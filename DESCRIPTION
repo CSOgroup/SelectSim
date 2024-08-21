@@ -1,0 +1,25 @@
+Package: SelectSim
+Title: Selected Events Linked by Evolutionary Conditions across human Tumors
+Version: 0.0.0.9000
+Authors@R: 
+    person("Arvind", "Iyer", , "ayalurarvind@gamil.com", role = c("aut", "cre"),comment = c(ORCID = "0000-0002-8247-700X"))
+    person("Marco", "Mina", , "marco.mina.85@gmail.com", role = c("aut", "cre"))
+    person("Giovanni", "Ciriello", , "givoanni.cirello@unil.ch", role = c("aut","cre"),comment = c(ORCID ="0000-0003-2021-8683"))
+Description: This R package implements the SelectSim methodology to infer evolutionary dependencies between functional alterations in cancer.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.0
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
+Imports: 
+    doParallel,
+    doRNG,
+    foreach,
+    Matrix,
+    Rcpp,
+    RcppArmadillo,
+    reshape2,
+    Rfast,
+    tictoc
