@@ -20,7 +20,7 @@ devtools::install_github("CSOgroup/SelectSim",dependencies = TRUE, build_vignett
 ```
 
 - For more details on installation refer to
-  [INSTALLATION](https://github.com/CSOgroup/SelectSim/INSTALLATION.md)
+  [INSTALLATION](INSTALLATION.md)
 
 ## Example
 
