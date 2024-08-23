@@ -1,0 +1,113 @@
+---
+title: "Introduction to finding evolutionary dependencies in cancer data using SelectSim algorithm"
+author: "Arvind Iyer"
+email: "arvind.iyer@unil.ch"
+date: "`r Sys.Date()`"
+output: 
+ rmarkdown::html_vignette:
+    css: doc.css
+vignette: >
+  %\VignetteIndexEntry{introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+- The goal of SelectSim pacakge is to implement the methodology to infer functional inter-dependencies between functional alterations in cancer.
+- `SelectSim` package provides function to generate the backgorund model and other utilites functions.
+
+### Installation
+
+- You can install the development version of SelectSim from [GitHub](https://github.com/CSOgroup/SelectSim) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("CSOgroup/SelectSim",dependencies = TRUE, build_vignettes = TRUE)
+```
+
+- For more details on installation refer to [INSTALLATION](https://github.com/CSOgroup/SelectSim/INSTALLATION.md)
+
+### Example
+
+- We will run SelectSim algorithm on processed LUAD dataset from TCGA provided with the package.
+- Note: This an example for running a processed data. Check other vignette to process the data to create the run_data object needed as input for SelectSim algorithm.
+
+```{r}
+library(SelectSim)
+library(dplyr)
+## Load the data provided with the package
+data(luad_run_data, package = "SelectSim")
+```
+#### Data Description & Format
+
+- The loaded data is list object which consists of 
+  - M: a list object of GAMs which is presence absence matrix of alterations
+  - tmb: a list object of tumor mutation burden as data frame with column names (should be) as sample and mutationn
+  - sample.class a named vector of sample annotations
+  - alteration.class a named vector of alteration annotations
+
+```{r}
+# Check the data strucutre
+str(luad_run_data)
+```
+
+#### Running SelectX
+- We use the function `selectX()` which generates the background model and results.
+- The parameters for the functions are:
+  - `M`: the list object of GAMs & TMB
+  - `sample.class`: a named vector of samples with covariates
+  - `alteration.class`: a named vector of alteration with covariates
+  - `min.freq`: Number of samples a gene should be mutated in atleast
+  - `n.permut`: Number of simulation to do
+  - `lambda`: Penalty factor used in computing penalty vector
+  - `tao`: Fold chnage factor used in computing penalty vector
+  - `maxFDR`: FDR rate to call significnat results
+
+- The function returns a list object which contains the background model and results.
+
+```{r}
+result_obj<- selectX(  M = luad_run_data$M,
+                      sample.class = luad_run_data$sample.class,
+                      alteration.class = luad_run_data$alteration.class,
+                      n.cores = 1,
+                      min.freq = 10,
+                      n.permut = 1000,
+                      lambda = 0.3,
+                      tao = 1,
+                      save.object = FALSE,
+                      verbose = FALSE,
+                      estimate_pairwise = FALSE,
+                      maxFDR = 0.25)
+```
+
+#### Intrepreting the results
+- Lets look into the results
+```{r}
+head(result_obj$result[,1:10],n=5)
+```
+
+##### Filtering significant hits
+```{r}
+# Filtering significant hits and counting EDs
+result_obj$result %>% filter(nFDR2<=0.25) %>% head(n=2)
+result_obj$result %>% filter(nFDR2<=0.25) %>% count(type)
+```
+##### Plotting a scatter plot of co-mutation
+```{r}
+# Filtering significant hits and plotting
+options(repr.plot.width = 7, repr.plot.height = 7)
+obs_exp_scatter(result = result_obj$result,title = 'TCGA LUAD')
+```
+
+
+### SessionInfo
+```{r}
+# Print the sessionInfo
+sessionInfo()
+```

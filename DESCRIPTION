@@ -1,6 +1,6 @@
 Package: SelectSim
 Title: Selected Events Linked by Evolutionary Conditions across human Tumors
-Version: 0.0.0.9000
+Version: 0.0.1.3
 Authors@R: 
     person("Arvind", "Iyer", , "ayalurarvind@gamil.com", role = c("aut", "cre"),comment = c(ORCID = "0000-0002-8247-700X"))
     person("Marco", "Mina", , "marco.mina.85@gmail.com", role = c("aut", "cre"))
@@ -16,10 +16,23 @@ LinkingTo:
 Imports: 
     doParallel,
     doRNG,
+    dplyr,
     foreach,
+    ggplot2,
+    ggpubr,
+    ggridges,
     Matrix,
     Rcpp,
     RcppArmadillo,
     reshape2,
     Rfast,
     tictoc
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10)
+LazyData: true
+VignetteBuilder: knitr
