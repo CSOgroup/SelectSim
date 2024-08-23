@@ -6,8 +6,19 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of SelectSim is to implement the methodology to infer
-inter-dependencies between functional alterations in cancer.
+The goal of SelectSim package is to implement the methodology to infer
+inter-dependencies between functional alterations in cancer. SelectSim
+estimates the expected number of mutations in a given gene and a given
+sample from the mutation frequency of the gene, f(g), and the tumor
+mutation burden (TMB) of the sample, $\mu$(t). These values can be
+estimated within specific mutation and tumor subsets, to account for
+heterogeneous tumor types, tissue specificities, and distinct mutational
+processes
+
+<figure>
+<img src="SelectSim_method.png" alt="SelectSim Method" />
+<figcaption aria-hidden="true">SelectSim Method</figcaption>
+</figure>
 
 ## Installation
 
@@ -24,7 +35,8 @@ devtools::install_github("CSOgroup/SelectSim",dependencies = TRUE, build_vignett
 
 ## Example
 
-Check the the vignettes folder.
+Check the the Vignettes folder or visit
+[website](https://csogroup.github.io/SelectSim/)
 
 ### Who do I talk to?
 

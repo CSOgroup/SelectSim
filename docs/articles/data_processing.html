@@ -116,7 +116,7 @@ package.</p></li>
 the maf to create the gam provided with the pacakge.</p></li>
 <li><p>NOTE: This an example to prcoess the MAF file. To know more about
 how we prcossed the all MAF file to run_data object, please refer to
-SelectSim_analysis <a href="https://github.com/CSOgroup/SelectSim" class="external-link">repository</a>.</p></li>
+SelectSim_analysis <a href="https://github.com/CSOgroup/SelectSim_analysis" class="external-link">repository</a>.</p></li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://csogroup.github.io/SelectSim/">SelectSim</a></span><span class="op">)</span></span>
@@ -220,7 +220,7 @@ of all genes in consideration.</li>
 <span>    <span class="va">truncating_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'gam'</span><span class="op">=</span><span class="va">tcga_truc_gam</span>,</span>
 <span>                            <span class="st">'tmb'</span><span class="op">=</span><span class="va">truncating_tmb</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ##### Creating Truncating GAM ####: 0.212 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; ##### Creating Truncating GAM ####: 0.214 sec elapsed</span></span></code></pre></div>
 <ul>
 <li>Let generate the Missense data
 <ul>
@@ -268,7 +268,7 @@ all genes in consideration.</li>
 <span>                          <span class="st">'tmb'</span><span class="op">=</span><span class="va">missense_tmb</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ##### Creating Missense GAM ####: 1.716 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; ##### Creating Missense GAM ####: 1.706 sec elapsed</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="genrating-the-run_object-to-run-selectx">Genrating the run_object to run SelectX<a class="anchor" aria-label="anchor" href="#genrating-the-run_object-to-run-selectx"></a>
