@@ -16,9 +16,7 @@ heterogeneous tumor types, tissue specificities, and distinct mutational
 processes
 
 <figure>
-<img
-src="https://github.com/CSOgroup/SelectSim/blob/main/SelectSim_method.png"
-alt="SelectSim Method" />
+<img src="vignettes/SelectSim_method.png" alt="SelectSim Method" />
 <figcaption aria-hidden="true">SelectSim Method</figcaption>
 </figure>
 

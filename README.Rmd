@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 The goal of SelectSim package is to implement the methodology to infer inter-dependencies between functional alterations in cancer. SelectSim estimates the expected number of mutations in a given gene and a given sample from the mutation frequency of the gene, f(g), and the tumor mutation burden (TMB) of the sample, $\mu$(t). These values can be estimated within specific mutation and tumor subsets, to account for heterogeneous tumor types, tissue specificities, and distinct mutational processes
 
-![SelectSim Method](https://github.com/CSOgroup/SelectSim/blob/main/SelectSim_method.png)
+![SelectSim Method](vignettes/SelectSim_method.png)
 
 ## Installation
 
