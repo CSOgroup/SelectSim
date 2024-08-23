@@ -24,21 +24,21 @@ knitr::opts_chunk$set(
 
 ### Installation
 
-- You can install the development version of SelectSim from [GitHub](https://github.com/) with:
+- You can install the development version of SelectSim from [GitHub](https://github.com/CSOgroup/SelectSim) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("CSOgroup/SelectSim",dependencies = TRUE, build_vignettes = TRUE)
 ```
 
-- For more details on installation refer to [INSTALLATION](https://github.com/CSOgroup/SelectSim/INSTALLATION.md)
+- For more details on installation refer to [INSTALLATION](https://github.com/CSOgroup/SelectSim/blob/main/INSTALLATION.md)
 
 ### Example
 
 - We will process LUAD MAF dataset from TCGA provided with the package.
 - We will also use oncokb v3.9 cancer genes and mutations to filter the maf to create the gam provided with the pacakge.
 
-- NOTE: This an example to prcoess the MAF file. To know more about how we prcossed the all MAF file to run_data object, please refer to SelectSim_analysis [repository](https://github.com/).
+- NOTE: This an example to prcoess the MAF file. To know more about how we prcossed the all MAF file to run_data object, please refer to SelectSim_analysis [repository](https://github.com/CSOgroup/SelectSim).
 
 
 ```{r}

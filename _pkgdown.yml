@@ -1,0 +1,5 @@
+url: https://csogroup.github.io/SelectSim/
+template:
+  bootstrap: 5
+  bootswatch: materia
+
