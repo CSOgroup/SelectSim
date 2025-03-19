@@ -478,6 +478,10 @@ null_model_parallel_debug <-function(al,
     }
 }
 
+### Bug & Updates
+# Miljan found a bug in the previous implementation of fuction.
+# Now fixed with an update.
+###
 #' Removing the Outliers
 #' 
 #' @param obj selectX object
@@ -502,9 +506,13 @@ retrieveOutliers = function(obj, nSim=1000){
     mean.sn = apply(abs(rsn), 2, mean)
     dev = mean.gn + mean.sn    
     dev2 = sort(dev)
-    mincut = dev2[ round(0.05*length(dev2)) ]
-    maxcut = dev2[ round(0.95*length(dev2)) ]
-    outliers = dev < mincut | dev >= maxcut
-    
+    # Miljan changed:
+    # mincut = dev2[ round(0.05*length(dev2)) ]
+    # maxcut = dev2[ round(0.95*length(dev2)) ]
+    # outliers = dev < mincut | dev >= maxcut
+    maxcut = dev2[ round(0.90*length(dev2)) ]
+    outliers = dev >= maxcut
+    #outliers = rep( FALSE, length(dev))
+    #print("Script uses corrected outlier removal & column indexing.")    
     return(outliers)
 }

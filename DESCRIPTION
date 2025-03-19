@@ -1,9 +1,10 @@
 Package: SelectSim
 Title: Selected Events Linked by Evolutionary Conditions across human Tumors
-Version: 0.0.1.3
+Version: 0.0.1.4
 Authors@R: 
     c(person("Arvind", "Iyer", , "ayalurarvind@gamil.com", role = c("aut", "cre"),comment = c(ORCID = "0000-0002-8247-700X")),
     person("Marco", "Mina", , "marco.mina.85@gmail.com", role = c("aut")),
+    person("Miljan", "Petrovic", , "miljanpet93@gmail.com", role = c("aut")),
     person("Giovanni", "Ciriello", , "givoanni.cirello@unil.ch", role = c("aut"),comment = c(ORCID ="0000-0003-2021-8683")))
 Description: This R package implements the SelectSim methodology to infer evolutionary dependencies between functional alterations in cancer.
 License: MIT + file LICENSE
