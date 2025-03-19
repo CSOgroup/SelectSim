@@ -88,29 +88,64 @@ al.stats <- function(al) {
     
     return(als)
 }
+### Updates
+# Added sparse matrix implementation and used Matrix library for doing it.
+# Done by Miljan
+###
 #' Compute overlap stats
 #' 
+#' @importFrom  Matrix sparseMatrix
+#' @importFrom  Matrix t
 #' @param am The alteration matrix
 #' @return overlap the overlap between the pairs
 #'
 #' @export
 am.pairwise.alteration.overlap <- function(am) {
+    # make sparse matrices
+    inds <- which(am==1,arr.ind=TRUE)
+    am <- Matrix::sparseMatrix( i = inds[,1], j = inds[,2],
+                                x = rep(1,nrow(inds)), dims=dim(am),
+                                dimnames = list(rownames(am),colnames(am))
+                            )
     A = am * 1
-    overlap =A %*% t(A)
+    overlap =A %*% Matrix::t(A)
     return(overlap)
+    # A = am * 1
+    # overlap =A %*% t(A)
+    # return(overlap)
 }
 #' Compute weight overlap stats
 #' 
+#' @importFrom  Matrix sparseMatrix
+#' @importFrom  Matrix t
 #' @param am The alteration matrix
 #' @param W The weight matrix
 #' @return overlap the weight overlap between the pairs
 #'
 #' @export
 am.weight.pairwise.alteration.overlap <- function(am,W) {
+
+        # make sparse matrices
+    inds <- which(am==1,arr.ind=TRUE)
+    am <- Matrix::sparseMatrix( i = inds[,1], j = inds[,2],
+				x = rep(1,nrow(inds)), dims=dim(am),
+				dimnames = list(rownames(am),colnames(am))
+			       )
+
+    inds <- which(W!=0,arr.ind=TRUE)
+    W <- Matrix::sparseMatrix( i = inds[,1], j = inds[,2],
+				x = W[W!=0], dims=dim(W),
+				dimnames = list(rownames(W),colnames(W))
+			       )
+
     A = am * 1
     col_order= colnames(A)
-    overlap = (W[,col_order]*A) %*% t(A)
+    overlap = (W[,col_order]*A) %*% Matrix::t(A)
     return(overlap)
+    # A = am * 1
+    # col_order= colnames(A)
+    # overlap = (W[,col_order]*A) %*% t(A)
+    # return(overlap)
 }
 #' Compute weight overlap stats
 #'
@@ -181,27 +216,27 @@ al.pairwise.alteration.stats <- function(al, als=NULL, do.blocks=FALSE) {
 #'
 #' @export
 r.am.pairwise.alteration.overlap <- function(null,n.permut,n.cores=1) {
-    # `%dopar%` <- foreach::`%dopar%`
-    # `%do%` <- foreach::`%do%`
-    # if(n.cores>1){
-    #     cl <-  parallel::makeCluster(n.cores-1, outfile=paste("r.gen.random.am.log", sep=''))
-    #     doParallel::registerDoParallel(cl)  
-    #     if(foreach::getDoParRegistered()) {
-    #         random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
-    #             selectX::am.pairwise.alteration.overlap(am=null[[i]])
-    #         } 
-    #         parallel::stopCluster(cl)
-    #         return (random_overlap)
-    #     } else {
-    #         stop('Error in registering a parallel cluster for randomization.')
-    #     }
-    # }
-    # else{
-    #    foreach::registerDoSEQ()
-    #    random_overlap <- foreach(i=c(1:length(null))) %do% selectX::am.pairwise.alteration.overlap(am=null[[i]])
-    #    return (random_overlap)
-    # }
-    return(rcpp_overlap(v=null,t=1))
+    `%dopar%` <- foreach::`%dopar%`
+    `%do%` <- foreach::`%do%`
+    if(n.cores>1){
+        cl <-  parallel::makeCluster(n.cores-1, outfile=paste("r.gen.random.am.log", sep=''))
+        doParallel::registerDoParallel(cl)  
+        if(foreach::getDoParRegistered()) {
+            random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
+                SelectSim::am.pairwise.alteration.overlap(am=null[[i]])
+            } 
+            parallel::stopCluster(cl)
+            return (random_overlap)
+        } else {
+            stop('Error in registering a parallel cluster for randomization.')
+        }
+    }
+    else{
+       foreach::registerDoSEQ()
+       random_overlap <- foreach(i=c(1:length(null))) %do% SelectSim::am.pairwise.alteration.overlap(am=null[[i]])
+       return (random_overlap)
+    }    
+    #return(rcpp_overlap(v=null,t=1))
     #return(selectX:::rcpp_overlap(v=null,t=1))
 }
 #' Compute weight overlap stats
@@ -216,30 +251,29 @@ r.am.pairwise.alteration.overlap <- function(null,n.permut,n.cores=1) {
 #'
 #' @export
 w.r.am.pairwise.alteration.overlap <- function(null,W,n.permut,n.cores=1) {
-	 
-	 
- #    `%dopar%` <- foreach::`%dopar%`
- #    `%do%` <- foreach::`%do%`
-	# if(n.cores>1){
-	# 	cl <-  parallel::makeCluster(n.cores-1, outfile=paste("r.gen.random.am.log", sep=''))
-	# 	doParallel::registerDoParallel(cl)  
-	# 	if(foreach::getDoParRegistered()) {
-	# 	    random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
-	# 	        selectX::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
-	# 	    } 
-	# 	    parallel::stopCluster(cl)
-	# 	    return (random_overlap)
-	# 	} 
-	# 	else {
-	# 	    stop('Error in registering a parallel cluster for randomization.')
-	# 	}
-	# }
-	# else{
-	# 	foreach::registerDoSEQ()
-	# 	random_overlap <- foreach(i=c(1:length(null))) %do% selectX::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
-	# 	return (random_overlap)
-	# }
-    return(rcpp_w_overlap(v=null,w=W,t=1))
+	  
+    `%dopar%` <- foreach::`%dopar%`
+    `%do%` <- foreach::`%do%`
+	if(n.cores>1){
+		cl <-  parallel::makeCluster(n.cores-1, outfile=paste("r.gen.random.am.log", sep=''))
+		doParallel::registerDoParallel(cl)  
+		if(foreach::getDoParRegistered()) {
+		    random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
+		        SelectSim::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
+		    } 
+		    parallel::stopCluster(cl)
+		    return (random_overlap)
+		} 
+		else {
+		    stop('Error in registering a parallel cluster for randomization.')
+		}
+	}
+	else{
+		foreach::registerDoSEQ()
+		random_overlap <- foreach(i=c(1:length(null))) %do% SelectSim::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
+		return (random_overlap)
+	}
+    #return(rcpp_w_overlap(v=null,w=W,t=1))
 }
 #' Compute weight overlap stats
 #' 

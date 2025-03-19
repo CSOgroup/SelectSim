@@ -10,4 +10,7 @@
 
 # SelectX 0.0.1.4
 
-* Added Mijan in author's list 
+* Added Mijan in author's list
+* Remove C/C++ code dependecny to avoid installation diffculties in different systems.
+  * Hence move to using `Matrix` library functions and removed `RCpp` functions and code.
+* Update the website and vignette accordingly. 

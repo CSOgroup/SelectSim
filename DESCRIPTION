@@ -11,9 +11,6 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.0
-LinkingTo: 
-    Rcpp,
-    RcppArmadillo
 Imports: 
     doParallel,
     doRNG,
@@ -23,8 +20,6 @@ Imports:
     ggpubr,
     ggridges,
     Matrix,
-    Rcpp,
-    RcppArmadillo,
     reshape2,
     Rfast,
     tictoc

@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">SelectSim</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +76,7 @@
                         <h4 data-toc-skip class="author">Arvind
 Iyer</h4>
             
-            <h4 data-toc-skip class="date">2024-08-23</h4>
+            <h4 data-toc-skip class="date">2025-03-19</h4>
       
       
       <div class="d-none name"><code>introduction.Rmd</code></div>
@@ -205,7 +205,7 @@ vector</li>
 model and results.</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">result_obj</span><span class="op">&lt;-</span> <span class="fu"><a href="../reference/selectX.html">selectX</a></span><span class="op">(</span>  M <span class="op">=</span> <span class="va">luad_run_data</span><span class="op">$</span><span class="va">M</span>,</span>
+<code class="sourceCode R"><span><span class="va">result_obj</span><span class="op">&lt;-</span> <span class="fu">SelectSim</span><span class="fu">::</span><span class="fu"><a href="../reference/selectX.html">selectX</a></span><span class="op">(</span>  M <span class="op">=</span> <span class="va">luad_run_data</span><span class="op">$</span><span class="va">M</span>,</span>
 <span>                      sample.class <span class="op">=</span> <span class="va">luad_run_data</span><span class="op">$</span><span class="va">sample.class</span>,</span>
 <span>                      alteration.class <span class="op">=</span> <span class="va">luad_run_data</span><span class="op">$</span><span class="va">alteration.class</span>,</span>
 <span>                      n.cores <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -217,7 +217,7 @@ model and results.</li>
 <span>                      verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                      estimate_pairwise <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                      maxFDR <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Total Time: 4.34 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; Total Time: 12.34 sec elapsed</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="intrepreting-the-results">Intrepreting the results<a class="anchor" aria-label="anchor" href="#intrepreting-the-results"></a>
@@ -249,11 +249,11 @@ model and results.</li>
 <span><span class="co">#&gt; KRAS - TP53  KRAS  TP53 KRAS - TP53       154       221 0.3067729 0.4402390</span></span>
 <span><span class="co">#&gt; EGFR - KRAS  EGFR  KRAS EGFR - KRAS        57       154 0.1135458 0.3067729</span></span>
 <span><span class="co">#&gt;             overlap w_overlap max_overlap freq_overlap r_overlap w_r_overlap</span></span>
-<span><span class="co">#&gt; KRAS - TP53      49  35.87602         154    0.3181818  99.02908    58.69631</span></span>
-<span><span class="co">#&gt; EGFR - KRAS       0   0.00000          57    0.0000000  31.22148    16.85637</span></span>
+<span><span class="co">#&gt; KRAS - TP53      49  35.87602         154    0.3181818  98.71769    58.50205</span></span>
+<span><span class="co">#&gt; EGFR - KRAS       0   0.00000          57    0.0000000  31.04989    16.75616</span></span>
 <span><span class="co">#&gt;                   wES wFDR       nES mean_r_nES nFDR cum_freq nFDR2 type  FDR</span></span>
-<span><span class="co">#&gt; KRAS - TP53 -16.13638    0 -14.18270  -1.953683    0      375     0   ME TRUE</span></span>
-<span><span class="co">#&gt; EGFR - KRAS -11.91926    0 -10.72977  -1.189488    0      211     0   ME TRUE</span></span>
+<span><span class="co">#&gt; KRAS - TP53 -15.99902    0 -14.02240  -1.976619    0      375     0   ME TRUE</span></span>
+<span><span class="co">#&gt; EGFR - KRAS -11.84840    0 -10.65247  -1.195925    0      211     0   ME TRUE</span></span>
 <span><span class="va">result_obj</span><span class="op">$</span><span class="va">result</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">nFDR2</span><span class="op">&lt;=</span><span class="fl">0.25</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   type  n</span></span>
 <span><span class="co">#&gt; 1   CO 13</span></span>
@@ -298,7 +298,7 @@ model and results.</li>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt; [1] dplyr_1.1.4       SelectSim_0.0.1.3</span></span>
+<span><span class="co">#&gt; [1] dplyr_1.1.4       SelectSim_0.0.1.4</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] gtable_0.3.4       xfun_0.41          bslib_0.6.1        ggplot2_3.4.4     </span></span>
@@ -329,7 +329,7 @@ model and results.</li>
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Arvind Iyer, Marco Mina, Giovanni Ciriello.</p>
+<p>Developed by Arvind Iyer, Marco Mina, Miljan Petrovic, Giovanni Ciriello.</p>
 </div>
 
 <div class="pkgdown-footer-right">
