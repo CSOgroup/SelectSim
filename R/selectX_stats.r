@@ -220,7 +220,7 @@ r.am.pairwise.alteration.overlap <- function(null,n.permut,n.cores=1) {
     `%do%` <- foreach::`%do%`
     if(n.cores>1){
         log_file <- paste0("r.gen.random.am_", Sys.getpid(), ".log")
-        cl <- parallel::makeCluster(n.cores, outfile = log_file)
+        cl <- parallel::makeCluster(n.cores, outfile = log_file,setup_strategy = "sequential")
         doParallel::registerDoParallel(cl)
         on.exit({
             parallel::stopCluster(cl)
@@ -265,7 +265,7 @@ w.r.am.pairwise.alteration.overlap <- function(null,W,n.permut,n.cores=1) {
     `%do%` <- foreach::`%do%`
 	if(n.cores>1){
         log_file <- paste0("r.gen.random.am_", Sys.getpid(), ".log")
-        cl <- parallel::makeCluster(n.cores, outfile = log_file) 
+        cl <- parallel::makeCluster(n.cores, outfile = log_file,setup_strategy = "sequential") 
         on.exit({
             parallel::stopCluster(cl)
             foreach::registerDoSEQ()  # Unregister the parallel backend

@@ -113,11 +113,11 @@ selectX <- function(M, #A list object consiting of GAM and TMB data
 	    		wobs.co = as.matrix(als$alteration.pairwise$w_overlap)
 	    		robs.co<-r.am.pairwise.alteration.overlap(null = obj$null,
 								 						  n.permut = obj$nSim,
-                  		                              	  n.cores = n.cores)
+                  		                              	  n.cores = 1)
     			wrobs.co<-w.r.am.pairwise.alteration.overlap(null = obj$null,
     											 			W= obj$W$W,
                                                  			n.permut = obj$nSim,
-                                                 			n.cores = n.cores)
+                                                 			n.cores = 1)
 
 			   selectX_result <- interaction.table(al,
 			                                        als,
@@ -127,7 +127,7 @@ selectX <- function(M, #A list object consiting of GAM and TMB data
 			                                        wrobs.co,
 			                                        null=obj$null,
 			                                        maxFDR=maxFDR,
-			                                        n.cores=n.cores,
+			                                        n.cores=1,
 			                                        estimate_pairwise=estimate_pairwise,
 			                                        n.permut=obj$nSim)
 			   obj$robs.co <- robs.co

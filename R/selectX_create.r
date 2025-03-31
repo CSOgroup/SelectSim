@@ -287,7 +287,8 @@ null_model_parallel <-function(al,
     }
 
     combine <- function(residuals,residuals_sort,val,index){
-        return(residuals[index,]>=residuals_sort[index,][val[index]])
+        #return(residuals[index,]>=residuals_sort[index,][val[index]])
+        return(round(residuals[index, ], digits = 10) >= round(residuals_sort[index, ][val[index]], digits = 10))
     }
 
     simulationFixedOnes = function(al,temp_mat, W,CORRECT_T = 0.05){
@@ -349,18 +350,19 @@ null_model_parallel <-function(al,
     if(n.cores>1){
         log_file <- paste0("gen.random.am_", Sys.getpid(), ".log")
         cl <-  parallel::makeCluster(n.cores, outfile=log_file)
-        doParallel::registerDoParallel(cl) 
+        doParallel::registerDoParallel(cl)
+        registerDoRNG(seed) 
         on.exit({
             parallel::stopCluster(cl)
             foreach::registerDoSEQ()  # Unregister the parallel backend
         }) 
-        registerDoRNG(42)
+        
         randomMs <- foreach::foreach(i=1:n.permut) %dopar% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
         return (randomMs)
     }
     else{
         # Use sequential execution
-        registerDoRNG(42)
+        registerDoRNG(seed)
         foreach::registerDoSEQ()
         randomMs <- foreach(i=1:n.permut) %do% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
         return (randomMs)
@@ -405,12 +407,10 @@ null_model_parallel2 <- function(al,
 
         error <- rowSums(S) / ncol(r) - gen / ncol(r)
         current_eps <- sign(error) * eps
-        print(paste('Error', sep = ":", "\n"), error)
         iter <- 0
         continue <- TRUE
         while (continue) {
             select <- abs(error) > maxDiff
-            print(select)
             S[select, ] <- 1 * (template[select, ] - r[select, ] > current_eps[select])
 
             error <- rowSums(S) / ncol(r) - gen / ncol(r)
@@ -461,8 +461,8 @@ null_model_parallel2 <- function(al,
         registerDoRNG(seed)
         randomMs <- foreach::foreach(i = 1:n.permut) %dopar% {
             simulationFixedOnes(al, temp_mat, W, maxDiff, maxIter)
-            return(randomMs)
         }
+        return(randomMs)
     } else {
         registerDoRNG(seed)
         foreach::registerDoSEQ()
@@ -622,7 +622,9 @@ retrieveOutliers = function(obj, nSim=1000){
     # maxcut = dev2[ round(0.95*length(dev2)) ]
     # outliers = dev < mincut | dev >= maxcut
     maxcut = dev2[ round(0.90*length(dev2)) ]
+    #maxcut = quantile(dev, probs = 0.9,type = 7)
     outliers = dev >= maxcut
+    #print(outliers)
     #outliers = rep( FALSE, length(dev))
     #print("Script uses corrected outlier removal & column indexing.")    
     return(outliers)

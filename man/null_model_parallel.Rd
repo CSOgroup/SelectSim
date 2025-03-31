@@ -4,7 +4,7 @@
 \alias{null_model_parallel}
 \title{Generating the null_simulation matrix}
 \usage{
-null_model_parallel(al, temp_mat, W, n.cores = 1, n.permut)
+null_model_parallel(al, temp_mat, W, n.cores = 1, n.permut, seed = 42)
 }
 \arguments{
 \item{al}{Alteration landscape object}
@@ -16,6 +16,8 @@ null_model_parallel(al, temp_mat, W, n.cores = 1, n.permut)
 \item{n.cores}{Number of cores}
 
 \item{n.permut}{Number of simulation}
+
+\item{seed}{Random seed}
 }
 \value{
 Template matrix as list object
