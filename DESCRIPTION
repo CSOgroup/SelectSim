@@ -6,7 +6,7 @@ Authors@R:
     person("Marco", "Mina", , "marco.mina.85@gmail.com", role = c("aut")),
     person("Miljan", "Petrovic", , "miljanpet93@gmail.com", role = c("aut")),
     person("Giovanni", "Ciriello", , "givoanni.cirello@unil.ch", role = c("aut"),comment = c(ORCID ="0000-0003-2021-8683")))
-Description: This R package implements the SelectSim methodology to infer evolutionary dependencies between functional alterations in cancer.
+Description: This R package implements the SelectSim methodology to infer co-mutations between functional alterations in cancer.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

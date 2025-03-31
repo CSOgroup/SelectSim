@@ -219,17 +219,26 @@ r.am.pairwise.alteration.overlap <- function(null,n.permut,n.cores=1) {
     `%dopar%` <- foreach::`%dopar%`
     `%do%` <- foreach::`%do%`
     if(n.cores>1){
-        cl <-  parallel::makeCluster(n.cores-1, outfile=paste("r.gen.random.am.log", sep=''))
-        doParallel::registerDoParallel(cl)  
-        if(foreach::getDoParRegistered()) {
-            random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
-                SelectSim::am.pairwise.alteration.overlap(am=null[[i]])
-            } 
+        log_file <- paste0("r.gen.random.am_", Sys.getpid(), ".log")
+        cl <- parallel::makeCluster(n.cores, outfile = log_file)
+        doParallel::registerDoParallel(cl)
+        on.exit({
             parallel::stopCluster(cl)
-            return (random_overlap)
-        } else {
-            stop('Error in registering a parallel cluster for randomization.')
+            foreach::registerDoSEQ()  # Unregister the parallel backend
+        })
+        random_overlap <- foreach::foreach(i = c(1:length(null))) %dopar% {
+            SelectSim::am.pairwise.alteration.overlap(am = null[[i]])
         }
+        return (random_overlap)
+        # if(foreach::getDoParRegistered()) {
+        #     random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
+        #         SelectSim::am.pairwise.alteration.overlap(am=null[[i]])
+        #     } 
+        #     parallel::stopCluster(cl)
+        #     return (random_overlap)
+        # } else {
+        #     stop('Error in registering a parallel cluster for randomization.')
+        # }
     }
     else{
        foreach::registerDoSEQ()
@@ -255,18 +264,26 @@ w.r.am.pairwise.alteration.overlap <- function(null,W,n.permut,n.cores=1) {
     `%dopar%` <- foreach::`%dopar%`
     `%do%` <- foreach::`%do%`
 	if(n.cores>1){
-		cl <-  parallel::makeCluster(n.cores-1, outfile=paste("r.gen.random.am.log", sep=''))
-		doParallel::registerDoParallel(cl)  
-		if(foreach::getDoParRegistered()) {
-		    random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
-		        SelectSim::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
-		    } 
-		    parallel::stopCluster(cl)
-		    return (random_overlap)
-		} 
-		else {
-		    stop('Error in registering a parallel cluster for randomization.')
-		}
+        log_file <- paste0("r.gen.random.am_", Sys.getpid(), ".log")
+        cl <- parallel::makeCluster(n.cores, outfile = log_file) 
+        on.exit({
+            parallel::stopCluster(cl)
+            foreach::registerDoSEQ()  # Unregister the parallel backend
+        })
+        random_overlap <- foreach::foreach(i = c(1:length(null))) %dopar% {
+            SelectSim::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
+        }
+        return (random_overlap)
+		# if(foreach::getDoParRegistered()) {
+		#     random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
+		#         SelectSim::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
+		#     } 
+		#     parallel::stopCluster(cl)
+		#     return (random_overlap)
+		# } 
+		# else {
+		#     stop('Error in registering a parallel cluster for randomization.')
+		# }
 	}
 	else{
 		foreach::registerDoSEQ()

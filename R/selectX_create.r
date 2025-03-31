@@ -6,8 +6,7 @@
 # Version : 0.1
 # Updates : Re wrote the whole code
 # Todo:
-# - Random seed to set to one value for parallel foreach?
-# - c++ backend for faster computation
+# - c++ backend for faster computation: Removed kept R native
 ###
 
 #' Create an AL object
@@ -261,6 +260,7 @@ generateW_block = function(al,lambda,tao) {
 #' @param W weight matrix 
 #' @param n.cores Number of cores
 #' @param n.permut Number of simulation
+#' @param seed Random seed
 #' @return Template matrix as list object
 #'
 #' Ordering of genes impacts the results as residual subraction is not correct.
@@ -269,7 +269,8 @@ null_model_parallel <-function(al,
                                temp_mat,
                                W,
                                n.cores=1,
-                               n.permut) {
+                               n.permut,
+                               seed=42) {
 
     `%dopar%` <- foreach::`%dopar%`
     `%do%` <- foreach::`%do%`
@@ -280,6 +281,8 @@ null_model_parallel <-function(al,
         nvalues = nrow(S)*ncol(S)
         r = matrix( runif(nvalues, min = 0, max = 1), nrow = nrow(S), ncol = ncol(S))
         test = S - r
+        rownames(r) <- rownames(S)
+        colnames(r) <- colnames(S)
         return(test)
     }
 
@@ -344,21 +347,129 @@ null_model_parallel <-function(al,
 
     
     if(n.cores>1){
-        cl <-  parallel::makeCluster(n.cores, outfile=paste("gen.random.am.log", sep=''))
-        doParallel::registerDoParallel(cl)  
-        if( foreach::getDoParRegistered()) {
-            registerDoRNG(42)
-            randomMs <- foreach::foreach(i=1:n.permut) %dopar% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
+        log_file <- paste0("gen.random.am_", Sys.getpid(), ".log")
+        cl <-  parallel::makeCluster(n.cores, outfile=log_file)
+        doParallel::registerDoParallel(cl) 
+        on.exit({
             parallel::stopCluster(cl)
-            return (randomMs)
-        } else {
-            stop('Error in registering a parallel cluster for randomization.')
-        }
+            foreach::registerDoSEQ()  # Unregister the parallel backend
+        }) 
+        registerDoRNG(42)
+        randomMs <- foreach::foreach(i=1:n.permut) %dopar% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
+        return (randomMs)
     }
     else{
+        # Use sequential execution
+        registerDoRNG(42)
         foreach::registerDoSEQ()
         randomMs <- foreach(i=1:n.permut) %do% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
         return (randomMs)
+    }
+}
+
+#' Generating the null_simulation matrix with row-specific correction and merging using pmax (experimental)
+#' 
+#' @import doParallel
+#' @import parallel
+#' @importFrom Rfast rowSort
+#' @import doRNG
+#' @param al Alteration landscape object
+#' @param temp_mat template matrices
+#' @param W weight matrix 
+#' @param n.cores Number of cores
+#' @param n.permut Number of simulations
+#' @param seed Random seed
+#' @param maxDiff Maximum allowable error for row sums
+#' @param maxIter Maximum number of iterations for threshold adjustment
+#' @return A list containing the null simulations
+#'
+#' @export
+null_model_parallel2 <- function(al,
+                                 temp_mat,
+                                 W,
+                                 n.cores = 1,
+                                 n.permut,
+                                 seed = 42,
+                                 maxDiff = 0.005,
+                                 maxIter = 100) {
+
+    `%dopar%` <- foreach::`%dopar%`
+    `%do%` <- foreach::`%do%`
+
+    # Row-specific correction logic
+    simulationStep <- function(template, gen, maxDiff, maxIter) {
+        nvalues <- nrow(template) * ncol(template)
+        eps <- rep(0.005, nrow(template))  # Initial threshold for each row
+        r <- matrix(runif(nvalues, min = 0, max = 1), nrow = nrow(template), ncol = ncol(template))
+        S <- 1 * ((template - r) > 0)  # Initial binary matrix
+
+        error <- rowSums(S) / ncol(r) - gen / ncol(r)
+        current_eps <- sign(error) * eps
+        print(paste('Error', sep = ":", "\n"), error)
+        iter <- 0
+        continue <- TRUE
+        while (continue) {
+            select <- abs(error) > maxDiff
+            print(select)
+            S[select, ] <- 1 * (template[select, ] - r[select, ] > current_eps[select])
+
+            error <- rowSums(S) / ncol(r) - gen / ncol(r)
+            iter <- iter + 1
+
+            if (max(abs(error)) > maxDiff & iter < maxIter) {
+                current_eps <- current_eps + sign(error) * (0.1 * eps)
+            } else {
+                continue <- FALSE
+            }
+        }
+
+        return(S)
+    }
+
+    # Simulation logic for multiple template matrices
+    simulationFixedOnes <- function(al, temp_mat, W, maxDiff, maxIter) {
+        gam_names <- names(al$am)
+        residuals <- list()
+
+        # Process each template matrix
+        for (i in 1:length(temp_mat)) {
+            S <- temp_mat[[i]]
+            gen <- rowSums(al$am$full)  # Row sums of the full alteration matrix
+            test <- simulationStep(template = S, gen = gen, maxDiff = maxDiff, maxIter = maxIter)
+            residuals[[i]] <- test
+        }
+
+        # Combine results from multiple template matrices using pmax
+        if (length(residuals) > 1) {
+            combined_S <- pmax(residuals[[1]], residuals[[2]])
+        } else {
+            combined_S <- residuals[[1]]
+        }
+
+        return(combined_S)
+    }
+
+    # Parallel or sequential execution
+    if (n.cores > 1) {
+        log_file <- paste0("gen.random.am_", Sys.getpid(), ".log")
+        cl <- parallel::makeCluster(n.cores, outfile = log_file)
+        doParallel::registerDoParallel(cl)
+        on.exit({
+            parallel::stopCluster(cl)
+            foreach::registerDoSEQ()  # Unregister the parallel backend
+        })
+        registerDoRNG(seed)
+        randomMs <- foreach::foreach(i = 1:n.permut) %dopar% {
+            simulationFixedOnes(al, temp_mat, W, maxDiff, maxIter)
+            return(randomMs)
+        }
+    } else {
+        registerDoRNG(seed)
+        foreach::registerDoSEQ()
+        randomMs <- foreach(i = 1:n.permut) %do% {
+            simulationFixedOnes(al, temp_mat, W, maxDiff, maxIter)
+        }
+        return(randomMs)
     }
 }
 

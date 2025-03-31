@@ -3,10 +3,9 @@
 # Email   : arvind.iyer@unil.ch
 # Project : SelectSim
 # Desc    : Main file which call the selectX function to create alteration object with background model and funtion to generate the table.
-# Version : 0.1
+# Version : 0.1.4
 # Updates : Re wrote the whole code
 # Todo:
-# - Random seed to set to one value for parallel foreach?
 # - Same ordering of colnames in input gam as the one used in null. 
 # - Better Error message and running text
 # - Edge case: When sample size in less than 2 there is error in computation (need to fix a number to do this analysis)
