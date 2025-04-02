@@ -1,6 +1,6 @@
 Package: SelectSim
 Title: Selected Events Linked by Evolutionary Conditions across human Tumors
-Version: 0.0.1.4
+Version: 0.0.1.5
 Authors@R: 
     c(person("Arvind", "Iyer", , "ayalurarvind@gamil.com", role = c("aut", "cre"),comment = c(ORCID = "0000-0002-8247-700X")),
     person("Marco", "Mina", , "marco.mina.85@gmail.com", role = c("aut")),
@@ -10,7 +10,7 @@ Description: This R package implements the SelectSim methodology to infer co-mut
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.2
 Imports: 
     doParallel,
     doRNG,
@@ -20,6 +20,7 @@ Imports:
     ggpubr,
     ggridges,
     Matrix,
+    Rcpp,
     reshape2,
     Rfast,
     tictoc
@@ -33,3 +34,6 @@ Depends:
 LazyData: true
 VignetteBuilder: knitr
 URL: https://csogroup.github.io/SelectSim/
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo

@@ -565,12 +565,12 @@ selectX_debug <- function(M, #A list object consiting of GAM and TMB data
 	}        
 }
 
-# ## usethis namespace: start
-# #' @importFrom Rcpp sourceCpp
-# ## usethis namespace: end
-# NULL
+## usethis namespace: start
+#' @importFrom Rcpp sourceCpp
+## usethis namespace: end
+NULL
 
-# ## usethis namespace: start
-# #' @useDynLib SelectSim, .registration = TRUE
-# ## usethis namespace: end
-# NULL
+## usethis namespace: start
+#' @useDynLib SelectSim, .registration = TRUE
+## usethis namespace: end
+NULL
