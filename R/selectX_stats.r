@@ -125,22 +125,16 @@ am.pairwise.alteration.overlap <- function(am) {
 #' @export
 am.weight.pairwise.alteration.overlap <- function(am,W) {
 
-        # make sparse matrices
+    #make sparse matrices
     inds <- which(am==1,arr.ind=TRUE)
-    am <- Matrix::sparseMatrix( i = inds[,1], j = inds[,2],
-				x = rep(1,nrow(inds)), dims=dim(am),
-				dimnames = list(rownames(am),colnames(am))
-			       )
-
-    inds <- which(W!=0,arr.ind=TRUE)
-    W <- Matrix::sparseMatrix( i = inds[,1], j = inds[,2],
-				x = W[W!=0], dims=dim(W),
-				dimnames = list(rownames(W),colnames(W))
-			       )
-
+    am <- Matrix::sparseMatrix( i = inds[,1],
+                                j = inds[,2],
+				                x = rep(1,nrow(inds)),
+                                dims=dim(am),
+				                dimnames = list(rownames(am),colnames(am)))
     A = am * 1
-    col_order= colnames(A)
-    overlap = (W[,col_order]*A) %*% Matrix::t(A)
+    #col_order= colnames(A)
+    overlap = tcrossprod(W * am)
     return(overlap)
     # A = am * 1
     # col_order= colnames(A)
@@ -218,35 +212,67 @@ al.pairwise.alteration.stats <- function(al, als=NULL, do.blocks=FALSE) {
 r.am.pairwise.alteration.overlap <- function(null,n.permut,n.cores=1) {
     `%dopar%` <- foreach::`%dopar%`
     `%do%` <- foreach::`%do%`
-    if(n.cores>1){
-        log_file <- paste0("r.gen.random.am_", Sys.getpid(), ".log")
-        cl <- parallel::makeCluster(n.cores, outfile = log_file,setup_strategy = "sequential")
-        doParallel::registerDoParallel(cl)
-        on.exit({
-            parallel::stopCluster(cl)
-            foreach::registerDoSEQ()  # Unregister the parallel backend
-        })
-        random_overlap <- foreach::foreach(i = c(1:length(null))) %dopar% {
-            SelectSim::am.pairwise.alteration.overlap(am = null[[i]])
-        }
-        return (random_overlap)
-        # if(foreach::getDoParRegistered()) {
-        #     random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
-        #         SelectSim::am.pairwise.alteration.overlap(am=null[[i]])
-        #     } 
-        #     parallel::stopCluster(cl)
-        #     return (random_overlap)
-        # } else {
-        #     stop('Error in registering a parallel cluster for randomization.')
-        # }
-    }
-    else{
-       foreach::registerDoSEQ()
-       random_overlap <- foreach(i=c(1:length(null))) %do% SelectSim::am.pairwise.alteration.overlap(am=null[[i]])
-       return (random_overlap)
-    }    
-    #return(rcpp_overlap(v=null,t=1))
-    #return(selectX:::rcpp_overlap(v=null,t=1))
+    # if(n.cores>1){
+    #     log_file <- paste0("r.gen.random.am_", Sys.getpid(), ".log")
+    #     cl <- parallel::makeCluster(n.cores, outfile = log_file)
+    #     doParallel::registerDoParallel(cl)
+    #     on.exit({
+    #         parallel::stopCluster(cl)
+    #         foreach::registerDoSEQ()  # Unregister the parallel backend
+    #     })
+    #     random_overlap <- foreach::foreach(i = c(1:length(null))) %dopar% {
+    #         SelectSim::am.pairwise.alteration.overlap(am = null[[i]])
+    #     }
+    #     return (random_overlap)
+    #     # if(foreach::getDoParRegistered()) {
+    #     #     random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
+    #     #         SelectSim::am.pairwise.alteration.overlap(am=null[[i]])
+    #     #     } 
+    #     #     parallel::stopCluster(cl)
+    #     #     return (random_overlap)
+    #     # } else {
+    #     #     stop('Error in registering a parallel cluster for randomization.')
+    #     # }
+    # }
+    # else{
+    foreach::registerDoSEQ()
+    
+    random_overlap <- foreach(i=c(1:length(null))) %do% SelectSim::am.pairwise.alteration.overlap(am=null[[i]])
+    return (random_overlap)
+    # }
+    # `%dopar%` <- foreach::`%dopar%`
+    # `%do%` <- foreach::`%do%`
+
+    # # Define chunking function
+    # chunk_indices <- function(total, chunk_size) {
+    #     split(seq_len(total), ceiling(seq_along(seq_len(total)) / chunk_size))
+    # }
+
+    # # Parallel execution
+    # if (n.cores > 1) {
+    #     log_file <- paste0("r.gen.random.am_", Sys.getpid(), ".log")
+    #     cl <- parallel::makeCluster(n.cores, outfile = log_file, setup_strategy = "sequential")
+    #     doParallel::registerDoParallel(cl)
+    #     on.exit({
+    #         parallel::stopCluster(cl)
+    #         foreach::registerDoSEQ()  # Unregister the parallel backend
+    #     })
+
+    #     # Chunking to reduce overhead
+    #     chunk_size <- ceiling(length(null) / n.cores)
+    #     chunks <- chunk_indices(length(null), chunk_size)
+
+    #     # Parallel processing with chunking
+    #     random_overlap <- foreach::foreach(chunk = chunks, .combine = c) %dopar% {
+    #         lapply(chunk, function(i) SelectSim::am.pairwise.alteration.overlap(am = null[[i]]))
+    #     }
+    #     return(random_overlap)
+    # } else {
+    #     # Sequential execution
+    #     foreach::registerDoSEQ()
+    #     random_overlap <- foreach(i = seq_along(null)) %do% SelectSim::am.pairwise.alteration.overlap(am = null[[i]])
+    #     return(random_overlap)
+    # }    
 }
 #' Compute weight overlap stats
 #' 
@@ -263,34 +289,76 @@ w.r.am.pairwise.alteration.overlap <- function(null,W,n.permut,n.cores=1) {
 	  
     `%dopar%` <- foreach::`%dopar%`
     `%do%` <- foreach::`%do%`
-	if(n.cores>1){
-        log_file <- paste0("r.gen.random.am_", Sys.getpid(), ".log")
-        cl <- parallel::makeCluster(n.cores, outfile = log_file,setup_strategy = "sequential") 
-        on.exit({
-            parallel::stopCluster(cl)
-            foreach::registerDoSEQ()  # Unregister the parallel backend
-        })
-        random_overlap <- foreach::foreach(i = c(1:length(null))) %dopar% {
-            SelectSim::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
-        }
-        return (random_overlap)
-		# if(foreach::getDoParRegistered()) {
-		#     random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
-		#         SelectSim::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
-		#     } 
-		#     parallel::stopCluster(cl)
-		#     return (random_overlap)
-		# } 
-		# else {
-		#     stop('Error in registering a parallel cluster for randomization.')
-		# }
-	}
-	else{
-		foreach::registerDoSEQ()
-		random_overlap <- foreach(i=c(1:length(null))) %do% SelectSim::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
-		return (random_overlap)
-	}
+	# if(n.cores>1){
+    #     log_file <- paste0("r.gen.random.am_", Sys.getpid(), ".log")
+    #     cl <- parallel::makeCluster(n.cores, outfile = log_file) 
+    #     on.exit({
+    #         parallel::stopCluster(cl)
+    #         foreach::registerDoSEQ()  # Unregister the parallel backend
+    #     })
+    #     random_overlap <- foreach::foreach(i = c(1:length(null))) %dopar% {
+    #         SelectSim::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
+    #     }
+    #     return (random_overlap)
+	# 	# if(foreach::getDoParRegistered()) {
+	# 	#     random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
+	# 	#         SelectSim::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
+	# 	#     } 
+	# 	#     parallel::stopCluster(cl)
+	# 	#     return (random_overlap)
+	# 	# } 
+	# 	# else {
+	# 	#     stop('Error in registering a parallel cluster for randomization.')
+	# 	# }
+	# }
+	# else{
+    foreach::registerDoSEQ()
+    inds <- which(W!=0,arr.ind=TRUE)
+    W <- Matrix::sparseMatrix( i = inds[,1],
+                               j = inds[,2],
+                               x = W[W!=0],
+                               dims=dim(W),
+                               dimnames = list(rownames(W),colnames(W)))
+    col_order= colnames(null[[1]])
+    W<- W[,col_order]
+    random_overlap <- foreach(i=c(1:length(null))) %do% SelectSim::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
+    return (random_overlap)
+	# }
     #return(rcpp_w_overlap(v=null,w=W,t=1))
+
+    # `%dopar%` <- foreach::`%dopar%`
+    # `%do%` <- foreach::`%do%`
+
+    # # Define chunking function
+    # chunk_indices <- function(total, chunk_size) {
+    #     split(seq_len(total), ceiling(seq_along(seq_len(total)) / chunk_size))
+    # }
+
+    # # Parallel execution
+    # if (n.cores > 1) {
+    #     log_file <- paste0("r.gen.random.am_", Sys.getpid(), ".log")
+    #     cl <- parallel::makeCluster(n.cores, outfile = log_file, setup_strategy = "sequential")
+    #     doParallel::registerDoParallel(cl)
+    #     on.exit({
+    #         parallel::stopCluster(cl)
+    #         foreach::registerDoSEQ()  # Unregister the parallel backend
+    #     })
+
+    #     # Chunking to reduce overhead
+    #     chunk_size <- ceiling(length(null) / n.cores)
+    #     chunks <- chunk_indices(length(null), chunk_size)
+
+    #     # Parallel processing with chunking
+    #     random_overlap <- foreach::foreach(chunk = chunks, .combine = c) %dopar% {
+    #         lapply(chunk, function(i) SelectSim::am.weight.pairwise.alteration.overlap(am = null[[i]], W = W))
+    #     }
+    #     return(random_overlap)
+    # } else {
+    #     # Sequential execution
+    #     foreach::registerDoSEQ()
+    #     random_overlap <- foreach(i = seq_along(null)) %do% SelectSim::am.weight.pairwise.alteration.overlap(am = null[[i]], W = W)
+    #     return(random_overlap)
+    # }
 }
 #' Compute weight overlap stats
 #' 
@@ -389,36 +457,77 @@ binary.yule <- function(overlap,mat){
 #' @export
 estimateFDR2 = function(obs, exp, nSim, maxFDR = 0.25){
 
-    all.fdr = rep(1, length(obs))
-    orig.obs = obs
-    obs = sort(obs, decreasing = TRUE)
-    exp = sort(exp, decreasing = TRUE)
-    obs.pos = 1
-    exp.pos = 1
-    scan = TRUE
-    while(scan){
-        if(obs.pos>length(obs)){
-            scan=FALSE
+    # all.fdr = rep(1, length(obs))
+    # orig.obs = obs
+    # obs = sort(obs, decreasing = TRUE)
+    # exp = sort(exp, decreasing = TRUE)
+    # obs.pos = 1
+    # exp.pos = 1
+    # scan = TRUE
+    # while(scan){
+    #     if(obs.pos>length(obs)){
+    #         scan=FALSE
+    #     }
+    #     else{
+    #         value = obs[obs.pos]
+    #         while(exp[exp.pos] >= value){
+    #             exp.pos = exp.pos + 1
+    #             if(exp.pos==length(exp))
+    #                 break
+    #         }
+    #         fp = (exp.pos-1)/nSim
+    #         fdr = min(fp/sum(obs >= value), 1)
+    #         #print(paste('FP',exp.pos,'Test_value',value,sep=":"))
+    #         #print(sum(obs >= value))
+    #         all.fdr[ orig.obs == value ] = fdr
+    #         if(fdr >= maxFDR)
+    #             scan = FALSE
+    #         obs.pos = obs.pos + 1
+    #     }
+    # }
+    # #print('------------')
+    # return(all.fdr)
+    # Initialize FDR values
+    all.fdr <- rep(1, length(obs))
+    orig.obs <- obs
+
+    # Sort observed and expected values in decreasing order
+    obs <- sort(obs, decreasing = TRUE)
+    exp <- sort(exp, decreasing = TRUE)
+
+    # Precompute cumulative sums for observed values
+    obs_cumsum <- cumsum(obs >= obs)
+
+    # Initialize positions
+    obs.pos <- 1
+    exp.pos <- 1
+
+    # Iterate through observed values
+    while (obs.pos <= length(obs)) {
+        value <- obs[obs.pos]
+
+        # Move exp.pos until exp[exp.pos] < value
+        while (exp.pos <= length(exp) && exp[exp.pos] >= value) {
+            exp.pos <- exp.pos + 1
         }
-        else{
-            value = obs[obs.pos]
-            while(exp[exp.pos] >= value){
-                exp.pos = exp.pos + 1
-                if(exp.pos==length(exp))
-                    break
-            }
-            fp = (exp.pos-1)/nSim
-            fdr = min(fp/sum(obs >= value), 1)
-            #print(paste('FP',exp.pos,'Test_value',value,sep=":"))
-            #print(sum(obs >= value))
-            all.fdr[ orig.obs == value ] = fdr
-            if(fdr >= maxFDR)
-                scan = FALSE
-            obs.pos = obs.pos + 1
+
+        # Compute false positives and FDR
+        fp <- (exp.pos - 1) / nSim
+        fdr <- min(fp / obs_cumsum[obs.pos], 1)
+
+        # Assign FDR to all matching observed values
+        all.fdr[orig.obs == value] <- fdr
+
+        # Stop if FDR exceeds maxFDR
+        if (fdr >= maxFDR) {
+            break
         }
+
+        obs.pos <- obs.pos + 1
     }
-    #print('------------')
+
     return(all.fdr)
+
 }
 
 #' Compute pairwise p-value
@@ -497,122 +606,211 @@ interaction.table <- function(al,
 							  n.cores=1,
 							  estimate_pairwise=FALSE,
 							  n.permut=1000){
-    features = rownames(al$am$full)
-    num_features = length(features)
-    result_cols = c('SFE_1', 'SFE_2')
-    results = data.frame(matrix(NA, nrow=num_features*(num_features-1)/2, ncol=length(result_cols)))
-    colnames(results) = result_cols
-    temp = rep(1:length(features), length(features))
-    dim(temp) = c(length(features), length(features))
-    diag(temp) = NA
-    temp1 = t(temp)
-    temp1[which(temp1 > temp)] = NA
-    temp[which(temp < temp1)] = NA
-    temp = cbind(as.vector(temp1), as.vector(temp))
-    temp = temp[which(!is.na(temp[,1]) & !is.na(temp[,2])),,drop=FALSE]
-    results[, 'SFE_1'] = features[temp[,1]]
-    results[, 'SFE_2'] = features[temp[,2]]
-    rownames(results) = paste(results[,'SFE_1'], results[,'SFE_2'], sep= ' - ')
-    results[, 'name'] = rownames(results)
-    results[,'support_1'] = als$alteration.count[results[,'SFE_1']]
-    results[,'support_2'] = als$alteration.count[results[,'SFE_2']]
-    results[,'freq_1'] = results[,'support_1']/als$n.samples
-    results[,'freq_2'] = results[,'support_2']/als$n.samples
-    results[,'overlap'] = as.vector(as.dist(obs))
-    results[,'w_overlap'] = as.vector(as.dist(wobs))
-    # Get max possible overlap
-    if(!is.null(als$sample.blocks)) {
-        A = lapply(als$sample.blocks, function(x) {
-            a = rep(x$alteration.count, length(x$alteration.count))
-            dim(a) = c(length(x$alteration.count),length(x$alteration.count))
-            rownames(a) = names(x$alteration.count)
-            colnames(a) = names(x$alteration.count)
-            b = t(a)
-            c = pmin(a,b)
-        })
-        A = Reduce('+', A)
-        results$max_overlap = as.vector(as.dist(A))
+    # features = rownames(al$am$full)
+    # num_features = length(features)
+    # result_cols = c('SFE_1', 'SFE_2')
+    # results = data.frame(matrix(NA, nrow=num_features*(num_features-1)/2, ncol=length(result_cols)))
+    # colnames(results) = result_cols
+    # temp = rep(1:length(features), length(features))
+    # dim(temp) = c(length(features), length(features))
+    # diag(temp) = NA
+    # temp1 = t(temp)
+    # temp1[which(temp1 > temp)] = NA
+    # temp[which(temp < temp1)] = NA
+    # temp = cbind(as.vector(temp1), as.vector(temp))
+    # temp = temp[which(!is.na(temp[,1]) & !is.na(temp[,2])),,drop=FALSE]
+    # results[, 'SFE_1'] = features[temp[,1]]
+    # results[, 'SFE_2'] = features[temp[,2]]
+    # rownames(results) = paste(results[,'SFE_1'], results[,'SFE_2'], sep= ' - ')
+    # results[, 'name'] = rownames(results)
+    # results[,'support_1'] = als$alteration.count[results[,'SFE_1']]
+    # results[,'support_2'] = als$alteration.count[results[,'SFE_2']]
+    # results[,'freq_1'] = results[,'support_1']/als$n.samples
+    # results[,'freq_2'] = results[,'support_2']/als$n.samples
+    # results[,'overlap'] = as.vector(as.dist(obs))
+    # results[,'w_overlap'] = as.vector(as.dist(wobs))
+    # # Get max possible overlap
+    # if(!is.null(als$sample.blocks)) {
+    #     A = lapply(als$sample.blocks, function(x) {
+    #         a = rep(x$alteration.count, length(x$alteration.count))
+    #         dim(a) = c(length(x$alteration.count),length(x$alteration.count))
+    #         rownames(a) = names(x$alteration.count)
+    #         colnames(a) = names(x$alteration.count)
+    #         b = t(a)
+    #         c = pmin(a,b)
+    #     })
+    #     A = Reduce('+', A)
+    #     results$max_overlap = as.vector(as.dist(A))
+    # }
+    # results[,'freq_overlap'] = results[,'overlap'] / (results[,'max_overlap'])       
+	# #tic('compute overlaps')
+    #     results[,'r_overlap'] = as.vector(as.dist(add(r.obs)/length(r.obs)))
+    #     results[,'w_r_overlap'] = as.vector(as.dist(add(r.wobs)/length(r.wobs)))
+	# #toc()
+	# # tic('compute diffoverlap')
+	# # 	exp.ES = (results[,'overlap'] - results[,'r_overlap'])
+	# # 	exp.ES = as.numeric(exp.ES)
+	# # 	results[,'diffoverlap']<-exp.ES
+	# # toc()
+	# if(estimate_pairwise){
+	# 	#tic('compute p-value on overlap pairwise')
+	#         obs.co = as.matrix(als$alteration.pairwise$overlap)
+	#         results[,'pairwise_p']<-rep(1,nrow(results)) 
+	#         results[,'pairwise_p'] = estimate_pairwise_p(obs=obs.co,
+	#         											 exp = r.obs,
+	#         											 results=results,
+	#         											 nSim=n.permut
+	#     												)
+	#     #toc()
+
+	# }
+	# exp.ES = (results[,'w_overlap'] - results[,'w_r_overlap'])*sin(pi/4)
+    # exp.ES = as.numeric(exp.ES) 
+    # results[,'wES']<-exp.ES
+    # exp.rES = r.effectSize (r.wobs,(add(r.wobs)/length(r.wobs)),n.permut=n.permut,n.cores=n.cores)
+    # #tic('compute FDR on wES')
+    #     exp.ES = unlist(exp.rES)
+    #     exp.ES = as.numeric(exp.ES)
+    #     results[,'wFDR']<-rep(1,nrow(results)) 
+    #     results[,'wFDR'] = estimateFDR2(obs = abs(results[,'wES']),
+    #                                    exp = abs(exp.ES),
+    #                                    maxFDR = maxFDR,
+    #                                    nSim = n.permut)
+    # #toc()
+    # ES_mtx <- matrix(abs(unlist(exp.rES)), ncol = length(exp.rES), nrow = length(exp.rES[[1]]))
+    # mean_ES <- abs(rowSums(ES_mtx)/n.permut)
+    # n.ES = (abs(results[,'wES']) - abs(mean_ES))
+    # n.ES[ n.ES < 0 ] = 0
+    # results[,'nES']<- sign(results[,'wES']) * n.ES
+    # results[,'mean_r_nES']<- sign(results[,'wES']) * abs(mean_ES)    
+    # #tic('compute FDR on nES')
+    #     exp.rES <- (abs(ES_mtx)-abs(mean_ES))
+    #     exp.rES[ exp.rES < 0 ] = 0
+    #     exp.rES<- sign(ES_mtx) * exp.rES
+    #     exp.ES = unlist(exp.rES)
+    #     exp.ES = as.numeric(exp.ES)
+    #     results[,'nFDR']<-rep(1,nrow(results)) 
+    #     results[,'nFDR'] = estimateFDR2(obs = abs(results[,'nES']),
+    #                                    exp = abs(exp.ES),
+    #                                    maxFDR = maxFDR,
+    #                                    nSim = n.permut)
+    # #toc()
+    # #tic('compute FDR on nES (frequency specific)')
+    #     results[,'cum_freq'] = results$support_1 + results$support_2
+    #     samples=length(colnames(al$am$full))
+    #     freq.cats = c(0, 0.02, 0.05, 0.10, 1)
+    #     results$nFDR2 = rep(1, nrow(results))
+    #     for(i in 2:length(freq.cats)){
+    #         #print(which(rownames(results)=='KRAS - TP53'))
+    #         #print(freq.cats[i-1]*samples)
+    #         #print(freq.cats[i]*samples)
+    #         select = results[,'cum_freq'] > freq.cats[i-1]*2*samples & results[,'cum_freq'] < freq.cats[i]*2*samples
+    #         #print(paste(i,select[which(rownames(results)=='KRAS - TP53')],sep=":"))
+    #         #print(paste(i,sum(select),sep=":"))
+    #         if (sum(select)>1){
+    #             results$nFDR2[select] = estimateFDR2(obs = abs(results$nES[select]),
+    #                                                  exp = abs(as.numeric(unlist(exp.rES[select,]))), 
+    #                                                  maxFDR = maxFDR,
+    #                                                  nSim = n.permut)
+
+    #         }
+    #     }
+    # #toc()
+    # results = results[order(abs(results$nES), decreasing = T),]
+    # results$type = rep('ME', nrow(results))
+    # results$type[ results$nES > 0 ] = 'CO'
+	# #results$diff_type = rep('ME', nrow(results))
+    # #results$diff_type[ results$diffoverlap > 0 ] = 'CO'
+
+    # results$FDR<-results$nFDR2<=maxFDR
+    # return (results)
+    features <- rownames(al$am$full)
+    num_features <- length(features)
+    result_cols <- c('SFE_1', 'SFE_2', 'name', 'support_1', 'support_2', 'freq_1', 'freq_2', 'overlap', 'w_overlap')
+    results <- data.frame(matrix(NA, nrow = num_features * (num_features - 1) / 2, ncol = length(result_cols)))
+    colnames(results) <- result_cols
+
+    # Generate all unique feature pairs
+    feature_pairs <- combn(features, 2)
+    results[, 'SFE_1'] <- feature_pairs[1, ]
+    results[, 'SFE_2'] <- feature_pairs[2, ]
+    results[, 'name'] <- paste(results[, 'SFE_1'], results[, 'SFE_2'], sep = ' - ')
+    rownames(results) <- results[, 'name']
+
+    # Precompute support and frequency
+    results[, 'support_1'] <- als$alteration.count[results[, 'SFE_1']]
+    results[, 'support_2'] <- als$alteration.count[results[, 'SFE_2']]
+    results[, 'freq_1'] <- results[, 'support_1'] / als$n.samples
+    results[, 'freq_2'] <- results[, 'support_2'] / als$n.samples
+
+    # Compute overlaps
+    results[, 'overlap'] <- as.vector(as.dist(obs))
+    results[, 'w_overlap'] <- as.vector(as.dist(wobs))
+
+    # Compute max possible overlap
+    if (!is.null(als$sample.blocks)) {
+        A <- Reduce('+', lapply(als$sample.blocks, function(x) {
+            a <- outer(x$alteration.count, x$alteration.count, pmin)
+            rownames(a) <- names(x$alteration.count)
+            colnames(a) <- names(x$alteration.count)
+            a
+        }))
+        results$max_overlap <- as.vector(as.dist(A))
     }
-    results[,'freq_overlap'] = results[,'overlap'] / (results[,'max_overlap'])       
-	#tic('compute overlaps')
-        results[,'r_overlap'] = as.vector(as.dist(add(r.obs)/length(r.obs)))
-        results[,'w_r_overlap'] = as.vector(as.dist(add(r.wobs)/length(r.wobs)))
-	#toc()
-	# tic('compute diffoverlap')
-	# 	exp.ES = (results[,'overlap'] - results[,'r_overlap'])
-	# 	exp.ES = as.numeric(exp.ES)
-	# 	results[,'diffoverlap']<-exp.ES
-	# toc()
-	if(estimate_pairwise){
-		#tic('compute p-value on overlap pairwise')
-	        obs.co = as.matrix(als$alteration.pairwise$overlap)
-	        results[,'pairwise_p']<-rep(1,nrow(results)) 
-	        results[,'pairwise_p'] = estimate_pairwise_p(obs=obs.co,
-	        											 exp = r.obs,
-	        											 results=results,
-	        											 nSim=n.permut
-	    												)
-	    #toc()
 
-	}
-	exp.ES = (results[,'w_overlap'] - results[,'w_r_overlap'])*sin(pi/4)
-    exp.ES = as.numeric(exp.ES) 
-    results[,'wES']<-exp.ES
-    exp.rES = r.effectSize (r.wobs,(add(r.wobs)/length(r.wobs)),n.permut=n.permut,n.cores=n.cores)
-    #tic('compute FDR on wES')
-        exp.ES = unlist(exp.rES)
-        exp.ES = as.numeric(exp.ES)
-        results[,'wFDR']<-rep(1,nrow(results)) 
-        results[,'wFDR'] = estimateFDR2(obs = abs(results[,'wES']),
-                                       exp = abs(exp.ES),
-                                       maxFDR = maxFDR,
-                                       nSim = n.permut)
-    #toc()
+    # Compute frequency overlap
+    results[, 'freq_overlap'] <- results[, 'overlap'] / results[, 'max_overlap']
+
+    # Compute random overlaps
+    results[, 'r_overlap'] <- as.vector(as.dist(add(r.obs) / length(r.obs)))
+    results[, 'w_r_overlap'] <- as.vector(as.dist(add(r.wobs) / length(r.wobs)))
+
+    # Compute weighted effect size
+    exp.ES <- (results[, 'w_overlap'] - results[, 'w_r_overlap']) * sin(pi / 4)
+    results[, 'wES'] <- exp.ES
+
+    # Compute random effect sizes
+    exp.rES <- r.effectSize(r.wobs, add(r.wobs) / length(r.wobs), n.permut = n.permut, n.cores = n.cores)
+    exp.ES <- unlist(exp.rES)
+    results[, 'wFDR'] <- estimateFDR2(obs = abs(results[, 'wES']), exp = abs(exp.ES), maxFDR = maxFDR, nSim = n.permut)
+
+    # Compute normalized effect size (nES)
     ES_mtx <- matrix(abs(unlist(exp.rES)), ncol = length(exp.rES), nrow = length(exp.rES[[1]]))
-    mean_ES <- abs(rowSums(ES_mtx)/n.permut)
-    n.ES = (abs(results[,'wES']) - abs(mean_ES))
-    n.ES[ n.ES < 0 ] = 0
-    results[,'nES']<- sign(results[,'wES']) * n.ES
-    results[,'mean_r_nES']<- sign(results[,'wES']) * abs(mean_ES)    
-    #tic('compute FDR on nES')
-        exp.rES <- (abs(ES_mtx)-abs(mean_ES))
-        exp.rES[ exp.rES < 0 ] = 0
-        exp.rES<- sign(ES_mtx) * exp.rES
-        exp.ES = unlist(exp.rES)
-        exp.ES = as.numeric(exp.ES)
-        results[,'nFDR']<-rep(1,nrow(results)) 
-        results[,'nFDR'] = estimateFDR2(obs = abs(results[,'nES']),
-                                       exp = abs(exp.ES),
-                                       maxFDR = maxFDR,
-                                       nSim = n.permut)
-    #toc()
-    #tic('compute FDR on nES (frequency specific)')
-        results[,'cum_freq'] = results$support_1 + results$support_2
-        samples=length(colnames(al$am$full))
-        freq.cats = c(0, 0.02, 0.05, 0.10, 1)
-        results$nFDR2 = rep(1, nrow(results))
-        for(i in 2:length(freq.cats)){
-            #print(which(rownames(results)=='KRAS - TP53'))
-            #print(freq.cats[i-1]*samples)
-            #print(freq.cats[i]*samples)
-            select = results[,'cum_freq'] > freq.cats[i-1]*2*samples & results[,'cum_freq'] < freq.cats[i]*2*samples
-            #print(paste(i,select[which(rownames(results)=='KRAS - TP53')],sep=":"))
-            #print(paste(i,sum(select),sep=":"))
-            if (sum(select)>1){
-                results$nFDR2[select] = estimateFDR2(obs = abs(results$nES[select]),
-                                                     exp = abs(as.numeric(unlist(exp.rES[select,]))), 
-                                                     maxFDR = maxFDR,
-                                                     nSim = n.permut)
+    mean_ES <- abs(rowSums(ES_mtx) / n.permut)
+    n.ES <- pmax(abs(results[, 'wES']) - abs(mean_ES), 0)
+    results[, 'nES'] <- sign(results[, 'wES']) * n.ES
+    results[, 'mean_r_nES'] <- sign(results[, 'wES']) * abs(mean_ES)
 
-            }
+    # Compute FDR for nES
+    exp.rES <- pmax(abs(ES_mtx) - abs(mean_ES), 0)
+    exp.rES <- sign(ES_mtx) * exp.rES
+    exp.ES <- unlist(exp.rES)
+    results[, 'nFDR'] <- estimateFDR2(obs = abs(results[, 'nES']), exp = abs(exp.ES), maxFDR = maxFDR, nSim = n.permut)
+
+    # Compute frequency-specific FDR
+    results[, 'cum_freq'] <- results$support_1 + results$support_2
+    samples <- ncol(al$am$full)
+    freq.cats <- c(0, 0.02, 0.05, 0.10, 1)
+    results$nFDR2 <- rep(1, nrow(results))
+    for (i in 2:length(freq.cats)) {
+        select <- results[, 'cum_freq'] > freq.cats[i - 1] * 2 * samples & results[, 'cum_freq'] < freq.cats[i] * 2 * samples
+        if (sum(select) > 1) {
+            results$nFDR2[select] <- estimateFDR2(
+                obs = abs(results$nES[select]),
+                exp = abs(as.numeric(unlist(exp.rES[select, ]))),
+                maxFDR = maxFDR,
+                nSim = n.permut
+            )
         }
-    #toc()
-    results = results[order(abs(results$nES), decreasing = T),]
-    results$type = rep('ME', nrow(results))
-    results$type[ results$nES > 0 ] = 'CO'
-	#results$diff_type = rep('ME', nrow(results))
-    #results$diff_type[ results$diffoverlap > 0 ] = 'CO'
+    }
 
-    results$FDR<-results$nFDR2<=maxFDR
-    return (results)
+    # Sort results by absolute nES
+    results <- results[order(abs(results$nES), decreasing = TRUE), ]
+
+    # Assign interaction types
+    results$type <- ifelse(results$nES > 0, 'CO', 'ME')
+    results$FDR <- results$nFDR2 <= maxFDR
+
+    return(results)
+
 }

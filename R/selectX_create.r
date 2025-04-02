@@ -2,8 +2,8 @@
 # Author  : Arvind Iyer
 # Email   : arvind.iyer@unil.ch
 # Project : SelectSim
-# Desc    : The alteration landscape object, template object and selectX object creating functions
-# Version : 0.1
+# Desc    : Implementation of SelectSim algorithm
+# Version : 0.1.4
 # Updates : Re wrote the whole code
 # Todo:
 # - c++ backend for faster computation: Removed kept R native
@@ -46,7 +46,7 @@ new.AL.general  <- function(am,
     al$am[['full']] = matrix(0, nrow = nrow(am$M[[1]]), ncol = ncol(am$M[[1]]))
     # Keep the order of rownames and colnames as in first gam.
     row.order = rownames(am$M[[1]])
-    col.order = colnames(am$M[[1]])
+    col.order = sort(colnames(am$M[[1]])) #fixed gene ordering issuses
     for ( i in names(am$M)){
         al$am[[i]] <-as.matrix(am$M[[i]][row.order,col.order])
         al$am[['full']] <- al$am[['full']]+as.matrix(am$M[[i]][row.order,col.order])
@@ -139,8 +139,9 @@ generateS = function(gam,
                      upperBound = 1){
 
     gene.freq = as.matrix(rowSums(gam)/ncol(gam), ncol = 1)
-    tmb.weight = t(as.matrix(sample.weights, ncol = 1))
-    sim.gam = gene.freq %*% tmb.weight
+    tmb.weight = (as.matrix(sample.weights, nrow = 1))
+    #sim.gam = gene.freq %*% tmb.weight
+    sim.gam = tcrossprod(gene.freq,tmb.weight)
     colnames(sim.gam) = colnames(gam)
     sim.gam[ sim.gam > 1 ] = upperBound
     return(sim.gam)
@@ -277,6 +278,7 @@ null_model_parallel <-function(al,
 
 
     simulationStep = function(template, total_mut){
+        
         S = template
         nvalues = nrow(S)*ncol(S)
         r = matrix( runif(nvalues, min = 0, max = 1), nrow = nrow(S), ncol = ncol(S))
@@ -351,19 +353,24 @@ null_model_parallel <-function(al,
         log_file <- paste0("gen.random.am_", Sys.getpid(), ".log")
         cl <-  parallel::makeCluster(n.cores, outfile=log_file)
         doParallel::registerDoParallel(cl)
-        registerDoRNG(seed) 
         on.exit({
             parallel::stopCluster(cl)
             foreach::registerDoSEQ()  # Unregister the parallel backend
         }) 
-        
-        randomMs <- foreach::foreach(i=1:n.permut) %dopar% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
+        registerDoRNG(seed)
+        # Use chunking to reduce overhead
+        chunk_size <- ceiling(n.permut / n.cores)
+        randomMs <- foreach(chunk = seq(1, n.permut, by = chunk_size), .combine = c) %dopar% {
+            lapply(seq_len(chunk_size), function(i) simulationFixedOnes(al, temp_mat, W, CORRECT_T = 0.05))
+        }
+        #randomMs <- foreach::foreach(i=1:n.permut) %dopar% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
         return (randomMs)
     }
     else{
         # Use sequential execution
-        registerDoRNG(seed)
+        set.seed(seed)
         foreach::registerDoSEQ()
+        registerDoRNG(seed)
         randomMs <- foreach(i=1:n.permut) %do% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
         return (randomMs)
     }
@@ -386,7 +393,7 @@ null_model_parallel <-function(al,
 #' @return A list containing the null simulations
 #'
 #' @export
-null_model_parallel2 <- function(al,
+null_model_parallel_dynamic <- function(al,
                                  temp_mat,
                                  W,
                                  n.cores = 1,
@@ -397,6 +404,8 @@ null_model_parallel2 <- function(al,
 
     `%dopar%` <- foreach::`%dopar%`
     `%do%` <- foreach::`%do%`
+
+ 
 
     # Row-specific correction logic
     simulationStep <- function(template, gen, maxDiff, maxIter) {
@@ -429,23 +438,16 @@ null_model_parallel2 <- function(al,
     # Simulation logic for multiple template matrices
     simulationFixedOnes <- function(al, temp_mat, W, maxDiff, maxIter) {
         gam_names <- names(al$am)
-        residuals <- list()
-
-        # Process each template matrix
-        for (i in 1:length(temp_mat)) {
-            S <- temp_mat[[i]]
-            gen <- rowSums(al$am$full)  # Row sums of the full alteration matrix
-            test <- simulationStep(template = S, gen = gen, maxDiff = maxDiff, maxIter = maxIter)
-            residuals[[i]] <- test
+        #residuals <- list()
+        
+        if(length(temp_mat)>1) {
+            combined_T <- pmax(temp_mat[[1]], temp_mat[[2]])
         }
-
-        # Combine results from multiple template matrices using pmax
-        if (length(residuals) > 1) {
-            combined_S <- pmax(residuals[[1]], residuals[[2]])
-        } else {
-            combined_S <- residuals[[1]]
+        else {
+           combined_T <- temp_mat[[1]]
         }
-
+        gen <- rowSums(al$am$full)
+        combined_S <- simulationStep(template = combined_T, gen = gen, maxDiff = maxDiff, maxIter = maxIter)
         return(combined_S)
     }
 
@@ -464,13 +466,79 @@ null_model_parallel2 <- function(al,
         }
         return(randomMs)
     } else {
-        registerDoRNG(seed)
         foreach::registerDoSEQ()
+        registerDoRNG(seed)
         randomMs <- foreach(i = 1:n.permut) %do% {
             simulationFixedOnes(al, temp_mat, W, maxDiff, maxIter)
         }
         return(randomMs)
     }
+    # `%dopar%` <- foreach::`%dopar%`
+    # `%do%` <- foreach::`%do%`
+
+    # # Precompute row sums of the full alteration matrix
+    # gen <- rowSums(al$am$full)
+
+    # # Combine template matrices using pmax
+    # combined_T <- if (length(temp_mat) > 1) {
+    #     do.call(pmax, temp_mat)
+    # } else {
+    #     temp_mat[[1]]
+    # }
+
+    # # Optimized simulation step with row-specific correction
+    # simulationStep <- function(template, gen, maxDiff, maxIter) {
+    #     nvalues <- nrow(template) * ncol(template)
+    #     eps <- rep(0.005, nrow(template))  # Initial threshold for each row
+    #     r <- matrix(runif(nvalues, min = 0, max = 1), nrow = nrow(template), ncol = ncol(template))
+    #     S <- 1 * ((template - r) > 0)  # Initial binary matrix
+
+    #     error <- rowSums(S) / ncol(r) - gen / ncol(r)
+    #     current_eps <- sign(error) * eps
+    #     iter <- 0
+    #     continue <- TRUE
+    #     while (continue) {
+    #         select <- abs(error) > maxDiff
+    #         S[select, ] <- 1 * (template[select, ] - r[select, ] > current_eps[select])
+
+    #         error <- rowSums(S) / ncol(r) - gen / ncol(r)
+    #         iter <- iter + 1
+
+    #         if (max(abs(error)) > maxDiff & iter < maxIter) {
+    #             current_eps <- current_eps + sign(error) * (0.1 * eps)
+    #         } else {
+    #             continue <- FALSE
+    #         }
+    #     }
+
+    #     return(S)
+    # }
+
+    # # Parallel or sequential execution
+    # if (n.cores > 1) {
+    #     log_file <- paste0("gen.random.am_", Sys.getpid(), ".log")
+    #     cl <- parallel::makeCluster(n.cores, outfile = log_file)
+    #     doParallel::registerDoParallel(cl)
+    #     on.exit({
+    #         parallel::stopCluster(cl)
+    #         foreach::registerDoSEQ()  # Unregister the parallel backend
+    #     })
+    #     registerDoRNG(seed)
+
+    #     # Use chunking to reduce overhead
+    #     chunk_size <- ceiling(n.permut / n.cores)
+    #     randomMs <- foreach(chunk = seq(1, n.permut, by = chunk_size), .combine = c) %dopar% {
+    #         lapply(seq_len(chunk_size), function(i) simulationStep(combined_T, gen, maxDiff, maxIter))
+    #     }
+    # } else {
+    #     foreach::registerDoSEQ()
+    #     registerDoRNG(seed)
+    #     randomMs <- foreach(i = 1:n.permut) %do% {
+    #         simulationStep(combined_T, gen, maxDiff, maxIter)
+    #     }
+    # }
+
+    # return(randomMs)
 }
 
 
@@ -603,29 +671,37 @@ null_model_parallel_debug <-function(al,
 retrieveOutliers = function(obj, nSim=1000){
     gnMut = matrix(0, nrow = nrow(obj$al$am$full), ncol = nSim)
     snMut = matrix(0, nrow = ncol(obj$al$am$full), ncol = nSim)
-    for(i in 1:nSim){
-       gnMut[,i] = rowSums(obj$null[[i]])
-       snMut[,i] = colSums(obj$null[[i]])
-    }
+    # for(i in 1:nSim){
+    #    gnMut[,i] = rowSums(obj$null[[i]])
+    #    snMut[,i] = colSums(obj$null[[i]])
+    # }
+    gnMut <- sapply(obj$null, rowSums)
+    snMut <- sapply(obj$null, colSums)
     rgn = gnMut
     rsn = snMut
     ogn = rowSums(obj$al$am$full)
     osn = colSums(obj$al$am$full)
-    rgn = rgn-ogn
-    rsn = rsn-osn
-    mean.gn = apply(abs(rgn), 2, mean)
-    mean.sn = apply(abs(rsn), 2, mean)
+    #rgn = rgn-ogn
+    #rsn = rsn-osn
+    #mean.gn = apply(abs(rgn), 2, mean)
+    #mean.sn = apply(abs(rsn), 2, mean)
+    rgn <- abs(gnMut - ogn)
+    rsn <- abs(snMut - osn)
+    mean.gn <- colMeans(rgn)
+    mean.sn <- colMeans(rsn)
     dev = mean.gn + mean.sn    
     dev2 = sort(dev)
     # Miljan changed:
     # mincut = dev2[ round(0.05*length(dev2)) ]
     # maxcut = dev2[ round(0.95*length(dev2)) ]
     # outliers = dev < mincut | dev >= maxcut
+    #print(dev2)
     maxcut = dev2[ round(0.90*length(dev2)) ]
     #maxcut = quantile(dev, probs = 0.9,type = 7)
     outliers = dev >= maxcut
     #print(outliers)
     #outliers = rep( FALSE, length(dev))
     #print("Script uses corrected outlier removal & column indexing.")    
-    return(outliers)
+    #return(list('outliers'=outliers,'dev'=dev))
+    return (outliers)
 }
