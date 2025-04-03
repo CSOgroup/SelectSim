@@ -275,8 +275,9 @@ null_model_parallel <-function(al,
 
     `%dopar%` <- foreach::`%dopar%`
     `%do%` <- foreach::`%do%`
-
-
+    # Set RNG kind and seed for reproducibility
+    RNGkind(kind = "Mersenne-Twister", normal.kind = "Inversion", sample.kind = "Rejection")
+    set.seed(seed)
     simulationStep = function(template, total_mut){
         
         S = template
@@ -405,14 +406,107 @@ null_model_parallel_dynamic <- function(al,
     
     `%dopar%` <- foreach::`%dopar%`
     `%do%` <- foreach::`%do%`
+    # Set RNG kind and seed for reproducibility
+    RNGkind(kind = "Mersenne-Twister", normal.kind = "Inversion", sample.kind = "Rejection")
+    set.seed(seed)
+    # Optimized row-specific correction logic
+    simulationStep <- function(template, gen, maxDiff, maxIter) {
+        nvalues <- nrow(template) * ncol(template)
+        eps <- rep(0.002, nrow(template))  # Initial threshold for each row
+        r <- matrix(runif(nvalues, min = 0, max = 1), nrow = nrow(template), ncol = ncol(template))
+        S <- (template - r) > 0  # Initial binary matrix
+        error <- rowSums(S) / ncol(r) - gen / ncol(r)
+        current_eps <- sign(error) * eps
+        iter <- 0
 
+        while (any(abs(error) > maxDiff) && iter < maxIter) {
+            select <- abs(error) > maxDiff
+            S[select, ] <- (template[select, ] - r[select, ]) > current_eps[select]
+            error <- rowSums(S) / ncol(r) - gen / ncol(r)
+            current_eps[select] <- current_eps[select] + sign(error[select]) * (0.1 * eps[select])
+            iter <- iter + 1
+        }
+
+        return(S)
+    }
+
+    # Combine two binary matrices using pmax
+    combineTemplates <- function(s1, s2) {
+        return(pmax(s1, s2))
+    }
+
+    gen <- rowSums(al$am$full)
+
+    # Parallel or sequential execution
+    if (n.cores > 1) {
+        log_file <- paste0("gen.random.am_", Sys.getpid(), ".log")
+        cl <- parallel::makeCluster(n.cores, outfile = log_file)
+        doParallel::registerDoParallel(cl)
+        on.exit({
+            parallel::stopCluster(cl)
+            foreach::registerDoSEQ()  # Unregister the parallel backend
+        })
+        registerDoRNG(seed)
+
+        randomMs <- foreach::foreach(i = 1:n.permut) %dopar% {
+            s1 <- simulationStep(template = temp_mat[[1]], gen = rowSums(temp_mat[[1]]), maxDiff = maxDiff, maxIter = maxIter)
+            s2 <- simulationStep(template = temp_mat[[2]], gen = rowSums(temp_mat[[2]]), maxDiff = maxDiff, maxIter = maxIter)
+            combineTemplates(s1, s2)
+        }
+        return(randomMs)
+    } else {
+        foreach::registerDoSEQ()
+        registerDoRNG(seed)
+
+        randomMs <- foreach(i = 1:n.permut) %do% {
+            s1 <- simulationStep(template = temp_mat[[1]], gen = rowSums(temp_mat[[1]]), maxDiff = maxDiff, maxIter = maxIter)
+            s2 <- simulationStep(template = temp_mat[[2]], gen = rowSums(temp_mat[[2]]), maxDiff = maxDiff, maxIter = maxIter)
+            combineTemplates(s1, s2)
+        }
+        return(randomMs)
+    }
+}
+
+#' Generating the null_simulation matrix with row-specific correction and merging using pmax (experimental)
+#' 
+#' @import doParallel
+#' @import parallel
+#' @importFrom Rfast rowSort
+#' @import doRNG
+#' @param al Alteration landscape object
+#' @param temp_mat template matrices
+#' @param W weight matrix 
+#' @param n.cores Number of cores
+#' @param n.permut Number of simulations
+#' @param seed Random seed
+#' @param maxDiff Maximum allowable error for row sums
+#' @param maxIter Maximum number of iterations for threshold adjustment
+#' @return A list containing the null simulations
+#'
+#' @export
+null_model_parallel_dynamic_test <- function(al,
+                                 temp_mat,
+                                 W,
+                                 n.cores = 1,
+                                 n.permut,
+                                 seed = 42,
+                                 maxDiff = 0.005,
+                                 maxIter = 100) {
+
+    
+    `%dopar%` <- foreach::`%dopar%`
+    `%do%` <- foreach::`%do%`
+    # Set RNG kind and seed for reproducibility
+    RNGkind(kind = "Mersenne-Twister", normal.kind = "Inversion", sample.kind = "Rejection")
+    set.seed(seed)
     # Row-specific correction logic
     simulationStep <- function(template, gen, maxDiff, maxIter) {
         nvalues <- nrow(template) * ncol(template)
         eps <- rep(0.005, nrow(template))  # Initial threshold for each row
         r <- matrix(runif(nvalues, min = 0, max = 1), nrow = nrow(template), ncol = ncol(template))
         S <- 1 * ((template - r) > 0)  # Initial binary matrix
-        error <- rowSums(S) / ncol(r) - gen / ncol(r)
+        error <- (rowSums(S) / ncol(r)) - (gen / ncol(r))
+        #print(error)
         current_eps <- sign(error) * eps
         iter <- 0
         continue <- TRUE
@@ -432,14 +526,10 @@ null_model_parallel_dynamic <- function(al,
 
         return(S)
     }
-    # Combine Template matrices using pmax
-    if(length(temp_mat)>1) {
-            combined_T <- pmax(temp_mat[[1]], temp_mat[[2]])
+    # Combine two binary matrices using pmax
+    templeate_simultation_combine <- function(s1,s2){
+        return(pmax(s1, s2))
     }
-    else{
-           combined_T <- temp_mat[[1]]
-    }
-    gen <- rowSums(al$am$full)
 
     # Parallel or sequential execution
     if (n.cores > 1) {
@@ -450,21 +540,40 @@ null_model_parallel_dynamic <- function(al,
             parallel::stopCluster(cl)
             foreach::registerDoSEQ()  # Unregister the parallel backend
         })
-        registerDoRNG(seed)        
-        randomMs <- foreach::foreach(i = 1:n.permut) %dopar% {
-           simulationStep(template = combined_T, gen = gen, maxDiff = maxDiff, maxIter = maxIter)
-        }
+        registerDoRNG(seed)
+        if(length(temp_mat)>1){
+            randomMs <- foreach::foreach(i = 1:n.permut) %dopar% {
+                        s1<-simulationStep(template = temp_mat[[1]], gen = rowSums(temp_mat[[1]]), maxDiff = maxDiff, maxIter = maxIter)
+                        s2<-simulationStep(template = temp_mat[[2]], gen = rowSums(temp_mat[[2]]), maxDiff = maxDiff, maxIter = maxIter)
+                        templeate_simultation_combine(s1,s2)
+            }
+        } else{
+            randomMs <- foreach::foreach(i = 1:n.permut) %dopar% {
+                simulationStep(template = temp_mat[[1]], gen = rowSums(temp_mat[[1]]), maxDiff = maxDiff, maxIter = maxIter)
+                #s2<-simulationStep(template = temp_mat[[2]], gen = rowSums(temp_mat[[2]]), maxDiff = maxDiff, maxIter = maxIter)
+                #templeate_simultation_combine(s1,s2)
+            }
+        }         
         return(randomMs)
     } else {
         foreach::registerDoSEQ()
         registerDoRNG(seed)
-        randomMs <- foreach(i = 1:n.permut) %do% {
-            simulationStep(template = combined_T, gen = gen, maxDiff = maxDiff, maxIter = maxIter)
+        if(length(temp_mat)>1){
+            randomMs <- foreach::foreach(i = 1:n.permut) %do% {
+                        s1<-simulationStep(template = temp_mat[[1]], gen = rowSums(temp_mat[[1]]), maxDiff = maxDiff, maxIter = maxIter)
+                        s2<-simulationStep(template = temp_mat[[2]], gen = rowSums(temp_mat[[2]]), maxDiff = maxDiff, maxIter = maxIter)
+                        templeate_simultation_combine(s1,s2)
+            }
+        } else{
+            randomMs <- foreach::foreach(i = 1:n.permut) %do% {
+                simulationStep(template = temp_mat[[1]], gen = rowSums(temp_mat[[1]]), maxDiff = maxDiff, maxIter = maxIter)
+                #s2<-simulationStep(template = temp_mat[[2]], gen = rowSums(temp_mat[[2]]), maxDiff = maxDiff, maxIter = maxIter)
+                #templeate_simultation_combine(s1,s2)
+            }
         }
         return(randomMs)
     }
 }
-
 
 
 #' Generating the null_simulation matrix  

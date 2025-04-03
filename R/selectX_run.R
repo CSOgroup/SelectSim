@@ -113,11 +113,11 @@ selectX <- function(M, #A list object consiting of GAM and TMB data
 	    		wobs.co = as.matrix(als$alteration.pairwise$w_overlap)
 	    		robs.co<-r.am.pairwise.alteration.overlap(null = obj$null,
 								 						  n.permut = obj$nSim,
-                  		                              	  n.cores = n.cores)
+                  		                              	  n.cores = 1)
     			wrobs.co<-w.r.am.pairwise.alteration.overlap(null = obj$null,
     											 			W= obj$W$W,
                                                  			n.permut = obj$nSim,
-                                                 			n.cores = n.cores)
+                                                 			n.cores = 1)
 
 			   selectX_result <- interaction.table(al,
 			                                        als,
@@ -166,11 +166,11 @@ selectX <- function(M, #A list object consiting of GAM and TMB data
     		wobs.co = as.matrix(als$alteration.pairwise$w_overlap)
     		robs.co<-r.am.pairwise.alteration.overlap(null = obj$null,
 									 				  n.permut = obj$nSim,
-                  		                              n.cores = n.cores)
+                  		                              n.cores = 1)
 			wrobs.co<-w.r.am.pairwise.alteration.overlap(null = obj$null,
 						  							    W= obj$W$W,
                                              			n.permut = obj$nSim,
-                                             			n.cores = n.cores)
+                                             			n.cores = 1)
 
 		   selectX_result <- interaction.table(al,
 		                                        als,
@@ -270,7 +270,7 @@ selectX_dynamic <- function(M, #A list object consiting of GAM and TMB data
 			toc()
 			print(paste('Step4-> Generating null model...'))
 			tic('Time:')
-				sim <- null_model_parallel_dynamic(al,temp.data$temp_mat,W$W,n.cores,n.permut,maxDiff,maxIter)
+				sim <- null_model_parallel_dynamic_test(al,temp.data$temp_mat,W$W,n.cores,n.permut,maxDiff,maxIter)
 		 		obj<- list('al'=al,'W'=W,'T'=temp.data,'null'=sim,'nSim'=n.permut)
 		    	print(paste('-> Removing the outliers matrix from null model...'))
 		    		outliers <- retrieveOutliers(obj = obj,nSim = n.permut)
@@ -300,11 +300,11 @@ selectX_dynamic <- function(M, #A list object consiting of GAM and TMB data
 	    		wobs.co = as.matrix(als$alteration.pairwise$w_overlap)
 	    		robs.co<-r.am.pairwise.alteration.overlap(null = obj$null,
 								 						  n.permut = obj$nSim,
-                  		                              	  n.cores = n.cores)
+                  		                              	  n.cores = 1)
     			wrobs.co<-w.r.am.pairwise.alteration.overlap(null = obj$null,
     											 			W= obj$W$W,
                                                  			n.permut = obj$nSim,
-                                                 			n.cores = n.cores)
+                                                 			n.cores = 1)
 
 			   selectX_result <- interaction.table(al,
 			                                        als,
@@ -333,7 +333,7 @@ selectX_dynamic <- function(M, #A list object consiting of GAM and TMB data
 			al = new.AL.general(M,alteration.class,sample.class,min.freq,verbose)
 			temp.data<-templeate.obj.gen(al)
 			W<-generateW_block(al,lambda,tao)
-			sim <- null_model_parallel_dynamic(al,temp.data$temp_mat,W$W,n.cores,n.permut,maxDiff,maxIter)
+			sim <- null_model_parallel_dynamic_test(al,temp.data$temp_mat,W$W,n.cores,n.permut,maxDiff,maxIter)
 		 	obj<- list('al'=al,'W'=W,'T'=temp.data,'null'=sim,'nSim'=n.permut)
 		 	outliers <- retrieveOutliers(obj = obj,nSim = n.permut)
 		 	if(length(which(outliers))==0){
@@ -352,12 +352,12 @@ selectX_dynamic <- function(M, #A list object consiting of GAM and TMB data
 			obs.co = as.matrix(als$alteration.pairwise$overlap)
     		wobs.co = as.matrix(als$alteration.pairwise$w_overlap)
     		robs.co<-r.am.pairwise.alteration.overlap(null = obj$null,
-									 					    	   n.permut = obj$nSim,
-                  		                           n.cores = n.cores)
+									 				n.permut = obj$nSim,
+                  		                           	n.cores = 1)
 			wrobs.co<-w.r.am.pairwise.alteration.overlap(null = obj$null,
-						  											   W= obj$W$W,
+						  								W= obj$W$W,
                                              			n.permut = obj$nSim,
-                                             			n.cores = n.cores)
+                                             			n.cores = 1)
 
 		   selectX_result <- interaction.table(al,
 		                                        als,
