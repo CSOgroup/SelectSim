@@ -3,11 +3,48 @@
 # Email   : arvind.iyer@unil.ch
 # Project : SelectX
 # Desc    : The file contains plot related functions
-# Version : 0.1
+# Version : 0.1.5
 # Updates : Re wrote the whole code
 # Todo:
 # - Oncoprint & other usefull plot functions
 ###
+
+
+#' A nice theme for making good plots
+#'
+#' @param base_size
+#' @param base_family
+#'
+#' @returns
+#' @export
+theme_Publication = function (base_size = 14, base_family = "sans") {
+   
+   (theme(
+    text = element_text(family = base_family, size = base_size),
+    plot.title = element_text(face = "bold", size = rel(1.2), hjust = 0.5),
+    panel.background = element_blank(),
+    plot.background = element_blank(),
+    panel.border = element_rect(colour = "black", fill = NA, size = 1),
+    axis.title = element_text(face = "bold", size = rel(1)),
+    axis.title.y = element_text(angle = 90, vjust = 2),
+    axis.title.x = element_text(vjust = -0.2),
+    axis.text = element_text(size = rel(0.8)),
+    axis.ticks = element_line(),
+    panel.grid.major = element_line(colour = "#f0f0f0"),
+    panel.grid.minor = element_blank(),
+    legend.key = element_blank(),
+    legend.position = "right",
+    legend.text = element_text(size = rel(0.8)),
+    legend.key.size = unit(4, "mm"),
+    legend.direction = "vertical",
+    legend.spacing = unit(0, "cm"),
+    legend.title = element_text(face = "italic"),
+    plot.margin = margin(5, 5, 5, 5, "mm"),
+    strip.background = element_rect(colour = "black", fill = "white"),
+    strip.text = element_text(face = "bold")))
+
+}
+
 
 
 #' Create an AL object
@@ -42,11 +79,9 @@ obs_exp_scatter <- function(result,title){
 	scale_y_continuous(breaks = seq(0, max(result$log_overlap), 1))+
     scale_x_continuous(breaks= seq(0, max(result$log_overlap), 1))
 
-	plot <- plot + ggtitle(title)+theme_pubr()+
+	plot <- plot + ggtitle(title)+theme_Publication(base_size=16)+
 	theme(	legend.position = "top",
-			legend.title = element_blank(),
-			plot.title =  element_text(hjust = 0.5),
-			text = element_text(size = 16))
+			legend.title = element_blank())
 
 	return(plot)
 }
