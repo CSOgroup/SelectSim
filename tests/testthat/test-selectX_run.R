@@ -1,4 +1,4 @@
-test_that("selectX() genrates same results on LUAD dataset", {
+test_that("selectX() from SelectSim genrates same results on LUAD dataset", {
 
 # Load the dataset
 data(luad_run_data, package = "SelectSim")
@@ -22,6 +22,6 @@ data(luad_result, package = "SelectSim")
 # Check if the number of signficant pairs is the same
   true_p <- nrow(luad_result[luad_result$FDR==TRUE,])
   test_p <- nrow(outdat$result[outdat$result$FDR==TRUE,])
-  #expect_equal(true_p,test_p)
+  expect_equal(true_p,test_p)
 })
 #> Test passed 😀
