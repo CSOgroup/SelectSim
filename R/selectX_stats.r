@@ -3,11 +3,9 @@
 # Email   : arvind.iyer@unil.ch
 # Project : SelectSim
 # Desc    : The file which contains the function to generate the stats and table
-# Version : 0.1
+# Version : 0.1.5
 # Updates : Re wrote the whole code
 # Todo:
-# - Random seed to set to one value for parallel foreach?
-# - c++ backend for faster computation
 ###
 
 #' Create an alteration landscape object
@@ -88,8 +86,12 @@ al.stats <- function(al) {
     
     return(als)
 }
+
+###
 #' Compute overlap stats
 #' 
+#' @importFrom  Matrix sparseMatrix
+#' @importFrom  Matrix t
 #' @param am The alteration matrix
 #' @return overlap the overlap between the pairs
 #'
@@ -101,16 +103,19 @@ am.pairwise.alteration.overlap <- function(am) {
 }
 #' Compute weight overlap stats
 #' 
+#' @importFrom  Matrix sparseMatrix
+#' @importFrom  Matrix t
 #' @param am The alteration matrix
 #' @param W The weight matrix
 #' @return overlap the weight overlap between the pairs
 #'
 #' @export
 am.weight.pairwise.alteration.overlap <- function(am,W) {
-    A = am * 1
-    col_order= colnames(A)
-    overlap = (W[,col_order]*A) %*% t(A)
-    return(overlap)
+
+     A = am * 1
+     col_order= colnames(A)
+     overlap = (W[,col_order]*A) %*% t(A)
+     return(overlap)
 }
 #' Compute weight overlap stats
 #'
@@ -181,28 +186,7 @@ al.pairwise.alteration.stats <- function(al, als=NULL, do.blocks=FALSE) {
 #'
 #' @export
 r.am.pairwise.alteration.overlap <- function(null,n.permut,n.cores=1) {
-    # `%dopar%` <- foreach::`%dopar%`
-    # `%do%` <- foreach::`%do%`
-    # if(n.cores>1){
-    #     cl <-  parallel::makeCluster(n.cores-1, outfile=paste("r.gen.random.am.log", sep=''))
-    #     doParallel::registerDoParallel(cl)  
-    #     if(foreach::getDoParRegistered()) {
-    #         random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
-    #             selectX::am.pairwise.alteration.overlap(am=null[[i]])
-    #         } 
-    #         parallel::stopCluster(cl)
-    #         return (random_overlap)
-    #     } else {
-    #         stop('Error in registering a parallel cluster for randomization.')
-    #     }
-    # }
-    # else{
-    #    foreach::registerDoSEQ()
-    #    random_overlap <- foreach(i=c(1:length(null))) %do% selectX::am.pairwise.alteration.overlap(am=null[[i]])
-    #    return (random_overlap)
-    # }
     return(rcpp_overlap(v=null,t=1))
-    #return(selectX:::rcpp_overlap(v=null,t=1))
 }
 #' Compute weight overlap stats
 #' 
@@ -215,30 +199,7 @@ r.am.pairwise.alteration.overlap <- function(null,n.permut,n.cores=1) {
 #' @return overlap the weight overlap between the pairs
 #'
 #' @export
-w.r.am.pairwise.alteration.overlap <- function(null,W,n.permut,n.cores=1) {
-	 
-	 
- #    `%dopar%` <- foreach::`%dopar%`
- #    `%do%` <- foreach::`%do%`
-	# if(n.cores>1){
-	# 	cl <-  parallel::makeCluster(n.cores-1, outfile=paste("r.gen.random.am.log", sep=''))
-	# 	doParallel::registerDoParallel(cl)  
-	# 	if(foreach::getDoParRegistered()) {
-	# 	    random_overlap <- foreach::foreach(i=c(1:length(null))) %dopar%{
-	# 	        selectX::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
-	# 	    } 
-	# 	    parallel::stopCluster(cl)
-	# 	    return (random_overlap)
-	# 	} 
-	# 	else {
-	# 	    stop('Error in registering a parallel cluster for randomization.')
-	# 	}
-	# }
-	# else{
-	# 	foreach::registerDoSEQ()
-	# 	random_overlap <- foreach(i=c(1:length(null))) %do% selectX::am.weight.pairwise.alteration.overlap(am=null[[i]],W=W)
-	# 	return (random_overlap)
-	# }
+w.r.am.pairwise.alteration.overlap <- function(null,W,n.permut,n.cores=1) {	  
     return(rcpp_w_overlap(v=null,w=W,t=1))
 }
 #' Compute weight overlap stats
@@ -270,38 +231,10 @@ effectSize = function(obs, exp){
 #' @export
 r.effectSize<- function(null_overlap,mean_mat,n.permut=1000,n.cores=1){
 
-    # effectSizes <- function(x,arg){
-    #     es = (x - arg)*sin(pi/4)
-    #     return(es)
-    # }
-
-    # r.effect <- lapply(null_overlap,effectSizes,mean_mat)
-    # return(r.effect)
-
     foreach::registerDoSEQ()
     i<-NULL
     r.effect <- foreach(i=1:n.permut) %do% as.vector(as.dist((null_overlap[[i]]-mean_mat)*sin(pi/4)))
     return(r.effect)
-
-	# i <- NULL
- #   `%do%` <- foreach::`%do%`
- #   `%dopar%` <- foreach::`%dopar%`
- #    if(n.cores>1){
- #        cl <-  parallel::makeCluster(n.cores, outfile=paste("r.gen.random.am.log", sep=''))
- #        doParallel::registerDoParallel(cl)  
- #        if(foreach::getDoParRegistered()) {
- #            tryCatch(r.effect <- foreach(i=1:n.permut) %dopar% as.vector(as.dist((null_overlap[[i]]-mean_mat)*sin(pi/4))), error = function(e) print(e))
- #            parallel::stopCluster(cl)
- #            return (r.effect)
- #        } else {
- #            stop('Error in registering a parallel cluster for randomization.')
- #        }
- #    }
- #    else{
- #        foreach::registerDoSEQ()
- #        r.effect <- foreach(i=1:n.permut) %do% as.vector(as.dist((null_overlap[[i]]-mean_mat)*sin(pi/4)))
- #        return(r.effect)
- #    }
 
 }
 #' Compute yule coefficent
@@ -483,17 +416,9 @@ interaction.table <- function(al,
         results$max_overlap = as.vector(as.dist(A))
     }
     results[,'freq_overlap'] = results[,'overlap'] / (results[,'max_overlap'])       
-	#tic('compute overlaps')
-        results[,'r_overlap'] = as.vector(as.dist(add(r.obs)/length(r.obs)))
-        results[,'w_r_overlap'] = as.vector(as.dist(add(r.wobs)/length(r.wobs)))
-	#toc()
-	# tic('compute diffoverlap')
-	# 	exp.ES = (results[,'overlap'] - results[,'r_overlap'])
-	# 	exp.ES = as.numeric(exp.ES)
-	# 	results[,'diffoverlap']<-exp.ES
-	# toc()
+    results[,'r_overlap'] = as.vector(as.dist(add(r.obs)/length(r.obs)))
+    results[,'w_r_overlap'] = as.vector(as.dist(add(r.wobs)/length(r.wobs)))
 	if(estimate_pairwise){
-		#tic('compute p-value on overlap pairwise')
 	        obs.co = as.matrix(als$alteration.pairwise$overlap)
 	        results[,'pairwise_p']<-rep(1,nrow(results)) 
 	        results[,'pairwise_p'] = estimate_pairwise_p(obs=obs.co,
@@ -501,8 +426,6 @@ interaction.table <- function(al,
 	        											 results=results,
 	        											 nSim=n.permut
 	    												)
-	    #toc()
-
 	}
 	exp.ES = (results[,'w_overlap'] - results[,'w_r_overlap'])*sin(pi/4)
     exp.ES = as.numeric(exp.ES) 
@@ -541,12 +464,7 @@ interaction.table <- function(al,
         freq.cats = c(0, 0.02, 0.05, 0.10, 1)
         results$nFDR2 = rep(1, nrow(results))
         for(i in 2:length(freq.cats)){
-            #print(which(rownames(results)=='KRAS - TP53'))
-            #print(freq.cats[i-1]*samples)
-            #print(freq.cats[i]*samples)
             select = results[,'cum_freq'] > freq.cats[i-1]*2*samples & results[,'cum_freq'] < freq.cats[i]*2*samples
-            #print(paste(i,select[which(rownames(results)=='KRAS - TP53')],sep=":"))
-            #print(paste(i,sum(select),sep=":"))
             if (sum(select)>1){
                 results$nFDR2[select] = estimateFDR2(obs = abs(results$nES[select]),
                                                      exp = abs(as.numeric(unlist(exp.rES[select,]))), 
@@ -559,9 +477,6 @@ interaction.table <- function(al,
     results = results[order(abs(results$nES), decreasing = T),]
     results$type = rep('ME', nrow(results))
     results$type[ results$nES > 0 ] = 'CO'
-	#results$diff_type = rep('ME', nrow(results))
-    #results$diff_type[ results$diffoverlap > 0 ] = 'CO'
-
     results$FDR<-results$nFDR2<=maxFDR
     return (results)
 }

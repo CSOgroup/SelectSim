@@ -72,7 +72,7 @@ str(luad_run_data)
 - The function returns a list object which contains the background model and results.
 
 ```{r}
-result_obj<- selectX(  M = luad_run_data$M,
+result_obj<- SelectSim::selectX(  M = luad_run_data$M,
                       sample.class = luad_run_data$sample.class,
                       alteration.class = luad_run_data$alteration.class,
                       n.cores = 1,

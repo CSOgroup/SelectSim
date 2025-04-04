@@ -2,12 +2,11 @@
 # Author  : Arvind Iyer
 # Email   : arvind.iyer@unil.ch
 # Project : SelectSim
-# Desc    : The alteration landscape object, template object and selectX object creating functions
-# Version : 0.1
+# Desc    : Implementation of SelectSim algorithm
+# Version : 0.1.5
 # Updates : Re wrote the whole code
 # Todo:
-# - Random seed to set to one value for parallel foreach?
-# - c++ backend for faster computation
+# - c++ backend for faster computation: Removed kept R native?
 ###
 
 #' Create an AL object
@@ -30,24 +29,14 @@ new.AL.general  <- function(am,
     # Assert if the AM are provided or not
     if(is.null(am$M)) 
         stop('Problem:-->  Input data is null')
-
-
-    # Assert if the data structre is in correct format
-    # if(is.list(am)){
-    #     if(names(am) != c('M','tmb'))
-    #         stop('Problem:-->  Input data (M) is not in correct structure\n Check the format which should be: 
-    #             list(M=list("missesne"=matrix()), # which has features on rows and sample on columns
-    #                  tmb=list("missesne"=data.frame()) # which has sample,mutation as column names and rownames as sample
-    #                 )')
-    # }
   
     # create the alteration landscape object
     al = list('am'=list()) 
     # Create a full gam  
     al$am[['full']] = matrix(0, nrow = nrow(am$M[[1]]), ncol = ncol(am$M[[1]]))
     # Keep the order of rownames and colnames as in first gam.
-    row.order = rownames(am$M[[1]])
-    col.order = colnames(am$M[[1]])
+    row.order = sort(rownames(am$M[[1]])) #fixed gene ordering issuses
+    col.order = colnames(am$M[[1]]) 
     for ( i in names(am$M)){
         al$am[[i]] <-as.matrix(am$M[[i]][row.order,col.order])
         al$am[['full']] <- al$am[['full']]+as.matrix(am$M[[i]][row.order,col.order])
@@ -140,8 +129,9 @@ generateS = function(gam,
                      upperBound = 1){
 
     gene.freq = as.matrix(rowSums(gam)/ncol(gam), ncol = 1)
-    tmb.weight = t(as.matrix(sample.weights, ncol = 1))
-    sim.gam = gene.freq %*% tmb.weight
+    tmb.weight = (as.matrix(sample.weights, nrow = 1))
+    #sim.gam = gene.freq %*% tmb.weight
+    sim.gam = tcrossprod(gene.freq,tmb.weight)
     colnames(sim.gam) = colnames(gam)
     sim.gam[ sim.gam > 1 ] = upperBound
     return(sim.gam)
@@ -261,6 +251,7 @@ generateW_block = function(al,lambda,tao) {
 #' @param W weight matrix 
 #' @param n.cores Number of cores
 #' @param n.permut Number of simulation
+#' @param seed Random seed
 #' @return Template matrix as list object
 #'
 #' Ordering of genes impacts the results as residual subraction is not correct.
@@ -269,22 +260,28 @@ null_model_parallel <-function(al,
                                temp_mat,
                                W,
                                n.cores=1,
-                               n.permut) {
+                               n.permut,
+                               seed=42) {
 
     `%dopar%` <- foreach::`%dopar%`
     `%do%` <- foreach::`%do%`
-
-
+    # Set RNG kind and seed for reproducibility
+    RNGkind(kind = "Mersenne-Twister", normal.kind = "Inversion", sample.kind = "Rejection")
+    set.seed(seed)
     simulationStep = function(template, total_mut){
+        
         S = template
         nvalues = nrow(S)*ncol(S)
         r = matrix( runif(nvalues, min = 0, max = 1), nrow = nrow(S), ncol = ncol(S))
         test = S - r
+        rownames(r) <- rownames(S)
+        colnames(r) <- colnames(S)
         return(test)
     }
 
     combine <- function(residuals,residuals_sort,val,index){
         return(residuals[index,]>=residuals_sort[index,][val[index]])
+        #return(round(residuals[index, ], digits = 10) >= round(residuals_sort[index, ][val[index]], digits = 10))
     }
 
     simulationFixedOnes = function(al,temp_mat, W,CORRECT_T = 0.05){
@@ -344,140 +341,37 @@ null_model_parallel <-function(al,
 
     
     if(n.cores>1){
-        cl <-  parallel::makeCluster(n.cores, outfile=paste("gen.random.am.log", sep=''))
-        doParallel::registerDoParallel(cl)  
-        if( foreach::getDoParRegistered()) {
-            registerDoRNG(42)
-            randomMs <- foreach::foreach(i=1:n.permut) %dopar% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
+        log_file <- paste0("gen.random.am_", Sys.getpid(), ".log")
+        cl <-  parallel::makeCluster(n.cores, outfile=log_file)
+        doParallel::registerDoParallel(cl)
+        on.exit({
             parallel::stopCluster(cl)
-            return (randomMs)
-        } else {
-            stop('Error in registering a parallel cluster for randomization.')
-        }
+            foreach::registerDoSEQ()  # Unregister the parallel backend
+        }) 
+        registerDoRNG(seed)
+        # # Use chunking to reduce overhead
+        # chunk_size <- ceiling(n.permut / n.cores)
+        # randomMs <- foreach(chunk = seq(1, n.permut, by = chunk_size), .combine = c) %dopar% {
+        #     lapply(seq_len(chunk_size), function(i) simulationFixedOnes(al, temp_mat, W, CORRECT_T = 0.05))
+        # }
+        randomMs <- foreach::foreach(i=1:n.permut) %dopar% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
+        return (randomMs)
     }
     else{
+        # Use sequential execution
+        set.seed(seed)
         foreach::registerDoSEQ()
+        registerDoRNG(seed)
         randomMs <- foreach(i=1:n.permut) %do% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
         return (randomMs)
     }
 }
 
-
-
-#' Generating the null_simulation matrix  
-#' 
-#' @import doParallel
-#' @import parallel
-#' @importFrom Rfast rowSort
-#' @import doRNG
-#' @param al Alteration landscape object
-#' @param temp_mat template matrixes
-#' @param W weight matrix 
-#' @param n.cores Number of cores
-#' @param n.permut Number of simulation
-#' @return Template matrix as list object
-#'
-#' Ordering of genes impacts the results as residual subraction is not correct.
-#' @export
-null_model_parallel_debug <-function(al,
-                               temp_mat,
-                               W,
-                               n.cores=1,
-                               n.permut) {
-
-    `%dopar%` <- foreach::`%dopar%`
-    `%do%` <- foreach::`%do%`
-
-
-    simulationStep = function(template, total_mut){
-        S = template
-        nvalues = nrow(S)*ncol(S)
-        r = matrix( runif(nvalues, min = 0, max = 1), nrow = nrow(S), ncol = ncol(S))
-        rownames(r)<-rownames(S)
-        colnames(r)<-colnames(S)
-        test = S - r[rownames(S),colnames(S)]
-        return(test)
-    }
-
-    combine <- function(residuals,residuals_sort,val,index){
-        return(residuals[index,]>=residuals_sort[index,][val[index]])
-    }
-
-    simulationFixedOnes = function(al,temp_mat, W,CORRECT_T = 0.05){
-        exp = matrix(0, nrow = nrow(W), ncol = ncol(W))
-        gam_names = names(al$am)
-        gam_incidence = list()
-        k=1
-        for(name in gam_names){
-            if (name=='full'){
-            }
-            else{
-                gam_incidence[[k]]=sum(al$am[[name]])
-                k=k+1
-            }
-        }
-        residuals = list()
-        for(i in 1:length(temp_mat)){    
-            S = temp_mat[[i]]
-            test = simulationStep(template = S, total_mut = gam_incidence[[i]])
-            residuals[[i]]<-test
-        }
-        total_mut = sum(al$am$full)
-        gene_freq = rowSums(al$am$full)
-        if(length(gam_names)>2){
-            residual_mtx <- pmax(residuals[[1]],residuals[[2]])
-            residual_mtx_sort <- Rfast::rowSort(residual_mtx, descending = TRUE)
-            temp<-list()
-            for(i in c(1:nrow(al$am$full))){
-                temp[[i]]<-combine(residual_mtx,residual_mtx_sort,rowSums(al$am$full),i)
-            }
-            exp<-do.call(rbind,temp)*1
-            rownames(exp) <- rownames(al$am$full)
-            tot = sum(exp)
-            exp.freq = rowSums(exp)
-            diff = abs(exp.freq - rowSums(al$am$full))/ncol(W)
-            return(exp)
-        }
-        else{
-            residual_mtx <- residuals[[1]]
-            residual_mtx_sort <- Rfast::rowSort(residual_mtx, descending = TRUE)
-            #print(dim(residual_mtx))
-            #print(dim(residual_mtx_sort))
-            temp<-list()
-            for(i in c(1:nrow(al$am$full))){
-                temp[[i]]<-combine(residual_mtx,residual_mtx_sort,rowSums(al$am$full),i)
-            }
-            exp<-do.call(rbind,temp)*1
-            rownames(exp) <- rownames(al$am$full)
-            tot = sum(exp)
-            #print(tot)
-            #print(gam_incidence[[1]])
-            exp.freq = rowSums(exp)
-            diff = abs(exp.freq - rowSums(al$am$full))/ncol(W)
-            return(exp)
-        }   
-    }
-
-    
-    if(n.cores>1){
-        cl <-  parallel::makeCluster(n.cores, outfile=paste("gen.random.am.log", sep=''))
-        doParallel::registerDoParallel(cl)  
-        if( foreach::getDoParRegistered()) {
-            registerDoRNG(42)
-            randomMs <- foreach::foreach(i=1:n.permut) %dopar% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
-            parallel::stopCluster(cl)
-            return (randomMs)
-        } else {
-            stop('Error in registering a parallel cluster for randomization.')
-        }
-    }
-    else{
-        foreach::registerDoSEQ()
-        randomMs <- foreach(i=1:n.permut) %do% simulationFixedOnes(al,temp_mat,W,CORRECT_T=0.05)
-        return (randomMs)
-    }
-}
-
+### Updates
+# Author: Miljan Petrovic
+# Miljan found a bug in the previous implementation of fuction.
+# Now fixed with an update.
+###
 #' Removing the Outliers
 #' 
 #' @param obj selectX object
@@ -492,6 +386,8 @@ retrieveOutliers = function(obj, nSim=1000){
        gnMut[,i] = rowSums(obj$null[[i]])
        snMut[,i] = colSums(obj$null[[i]])
     }
+    #gnMut <- sapply(obj$null, rowSums)
+    #snMut <- sapply(obj$null, colSums)
     rgn = gnMut
     rsn = snMut
     ogn = rowSums(obj$al$am$full)
@@ -500,11 +396,23 @@ retrieveOutliers = function(obj, nSim=1000){
     rsn = rsn-osn
     mean.gn = apply(abs(rgn), 2, mean)
     mean.sn = apply(abs(rsn), 2, mean)
+    # rgn <- abs(gnMut - ogn)
+    # rsn <- abs(snMut - osn)
+    # mean.gn <- colMeans(rgn)
+    # mean.sn <- colMeans(rsn)
     dev = mean.gn + mean.sn    
     dev2 = sort(dev)
-    mincut = dev2[ round(0.05*length(dev2)) ]
-    maxcut = dev2[ round(0.95*length(dev2)) ]
-    outliers = dev < mincut | dev >= maxcut
-    
-    return(outliers)
+    # Miljan changed:
+    # mincut = dev2[ round(0.05*length(dev2)) ]
+    # maxcut = dev2[ round(0.95*length(dev2)) ]
+    # outliers = dev < mincut | dev >= maxcut
+    #print(dev2)
+    maxcut = dev2[ round(0.90*length(dev2)) ]
+    #maxcut = quantile(dev, probs = 0.9,type = 7)
+    outliers = dev >= maxcut
+    #print(outliers)
+    #outliers = rep( FALSE, length(dev))
+    #print("Script uses corrected outlier removal & column indexing.")    
+    #return(list('outliers'=outliers,'dev'=dev))
+    return (outliers)
 }

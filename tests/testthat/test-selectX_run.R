@@ -1,4 +1,4 @@
-test_that("selectX() genrates same results on LUAD dataset", {
+test_that("selectX() from SelectSim genrates same results on LUAD dataset", {
 
 # Load the dataset
 data(luad_run_data, package = "SelectSim")
