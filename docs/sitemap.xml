@@ -1,204 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/404.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/INSTALLATION.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/articles/data_processing.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/articles/introduction.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/index.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/GENIE_maf_schema.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/TCGA_maf_schema.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/add.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/al.pairwise.alteration.stats.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/al.stats.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/am.pairwise.alteration.coverage.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/am.pairwise.alteration.overlap.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/am.stats.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/am.weight.pairwise.alteration.overlap.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/binary.yule.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/effectSize.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/estimateFDR2.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/estimate_p_val.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/estimate_pairwise_p.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/filter_maf_column.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/filter_maf_complex.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/filter_maf_gene.name.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/filter_maf_ignore.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/filter_maf_missense.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/filter_maf_mutation.type.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/filter_maf_mutations.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/filter_maf_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/filter_maf_schema.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/filter_maf_truncating.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/generateS.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/generateW_block.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/generateW_mean_tmb.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/get.blocks.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/interaction.table.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/luad_maf.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/luad_result.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/luad_run_data.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/maf2gam.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/mutation_type.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/new.AL.general.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/new.ALS.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/new.AMS.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/null_model_parallel.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/null_model_parallel_debug.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/obs_exp_scatter.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/oncokb_genes.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/oncokb_truncating_genes.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/overlap_pair_extract.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/r.am.pairwise.alteration.overlap.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/r.effectSize.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/retrieveOutliers.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/ridge_plot_ed.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/ridge_plot_ed_compare.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/selectX.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/selectX_debug.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/stat_maf_column.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/stat_maf_gene.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/stat_maf_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/templeate.obj.gen.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/variant_catalogue.html</loc>
-  </url>
-  <url>
-    <loc>https://csogroup.github.io/SelectSim/reference/w.r.am.pairwise.alteration.overlap.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://csogroup.github.io/SelectSim/404.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/INSTALLATION.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/LICENSE-text.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/LICENSE.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/articles/data_processing.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/articles/index.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/articles/introduction.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/authors.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/index.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/news/index.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/GENIE_maf_schema.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/TCGA_maf_schema.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/add.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/al.pairwise.alteration.stats.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/al.stats.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/am.pairwise.alteration.coverage.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/am.pairwise.alteration.overlap.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/am.stats.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/am.weight.pairwise.alteration.overlap.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/binary.yule.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/effectSize.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/estimateFDR2.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/estimate_p_val.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/estimate_pairwise_p.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/filter_maf_column.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/filter_maf_complex.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/filter_maf_gene.name.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/filter_maf_ignore.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/filter_maf_missense.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/filter_maf_mutation.type.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/filter_maf_mutations.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/filter_maf_sample.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/filter_maf_schema.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/filter_maf_truncating.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/generateS.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/generateW_block.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/generateW_mean_tmb.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/get.blocks.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/index.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/interaction.table.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/luad_maf.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/luad_result.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/luad_run_data.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/maf2gam.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/mutation_type.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/new.AL.general.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/new.ALS.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/new.AMS.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/null_model_parallel.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/null_model_parallel_debug.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/obs_exp_scatter.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/oncokb_genes.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/oncokb_truncating_genes.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/overlap_pair_extract.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/r.am.pairwise.alteration.overlap.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/r.effectSize.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/retrieveOutliers.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/ridge_plot_ed.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/ridge_plot_ed_compare.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/selectX.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/selectX_debug.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/stat_maf_column.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/stat_maf_gene.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/stat_maf_sample.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/templeate.obj.gen.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/theme_Publication.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/variant_catalogue.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/w.r.am.pairwise.alteration.overlap.html</loc></url>
 </urlset>
+

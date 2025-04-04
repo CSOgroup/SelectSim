@@ -12,10 +12,10 @@
 
 #' A nice theme for making good plots
 #'
-#' @param base_size
-#' @param base_family
+#' @param base_size size of fonts
+#' @param base_family type of font
 #'
-#' @returns
+#' @returns theme object
 #' @export
 theme_Publication = function (base_size = 14, base_family = "sans") {
    

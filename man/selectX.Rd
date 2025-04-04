@@ -2,7 +2,7 @@
 % Please edit documentation in R/selectX_run.R
 \name{selectX}
 \alias{selectX}
-\title{SelectX main function to create alteration object with background model}
+\title{SelectX main function from SelectSim to create alteration object with background model}
 \usage{
 selectX(
   M,
@@ -51,7 +51,7 @@ selectX(
 \item{seed}{a random seed}
 }
 \value{
-result  a SelectX object with background model and other info along with result table
+result  a SelectSim object with background model and other info along with result table
 }
 \description{
 \code{selectX()} takes a list object which consist of genome alteration matrix and tumor mutation burden.
