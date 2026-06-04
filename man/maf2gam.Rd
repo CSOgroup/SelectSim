@@ -13,8 +13,7 @@ maf2gam(
   genes = NULL,
   fun.aggregate = length,
   binarize = TRUE,
-  fill = NA,
-  ...
+  fill = NA
 )
 }
 \arguments{
@@ -35,8 +34,6 @@ maf2gam(
 \item{binarize}{If TRUE, convert aggregated counts to binary presence/absence}
 
 \item{fill}{Value used for missing (sample, gene) combinations}
-
-\item{...}{Additional arguments passed to reshape2::acast}
 }
 \value{
 Numeric matrix (samples x genes) representing the gene alteration matrix.

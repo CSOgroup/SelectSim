@@ -4,3 +4,5 @@
 ^docs$
 ^pkgdown$
 ^\.github$
+^INSTALLATION\.md$
+^environment\.yml$

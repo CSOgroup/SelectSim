@@ -13,7 +13,7 @@
 
 ###
 #' SelectX main function from SelectSim to create alteration object with background model
-#' 
+#'
 #' @description
 #' `selectX()` takes a list object which consist of genome alteration matrix and tumor mutation burden.
 #'
@@ -39,155 +39,78 @@
 #' @param maxFDR FDR value
 #' @param seed a random seed
 #' @return result  a SelectSim object with background model and other info along with result table
-#'  
-#' @export                          
-selectX <- function(M, #A list object consiting of GAM and TMB data
-				    sample.class, # Sample Covariates as named list
-				    alteration.class, #Alteration Covariates as named list
-					n.cores = 1, #number of cores
-				    min.freq=10,  # Min freq of gene to be mutated to do the analysis
-				    n.permut = 1000, # number of simulations
-    	            lambda=0.3, #wieght factor
-    	            tau=1, #the fold change factor
-    	            save.object = FALSE, #save the object
-	                folder='./', # folder
-				    verbose = TRUE, #verbose to print the steps
-				    estimate_pairwise=FALSE, #compute pairwise p-val
-				    maxFDR=0.25, #max fdr
-				    seed=42 # a random seed,
-				    ){
-	## Set a global seed for computation
-	set.seed(seed)
-	if(verbose){
-		tictoc::tic('Total time taken:')
-			print(paste('#### Creating SelectX object ####'))
-			tictoc::tic('Time:')
-				print(paste('Step1-> Parsing and Filtering GAM...'))
-					al = new.AL.general(M,alteration.class,sample.class,min.freq,verbose)
-				print(paste('-> Alteration Landscape object created'))
-			tictoc::toc()	
-			print(paste('Step2-> Generating Template object...'))
-			tictoc::tic('Time:')
-					temp.data<-template.obj.gen(al)
-				print(paste('-> Template object created'))
-			tictoc::toc()
-			print(paste('Step3-> Generating sample weight matrix...'))
-			tictoc::tic('Time:')
-					W<-generateW_block(al,lambda,tau)
-				print(paste('-> Weight Matrix created'))
-			tictoc::toc()
-			print(paste('Step4-> Generating null model...'))
-			tictoc::tic('Time:')
-				sim <- null_model_parallel(al,temp.data$temp_mat,W$W,n.cores,n.permut)
-		 		obj<- list('al'=al,'W'=W,'T'=temp.data,'null'=sim,'nSim'=n.permut)
-		    	print(paste('-> Removing the outliers matrix from null model...'))
-		    		outliers <- retrieveOutliers(obj = obj,nSim = n.permut)
-				    if(length(which(outliers))==0){
-				            print(paste('Removed null-matrix:',length(which(outliers)),sep=" "))
-				            obj$nSim  <- n.permut
-				    }
-				    else{
-				            print(paste(' Removed null-matrix:',length(which(outliers)),sep=" "))
-				            obj$null <- obj$null[which(!outliers)]
-				            print(paste(' Updated the null-model and nSim variables...'))
-				            obj$nSim <- length(which(!outliers))
-				    }
-			tictoc::toc()
-			print(paste('-> Null model generated'))
-			print(paste('### SelectSim object created ###'))
+#'
+#' @export
+selectX <- function(M,
+                    sample.class,
+                    alteration.class,
+                    n.cores = 1,
+                    min.freq = 10,
+                    n.permut = 1000,
+                    lambda = 0.3,
+                    tau = 1,
+                    save.object = FALSE,
+                    folder = './',
+                    verbose = TRUE,
+                    estimate_pairwise = FALSE,
+                    maxFDR = 0.25,
+                    seed = 42) {
+    set.seed(seed)
+    if (verbose) { print(paste('#### Creating SelectX object ####')); tictoc::tic('Total time taken:') }
 
-			print(paste('#### Computing EDs on the dataset ####'))
-			tictoc::tic('Time:')
-				al<-obj$al
-			    als = al.stats(obj) # Univariate stats
-			    alp = al.pairwise.alteration.stats(obj, als, do.blocks=FALSE)
-			    als[['alteration.pairwise']] = alp
-			    als[['alteration.pairwise']]$sample.blocks = NULL
-			    for(i in names(als$sample.blocks)) als$sample.blocks[[i]][['alteration.pairwise']] = alp$sample.blocks[[i]]
-				obs.co = as.matrix(als$alteration.pairwise$overlap)
-	    		wobs.co = as.matrix(als$alteration.pairwise$w_overlap)
-	    		robs.co<-r.am.pairwise.alteration.overlap(null = obj$null,
-								 						  n.permut = obj$nSim,
-                  		                              	  n.cores = 1)
-    			wrobs.co<-w.r.am.pairwise.alteration.overlap(null = obj$null,
-    											 			W= obj$W$W,
-                                                 			n.permut = obj$nSim,
-                                                 			n.cores = 1)
+    if (verbose) { print(paste('Step1-> Parsing and Filtering GAM...')); tictoc::tic('Time:') }
+    al <- new.AL.general(M, alteration.class, sample.class, min.freq, verbose)
+    if (verbose) { print(paste('-> Alteration Landscape object created')); tictoc::toc() }
 
-			   selectX_result <- interaction.table(al,
-			                                        als,
-			                                        obs.co,
-			                                        wobs.co,
-			                                        robs.co,
-			                                        wrobs.co,
-			                                        null=obj$null,
-			                                        maxFDR=maxFDR,
-			                                        n.cores=1,
-			                                        estimate_pairwise=estimate_pairwise,
-			                                        n.permut=obj$nSim)
-			   obj$robs.co <- robs.co
-			   obj$wrobs.co <- wrobs.co
-	    	tictoc::toc()
-	    	print(paste('#### EDs computed ####'))
-		tictoc::toc()
-		if(save.object) {
-			saveRDS(obj, file=paste(folder,'selectsim_object.rds',sep=''))
-			saveRDS(selectX_result, file=paste(folder,'selectsim_results.rds',sep=''))
-		}
-		return(list(obj=obj,result=selectX_result))		
-	}
-	else{
-		tictoc::tic('Total Time')
-			al = new.AL.general(M,alteration.class,sample.class,min.freq,verbose)
-			temp.data<-template.obj.gen(al)
-			W<-generateW_block(al,lambda,tau)
-			sim <- null_model_parallel(al,temp.data$temp_mat,W$W,n.cores,n.permut)
-		 	obj<- list('al'=al,'W'=W,'T'=temp.data,'null'=sim,'nSim'=n.permut)
-		 	outliers <- retrieveOutliers(obj = obj,nSim = n.permut)
-		 	if(length(which(outliers))==0){
-		 		obj$nSim  <- n.permut
-		 	}
-		 	else{
-		 		obj$null <- obj$null[which(!outliers)]
-		 		obj$nSim <- length(which(!outliers))
-		 	}
-			al<-obj$al
-		    als = al.stats(obj) # Univariate stats
-		    alp = al.pairwise.alteration.stats(obj, als, do.blocks=FALSE)
-		    als[['alteration.pairwise']] = alp
-		    als[['alteration.pairwise']]$sample.blocks = NULL
-		    for(i in names(als$sample.blocks)) als$sample.blocks[[i]][['alteration.pairwise']] = alp$sample.blocks[[i]]
-			obs.co = as.matrix(als$alteration.pairwise$overlap)
-    		wobs.co = as.matrix(als$alteration.pairwise$w_overlap)
-    		robs.co<-r.am.pairwise.alteration.overlap(null = obj$null,
-									 				  n.permut = obj$nSim,
-                  		                              n.cores = 1)
-			wrobs.co<-w.r.am.pairwise.alteration.overlap(null = obj$null,
-						  							    W= obj$W$W,
-                                             			n.permut = obj$nSim,
-                                             			n.cores = 1)
+    if (verbose) { print(paste('Step2-> Generating Template object...')); tictoc::tic('Time:') }
+    temp.data <- template.obj.gen(al)
+    if (verbose) { print(paste('-> Template object created')); tictoc::toc() }
 
-		   selectX_result <- interaction.table(al,
-		                                        als,
-		                                        obs.co,
-		                                        wobs.co,
-		                                        robs.co,
-		                                        wrobs.co,
-		                                        null=obj$null,
-		                                        maxFDR=maxFDR,
-		                                        n.cores=1,
-		                                        estimate_pairwise=estimate_pairwise,
-		                                        n.permut=obj$nSim)
-		   obj$robs.co <- robs.co
-		   obj$wrobs.co <- wrobs.co
-		tictoc::toc()
+    if (verbose) { print(paste('Step3-> Generating sample weight matrix...')); tictoc::tic('Time:') }
+    W <- generateW_block(al, lambda, tau)
+    if (verbose) { print(paste('-> Weight Matrix created')); tictoc::toc() }
 
-		if(save.object) {
-			saveRDS(obj, file=paste(folder,'selectsim_object.rds',sep=''))
-			saveRDS(selectX_result, file=paste(folder,'selectsim_results.rds',sep=''))
-		}
-		return(list(obj=obj,result=selectX_result))
-	}        
+    if (verbose) { print(paste('Step4-> Generating null model...')); tictoc::tic('Time:') }
+    sim <- null_model_parallel(al, temp.data$temp_mat, W$W, n.cores, n.permut)
+    obj <- list('al'=al, 'W'=W, 'T'=temp.data, 'null'=sim, 'nSim'=n.permut)
+    if (verbose) print(paste('-> Removing the outliers matrix from null model...'))
+    outliers <- retrieveOutliers(obj=obj, nSim=n.permut)
+    if (length(which(outliers)) == 0) {
+        if (verbose) print(paste('Removed null-matrix:', length(which(outliers)), sep=" "))
+        obj$nSim <- n.permut
+    } else {
+        if (verbose) print(paste(' Removed null-matrix:', length(which(outliers)), sep=" "))
+        obj$null <- obj$null[which(!outliers)]
+        if (verbose) print(paste(' Updated the null-model and nSim variables...'))
+        obj$nSim <- length(which(!outliers))
+    }
+    if (verbose) { tictoc::toc(); print(paste('-> Null model generated')); print(paste('### SelectSim object created ###')) }
+
+    if (verbose) { print(paste('#### Computing EDs on the dataset ####')); tictoc::tic('Time:') }
+    al <- obj$al
+    als <- al.stats(obj)
+    alp <- al.pairwise.alteration.stats(obj, als, do.blocks=FALSE)
+    als[['alteration.pairwise']] <- alp
+    als[['alteration.pairwise']]$sample.blocks <- NULL
+    for (i in names(als$sample.blocks)) als$sample.blocks[[i]][['alteration.pairwise']] <- alp$sample.blocks[[i]]
+    obs.co <- as.matrix(als$alteration.pairwise$overlap)
+    wobs.co <- as.matrix(als$alteration.pairwise$w_overlap)
+    robs.co <- r.am.pairwise.alteration.overlap(null=obj$null, n.permut=obj$nSim, n.cores=1)
+    wrobs.co <- w.r.am.pairwise.alteration.overlap(null=obj$null, W=obj$W$W, n.permut=obj$nSim, n.cores=1)
+    selectX_result <- interaction.table(al, als, obs.co, wobs.co, robs.co, wrobs.co,
+                                        null=obj$null, maxFDR=maxFDR, n.cores=1,
+                                        estimate_pairwise=estimate_pairwise, n.permut=obj$nSim)
+    obj$robs.co <- robs.co
+    obj$wrobs.co <- wrobs.co
+    if (verbose) { tictoc::toc(); print(paste('#### EDs computed ####')) }
+
+    if (verbose) tictoc::toc()
+
+    if (save.object) {
+        saveRDS(obj, file=paste(folder, 'selectsim_object.rds', sep=''))
+        saveRDS(selectX_result, file=paste(folder, 'selectsim_results.rds', sep=''))
+    }
+    return(list(obj=obj, result=selectX_result))
 }
 
 ## usethis namespace: start

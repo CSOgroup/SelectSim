@@ -304,7 +304,6 @@ stat_maf_gene <- function(maf, column = 'Hugo_Symbol', ...) {
 #' @description
 #' `maf2gam()` takes a maf file and converts into gam
 #'
-#' @importFrom  reshape2 acast
 #' @param maf A MAF dataframe
 #' @param sample.col Column name for sample IDs
 #' @param gene.col Column name for gene symbols
@@ -314,22 +313,20 @@ stat_maf_gene <- function(maf, column = 'Hugo_Symbol', ...) {
 #' @param fun.aggregate Aggregation function applied per (sample, gene) cell
 #' @param binarize If TRUE, convert aggregated counts to binary presence/absence
 #' @param fill Value used for missing (sample, gene) combinations
-#' @param ... Additional arguments passed to reshape2::acast
 #' @return Numeric matrix (samples x genes) representing the gene alteration matrix.
 #'  
 #' @export 
-maf2gam <- function(maf, 
+maf2gam <- function(maf,
 					sample.col = 'Tumor_Sample_Barcode',
 					gene.col = 'Hugo_Symbol',
 					value.var = 'HGVSp_Short',
 					samples = NULL,
 					genes = NULL,
 					fun.aggregate = length,
-					binarize=TRUE,
-					fill=NA,
-					 ...) {
-	
-	mut_gam = acast(maf, get(sample.col) ~ get(gene.col), value.var = value.var, fun.aggregate = fun.aggregate)
+					binarize = TRUE,
+					fill = NA) {
+
+	mut_gam <- tapply(maf[[value.var]], list(maf[[sample.col]], maf[[gene.col]]), FUN = fun.aggregate)
 	if(binarize) {
 		if(mode(mut_gam)=='character') mut_gam = mut_gam != ''
 		else if(mode(mut_gam)=='numeric') mut_gam = mut_gam > 0

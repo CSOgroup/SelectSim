@@ -311,13 +311,14 @@ null_model_parallel <-function(al,
 
     
     if(n.cores>1){
-        log_file <- paste0("gen.random.am_", Sys.getpid(), ".log")
+        log_file <- tempfile(pattern = "gen.random.am_", fileext = ".log")
         cl <-  parallel::makeCluster(n.cores, outfile=log_file)
         doParallel::registerDoParallel(cl)
         on.exit({
             parallel::stopCluster(cl)
-            foreach::registerDoSEQ()  # Unregister the parallel backend
-        }) 
+            foreach::registerDoSEQ()
+            unlink(log_file)
+        })
         registerDoRNG(seed)
         randomMs <- foreach::foreach(i=1:n.permut) %dopar% simulationFixedOnes(al,temp_mat,W)
         return (randomMs)

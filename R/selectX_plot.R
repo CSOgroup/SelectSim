@@ -9,6 +9,12 @@
 # - Oncoprint & other usefull plot functions
 ###
 
+# Suppress R CMD check notes for ggplot2/ggridges column name variables
+utils::globalVariables(c(
+    "density", "fill", "freq", "group", "iscale",
+    "name", "pairs", "scale", "x", "x_actual", "y", "ymin"
+))
+
 
 #' A nice theme for making good plots
 #'
@@ -117,7 +123,6 @@ overlap_pair_extract <- function(gene1,gene2,obj){
 #' @import ggplot2
 #' @import ggridges
 #' @importFrom  dplyr %>%
-#' @importFrom  reshape2 melt
 #' @importFrom  dplyr case_when
 #' @importFrom  dplyr group_by
 #' @importFrom  dplyr ungroup
@@ -126,6 +131,7 @@ overlap_pair_extract <- function(gene1,gene2,obj){
 #' @importFrom  dplyr filter
 #' @importFrom  dplyr left_join
 #' @importFrom  dplyr arrange
+#' @importFrom  dplyr distinct
 #' @importFrom  stats as.dist
 #' @importFrom  stats density
 #' @importFrom  stats ecdf
@@ -133,7 +139,7 @@ overlap_pair_extract <- function(gene1,gene2,obj){
 #' @importFrom  stats setNames
 #' @param result_df  result table of selectX obj$result
 #' @param obj    selectX obj
-#' @return a ggplot2 object with observed vs random overlap plot. 
+#' @return a ggplot2 object with observed vs random overlap plot.
 #' @export
 
 ridge_plot_ed <- function(result_df,obj){
@@ -146,11 +152,11 @@ ridge_plot_ed <- function(result_df,obj){
     }
     pair_mat_plot <- t(pair_mat)
     colnames(pair_mat_plot)<-result_df$name
-    df <- setNames(reshape2::melt(pair_mat_plot), c('rows', 'pairs', 'freq'))
+    df <- setNames(as.data.frame.table(pair_mat_plot, stringsAsFactors = FALSE), c('rows', 'pairs', 'freq'))
     p<-ggplot(df, aes(x=freq, y=pairs)) +
              xlab('Co-mutated samples')+
              geom_density_ridges_gradient(quantile_lines = FALSE, quantiles = 2,color='black',fill='lightgrey') +
-             theme_ridges(grid = TRUE, center = TRUE)+scale_x_continuous(breaks = seq(0, max(df$freq), by = 2))
+             theme_ridges(grid = TRUE, center_axis_labels = TRUE)+scale_x_continuous(breaks = seq(0, max(df$freq), by = 2))
     
     q <- ggplot_build(p)$data[[1]]
     density_lines <- q %>%
@@ -167,7 +173,7 @@ ridge_plot_ed <- function(result_df,obj){
                      y=pairs))+
                 xlab('Weighted overlap')+ylab('')+
                 geom_density_ridges_gradient(quantile_lines = FALSE, quantiles = 2,color='black',fill='lightgrey') +
-                theme_ridges(grid = TRUE, center = TRUE,font_size = 18)+ scale_x_continuous(breaks = seq(0, max(df$freq), by = 5))+
+                theme_ridges(grid = TRUE, center_axis_labels = TRUE, font_size = 18)+ scale_x_continuous(breaks = seq(0, max(df$freq), by = 5))+
                 geom_segment(data = density_lines_complete, aes(x = x_actual, xend = x_actual, y = ymin, yend = ymin+density*scale*iscale,color="Actual overlap"))+
                 geom_segment(data = density_lines_complete, aes(x = x, xend = x, y = ymin, yend = ymin+density*scale*iscale,color="Mean Background overlap"))+
                 scale_color_manual("Legend",values = c("red","blue"))+
@@ -184,7 +190,6 @@ ridge_plot_ed <- function(result_df,obj){
 #' @import ggplot2
 #' @import ggridges
 #' @importFrom  dplyr %>%
-#' @importFrom  reshape2 melt
 #' @importFrom  dplyr case_when
 #' @importFrom  dplyr group_by
 #' @importFrom  dplyr ungroup
@@ -216,7 +221,7 @@ ridge_plot_ed_compare <- function(result_df,obj1,obj2,name1,name2){
     }
     pair_mat_plot <- t(pair_mat)
     colnames(pair_mat_plot)<-result_df$name
-    df1 <- setNames(reshape2::melt(pair_mat_plot), c('rows', 'pairs', 'freq'))
+    df1 <- setNames(as.data.frame.table(pair_mat_plot, stringsAsFactors = FALSE), c('rows', 'pairs', 'freq'))
     
     pair_mat <- matrix(0,nrow = nrow(result_df),ncol=obj2$nSim)
     for(row in c(1:nrow(result_df))){
@@ -227,7 +232,7 @@ ridge_plot_ed_compare <- function(result_df,obj1,obj2,name1,name2){
     }
     pair_mat_plot <- t(pair_mat)
     colnames(pair_mat_plot)<-result_df$name
-    df2 <- setNames(reshape2::melt(pair_mat_plot), c('rows', 'pairs', 'freq'))
+    df2 <- setNames(as.data.frame.table(pair_mat_plot, stringsAsFactors = FALSE), c('rows', 'pairs', 'freq'))
     
     df1$name<-rep(name1,nrow(df1))
     df2$name<-rep(name2,nrow(df2))
@@ -237,7 +242,7 @@ ridge_plot_ed_compare <- function(result_df,obj1,obj2,name1,name2){
     p<-ggplot(df, aes(x=freq, y=pairs,fill=name)) +
              xlab('Co-mutated samples')+
              geom_density_ridges_gradient(quantile_lines = FALSE, quantiles = 2,color='black') + scale_fill_manual(values = c("#E69F00", "#56B4E9"))+
-             theme_ridges(grid = TRUE, center = TRUE)+scale_x_continuous(breaks = seq(0, max(df$freq), by = 5))
+             theme_ridges(grid = TRUE, center_axis_labels = TRUE)+scale_x_continuous(breaks = seq(0, max(df$freq), by = 5))
     
     q <- ggplot_build(p)$data[[1]]
     density_lines <- q %>% group_by(fill,y) %>% 
@@ -254,7 +259,7 @@ ridge_plot_ed_compare <- function(result_df,obj1,obj2,name1,name2){
                      fill=name),alpha = 0.2)+
                 xlab('Weighted overlap')+ylab('')+
                 geom_density_ridges_gradient(quantile_lines = FALSE, quantiles = 2) +
-                theme_ridges(grid = TRUE, center = TRUE,font_size = 18)+ scale_x_continuous(breaks = seq(0, max(df$freq), by = 5))+
+                theme_ridges(grid = TRUE, center_axis_labels = TRUE, font_size = 18)+ scale_x_continuous(breaks = seq(0, max(df$freq), by = 5))+
                 geom_segment(data = density_lines, aes(x = x_actual, xend = x_actual, y = ymin, yend = ymin+density*scale*iscale,color=name,linetype='Actual overlap'))+
                 geom_segment(data = density_lines, aes(x = x, xend = x, y = ymin, yend = ymin+density*scale*iscale,color=name,linetype='Mean Background overlap'))+
                 scale_color_manual("Line Color",values = c("red", "blue"))+

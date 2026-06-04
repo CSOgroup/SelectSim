@@ -22,7 +22,6 @@ Imports:
     ggridges,
     Matrix,
     Rcpp,
-    reshape2,
     Rfast
 Suggests:
     knitr,
@@ -40,4 +39,3 @@ BugReports: https://github.com/CSOgroup/SelectSim/issues
 LinkingTo:
     Rcpp,
     RcppArmadillo
-SystemRequirements: C++14
