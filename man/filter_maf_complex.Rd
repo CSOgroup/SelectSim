@@ -2,10 +2,20 @@
 % Please edit documentation in R/gam_utils.r
 \name{filter_maf_complex}
 \alias{filter_maf_complex}
-\title{This function filters a MAF dataframe by retaining only the rows with a combination of values compatible with the values}
+\title{Filter a MAF dataframe by a combination of column values}
 \usage{
 filter_maf_complex(maf, values, ...)
 }
+\arguments{
+\item{maf}{A MAF dataframe}
+
+\item{values}{A dataframe of (column, value) pairs to match against}
+
+\item{...}{Additional arguments passed to merge}
+}
+\value{
+Filtered MAF dataframe containing only rows matching the value combinations.
+}
 \description{
-This function filters a MAF dataframe by retaining only the rows with a combination of values compatible with the values
+Filter a MAF dataframe by a combination of column values
 }

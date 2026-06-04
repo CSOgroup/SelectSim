@@ -2,16 +2,16 @@
 % Please edit documentation in R/selectX_stats.r
 \name{new.ALS}
 \alias{new.ALS}
-\title{Create an alteration landscape object}
+\title{Initialize an Alteration Landscape Stats (ALS) container}
 \usage{
 new.ALS(al)
 }
 \arguments{
-\item{al}{The alteration landscape}
+\item{al}{The alteration landscape object (checked for NULL)}
 }
 \value{
-AlS object.
+Empty ALS list object.
 }
 \description{
-Create an alteration landscape object
+Initialize an Alteration Landscape Stats (ALS) container
 }

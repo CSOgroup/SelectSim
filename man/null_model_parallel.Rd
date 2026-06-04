@@ -9,20 +9,18 @@ null_model_parallel(al, temp_mat, W, n.cores = 1, n.permut, seed = 42)
 \arguments{
 \item{al}{Alteration landscape object}
 
-\item{temp_mat}{template matrixes}
+\item{temp_mat}{template matrices}
 
 \item{W}{weight matrix}
 
 \item{n.cores}{Number of cores}
 
-\item{n.permut}{Number of simulation}
+\item{n.permut}{Number of simulations}
 
 \item{seed}{Random seed}
 }
 \value{
-Template matrix as list object
-
-Ordering of genes impacts the results as residual subraction is not correct.
+List of simulated binary matrices (one per permutation)
 }
 \description{
 Generating the null_simulation matrix

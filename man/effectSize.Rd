@@ -2,18 +2,18 @@
 % Please edit documentation in R/selectX_stats.r
 \name{effectSize}
 \alias{effectSize}
-\title{Compute weight overlap stats}
+\title{Compute effect size between observed and expected overlap}
 \usage{
 effectSize(obs, exp)
 }
 \arguments{
-\item{obs}{The observed overlap}
+\item{obs}{The observed overlap values}
 
-\item{exp}{The expected overlap}
+\item{exp}{The expected (null model mean) overlap values}
 }
 \value{
-effect size
+Effect size value(s)
 }
 \description{
-Compute weight overlap stats
+Compute effect size between observed and expected overlap
 }

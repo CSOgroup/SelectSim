@@ -18,28 +18,28 @@ maf2gam(
 )
 }
 \arguments{
-\item{maf}{a maf as dataframe}
+\item{maf}{A MAF dataframe}
 
-\item{sample.col}{a list containing the elements to filter}
+\item{sample.col}{Column name for sample IDs}
 
-\item{gene.col}{column in maf file to filter}
+\item{gene.col}{Column name for gene symbols}
 
-\item{value.var}{column in maf file to filter}
+\item{value.var}{Column used as the value to aggregate}
 
-\item{samples}{column in maf file to filter}
+\item{samples}{Vector of sample IDs to include; NULL keeps all samples present in the MAF}
 
-\item{genes}{column in maf file to filter}
+\item{genes}{Vector of gene names to include; NULL keeps all genes present in the MAF}
 
-\item{fun.aggregate}{column in maf file to filter}
+\item{fun.aggregate}{Aggregation function applied per (sample, gene) cell}
 
-\item{binarize}{a boolena to include or exclude the dataframe with values in list provided}
+\item{binarize}{If TRUE, convert aggregated counts to binary presence/absence}
 
-\item{fill}{a grep argument to specify if grep use the argumnet as string or not}
+\item{fill}{Value used for missing (sample, gene) combinations}
 
-\item{...}{Other options}
+\item{...}{Additional arguments passed to reshape2::acast}
 }
 \value{
-filtered_maf  a GAM matrix
+Numeric matrix (samples x genes) representing the gene alteration matrix.
 }
 \description{
 \code{maf2gam()} takes a maf file and converts into gam

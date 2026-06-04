@@ -8,11 +8,11 @@
 # Todo:
 ###
 
-#' Create an alteration landscape object
-#' 
-#' @param al The alteration landscape
-#' @return AlS object.
-#' 
+#' Initialize an Alteration Landscape Stats (ALS) container
+#'
+#' @param al The alteration landscape object (checked for NULL)
+#' @return Empty ALS list object.
+#'
 #' @export
 new.ALS <- function(al) {
     if(is.null(al)) stop('Input al is NULL')
@@ -20,10 +20,10 @@ new.ALS <- function(al) {
     class(als) <- "ALS";
     return(als)
 }
-#' Create an alteration matrix stats object
-#' 
-#' @param am The alteration matrix stats object
-#' @return AMS object.
+#' Initialize an Alteration Matrix Stats (AMS) container
+#'
+#' @param am The alteration matrix (checked for NULL)
+#' @return Empty AMS list object.
 #'
 #' @export
 new.AMS <- function(am) {
@@ -32,10 +32,10 @@ new.AMS <- function(am) {
     class(ams) <- "AMS";
     return(ams)
 }
-#' Create an alteration matrix stats object
-#' 
-#' @param am The alteration matrix stat object
-#' @return AMS object with basic stats for the matrix
+#' Compute summary statistics for a binary alteration matrix
+#'
+#' @param am Binary alteration matrix (features x samples)
+#' @return AMS object with basic counts: n.samples, n.alterations, n.occurrences, per-sample and per-feature counts.
 #'
 #' @export
 am.stats <- function(am) {
@@ -52,10 +52,10 @@ am.stats <- function(am) {
     ams[names(temp)] = temp
     return(ams)
 }
-#' Create an alteration stats object
-#' 
-#' @param al The alteration landscape object
-#' @return als alteration landscape stats object
+#' Compute alteration landscape statistics
+#'
+#' @param al SelectX object (list containing al, W, etc. as returned by selectX)
+#' @return ALS object with overall and per-block alteration statistics.
 #'
 #' @export
 al.stats <- function(al) {
@@ -66,8 +66,7 @@ al.stats <- function(al) {
     # get stats for each single block
     blocks = get.blocks(al$al)
     als$sample.blocks = list()
-    #print(length(blocks$sample.blocks))
-    for(ib in 1:length(blocks$sample.blocks)) { 
+    for(ib in 1:length(blocks$sample.blocks)) {
     	fib = blocks$sample.blocks[[ib]]; 
     	if(length(fib)>0) {
         subM <- al$al$am$full[,fib, drop=FALSE]
@@ -101,13 +100,13 @@ am.pairwise.alteration.overlap <- function(am) {
     overlap =A %*% t(A)
     return(overlap)
 }
-#' Compute weight overlap stats
-#' 
+#' Compute TMB-weighted pairwise alteration overlap
+#'
 #' @importFrom  Matrix sparseMatrix
 #' @importFrom  Matrix t
-#' @param am The alteration matrix
-#' @param W The weight matrix
-#' @return overlap the weight overlap between the pairs
+#' @param am Binary alteration matrix (features x samples)
+#' @param W Weight matrix (features x samples) with per-sample TMB weights
+#' @return Weighted pairwise overlap matrix (features x features).
 #'
 #' @export
 am.weight.pairwise.alteration.overlap <- function(am,W) {
@@ -117,13 +116,13 @@ am.weight.pairwise.alteration.overlap <- function(am,W) {
      overlap = (W[,col_order]*A) %*% t(A)
      return(overlap)
 }
-#' Compute weight overlap stats
+#' Compute pairwise alteration coverage statistics
 #'
-#' @importFrom  Matrix Matrix 
-#' @param overlap_M The overlap matrix
-#' @param M.stats The am matrix statis
-#' @param w_overlap_M The weighted overlap matrix
-#' @return stats of the am matrix
+#' @importFrom  Matrix Matrix
+#' @param overlap_M The pairwise overlap matrix
+#' @param M.stats The alteration matrix stats (from am.stats)
+#' @param w_overlap_M The weighted pairwise overlap matrix
+#' @return List with overlap and w_overlap sparse matrices.
 #'
 #' @export
 am.pairwise.alteration.coverage <- function(overlap_M, M.stats,w_overlap_M) {
@@ -134,23 +133,18 @@ am.pairwise.alteration.coverage <- function(overlap_M, M.stats,w_overlap_M) {
     colnames(marginal_f1) = rownames(marginal_f1)
     marginal_f2 = t(marginal_f1)
     diag(overlap_M) = diag(marginal_f1)
-    # me = marginal_f1 + marginal_f2 - 2*overlap_M # not used. Nov 2018
-    # coverage = marginal_f2 + marginal_f1 - overlap_M # not used. Nov 2018
     stats[['overlap']] = Matrix(overlap_M)
     stats[['w_overlap']] = Matrix(w_overlap_M)
-    # stats[['coverage']] = coverage
-    # stats[['me']] = me # not used. Nov 2018
     return(stats)
 }
-#' Compute weight overlap stats
-#' 
-#' @param al The alteration landscape object
-#' @param als The alteration stats object
-#' @param do.blocks blockwise comptutation
-#' @return overlap the weight overlap between the pairs
+#' Compute pairwise alteration statistics for an alteration landscape
+#'
+#' @param al SelectX object (list containing al, W, etc.)
+#' @param als Alteration landscape stats (from al.stats); computed internally if NULL
+#' @param do.blocks Whether to also compute block-level pairwise stats
+#' @return List with overlap and w_overlap matrices, plus optional sample.blocks entries.
 #'
 #' @export
-# TODO do.block is error prone.
 al.pairwise.alteration.stats <- function(al, als=NULL, do.blocks=FALSE) {
     if(is.null(als)) als = al.stats(al)
     M.overlap = am.pairwise.alteration.overlap(as.matrix(al$al$am$full))
@@ -175,58 +169,54 @@ al.pairwise.alteration.stats <- function(al, als=NULL, do.blocks=FALSE) {
     }
      return(M.pairwise)
 }
-#' Compute weight overlap stats
-#' 
-#' @import doParallel
-#' @import parallel
-#' @param null The null model
+#' Compute null overlap matrix
+#'
+#' @param null The null model (list of simulated binary matrices)
 #' @param n.permut The number of permutation steps
 #' @param n.cores The number of cores
-#' @return overlap the weight overlap between the pairs
+#' @return overlap the overlap summed across permutations
 #'
 #' @export
 r.am.pairwise.alteration.overlap <- function(null,n.permut,n.cores=1) {
     return(rcpp_overlap(v=null,t=1))
 }
-#' Compute weight overlap stats
-#' 
-#' @import doParallel
-#' @import parallel
-#' @param null The null model
+#' Compute null weighted overlap matrix
+#'
+#' @param null The null model (list of simulated binary matrices)
 #' @param W The weight matrix
 #' @param n.permut The number of permutation steps
 #' @param n.cores The number of cores
-#' @return overlap the weight overlap between the pairs
+#' @return weighted overlap summed across permutations
 #'
 #' @export
 w.r.am.pairwise.alteration.overlap <- function(null,W,n.permut,n.cores=1) {	  
     return(rcpp_w_overlap(v=null,w=W,t=1))
 }
-#' Compute weight overlap stats
-#' 
-#' @param x The alteration matrix
-#' @return average
+#' Sum a list of matrices element-wise
+#'
+#' @param x List of matrices of identical dimensions
+#' @return Single matrix that is the element-wise sum of all matrices in x
 #'
 #' @export
 add <- function(x) Reduce("+", x)
-#' Compute weight overlap stats
-#' 
-#' @param obs The observed overlap
-#' @param exp The expected overlap
-#' @return effect size
+#' Compute effect size between observed and expected overlap
+#'
+#' @param obs The observed overlap values
+#' @param exp The expected (null model mean) overlap values
+#' @return Effect size value(s)
 #'
 #' @export
 effectSize = function(obs, exp){
     es = (obs - exp)*sin(pi/4)
     return(es)
 }
-#' Compute weight overlap stats
-#' 
-#' @param null_overlap The null model overlap
-#' @param mean_mat The mean effect size vector
-#' @param n.permut The number of permutation steps
-#' @param n.cores The number of cores
-#' @return overlap the weight overlap between the pairs
+#' Compute effect sizes for null model permutations
+#'
+#' @param null_overlap List of null model overlap matrices (one per permutation)
+#' @param mean_mat Mean overlap matrix across all permutations
+#' @param n.permut Number of permutations
+#' @param n.cores Number of cores (currently unused; sequential only)
+#' @return List of effect size vectors, one per permutation.
 #'
 #' @export
 r.effectSize<- function(null_overlap,mean_mat,n.permut=1000,n.cores=1){
@@ -237,11 +227,11 @@ r.effectSize<- function(null_overlap,mean_mat,n.permut=1000,n.cores=1){
     return(r.effect)
 
 }
-#' Compute yule coefficent
-#' 
-#' @param overlap The overlap matrixx
-#' @param mat The gam
-#' @return yule coefficent
+#' Compute Yule Q coefficient for all gene pairs
+#'
+#' @param overlap The pairwise overlap matrix
+#' @param mat The binary GAM (features x samples)
+#' @return Matrix of Yule Q coefficients
 #'
 #' @export
 binary.yule <- function(overlap,mat){
@@ -252,7 +242,7 @@ binary.yule <- function(overlap,mat){
     v_11 = overlap
     v_10 = marginal_f1 - v_11
     v_01 = marginal_f2 - v_11
-    v_00 = nrow(mat) - v_11 - v_01 - v_10
+    v_00 = ncol(mat) - v_11 - v_01 - v_10
     
     # Calculate Odds Ratio
     OR = (v_00 * v_11) / (v_10 * v_01)
@@ -260,13 +250,13 @@ binary.yule <- function(overlap,mat){
     return(Yule)
 }
 
-#' Compute FDR
-#' 
-#' @param obs The observed values
-#' @param exp The expected values aka null model
-#' @param nSim The weight matrix
-#' @param maxFDR The maxFDR to keep
-#' @return overlap the weight overlap between the pairs
+#' Estimate FDR by scanning observed vs null effect sizes
+#'
+#' @param obs Vector of observed effect sizes
+#' @param exp Vector of null model effect sizes (all permutations concatenated)
+#' @param nSim Number of permutations used to generate exp
+#' @param maxFDR FDR cutoff; scanning stops once FDR exceeds this value
+#' @return Vector of FDR values, one per element of obs.
 #'
 #' @export
 estimateFDR2 = function(obs, exp, nSim, maxFDR = 0.25){
@@ -291,8 +281,6 @@ estimateFDR2 = function(obs, exp, nSim, maxFDR = 0.25){
             }
             fp = (exp.pos-1)/nSim
             fdr = min(fp/sum(obs >= value), 1)
-            #print(paste('FP',exp.pos,'Test_value',value,sep=":"))
-            #print(sum(obs >= value))
             all.fdr[ orig.obs == value ] = fdr
             if(fdr >= maxFDR)
                 scan = FALSE
@@ -303,13 +291,13 @@ estimateFDR2 = function(obs, exp, nSim, maxFDR = 0.25){
     return(all.fdr)
 }
 
-#' Compute pairwise p-value
-#' 
-#' @param robs_co The observed values
-#' @param obs.co The expected values aka null model
-#' @param gene1 The weight matrix
-#' @param gene2 The maxFDR to keep
-#' @return overlap the weight overlap between the pairs
+#' Compute empirical two-sided p-value for a gene pair
+#'
+#' @param robs_co List of null model overlap matrices (one per permutation)
+#' @param obs.co Observed pairwise overlap matrix
+#' @param gene1 Name of the first gene/alteration
+#' @param gene2 Name of the second gene/alteration
+#' @return Two-sided empirical p-value
 #'
 #' @export
 
@@ -324,13 +312,13 @@ estimate_p_val <- function(robs_co,obs.co,gene1,gene2){
     return(p_val)
 }
 
-#' Compute pairwise p-value
-#' 
-#' @param obs The observed values
-#' @param exp The expected values aka null model
-#' @param results The weight matrix
-#' @param nSim The maxFDR to keep
-#' @return overlap the weight overlap between the pairs
+#' Compute p-values for all gene pairs in a results table
+#'
+#' @param obs Observed pairwise overlap matrix
+#' @param exp List of null model overlap matrices (one per permutation)
+#' @param results Results data frame with SFE_1 and SFE_2 columns
+#' @param nSim Number of permutations
+#' @return Vector of p-values, one per row in results.
 #'
 #' @export
 estimate_pairwise_p = function(obs, exp,results, nSim){     
@@ -352,21 +340,21 @@ estimate_pairwise_p = function(obs, exp,results, nSim){
 }
 
 
-#' Compute weight overlap stats
-#' 
-#' @param al The alteration matrix
-#' @param als The alteration matrix stats object
-#' @param obs The observed overlap
-#' @param wobs The weighted observed overlap
-#' @param r.obs The random observed overlap
-#' @param r.wobs The random weighted observed overlap
-#' @param null The null model
-#' @param maxFDR The maxFDR cutoff
-#' @param estimate_pairwise Compute pairwise or not
-#' @param n.cores The number of cores
-#' @param n.permut The number of permutation
-#' @return The table of results
-#' @export 
+#' Build the full interaction results table from selectX outputs
+#'
+#' @param al Alteration landscape object (al$am, etc.)
+#' @param als Alteration landscape stats (from al.stats)
+#' @param obs Observed pairwise overlap matrix
+#' @param wobs Weighted observed pairwise overlap matrix
+#' @param r.obs List of null model overlap matrices
+#' @param r.wobs List of null model weighted overlap matrices
+#' @param null Null model list (simulated binary matrices)
+#' @param maxFDR FDR cutoff for calling significant results
+#' @param estimate_pairwise Whether to compute per-pair empirical p-values
+#' @param n.cores Number of cores
+#' @param n.permut Number of permutations
+#' @return Data frame with one row per gene pair and columns for overlap, effect sizes, FDR, and interaction type.
+#' @export
 #'
 interaction.table <- function(al,
 							  als,
@@ -431,7 +419,6 @@ interaction.table <- function(al,
     exp.ES = as.numeric(exp.ES) 
     results[,'wES']<-exp.ES
     exp.rES = r.effectSize (r.wobs,(add(r.wobs)/length(r.wobs)),n.permut=n.permut,n.cores=n.cores)
-    #tic('compute FDR on wES')
         exp.ES = unlist(exp.rES)
         exp.ES = as.numeric(exp.ES)
         results[,'wFDR']<-rep(1,nrow(results)) 
@@ -439,14 +426,12 @@ interaction.table <- function(al,
                                        exp = abs(exp.ES),
                                        maxFDR = maxFDR,
                                        nSim = n.permut)
-    #toc()
     ES_mtx <- matrix(abs(unlist(exp.rES)), ncol = length(exp.rES), nrow = length(exp.rES[[1]]))
     mean_ES <- abs(rowSums(ES_mtx)/n.permut)
     n.ES = (abs(results[,'wES']) - abs(mean_ES))
     n.ES[ n.ES < 0 ] = 0
     results[,'nES']<- sign(results[,'wES']) * n.ES
     results[,'mean_r_nES']<- sign(results[,'wES']) * abs(mean_ES)    
-    #tic('compute FDR on nES')
         exp.rES <- (abs(ES_mtx)-abs(mean_ES))
         exp.rES[ exp.rES < 0 ] = 0
         exp.rES<- sign(ES_mtx) * exp.rES
@@ -457,8 +442,6 @@ interaction.table <- function(al,
                                        exp = abs(exp.ES),
                                        maxFDR = maxFDR,
                                        nSim = n.permut)
-    #toc()
-    #tic('compute FDR on nES (frequency specific)')
         results[,'cum_freq'] = results$support_1 + results$support_2
         samples=length(colnames(al$am$full))
         freq.cats = c(0, 0.02, 0.05, 0.10, 1)
@@ -473,7 +456,6 @@ interaction.table <- function(al,
 
             }
         }
-    #toc()
     results = results[order(abs(results$nES), decreasing = T),]
     results$type = rep('ME', nrow(results))
     results$type[ results$nES > 0 ] = 'CO'

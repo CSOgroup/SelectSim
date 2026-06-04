@@ -2,22 +2,22 @@
 % Please edit documentation in R/selectX_stats.r
 \name{estimateFDR2}
 \alias{estimateFDR2}
-\title{Compute FDR}
+\title{Estimate FDR by scanning observed vs null effect sizes}
 \usage{
 estimateFDR2(obs, exp, nSim, maxFDR = 0.25)
 }
 \arguments{
-\item{obs}{The observed values}
+\item{obs}{Vector of observed effect sizes}
 
-\item{exp}{The expected values aka null model}
+\item{exp}{Vector of null model effect sizes (all permutations concatenated)}
 
-\item{nSim}{The weight matrix}
+\item{nSim}{Number of permutations used to generate exp}
 
-\item{maxFDR}{The maxFDR to keep}
+\item{maxFDR}{FDR cutoff; scanning stops once FDR exceeds this value}
 }
 \value{
-overlap the weight overlap between the pairs
+Vector of FDR values, one per element of obs.
 }
 \description{
-Compute FDR
+Estimate FDR by scanning observed vs null effect sizes
 }

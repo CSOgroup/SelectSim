@@ -2,7 +2,7 @@
 % Please edit documentation in R/gam_utils.r
 \name{filter_maf_mutation.type}
 \alias{filter_maf_mutation.type}
-\title{This function filters a MAF dataframe by sample id}
+\title{Filter a MAF dataframe by mutation type}
 \usage{
 filter_maf_mutation.type(
   maf,
@@ -11,6 +11,18 @@ filter_maf_mutation.type(
   ...
 )
 }
+\arguments{
+\item{maf}{A MAF dataframe}
+
+\item{variants}{Vector of variant classification values to retain}
+
+\item{variant.col}{Column name containing variant classifications}
+
+\item{...}{Additional arguments passed to filter_maf_column}
+}
+\value{
+Filtered MAF dataframe.
+}
 \description{
-This function filters a MAF dataframe by sample id
+Filter a MAF dataframe by mutation type
 }

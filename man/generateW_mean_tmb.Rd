@@ -9,7 +9,7 @@ generateW_mean_tmb(
   mean_tmb,
   ngenes,
   lambda = 0.3,
-  tao = 1,
+  tau = 1,
   discrete = TRUE
 )
 }
@@ -20,9 +20,9 @@ generateW_mean_tmb(
 
 \item{ngenes}{Number of genes}
 
-\item{lambda}{0.1 weight factor}
+\item{lambda}{weight penalty factor (default 0.3)}
 
-\item{tao}{1 Fold change factor}
+\item{tau}{fold change factor}
 
 \item{discrete}{True discrete weights}
 }

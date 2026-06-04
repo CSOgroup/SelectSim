@@ -2,16 +2,16 @@
 % Please edit documentation in R/selectX_stats.r
 \name{am.stats}
 \alias{am.stats}
-\title{Create an alteration matrix stats object}
+\title{Compute summary statistics for a binary alteration matrix}
 \usage{
 am.stats(am)
 }
 \arguments{
-\item{am}{The alteration matrix stat object}
+\item{am}{Binary alteration matrix (features x samples)}
 }
 \value{
-AMS object with basic stats for the matrix
+AMS object with basic counts: n.samples, n.alterations, n.occurrences, per-sample and per-feature counts.
 }
 \description{
-Create an alteration matrix stats object
+Compute summary statistics for a binary alteration matrix
 }

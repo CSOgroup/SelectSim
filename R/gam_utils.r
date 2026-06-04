@@ -45,8 +45,8 @@ TCGA_maf_schema = list(
 )
 
 ###
-#' GENIE_maf_schema: GENIE_maf_schema: schema for TCGA maf file to process the mutations
-#'   
+#' GENIE_maf_schema: schema for GENIE maf file to process the mutations
+#'
 #' @export
 GENIE_maf_schema = list(
 	'column' = list(
@@ -104,37 +104,67 @@ filter_maf_column <- function(maf, # the maf as dataframe
 	return(filtered_maf)
 }
 
-#' This function filters a MAF dataframe by retaining only the rows with a combination of values compatible with the values
-#' @export 
+#' Filter a MAF dataframe by a combination of column values
+#'
+#' @param maf A MAF dataframe
+#' @param values A dataframe of (column, value) pairs to match against
+#' @param ... Additional arguments passed to merge
+#' @return Filtered MAF dataframe containing only rows matching the value combinations.
+#' @export
 filter_maf_complex <- function(maf, values, ...) {
 	filtered_maf = merge(maf, values, suffixes = c('', '_to.ignore'), ...)
 	filtered_maf = unique(filtered_maf)
 	return(filtered_maf)
 }
 
-#' This function filters a MAF dataframe by sample id
-#' @export 
+#' Filter a MAF dataframe by sample ID
+#'
+#' @param maf A MAF dataframe
+#' @param samples Vector of sample IDs to retain
+#' @param sample.col Column name containing sample IDs
+#' @param ... Additional arguments passed to filter_maf_column
+#' @return Filtered MAF dataframe.
+#' @export
 filter_maf_sample <- function(maf, samples, sample.col = 'Tumor_Sample_Barcode', ...) {
 	filtered_maf = filter_maf_column(maf, values = samples, column = sample.col, ...)
 	return(filtered_maf)
 }
 
-#' This function filters a MAF dataframe by sample id
-#' @export 
+#' Filter a MAF dataframe by gene name
+#'
+#' @param maf A MAF dataframe
+#' @param genes Vector of gene names to retain
+#' @param gene.col Column name containing gene symbols
+#' @param ... Additional arguments passed to filter_maf_column
+#' @return Filtered MAF dataframe.
+#' @export
 filter_maf_gene.name <- function(maf, genes, gene.col = 'Hugo_Symbol', ...) {
 	filtered_maf = filter_maf_column(maf, values = genes, column = gene.col, ...)
 	return(filtered_maf)
 }
 
-#' This function filters a MAF dataframe by sample id
-#' @export 
+#' Filter a MAF dataframe by mutation type
+#'
+#' @param maf A MAF dataframe
+#' @param variants Vector of variant classification values to retain
+#' @param variant.col Column name containing variant classifications
+#' @param ... Additional arguments passed to filter_maf_column
+#' @return Filtered MAF dataframe.
+#' @export
 filter_maf_mutation.type <- function(maf, variants, variant.col = 'Variant_Classification', ...) {
 	filtered_maf = filter_maf_column(maf, values = variants, column = variant.col, ...)
 	return(filtered_maf)
 }
 
-#' This function filters a MAF dataframe by sample id
-#' @export 
+#' Filter a MAF dataframe by specific gene-mutation combinations
+#'
+#' @param maf A MAF dataframe
+#' @param values Dataframe of allowed (gene, mutation) combinations
+#' @param maf.col Columns in maf to join on
+#' @param values.col Corresponding columns in values to join on
+#' @param ... Additional arguments passed to filter_maf_complex
+#' @return Filtered MAF dataframe containing only rows matching the allowed combinations.
+#' @export
 filter_maf_mutations <- function(maf, values, maf.col = c('Hugo_Symbol', 'HGVSp_Short'), values.col = maf.col, ...) {
 	filtered_maf = filter_maf_complex(maf, values = values, by.x = maf.col, by.y = values.col, ...)
 	return(filtered_maf)
@@ -242,31 +272,25 @@ stat_maf_column <- function(maf, column, ...) {
 	return(table(v))
 }
 ###
-#' Summary functions for MAF file
-#' 
-#' @description
-#' `stat_maf_column()` takes a maf file and filters a MAF dataframe by retaining only the rows with a column value included in the values list
+#' Count mutations per sample in a MAF file
 #'
-#' @param maf a maf as dataframe
-#' @param column a schema of datafrane check Select::TCGA_maf_schema for example
-#' @param ... Other options
-#' @return filtered_maf  a filtered maf file
-#'  
+#' @param maf A MAF dataframe
+#' @param column Column name containing sample IDs
+#' @param ... Additional arguments passed to stat_maf_column
+#' @return Table of mutation counts per sample.
+#'
 #' @export
 stat_maf_sample <- function(maf, column = 'Tumor_Sample_Barcode', ...) {
 	return(stat_maf_column(maf, column, ...))
 }
 ###
-#' Summary functions for MAF file
-#' 
-#' @description
-#' `stat_maf_column()` takes a maf file and filters a MAF dataframe by retaining only the rows with a column value included in the values list
+#' Count mutations per gene in a MAF file
 #'
-#' @param maf a maf as dataframe
-#' @param column a schema of datafrane check Select::TCGA_maf_schema for example
-#' @param ... Other options
-#' @return filtered_maf  a filtered maf file
-#'  
+#' @param maf A MAF dataframe
+#' @param column Column name containing gene symbols
+#' @param ... Additional arguments passed to stat_maf_column
+#' @return Table of mutation counts per gene.
+#'
 #' @export
 stat_maf_gene <- function(maf, column = 'Hugo_Symbol', ...) {
 	return(stat_maf_column(maf, column, ...))
@@ -280,18 +304,18 @@ stat_maf_gene <- function(maf, column = 'Hugo_Symbol', ...) {
 #' @description
 #' `maf2gam()` takes a maf file and converts into gam
 #'
-#' @importFrom  reshape2 acast 
-#' @param maf a maf as dataframe
-#' @param sample.col a list containing the elements to filter
-#' @param gene.col column in maf file to filter
-#' @param value.var column in maf file to filter
-#' @param samples column in maf file to filter
-#' @param genes column in maf file to filter
-#' @param fun.aggregate column in maf file to filter
-#' @param binarize a boolena to include or exclude the dataframe with values in list provided
-#' @param fill a grep argument to specify if grep use the argumnet as string or not
-#' @param ... Other options
-#' @return filtered_maf  a GAM matrix
+#' @importFrom  reshape2 acast
+#' @param maf A MAF dataframe
+#' @param sample.col Column name for sample IDs
+#' @param gene.col Column name for gene symbols
+#' @param value.var Column used as the value to aggregate
+#' @param samples Vector of sample IDs to include; NULL keeps all samples present in the MAF
+#' @param genes Vector of gene names to include; NULL keeps all genes present in the MAF
+#' @param fun.aggregate Aggregation function applied per (sample, gene) cell
+#' @param binarize If TRUE, convert aggregated counts to binary presence/absence
+#' @param fill Value used for missing (sample, gene) combinations
+#' @param ... Additional arguments passed to reshape2::acast
+#' @return Numeric matrix (samples x genes) representing the gene alteration matrix.
 #'  
 #' @export 
 maf2gam <- function(maf, 

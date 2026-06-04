@@ -2,20 +2,20 @@
 % Please edit documentation in R/gam_utils.r
 \name{stat_maf_sample}
 \alias{stat_maf_sample}
-\title{Summary functions for MAF file}
+\title{Count mutations per sample in a MAF file}
 \usage{
 stat_maf_sample(maf, column = "Tumor_Sample_Barcode", ...)
 }
 \arguments{
-\item{maf}{a maf as dataframe}
+\item{maf}{A MAF dataframe}
 
-\item{column}{a schema of datafrane check Select::TCGA_maf_schema for example}
+\item{column}{Column name containing sample IDs}
 
-\item{...}{Other options}
+\item{...}{Additional arguments passed to stat_maf_column}
 }
 \value{
-filtered_maf  a filtered maf file
+Table of mutation counts per sample.
 }
 \description{
-\code{stat_maf_column()} takes a maf file and filters a MAF dataframe by retaining only the rows with a column value included in the values list
+Count mutations per sample in a MAF file
 }

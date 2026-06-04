@@ -24,7 +24,7 @@ theme_Publication = function (base_size = 14, base_family = "sans") {
     plot.title = element_text(face = "bold", size = rel(1.2), hjust = 0.5),
     panel.background = element_blank(),
     plot.background = element_blank(),
-    panel.border = element_rect(colour = "black", fill = NA, size = 1),
+    panel.border = element_rect(colour = "black", fill = NA, linewidth = 1),
     axis.title = element_text(face = "bold", size = rel(1)),
     axis.title.y = element_text(angle = 90, vjust = 2),
     axis.title.x = element_text(vjust = -0.2),
@@ -116,7 +116,6 @@ overlap_pair_extract <- function(gene1,gene2,obj){
 #' @import ggpubr
 #' @import ggplot2
 #' @import ggridges
-#' @import graphics
 #' @importFrom  dplyr %>%
 #' @importFrom  reshape2 melt
 #' @importFrom  dplyr case_when
@@ -184,7 +183,6 @@ ridge_plot_ed <- function(result_df,obj){
 #' @import ggpubr
 #' @import ggplot2
 #' @import ggridges
-#' @import graphics
 #' @importFrom  dplyr %>%
 #' @importFrom  reshape2 melt
 #' @importFrom  dplyr case_when

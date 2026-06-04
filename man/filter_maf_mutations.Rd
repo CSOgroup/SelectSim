@@ -2,7 +2,7 @@
 % Please edit documentation in R/gam_utils.r
 \name{filter_maf_mutations}
 \alias{filter_maf_mutations}
-\title{This function filters a MAF dataframe by sample id}
+\title{Filter a MAF dataframe by specific gene-mutation combinations}
 \usage{
 filter_maf_mutations(
   maf,
@@ -12,6 +12,20 @@ filter_maf_mutations(
   ...
 )
 }
+\arguments{
+\item{maf}{A MAF dataframe}
+
+\item{values}{Dataframe of allowed (gene, mutation) combinations}
+
+\item{maf.col}{Columns in maf to join on}
+
+\item{values.col}{Corresponding columns in values to join on}
+
+\item{...}{Additional arguments passed to filter_maf_complex}
+}
+\value{
+Filtered MAF dataframe containing only rows matching the allowed combinations.
+}
 \description{
-This function filters a MAF dataframe by sample id
+Filter a MAF dataframe by specific gene-mutation combinations
 }

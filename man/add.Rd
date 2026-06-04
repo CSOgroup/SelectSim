@@ -2,16 +2,16 @@
 % Please edit documentation in R/selectX_stats.r
 \name{add}
 \alias{add}
-\title{Compute weight overlap stats}
+\title{Sum a list of matrices element-wise}
 \usage{
 add(x)
 }
 \arguments{
-\item{x}{The alteration matrix}
+\item{x}{List of matrices of identical dimensions}
 }
 \value{
-average
+Single matrix that is the element-wise sum of all matrices in x
 }
 \description{
-Compute weight overlap stats
+Sum a list of matrices element-wise
 }

@@ -2,20 +2,20 @@
 % Please edit documentation in R/selectX_stats.r
 \name{r.am.pairwise.alteration.overlap}
 \alias{r.am.pairwise.alteration.overlap}
-\title{Compute weight overlap stats}
+\title{Compute null overlap matrix}
 \usage{
 r.am.pairwise.alteration.overlap(null, n.permut, n.cores = 1)
 }
 \arguments{
-\item{null}{The null model}
+\item{null}{The null model (list of simulated binary matrices)}
 
 \item{n.permut}{The number of permutation steps}
 
 \item{n.cores}{The number of cores}
 }
 \value{
-overlap the weight overlap between the pairs
+overlap the overlap summed across permutations
 }
 \description{
-Compute weight overlap stats
+Compute null overlap matrix
 }

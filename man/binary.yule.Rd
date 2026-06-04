@@ -2,18 +2,18 @@
 % Please edit documentation in R/selectX_stats.r
 \name{binary.yule}
 \alias{binary.yule}
-\title{Compute yule coefficent}
+\title{Compute Yule Q coefficient for all gene pairs}
 \usage{
 binary.yule(overlap, mat)
 }
 \arguments{
-\item{overlap}{The overlap matrixx}
+\item{overlap}{The pairwise overlap matrix}
 
-\item{mat}{The gam}
+\item{mat}{The binary GAM (features x samples)}
 }
 \value{
-yule coefficent
+Matrix of Yule Q coefficients
 }
 \description{
-Compute yule coefficent
+Compute Yule Q coefficient for all gene pairs
 }

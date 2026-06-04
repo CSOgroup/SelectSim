@@ -2,18 +2,19 @@
 % Please edit documentation in R/selectX_create.r
 \name{retrieveOutliers}
 \alias{retrieveOutliers}
-\title{Removing the Outliers}
+\title{Identify outlier null-model matrices}
 \usage{
 retrieveOutliers(obj, nSim = 1000)
 }
 \arguments{
-\item{obj}{selectX object}
+\item{obj}{SelectX object (list with al and null fields)}
 
-\item{nSim}{Number of simulation}
+\item{nSim}{Number of simulations in the null model}
 }
 \value{
-outliers
+Logical vector; TRUE for each null matrix flagged as an outlier.
 }
 \description{
-Removing the Outliers
+Flags simulations whose mean per-gene and per-sample deviation from the
+observed counts falls in the top 10\%, indicating numerical instability.
 }

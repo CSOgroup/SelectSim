@@ -1,0 +1,147 @@
+# Package index
+
+## Main interface
+
+End-to-end analysis: run the full SelectSim pipeline in one call.
+
+- [`selectX()`](https://csogroup.github.io/SelectSim/reference/selectX.md)
+  : SelectX main function from SelectSim to create alteration object
+  with background model
+
+## Core workflow
+
+Step-by-step building blocks called internally by `selectX`. Expose
+these directly for custom pipelines or debugging.
+
+- [`new.AL.general()`](https://csogroup.github.io/SelectSim/reference/new.AL.general.md)
+  : Create an AL object
+- [`get.blocks()`](https://csogroup.github.io/SelectSim/reference/get.blocks.md)
+  : Get sample/alteration blocks
+- [`template.obj.gen()`](https://csogroup.github.io/SelectSim/reference/template.obj.gen.md)
+  : Generate the template matrix
+- [`generateS()`](https://csogroup.github.io/SelectSim/reference/generateS.md)
+  : Generate S matrix
+- [`generateW_block()`](https://csogroup.github.io/SelectSim/reference/generateW_block.md)
+  : Generating the weight matrix taking sample covariate
+- [`generateW_mean_tmb()`](https://csogroup.github.io/SelectSim/reference/generateW_mean_tmb.md)
+  : Generating the weight matrix
+- [`null_model_parallel()`](https://csogroup.github.io/SelectSim/reference/null_model_parallel.md)
+  : Generating the null_simulation matrix
+- [`retrieveOutliers()`](https://csogroup.github.io/SelectSim/reference/retrieveOutliers.md)
+  : Identify outlier null-model matrices
+
+## Statistics
+
+Overlap computation, effect sizes, FDR estimation, and results table.
+
+- [`new.ALS()`](https://csogroup.github.io/SelectSim/reference/new.ALS.md)
+  : Initialize an Alteration Landscape Stats (ALS) container
+- [`new.AMS()`](https://csogroup.github.io/SelectSim/reference/new.AMS.md)
+  : Initialize an Alteration Matrix Stats (AMS) container
+- [`al.stats()`](https://csogroup.github.io/SelectSim/reference/al.stats.md)
+  : Compute alteration landscape statistics
+- [`am.stats()`](https://csogroup.github.io/SelectSim/reference/am.stats.md)
+  : Compute summary statistics for a binary alteration matrix
+- [`al.pairwise.alteration.stats()`](https://csogroup.github.io/SelectSim/reference/al.pairwise.alteration.stats.md)
+  : Compute pairwise alteration statistics for an alteration landscape
+- [`am.pairwise.alteration.overlap()`](https://csogroup.github.io/SelectSim/reference/am.pairwise.alteration.overlap.md)
+  : Compute overlap stats
+- [`am.pairwise.alteration.coverage()`](https://csogroup.github.io/SelectSim/reference/am.pairwise.alteration.coverage.md)
+  : Compute pairwise alteration coverage statistics
+- [`am.weight.pairwise.alteration.overlap()`](https://csogroup.github.io/SelectSim/reference/am.weight.pairwise.alteration.overlap.md)
+  : Compute TMB-weighted pairwise alteration overlap
+- [`r.am.pairwise.alteration.overlap()`](https://csogroup.github.io/SelectSim/reference/r.am.pairwise.alteration.overlap.md)
+  : Compute null overlap matrix
+- [`w.r.am.pairwise.alteration.overlap()`](https://csogroup.github.io/SelectSim/reference/w.r.am.pairwise.alteration.overlap.md)
+  : Compute null weighted overlap matrix
+- [`binary.yule()`](https://csogroup.github.io/SelectSim/reference/binary.yule.md)
+  : Compute Yule Q coefficient for all gene pairs
+- [`effectSize()`](https://csogroup.github.io/SelectSim/reference/effectSize.md)
+  : Compute effect size between observed and expected overlap
+- [`r.effectSize()`](https://csogroup.github.io/SelectSim/reference/r.effectSize.md)
+  : Compute effect sizes for null model permutations
+- [`add()`](https://csogroup.github.io/SelectSim/reference/add.md) : Sum
+  a list of matrices element-wise
+- [`estimateFDR2()`](https://csogroup.github.io/SelectSim/reference/estimateFDR2.md)
+  : Estimate FDR by scanning observed vs null effect sizes
+- [`estimate_p_val()`](https://csogroup.github.io/SelectSim/reference/estimate_p_val.md)
+  : Compute empirical two-sided p-value for a gene pair
+- [`estimate_pairwise_p()`](https://csogroup.github.io/SelectSim/reference/estimate_pairwise_p.md)
+  : Compute p-values for all gene pairs in a results table
+- [`interaction.table()`](https://csogroup.github.io/SelectSim/reference/interaction.table.md)
+  : Build the full interaction results table from selectX outputs
+
+## Data processing
+
+MAF file filtering utilities and gene alteration matrix (GAM)
+construction.
+
+- [`maf2gam()`](https://csogroup.github.io/SelectSim/reference/maf2gam.md)
+  : Generate gam from the maf file
+- [`filter_maf_column()`](https://csogroup.github.io/SelectSim/reference/filter_maf_column.md)
+  : Filter maf function
+- [`filter_maf_complex()`](https://csogroup.github.io/SelectSim/reference/filter_maf_complex.md)
+  : Filter a MAF dataframe by a combination of column values
+- [`filter_maf_gene.name()`](https://csogroup.github.io/SelectSim/reference/filter_maf_gene.name.md)
+  : Filter a MAF dataframe by gene name
+- [`filter_maf_ignore()`](https://csogroup.github.io/SelectSim/reference/filter_maf_ignore.md)
+  : This function filters a MAF dataframe by retaining (or discarding)
+  ignore mutations
+- [`filter_maf_missense()`](https://csogroup.github.io/SelectSim/reference/filter_maf_missense.md)
+  : This function filters a MAF dataframe by retaining (or discarding)
+  missense mutations
+- [`filter_maf_mutation.type()`](https://csogroup.github.io/SelectSim/reference/filter_maf_mutation.type.md)
+  : Filter a MAF dataframe by mutation type
+- [`filter_maf_mutations()`](https://csogroup.github.io/SelectSim/reference/filter_maf_mutations.md)
+  : Filter a MAF dataframe by specific gene-mutation combinations
+- [`filter_maf_sample()`](https://csogroup.github.io/SelectSim/reference/filter_maf_sample.md)
+  : Filter a MAF dataframe by sample ID
+- [`filter_maf_schema()`](https://csogroup.github.io/SelectSim/reference/filter_maf_schema.md)
+  : This function filters a MAF dataframe by sample id
+- [`filter_maf_truncating()`](https://csogroup.github.io/SelectSim/reference/filter_maf_truncating.md)
+  : This function filters a MAF dataframe by retaining (or discarding)
+  truncating mutations
+- [`stat_maf_column()`](https://csogroup.github.io/SelectSim/reference/stat_maf_column.md)
+  : Summary functions for MAF file
+- [`stat_maf_gene()`](https://csogroup.github.io/SelectSim/reference/stat_maf_gene.md)
+  : Count mutations per gene in a MAF file
+- [`stat_maf_sample()`](https://csogroup.github.io/SelectSim/reference/stat_maf_sample.md)
+  : Count mutations per sample in a MAF file
+- [`mutation_type`](https://csogroup.github.io/SelectSim/reference/mutation_type.md)
+  : Mutation list object
+- [`TCGA_maf_schema`](https://csogroup.github.io/SelectSim/reference/TCGA_maf_schema.md)
+  : TCGA_maf_schema: schema for TCGA maf file to process the mutations
+- [`GENIE_maf_schema`](https://csogroup.github.io/SelectSim/reference/GENIE_maf_schema.md)
+  : GENIE_maf_schema: schema for GENIE maf file to process the mutations
+
+## Visualization
+
+Plot helpers for inspecting results and null model distributions.
+
+- [`obs_exp_scatter()`](https://csogroup.github.io/SelectSim/reference/obs_exp_scatter.md)
+  : Create an AL object
+- [`ridge_plot_ed()`](https://csogroup.github.io/SelectSim/reference/ridge_plot_ed.md)
+  : Generate a pairs background plot
+- [`ridge_plot_ed_compare()`](https://csogroup.github.io/SelectSim/reference/ridge_plot_ed_compare.md)
+  : Generate a pairs background plot for two dataset comaprision
+- [`overlap_pair_extract()`](https://csogroup.github.io/SelectSim/reference/overlap_pair_extract.md)
+  : Extract the backgroun distribution
+- [`theme_Publication()`](https://csogroup.github.io/SelectSim/reference/theme_Publication.md)
+  : A nice theme for making good plots
+
+## Datasets
+
+Example datasets bundled with the package.
+
+- [`luad_run_data`](https://csogroup.github.io/SelectSim/reference/luad_run_data.md)
+  : Lung adenocarcinoma from TCGA cohort as selectX run object
+- [`luad_result`](https://csogroup.github.io/SelectSim/reference/luad_result.md)
+  : Lung adenocarcinoma from TCGA cohort as selectX run results
+- [`luad_maf`](https://csogroup.github.io/SelectSim/reference/luad_maf.md)
+  : Lung adenocarcinoma MAF from TCGA cohort
+- [`oncokb_genes`](https://csogroup.github.io/SelectSim/reference/oncokb_genes.md)
+  : OncoKB v3.9 cancer genes
+- [`oncokb_truncating_genes`](https://csogroup.github.io/SelectSim/reference/oncokb_truncating_genes.md)
+  : OncoKB v3.9 cancer genes consider for truncating mutations
+- [`variant_catalogue`](https://csogroup.github.io/SelectSim/reference/variant_catalogue.md)
+  : OncoKB v3.9 cancer genes

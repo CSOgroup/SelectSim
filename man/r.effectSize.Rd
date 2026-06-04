@@ -2,22 +2,22 @@
 % Please edit documentation in R/selectX_stats.r
 \name{r.effectSize}
 \alias{r.effectSize}
-\title{Compute weight overlap stats}
+\title{Compute effect sizes for null model permutations}
 \usage{
 r.effectSize(null_overlap, mean_mat, n.permut = 1000, n.cores = 1)
 }
 \arguments{
-\item{null_overlap}{The null model overlap}
+\item{null_overlap}{List of null model overlap matrices (one per permutation)}
 
-\item{mean_mat}{The mean effect size vector}
+\item{mean_mat}{Mean overlap matrix across all permutations}
 
-\item{n.permut}{The number of permutation steps}
+\item{n.permut}{Number of permutations}
 
-\item{n.cores}{The number of cores}
+\item{n.cores}{Number of cores (currently unused; sequential only)}
 }
 \value{
-overlap the weight overlap between the pairs
+List of effect size vectors, one per permutation.
 }
 \description{
-Compute weight overlap stats
+Compute effect sizes for null model permutations
 }

@@ -2,22 +2,22 @@
 % Please edit documentation in R/selectX_stats.r
 \name{estimate_p_val}
 \alias{estimate_p_val}
-\title{Compute pairwise p-value}
+\title{Compute empirical two-sided p-value for a gene pair}
 \usage{
 estimate_p_val(robs_co, obs.co, gene1, gene2)
 }
 \arguments{
-\item{robs_co}{The observed values}
+\item{robs_co}{List of null model overlap matrices (one per permutation)}
 
-\item{obs.co}{The expected values aka null model}
+\item{obs.co}{Observed pairwise overlap matrix}
 
-\item{gene1}{The weight matrix}
+\item{gene1}{Name of the first gene/alteration}
 
-\item{gene2}{The maxFDR to keep}
+\item{gene2}{Name of the second gene/alteration}
 }
 \value{
-overlap the weight overlap between the pairs
+Two-sided empirical p-value
 }
 \description{
-Compute pairwise p-value
+Compute empirical two-sided p-value for a gene pair
 }

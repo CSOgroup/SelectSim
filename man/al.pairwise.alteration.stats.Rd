@@ -2,20 +2,20 @@
 % Please edit documentation in R/selectX_stats.r
 \name{al.pairwise.alteration.stats}
 \alias{al.pairwise.alteration.stats}
-\title{Compute weight overlap stats}
+\title{Compute pairwise alteration statistics for an alteration landscape}
 \usage{
 al.pairwise.alteration.stats(al, als = NULL, do.blocks = FALSE)
 }
 \arguments{
-\item{al}{The alteration landscape object}
+\item{al}{SelectX object (list containing al, W, etc.)}
 
-\item{als}{The alteration stats object}
+\item{als}{Alteration landscape stats (from al.stats); computed internally if NULL}
 
-\item{do.blocks}{blockwise comptutation}
+\item{do.blocks}{Whether to also compute block-level pairwise stats}
 }
 \value{
-overlap the weight overlap between the pairs
+List with overlap and w_overlap matrices, plus optional sample.blocks entries.
 }
 \description{
-Compute weight overlap stats
+Compute pairwise alteration statistics for an alteration landscape
 }

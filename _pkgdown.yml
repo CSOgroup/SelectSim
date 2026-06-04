@@ -1,5 +1,106 @@
 url: https://csogroup.github.io/SelectSim/
+
 template:
   bootstrap: 5
   bootswatch: journal
 
+home:
+  title: "SelectSim — Evolutionary dependencies in cancer"
+  sidebar:
+    structure: [links, license, citation, authors, dev]
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [github]
+  components:
+    intro:
+      text: "Get started"
+      href: articles/introduction.html
+    github:
+      icon: fab fa-github
+      href: https://github.com/CSOgroup/SelectSim
+      aria-label: GitHub
+
+reference:
+  - title: "Main interface"
+    desc: "End-to-end analysis: run the full SelectSim pipeline in one call."
+    contents:
+      - selectX
+
+  - title: "Core workflow"
+    desc: >
+      Step-by-step building blocks called internally by `selectX`. Expose
+      these directly for custom pipelines or debugging.
+    contents:
+      - new.AL.general
+      - get.blocks
+      - template.obj.gen
+      - generateS
+      - generateW_block
+      - generateW_mean_tmb
+      - null_model_parallel
+      - retrieveOutliers
+
+  - title: "Statistics"
+    desc: "Overlap computation, effect sizes, FDR estimation, and results table."
+    contents:
+      - new.ALS
+      - new.AMS
+      - al.stats
+      - am.stats
+      - al.pairwise.alteration.stats
+      - am.pairwise.alteration.overlap
+      - am.pairwise.alteration.coverage
+      - am.weight.pairwise.alteration.overlap
+      - r.am.pairwise.alteration.overlap
+      - w.r.am.pairwise.alteration.overlap
+      - binary.yule
+      - effectSize
+      - r.effectSize
+      - add
+      - estimateFDR2
+      - estimate_p_val
+      - estimate_pairwise_p
+      - interaction.table
+
+  - title: "Data processing"
+    desc: "MAF file filtering utilities and gene alteration matrix (GAM) construction."
+    contents:
+      - maf2gam
+      - starts_with("filter_maf")
+      - starts_with("stat_maf")
+      - mutation_type
+      - TCGA_maf_schema
+      - GENIE_maf_schema
+
+  - title: "Visualization"
+    desc: "Plot helpers for inspecting results and null model distributions."
+    contents:
+      - obs_exp_scatter
+      - ridge_plot_ed
+      - ridge_plot_ed_compare
+      - overlap_pair_extract
+      - theme_Publication
+
+  - title: "Datasets"
+    desc: "Example datasets bundled with the package."
+    contents:
+      - luad_run_data
+      - luad_result
+      - luad_maf
+      - oncokb_genes
+      - oncokb_truncating_genes
+      - variant_catalogue
+
+articles:
+  - title: "Vignettes"
+    navbar: ~
+    contents:
+      - introduction
+      - data_processing
+
+footer:
+  structure:
+    left:  developed_by
+    right: built_with

@@ -2,10 +2,22 @@
 % Please edit documentation in R/gam_utils.r
 \name{filter_maf_gene.name}
 \alias{filter_maf_gene.name}
-\title{This function filters a MAF dataframe by sample id}
+\title{Filter a MAF dataframe by gene name}
 \usage{
 filter_maf_gene.name(maf, genes, gene.col = "Hugo_Symbol", ...)
 }
+\arguments{
+\item{maf}{A MAF dataframe}
+
+\item{genes}{Vector of gene names to retain}
+
+\item{gene.col}{Column name containing gene symbols}
+
+\item{...}{Additional arguments passed to filter_maf_column}
+}
+\value{
+Filtered MAF dataframe.
+}
 \description{
-This function filters a MAF dataframe by sample id
+Filter a MAF dataframe by gene name
 }

@@ -2,16 +2,16 @@
 % Please edit documentation in R/selectX_stats.r
 \name{al.stats}
 \alias{al.stats}
-\title{Create an alteration stats object}
+\title{Compute alteration landscape statistics}
 \usage{
 al.stats(al)
 }
 \arguments{
-\item{al}{The alteration landscape object}
+\item{al}{SelectX object (list containing al, W, etc. as returned by selectX)}
 }
 \value{
-als alteration landscape stats object
+ALS object with overall and per-block alteration statistics.
 }
 \description{
-Create an alteration stats object
+Compute alteration landscape statistics
 }

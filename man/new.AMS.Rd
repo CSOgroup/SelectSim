@@ -2,16 +2,16 @@
 % Please edit documentation in R/selectX_stats.r
 \name{new.AMS}
 \alias{new.AMS}
-\title{Create an alteration matrix stats object}
+\title{Initialize an Alteration Matrix Stats (AMS) container}
 \usage{
 new.AMS(am)
 }
 \arguments{
-\item{am}{The alteration matrix stats object}
+\item{am}{The alteration matrix (checked for NULL)}
 }
 \value{
-AMS object.
+Empty AMS list object.
 }
 \description{
-Create an alteration matrix stats object
+Initialize an Alteration Matrix Stats (AMS) container
 }

@@ -2,18 +2,18 @@
 % Please edit documentation in R/selectX_stats.r
 \name{am.weight.pairwise.alteration.overlap}
 \alias{am.weight.pairwise.alteration.overlap}
-\title{Compute weight overlap stats}
+\title{Compute TMB-weighted pairwise alteration overlap}
 \usage{
 am.weight.pairwise.alteration.overlap(am, W)
 }
 \arguments{
-\item{am}{The alteration matrix}
+\item{am}{Binary alteration matrix (features x samples)}
 
-\item{W}{The weight matrix}
+\item{W}{Weight matrix (features x samples) with per-sample TMB weights}
 }
 \value{
-overlap the weight overlap between the pairs
+Weighted pairwise overlap matrix (features x features).
 }
 \description{
-Compute weight overlap stats
+Compute TMB-weighted pairwise alteration overlap
 }

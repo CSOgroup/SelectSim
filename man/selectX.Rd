@@ -12,7 +12,7 @@ selectX(
   min.freq = 10,
   n.permut = 1000,
   lambda = 0.3,
-  tao = 1,
+  tau = 1,
   save.object = FALSE,
   folder = "./",
   verbose = TRUE,
@@ -36,7 +36,7 @@ selectX(
 
 \item{lambda}{lambda parameter.}
 
-\item{tao}{tao parameter.}
+\item{tau}{tau (fold change) parameter.}
 
 \item{save.object}{store the SelectX object.}
 

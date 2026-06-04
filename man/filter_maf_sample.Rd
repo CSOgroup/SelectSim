@@ -2,10 +2,22 @@
 % Please edit documentation in R/gam_utils.r
 \name{filter_maf_sample}
 \alias{filter_maf_sample}
-\title{This function filters a MAF dataframe by sample id}
+\title{Filter a MAF dataframe by sample ID}
 \usage{
 filter_maf_sample(maf, samples, sample.col = "Tumor_Sample_Barcode", ...)
 }
+\arguments{
+\item{maf}{A MAF dataframe}
+
+\item{samples}{Vector of sample IDs to retain}
+
+\item{sample.col}{Column name containing sample IDs}
+
+\item{...}{Additional arguments passed to filter_maf_column}
+}
+\value{
+Filtered MAF dataframe.
+}
 \description{
-This function filters a MAF dataframe by sample id
+Filter a MAF dataframe by sample ID
 }

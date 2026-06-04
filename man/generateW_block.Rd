@@ -4,14 +4,14 @@
 \alias{generateW_block}
 \title{Generating the weight matrix taking sample covariate}
 \usage{
-generateW_block(al, lambda, tao)
+generateW_block(al, lambda, tau)
 }
 \arguments{
 \item{al}{altearting landscape onject}
 
 \item{lambda}{penalty factor parameter}
 
-\item{tao}{fold change paramenter}
+\item{tau}{fold change parameter}
 }
 \value{
 Weight matrix

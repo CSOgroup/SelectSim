@@ -2,20 +2,20 @@
 % Please edit documentation in R/selectX_stats.r
 \name{am.pairwise.alteration.coverage}
 \alias{am.pairwise.alteration.coverage}
-\title{Compute weight overlap stats}
+\title{Compute pairwise alteration coverage statistics}
 \usage{
 am.pairwise.alteration.coverage(overlap_M, M.stats, w_overlap_M)
 }
 \arguments{
-\item{overlap_M}{The overlap matrix}
+\item{overlap_M}{The pairwise overlap matrix}
 
-\item{M.stats}{The am matrix statis}
+\item{M.stats}{The alteration matrix stats (from am.stats)}
 
-\item{w_overlap_M}{The weighted overlap matrix}
+\item{w_overlap_M}{The weighted pairwise overlap matrix}
 }
 \value{
-stats of the am matrix
+List with overlap and w_overlap sparse matrices.
 }
 \description{
-Compute weight overlap stats
+Compute pairwise alteration coverage statistics
 }

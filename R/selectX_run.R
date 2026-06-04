@@ -19,9 +19,6 @@
 #'
 #' @import foreach
 #' @import doParallel
-#' @import parallel
-#' @importFrom  tictoc tic
-#' @importFrom  tictoc toc
 #' @importFrom  stats as.dist
 #' @importFrom  stats density
 #' @importFrom  stats ecdf
@@ -34,7 +31,7 @@
 #' @param min.freq number of samples for features to be atleast mutated in.
 #' @param n.permut number of simulations.
 #' @param lambda lambda parameter.
-#' @param tao tao parameter.
+#' @param tau tau (fold change) parameter.
 #' @param folder folder path to store the results.
 #' @param save.object store the SelectX object.
 #' @param verbose print the time and each steps.
@@ -51,7 +48,7 @@ selectX <- function(M, #A list object consiting of GAM and TMB data
 				    min.freq=10,  # Min freq of gene to be mutated to do the analysis
 				    n.permut = 1000, # number of simulations
     	            lambda=0.3, #wieght factor
-    	            tao=1, #the fold change factor
+    	            tau=1, #the fold change factor
     	            save.object = FALSE, #save the object
 	                folder='./', # folder
 				    verbose = TRUE, #verbose to print the steps
@@ -62,25 +59,25 @@ selectX <- function(M, #A list object consiting of GAM and TMB data
 	## Set a global seed for computation
 	set.seed(seed)
 	if(verbose){
-		tic('Total time taken:')
+		tictoc::tic('Total time taken:')
 			print(paste('#### Creating SelectX object ####'))
-			tic('Time:')
+			tictoc::tic('Time:')
 				print(paste('Step1-> Parsing and Filtering GAM...'))
 					al = new.AL.general(M,alteration.class,sample.class,min.freq,verbose)
 				print(paste('-> Alteration Landscape object created'))
-			toc()	
-			print(paste('Step2-> Generating Templetate object...'))
-			tic('Time:')
-					temp.data<-templeate.obj.gen(al)
-				print(paste('-> Templetate object created'))
-			toc()
+			tictoc::toc()	
+			print(paste('Step2-> Generating Template object...'))
+			tictoc::tic('Time:')
+					temp.data<-template.obj.gen(al)
+				print(paste('-> Template object created'))
+			tictoc::toc()
 			print(paste('Step3-> Generating sample weight matrix...'))
-			tic('Time:')
-					W<-generateW_block(al,lambda,tao)
+			tictoc::tic('Time:')
+					W<-generateW_block(al,lambda,tau)
 				print(paste('-> Weight Matrix created'))
-			toc()
+			tictoc::toc()
 			print(paste('Step4-> Generating null model...'))
-			tic('Time:')
+			tictoc::tic('Time:')
 				sim <- null_model_parallel(al,temp.data$temp_mat,W$W,n.cores,n.permut)
 		 		obj<- list('al'=al,'W'=W,'T'=temp.data,'null'=sim,'nSim'=n.permut)
 		    	print(paste('-> Removing the outliers matrix from null model...'))
@@ -95,12 +92,12 @@ selectX <- function(M, #A list object consiting of GAM and TMB data
 				            print(paste(' Updated the null-model and nSim variables...'))
 				            obj$nSim <- length(which(!outliers))
 				    }
-			toc()
+			tictoc::toc()
 			print(paste('-> Null model generated'))
 			print(paste('### SelectSim object created ###'))
 
 			print(paste('#### Computing EDs on the dataset ####'))
-			tic('Time:')
+			tictoc::tic('Time:')
 				al<-obj$al
 			    als = al.stats(obj) # Univariate stats
 			    alp = al.pairwise.alteration.stats(obj, als, do.blocks=FALSE)
@@ -130,9 +127,9 @@ selectX <- function(M, #A list object consiting of GAM and TMB data
 			                                        n.permut=obj$nSim)
 			   obj$robs.co <- robs.co
 			   obj$wrobs.co <- wrobs.co
-	    	toc()
+	    	tictoc::toc()
 	    	print(paste('#### EDs computed ####'))
-		toc()
+		tictoc::toc()
 		if(save.object) {
 			saveRDS(obj, file=paste(folder,'selectsim_object.rds',sep=''))
 			saveRDS(selectX_result, file=paste(folder,'selectsim_results.rds',sep=''))
@@ -140,10 +137,10 @@ selectX <- function(M, #A list object consiting of GAM and TMB data
 		return(list(obj=obj,result=selectX_result))		
 	}
 	else{
-		tic('Total Time')
+		tictoc::tic('Total Time')
 			al = new.AL.general(M,alteration.class,sample.class,min.freq,verbose)
-			temp.data<-templeate.obj.gen(al)
-			W<-generateW_block(al,lambda,tao)
+			temp.data<-template.obj.gen(al)
+			W<-generateW_block(al,lambda,tau)
 			sim <- null_model_parallel(al,temp.data$temp_mat,W$W,n.cores,n.permut)
 		 	obj<- list('al'=al,'W'=W,'T'=temp.data,'null'=sim,'nSim'=n.permut)
 		 	outliers <- retrieveOutliers(obj = obj,nSim = n.permut)
@@ -183,7 +180,7 @@ selectX <- function(M, #A list object consiting of GAM and TMB data
 		                                        n.permut=obj$nSim)
 		   obj$robs.co <- robs.co
 		   obj$wrobs.co <- wrobs.co
-		toc()
+		tictoc::toc()
 
 		if(save.object) {
 			saveRDS(obj, file=paste(folder,'selectsim_object.rds',sep=''))

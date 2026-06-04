@@ -2,22 +2,22 @@
 % Please edit documentation in R/selectX_stats.r
 \name{estimate_pairwise_p}
 \alias{estimate_pairwise_p}
-\title{Compute pairwise p-value}
+\title{Compute p-values for all gene pairs in a results table}
 \usage{
 estimate_pairwise_p(obs, exp, results, nSim)
 }
 \arguments{
-\item{obs}{The observed values}
+\item{obs}{Observed pairwise overlap matrix}
 
-\item{exp}{The expected values aka null model}
+\item{exp}{List of null model overlap matrices (one per permutation)}
 
-\item{results}{The weight matrix}
+\item{results}{Results data frame with SFE_1 and SFE_2 columns}
 
-\item{nSim}{The maxFDR to keep}
+\item{nSim}{Number of permutations}
 }
 \value{
-overlap the weight overlap between the pairs
+Vector of p-values, one per row in results.
 }
 \description{
-Compute pairwise p-value
+Compute p-values for all gene pairs in a results table
 }

@@ -2,20 +2,20 @@
 % Please edit documentation in R/gam_utils.r
 \name{stat_maf_gene}
 \alias{stat_maf_gene}
-\title{Summary functions for MAF file}
+\title{Count mutations per gene in a MAF file}
 \usage{
 stat_maf_gene(maf, column = "Hugo_Symbol", ...)
 }
 \arguments{
-\item{maf}{a maf as dataframe}
+\item{maf}{A MAF dataframe}
 
-\item{column}{a schema of datafrane check Select::TCGA_maf_schema for example}
+\item{column}{Column name containing gene symbols}
 
-\item{...}{Other options}
+\item{...}{Additional arguments passed to stat_maf_column}
 }
 \value{
-filtered_maf  a filtered maf file
+Table of mutation counts per gene.
 }
 \description{
-\code{stat_maf_column()} takes a maf file and filters a MAF dataframe by retaining only the rows with a column value included in the values list
+Count mutations per gene in a MAF file
 }
