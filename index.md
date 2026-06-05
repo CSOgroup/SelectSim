@@ -29,8 +29,8 @@ You can install the development version of SelectSim from
 
 ``` r
 
-# install.packages("devtools")
-devtools::install_github("CSOgroup/SelectSim", dependencies = TRUE, build_vignettes = TRUE)
+# install.packages("pak")
+pak::pak("CSOgroup/SelectSim")
 ```
 
 For more details on installation refer to
