@@ -9,7 +9,7 @@
 * Added GitHub community health files: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, issue templates, PR template, and CI workflow.
 * Expanded test coverage with `test-gam_utils.R`.
 * Repository migrated: development moved from personal branches to [CSOgroup/SelectSim](https://github.com/CSOgroup/SelectSim); `dev` branch merged into `main` for initial public release.
-* Bumped version to 0.1.6 across all source files; updated `DESCRIPTION` date to 2026-06-05.
+* Bumped version to 0.1.6 across all source files
 
 # SelectSim 0.0.1.3
 
