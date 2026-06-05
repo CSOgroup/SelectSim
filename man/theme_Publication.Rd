@@ -2,7 +2,7 @@
 % Please edit documentation in R/selectX_plot.R
 \name{theme_Publication}
 \alias{theme_Publication}
-\title{A nice theme for making good plots}
+\title{A clean ggplot2 theme for publication-quality plots}
 \usage{
 theme_Publication(base_size = 14, base_family = "sans")
 }
@@ -12,8 +12,14 @@ theme_Publication(base_size = 14, base_family = "sans")
 \item{base_family}{type of font}
 }
 \value{
-theme object
+A ggplot2 theme object.
 }
 \description{
-A nice theme for making good plots
+A clean ggplot2 theme for publication-quality plots
+}
+\examples{
+library(ggplot2)
+ggplot(data.frame(x = 1:3, y = 1:3), aes(x, y)) +
+  geom_point() + theme_Publication()
+
 }

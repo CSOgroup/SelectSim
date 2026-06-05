@@ -2,24 +2,46 @@
 % Please edit documentation in R/selectX_plot.R
 \name{ridge_plot_ed_compare}
 \alias{ridge_plot_ed_compare}
-\title{Generate a pairs background plot for two dataset comaprision}
+\title{Ridge plot comparing null-model distributions for two datasets}
 \usage{
 ridge_plot_ed_compare(result_df, obj1, obj2, name1, name2)
 }
 \arguments{
-\item{result_df}{a common result table of selectX obj$result with dataset1_w_overlap and dataset2_w_overlap columns}
+\item{result_df}{A data frame of gene pairs to display, with columns
+\code{SFE_1}, \code{SFE_2}, \code{name}, \code{type}, \code{dataset1_w_overlap},
+and \code{dataset2_w_overlap}.}
 
-\item{obj1}{selectX obj of dataset1}
+\item{obj1}{SelectX object for dataset 1 (\code{selectX()$obj}).}
 
-\item{obj2}{selectX obj of dataset2}
+\item{obj2}{SelectX object for dataset 2 (\code{selectX()$obj}).}
 
-\item{name1}{dataset1 name}
+\item{name1}{Display label for dataset 1.}
 
-\item{name2}{dataset2 name}
+\item{name2}{Display label for dataset 2.}
 }
 \value{
-a ggplot2 object with observed vs random overlap plot.
+A ggplot2 ridge-plot object.
 }
 \description{
-Create an Alteration Landscape (AL) object which contains gams and mutation burden of samples of associated gams.
+For each gene pair in \code{result_df}, overlays the null-model weighted-overlap
+distributions from two separate \code{selectX} runs, allowing visual comparison
+of evolutionary dependencies across cohorts or conditions.
+}
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+r1 <- selectX(M = luad_run_data$M,
+              sample.class = luad_run_data$sample.class,
+              alteration.class = luad_run_data$alteration.class,
+              n.cores = 1, min.freq = 10, n.permut = 10, verbose = FALSE)
+r2 <- selectX(M = luad_run_data$M,
+              sample.class = luad_run_data$sample.class,
+              alteration.class = luad_run_data$alteration.class,
+              n.cores = 1, min.freq = 10, n.permut = 10, verbose = FALSE)
+common <- head(r1$result, 3)
+common$dataset1_w_overlap <- common$w_overlap
+common$dataset2_w_overlap <- common$w_overlap
+ridge_plot_ed_compare(common, r1$obj, r2$obj, "Run1", "Run2")
+}
+
 }

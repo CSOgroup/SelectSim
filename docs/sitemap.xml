@@ -1,8 +1,11 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://csogroup.github.io/SelectSim/404.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/CONTRIBUTING.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/INSTALLATION.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/LICENSE-text.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/LICENSE.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/PULL_REQUEST_TEMPLATE.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/articles/data_processing.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/articles/index.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/articles/introduction.html</loc></url>
@@ -63,6 +66,7 @@
 <url><loc>https://csogroup.github.io/SelectSim/reference/stat_maf_column.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/reference/stat_maf_gene.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/reference/stat_maf_sample.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/reference/template.obj.gen.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/reference/templeate.obj.gen.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/reference/theme_Publication.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/reference/variant_catalogue.html</loc></url>

@@ -1,5 +1,5 @@
 ---
-title: "Data_processing"
+title: "Data Processing with SelectSim"
 author: "Arvind Iyer"
 email: "arvind.iyer@unil.ch"
 date: "`r Sys.Date()`"
@@ -7,7 +7,7 @@ output:
  rmarkdown::html_vignette:
     css: doc.css
 vignette: >
-  %\VignetteIndexEntry{data_processing}
+  %\VignetteIndexEntry{Data Processing with SelectSim}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,8 +19,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-- The goal of SelectSim pacakge is to implement the SelectSim methodology to infer inter-dependencies between functional alterations in cancer.
-- `functional` package provides function to generate the backgorund model and other utilites functions.
+- The goal of SelectSim package is to implement the SelectSim methodology to infer inter-dependencies between functional alterations in cancer.
+- `SelectSim` package provides functions to generate the background model and other utility functions.
 
 ### Installation
 
@@ -36,15 +36,15 @@ devtools::install_github("CSOgroup/SelectSim",dependencies = TRUE, build_vignett
 ### Example
 
 - We will process LUAD MAF dataset from TCGA provided with the package.
-- We will also use oncokb v3.9 cancer genes and mutations to filter the maf to create the gam provided with the pacakge.
+- We will also use oncokb v3.9 cancer genes and mutations to filter the maf to create the gam provided with the package.
 
-- NOTE: This an example to prcoess the MAF file. To know more about how we prcossed the all MAF file to run_data object, please refer to SelectSim_analysis [repository](https://github.com/CSOgroup/SelectSim_analysis).
+- NOTE: This is an example to process the MAF file. To know more about how we processed the MAF file to run_data object, please refer to SelectSim_analysis [repository](https://github.com/CSOgroup/SelectSim_analysis).
 
 
 ```{r}
 library(SelectSim)
 library(dplyr)
-library(tictoc)
+if (requireNamespace("tictoc", quietly = TRUE)) library(tictoc)
 ## Load the data provided with the package
 data(luad_maf, package = "SelectSim")
 data(oncokb_genes, package = "SelectSim")
@@ -66,7 +66,7 @@ genes_to_consider =  oncokb_genes
 print(paste('##### Number of genes ####',length(genes_to_consider),sep="->"))
 ```
 
-- Let create a table schema of mutations to conisder and columns defined in maf file
+- Let create a table schema of mutations to consider and columns defined in maf file
 
 ```{r}
 mutation_type = list(
@@ -103,7 +103,7 @@ maf_genes = filter_maf_gene.name(input_maf, genes = genes_to_consider, gene.col 
 print(paste('##### Number of lines ####',nrow(maf_genes),sep="->"))
 ```
 
-#### Genrating the GAMs
+#### Generating the GAMs
 
 - Let generate the truncating data
   - We generate the GAM consider the genes to consider truncating mutations.
@@ -111,12 +111,12 @@ print(paste('##### Number of lines ####',nrow(maf_genes),sep="->"))
 
 ```{r}
 # Creating Truncating GAM
-tic('##### Creating Truncating GAM ####')
+if (requireNamespace("tictoc", quietly = TRUE)) tictoc::tic('##### Creating Truncating GAM ####')
     maf_trunc = filter_maf_truncating(maf_genes,genes=oncokb_truncating_genes, custom_maf_schema)
     input_maf_trunc<-filter_maf_truncating(input_maf, custom_maf_schema)
     truncating_tmb <- data.frame('sample'=mut_samples,'mutation'=rep(0,length(mut_samples)))
     rownames(truncating_tmb)<-mut_samples
-    temp <- input_maf_trunc %>% count(sample) 
+    temp <- input_maf_trunc %>% count(sample)
     rownames(temp)<-temp$sample
     truncating_tmb[intersect(truncating_tmb$sample,temp$sample),]$mutation <-temp[intersect(truncating_tmb$sample,temp$sample),'n']
     tcga_truc_gam = maf2gam(maf_trunc,
@@ -130,7 +130,7 @@ tic('##### Creating Truncating GAM ####')
                      fill=0)
     truncating_data <- list('gam'=tcga_truc_gam,
                             'tmb'=truncating_tmb)
-toc()
+if (requireNamespace("tictoc", quietly = TRUE)) tictoc::toc()
 ```
 
 - Let generate the Missense data
@@ -139,7 +139,7 @@ toc()
 
 ```{r}
 # Creating Missense GAM
-tic('##### Creating Missense GAM ####')
+if (requireNamespace("tictoc", quietly = TRUE)) tictoc::tic('##### Creating Missense GAM ####')
     maf_valid = filter_maf_schema(input_maf,
                              schema = custom_maf_schema,
                              column = 'mutation.type',
@@ -173,14 +173,14 @@ tic('##### Creating Missense GAM ####')
     missesne_data <- list('gam'=missense_tcga_gam,
                           'tmb'=missense_tmb)
 
-toc()
+if (requireNamespace("tictoc", quietly = TRUE)) tictoc::toc()
 ```
 
-#### Genrating the run_object to run SelectX
+#### Generating the run_object to run SelectSim
 
 - We create a run_object data which is list object which consists of 
   - M: a list object of GAMs which is presence absence matrix of alterations
-  - tmb: a list object of tumor mutation burden as data frame with column names (should be) as sample and mutationn
+  - tmb: a list object of tumor mutation burden as data frame with column names (should be) as sample and mutation
   - sample.class a named vector of sample annotations
   - alteration.class a named vector of alteration annotations
 

@@ -12,7 +12,7 @@ selectX(
   min.freq = 10,
   n.permut = 1000,
   lambda = 0.3,
-  tao = 1,
+  tau = 1,
   save.object = FALSE,
   folder = "./",
   verbose = TRUE,
@@ -36,7 +36,7 @@ selectX(
 
 \item{lambda}{lambda parameter.}
 
-\item{tao}{tao parameter.}
+\item{tau}{tau (fold change) parameter.}
 
 \item{save.object}{store the SelectX object.}
 
@@ -55,4 +55,20 @@ result  a SelectSim object with background model and other info along with resul
 }
 \description{
 \code{selectX()} takes a list object which consist of genome alteration matrix and tumor mutation burden.
+}
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+result <- selectX(
+  M                = luad_run_data$M,
+  sample.class     = luad_run_data$sample.class,
+  alteration.class = luad_run_data$alteration.class,
+  n.cores          = 1,
+  min.freq         = 10,
+  n.permut         = 10,
+  verbose          = FALSE
+)
+head(result$result)
+}
+
 }

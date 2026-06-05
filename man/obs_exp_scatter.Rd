@@ -2,18 +2,27 @@
 % Please edit documentation in R/selectX_plot.R
 \name{obs_exp_scatter}
 \alias{obs_exp_scatter}
-\title{Create an AL object}
+\title{Scatter plot of observed vs expected weighted co-mutation}
 \usage{
 obs_exp_scatter(result, title)
 }
 \arguments{
-\item{result}{result table of selectX obj$result}
+\item{result}{Result table from \code{selectX()$result}.}
 
-\item{title}{title of the plot}
+\item{title}{Plot title.}
 }
 \value{
-a ggplot2 object with observed vs random overlap plot.
+A ggplot2 object.
 }
 \description{
-Create an Alteration Landscape (AL) object which contains gams and mutation burden of samples of associated gams.
+Plots each gene pair as a point with observed weighted co-mutation on the y-axis
+and expected (null model mean) on the x-axis. Significant co-mutations (CO) and
+mutual exclusivities (ME) are coloured; non-significant pairs are grey.
+}
+\examples{
+\donttest{
+data(luad_result, package = "SelectSim")
+obs_exp_scatter(result = luad_result, title = "TCGA LUAD")
+}
+
 }
