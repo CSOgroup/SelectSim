@@ -6,6 +6,7 @@
 .quarto
 .ipynb_checkpoints
 inst/doc
+docs/
 .*
 !/.gitignore
 !/.github
