@@ -1,0 +1,10 @@
+pandoc: 3.8.3
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  data_processing: data_processing.html
+  introduction: introduction.html
+last_built: 2026-06-05T22:55Z
+urls:
+  reference: https://csogroup.github.io/SelectSim/reference
+  article: https://csogroup.github.io/SelectSim/articles

@@ -1,0 +1,130 @@
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #ffffff;
+  color: #222;
+  margin: 2em auto;
+  padding: 0 2em;
+  max-width: 950px;
+  line-height: 1.6em;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+img {
+  margin: 0;
+  border: 0;
+  max-width: 100%;
+}
+
+p {
+  margin: 1em 0;
+}
+
+a {
+  color: #0055a5;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #6a3d9a;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  color: #318100;
+}
+
+p img {
+  border: 0;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #003a6b;
+  background-color: transparent;
+  margin: 1.2em 0 0.5em;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h1 { font-size: 180%; }
+h2 { font-size: 150%; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.2em; }
+h3 { font-size: 125%; }
+h4 { font-size: 110%; }
+h5 { font-size: 105%; }
+h6 { font-size: 100%; }
+
+dt {
+  font-style: italic;
+}
+
+dd {
+  margin-bottom: 1.5em;
+}
+
+li {
+  line-height: 1.6em;
+}
+
+code {
+  padding: 0.15em 0.35em;
+  font-size: 0.88em;
+  font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+  background-color: #f4f4f4;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+}
+
+pre {
+  font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+  background-color: #f8f8f8;
+  padding: 0.8em 1em;
+  line-height: 1.4em;
+  font-size: 0.9em;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+pre code {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+blockquote {
+  border-left: 4px solid #003a6b;
+  margin-left: 0;
+  padding-left: 1em;
+  color: #555;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+
+th {
+  background-color: #f0f4f8;
+  font-weight: 600;
+}
+
+tr:nth-child(even) td {
+  background-color: #fafafa;
+}
+
+div.main-container {
+  max-width: 1100px !important;
+}
