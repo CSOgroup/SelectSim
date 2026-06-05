@@ -1,8 +1,11 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://csogroup.github.io/SelectSim/404.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/CONTRIBUTING.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/INSTALLATION.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/LICENSE-text.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/LICENSE.html</loc></url>
+<url><loc>https://csogroup.github.io/SelectSim/PULL_REQUEST_TEMPLATE.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/articles/data_processing.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/articles/index.html</loc></url>
 <url><loc>https://csogroup.github.io/SelectSim/articles/introduction.html</loc></url>

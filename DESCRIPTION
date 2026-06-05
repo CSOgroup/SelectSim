@@ -1,17 +1,22 @@
 Package: SelectSim
-Title: Selected Events Linked by Evolutionary Conditions Across Human Tumors
-Version: 0.1.0
-Date: 2026-06-01
-Authors@R:
-    c(person("Arvind", "Iyer", , "ayalurarvind@gmail.com", role = c("aut", "cre"),comment = c(ORCID = "0000-0002-8247-700X")),
-    person("Marco", "Mina", , "marco.mina.85@gmail.com", role = c("aut")),
-    person("Miljan", "Petrovic", , "miljanpet93@gmail.com", role = c("aut")),
-    person("Giovanni", "Ciriello", , "giovanni.ciriello@unil.ch", role = c("aut"),comment = c(ORCID ="0000-0003-2021-8683")))
-Description: This R package implements the SelectSim methodology to infer co-mutations between functional alterations in cancer.
+Title: Selected Events Linked by Evolutionary Conditions Across Human
+    Tumors
+Version: 0.1.6
+Authors@R: c(
+    person("Arvind", "Iyer", , "ayalurarvind@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-8247-700X")),
+    person("Marco", "Mina", , "marco.mina.85@gmail.com", role = "aut"),
+    person("Miljan", "Petrovic", , "miljanpet93@gmail.com", role = "aut"),
+    person("Giovanni", "Ciriello", , "giovanni.ciriello@unil.ch", role = "aut",
+           comment = c(ORCID = "0000-0003-2021-8683"))
+  )
+Description: This R package implements the SelectSim methodology to infer
+    co-mutations between functional alterations in cancer.
 License: MIT + file LICENSE
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 8.0.0
+URL: https://csogroup.github.io/SelectSim/
+BugReports: https://github.com/CSOgroup/SelectSim/issues
+Depends:
+    R (>= 3.5)
 Imports:
     doParallel,
     doRNG,
@@ -21,21 +26,25 @@ Imports:
     ggpubr,
     ggridges,
     Matrix,
+    parallel,
     Rcpp,
-    Rfast
+    Rfast,
+    stats,
+    tictoc
 Suggests:
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0),
-    tictoc
-Config/testthat/edition: 3
-Depends:
-    R (>= 3.5)
-LazyData: true
-LazyDataCompression: xz
-VignetteBuilder: knitr
-URL: https://csogroup.github.io/SelectSim/
-BugReports: https://github.com/CSOgroup/SelectSim/issues
+    spelling,
+    testthat (>= 3.0.0)
 LinkingTo:
     Rcpp,
     RcppArmadillo
+VignetteBuilder: 
+    knitr
+Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+LazyDataCompression: xz
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
+Language: en-US

@@ -3,7 +3,7 @@
 \docType{data}
 \name{luad_run_data}
 \alias{luad_run_data}
-\title{Lung adenocarcinoma from TCGA cohort as selectX run object}
+\title{Lung adenocarcinoma from TCGA cohort as SelectSim run object}
 \format{
 A list object with GAMs and TMBs along with sample & alteration annotations.
 }

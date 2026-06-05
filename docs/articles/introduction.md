@@ -124,7 +124,6 @@ result_obj<- SelectSim::selectX(  M = luad_run_data$M,
                       verbose = FALSE,
                       estimate_pairwise = FALSE,
                       maxFDR = 0.25)
-#> Total Time: 1.703 sec elapsed
 ```
 
 #### Interpreting the results
@@ -203,32 +202,30 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] dplyr_1.2.1     SelectSim_0.1.0
+#> [1] dplyr_1.2.1     SelectSim_0.1.6
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] gtable_0.3.6          xfun_0.57             bslib_0.11.0         
-#>  [4] ggplot2_4.0.3         htmlwidgets_1.6.4     rstatix_0.7.3        
-#>  [7] lattice_0.22-9        vctrs_0.7.3           tools_4.5.3          
-#> [10] generics_0.1.4        parallel_4.5.3        tibble_3.3.1         
-#> [13] pkgconfig_2.0.3       Matrix_1.7-5          RColorBrewer_1.1-3   
-#> [16] S7_0.2.2              desc_1.4.3            ggridges_0.5.7       
-#> [19] rngtools_1.5.2        RcppParallel_5.1.11-2 lifecycle_1.0.5      
-#> [22] compiler_4.5.3        farver_2.1.2          stringr_1.6.0        
-#> [25] tictoc_1.2.1          textshaping_1.0.5     codetools_0.2-20     
-#> [28] carData_3.0-6         htmltools_0.5.9       sass_0.4.10          
-#> [31] yaml_2.3.12           Formula_1.2-5         pillar_1.11.1        
-#> [34] pkgdown_2.2.0         car_3.1-5             ggpubr_0.6.3         
-#> [37] jquerylib_0.1.4       tidyr_1.3.2           cachem_1.1.0         
-#> [40] doRNG_1.8.6.3         iterators_1.0.14      abind_1.4-8          
-#> [43] foreach_1.5.2         tidyselect_1.2.1      digest_0.6.39        
-#> [46] stringi_1.8.7         reshape2_1.4.5        purrr_1.2.2          
-#> [49] fastmap_1.2.0         grid_4.5.3            cli_3.6.6            
-#> [52] magrittr_2.0.5        Rfast_2.1.5.2         broom_1.0.13         
-#> [55] withr_3.0.2           scales_1.4.0          backports_1.5.1      
-#> [58] rmarkdown_2.31        otel_0.2.0            ggsignif_0.6.4       
-#> [61] ragg_1.5.2            evaluate_1.0.5        knitr_1.51           
-#> [64] doParallel_1.0.17     rlang_1.2.0           zigg_0.0.2           
-#> [67] Rcpp_1.1.1-1.1        glue_1.8.1            jsonlite_2.0.0       
-#> [70] R6_2.6.1              plyr_1.8.9            systemfonts_1.3.2    
-#> [73] fs_2.1.0
+#>  [1] sass_0.4.10           generics_0.1.4        tidyr_1.3.2          
+#>  [4] rstatix_0.7.3         lattice_0.22-9        digest_0.6.39        
+#>  [7] magrittr_2.0.5        evaluate_1.0.5        grid_4.5.3           
+#> [10] RColorBrewer_1.1-3    iterators_1.0.14      fastmap_1.2.0        
+#> [13] Matrix_1.7-5          foreach_1.5.2         doParallel_1.0.17    
+#> [16] jsonlite_2.0.0        backports_1.5.1       Formula_1.2-5        
+#> [19] purrr_1.2.2           doRNG_1.8.6.3         scales_1.4.0         
+#> [22] codetools_0.2-20      textshaping_1.0.5     jquerylib_0.1.4      
+#> [25] abind_1.4-8           cli_3.6.6             zigg_0.0.2           
+#> [28] rlang_1.2.0           withr_3.0.2           cachem_1.1.0         
+#> [31] yaml_2.3.12           otel_0.2.0            tools_4.5.3          
+#> [34] parallel_4.5.3        ggsignif_0.6.4        ggplot2_4.0.3        
+#> [37] ggpubr_0.6.3          rngtools_1.5.2        Rfast_2.1.5.2        
+#> [40] broom_1.0.13          vctrs_0.7.3           R6_2.6.1             
+#> [43] ggridges_0.5.7        lifecycle_1.0.5       fs_2.1.0             
+#> [46] car_3.1-5             htmlwidgets_1.6.4     ragg_1.5.2           
+#> [49] pkgconfig_2.0.3       desc_1.4.3            RcppParallel_5.1.11-2
+#> [52] pkgdown_2.2.0         bslib_0.11.0          pillar_1.11.1        
+#> [55] gtable_0.3.6          Rcpp_1.1.1-1.1        glue_1.8.1           
+#> [58] systemfonts_1.3.2     xfun_0.57             tibble_3.3.1         
+#> [61] tidyselect_1.2.1      knitr_1.51            farver_2.1.2         
+#> [64] htmltools_0.5.9       rmarkdown_2.31        carData_3.0-6        
+#> [67] compiler_4.5.3        S7_0.2.2
 ```

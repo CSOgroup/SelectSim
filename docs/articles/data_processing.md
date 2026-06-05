@@ -144,7 +144,7 @@ tictoc::tic('##### Creating Truncating GAM ####')
     truncating_data <- list('gam'=tcga_truc_gam,
                             'tmb'=truncating_tmb)
 tictoc::toc()
-#> ##### Creating Truncating GAM ####: 0.081 sec elapsed
+#> ##### Creating Truncating GAM ####: 0.077 sec elapsed
 ```
 
 - Let generate the Missense data
@@ -191,7 +191,7 @@ tictoc::tic('##### Creating Missense GAM ####')
                           'tmb'=missense_tmb)
 
 tictoc::toc()
-#> ##### Creating Missense GAM ####: 0.657 sec elapsed
+#> ##### Creating Missense GAM ####: 0.638 sec elapsed
 ```
 
 #### Generating the run_object to run SelectSim
@@ -223,11 +223,11 @@ str(run_data)
 #> List of 3
 #>  $ M               :List of 2
 #>   ..$ M  :List of 2
-#>   .. ..$ missense  : num [1:396, 1:502] 0 0 0 0 0 0 0 0 0 0 ...
+#>   .. ..$ missense  : num [1:396, 1:502] NA NA NA NA NA NA NA NA NA NA ...
 #>   .. .. ..- attr(*, "dimnames")=List of 2
 #>   .. .. .. ..$ : chr [1:396] "AKT1" "ATM" "BRAF" "CDKN2A" ...
 #>   .. .. .. ..$ : chr [1:502] "TCGA-05-4244-01" "TCGA-05-4249-01" "TCGA-05-4250-01" "TCGA-05-4382-01" ...
-#>   .. ..$ truncating: num [1:396, 1:502] 0 0 0 0 0 0 0 0 0 0 ...
+#>   .. ..$ truncating: num [1:396, 1:502] 0 NA NA NA NA NA NA NA NA 0 ...
 #>   .. .. ..- attr(*, "dimnames")=List of 2
 #>   .. .. .. ..$ : chr [1:396] "AKT1" "ATM" "BRAF" "CDKN2A" ...
 #>   .. .. .. ..$ : chr [1:502] "TCGA-05-4244-01" "TCGA-05-4249-01" "TCGA-05-4250-01" "TCGA-05-4382-01" ...
@@ -270,31 +270,30 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] tictoc_1.2.1    dplyr_1.2.1     SelectSim_0.1.0
+#> [1] tictoc_1.2.1    dplyr_1.2.1     SelectSim_0.1.6
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] sass_0.4.10           generics_0.1.4        tidyr_1.3.2          
-#>  [4] rstatix_0.7.3         stringi_1.8.7         lattice_0.22-9       
-#>  [7] digest_0.6.39         magrittr_2.0.5        evaluate_1.0.5       
-#> [10] grid_4.5.3            RColorBrewer_1.1-3    iterators_1.0.14     
-#> [13] fastmap_1.2.0         plyr_1.8.9            Matrix_1.7-5         
-#> [16] foreach_1.5.2         doParallel_1.0.17     jsonlite_2.0.0       
-#> [19] backports_1.5.1       Formula_1.2-5         purrr_1.2.2          
-#> [22] doRNG_1.8.6.3         scales_1.4.0          codetools_0.2-20     
-#> [25] textshaping_1.0.5     jquerylib_0.1.4       abind_1.4-8          
-#> [28] cli_3.6.6             zigg_0.0.2            rlang_1.2.0          
-#> [31] cachem_1.1.0          yaml_2.3.12           otel_0.2.0           
-#> [34] tools_4.5.3           parallel_4.5.3        reshape2_1.4.5       
-#> [37] ggsignif_0.6.4        ggplot2_4.0.3         ggpubr_0.6.3         
-#> [40] rngtools_1.5.2        Rfast_2.1.5.2         broom_1.0.13         
-#> [43] vctrs_0.7.3           R6_2.6.1              ggridges_0.5.7       
-#> [46] lifecycle_1.0.5       stringr_1.6.0         fs_2.1.0             
-#> [49] car_3.1-5             htmlwidgets_1.6.4     ragg_1.5.2           
-#> [52] pkgconfig_2.0.3       desc_1.4.3            RcppParallel_5.1.11-2
-#> [55] pkgdown_2.2.0         bslib_0.11.0          pillar_1.11.1        
-#> [58] gtable_0.3.6          Rcpp_1.1.1-1.1        glue_1.8.1           
-#> [61] systemfonts_1.3.2     xfun_0.57             tibble_3.3.1         
-#> [64] tidyselect_1.2.1      knitr_1.51            farver_2.1.2         
-#> [67] htmltools_0.5.9       rmarkdown_2.31        carData_3.0-6        
-#> [70] compiler_4.5.3        S7_0.2.2
+#>  [4] rstatix_0.7.3         lattice_0.22-9        digest_0.6.39        
+#>  [7] magrittr_2.0.5        evaluate_1.0.5        grid_4.5.3           
+#> [10] RColorBrewer_1.1-3    iterators_1.0.14      fastmap_1.2.0        
+#> [13] Matrix_1.7-5          foreach_1.5.2         doParallel_1.0.17    
+#> [16] jsonlite_2.0.0        backports_1.5.1       Formula_1.2-5        
+#> [19] purrr_1.2.2           doRNG_1.8.6.3         scales_1.4.0         
+#> [22] codetools_0.2-20      textshaping_1.0.5     jquerylib_0.1.4      
+#> [25] abind_1.4-8           cli_3.6.6             zigg_0.0.2           
+#> [28] rlang_1.2.0           cachem_1.1.0          yaml_2.3.12          
+#> [31] otel_0.2.0            tools_4.5.3           parallel_4.5.3       
+#> [34] ggsignif_0.6.4        ggplot2_4.0.3         ggpubr_0.6.3         
+#> [37] rngtools_1.5.2        Rfast_2.1.5.2         broom_1.0.13         
+#> [40] vctrs_0.7.3           R6_2.6.1              ggridges_0.5.7       
+#> [43] lifecycle_1.0.5       fs_2.1.0              car_3.1-5            
+#> [46] htmlwidgets_1.6.4     ragg_1.5.2            pkgconfig_2.0.3      
+#> [49] desc_1.4.3            RcppParallel_5.1.11-2 pkgdown_2.2.0        
+#> [52] bslib_0.11.0          pillar_1.11.1         gtable_0.3.6         
+#> [55] Rcpp_1.1.1-1.1        glue_1.8.1            systemfonts_1.3.2    
+#> [58] xfun_0.57             tibble_3.3.1          tidyselect_1.2.1     
+#> [61] knitr_1.51            farver_2.1.2          htmltools_0.5.9      
+#> [64] rmarkdown_2.31        carData_3.0-6         compiler_4.5.3       
+#> [67] S7_0.2.2
 ```

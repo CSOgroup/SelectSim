@@ -1,40 +1,50 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-
 
 # SelectSim <img src="man/figures/logo.png" align="right" height="138" alt="" />
 
 <!-- badges: start -->
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19680236.svg)](https://doi.org/10.5281/zenodo.19680236)
 <!-- badges: end -->
 
-SelectSim is an R package that infers evolutionary dependencies — co-mutations and mutual exclusivities — between functional alterations across cancer genomes. It estimates the expected co-mutation frequency for each gene pair from individual mutation frequencies and per-sample tumor mutation burden (TMB), then evaluates significance against a permutation-based null model.
+SelectSim is an R package that infers evolutionary dependencies i.e
+co-mutations and mutual exclusivities — between functional alterations
+across cancer genomes. It estimates the expected co-mutation frequency
+for each gene pair from individual mutation frequencies and per-sample
+tumor mutation burden (TMB), then evaluates significance against a
+simulation based null model.
 
-![SelectSim Method](man/figures/SelectSim_method.png)
+<figure>
+<img src="man/figures/SelectSim_method.png" alt="SelectSim Method" />
+<figcaption aria-hidden="true">SelectSim Method</figcaption>
+</figure>
 
-The method accounts for heterogeneous tumor types, tissue specificities, and distinct mutational processes through a covariate-aware weighting scheme. Significance is assessed as a weighted effect size with frequency-stratified FDR control.
+The method accounts for heterogeneous tumor types, tissue specificities,
+and distinct mutational processes through a covariate-aware weighting
+scheme. Significance is assessed as a weighted effect size with
+frequency-stratified FDR control generated via simulation.
 
 This package accompanies the manuscript:
 
-> Iyer A, Mina M, Petrovic M, Ciriello G (2026). Evolving patterns of co-mutations from tumor initiation to metastatic progression. *TBD*. doi:[10.5281/zenodo.19680236](https://doi.org/10.5281/zenodo.19680236)
+> Iyer A, Mina M, Petrovic M, Ciriello G (2026). Evolving patterns of
+> co-mutations from tumor initiation to metastatic progression. *TBD*.
+> <doi:%5B10.5281/zenodo.19680236>\](<https://doi.org/10.5281/zenodo.19680236>)
 
 ## Installation
 
-You can install the development version of SelectSim from [GitHub](https://github.com/CSOgroup/SelectSim) with:
+You can install the development version of SelectSim from
+[GitHub](https://github.com/CSOgroup/SelectSim) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("CSOgroup/SelectSim", dependencies = TRUE, build_vignettes = TRUE)
 ```
 
-For more details on installation refer to [INSTALLATION](INSTALLATION.md).
+For more details on installation refer to
+[INSTALLATION](INSTALLATION.md).
 
 ## Quick start
-
 
 ``` r
 library(SelectSim)
@@ -60,22 +70,29 @@ result <- selectX(
 result$result |> filter(nFDR2 <= 0.25) |> head()
 ```
 
-For a full walkthrough see the
-[Introduction vignette](https://csogroup.github.io/SelectSim/articles/introduction.html).
+For a full walkthrough see the [Introduction
+vignette](https://csogroup.github.io/SelectSim/articles/introduction.html).
 
 ## Documentation
 
-Full documentation and vignettes are available at <https://csogroup.github.io/SelectSim/>.
+Full documentation and vignettes are available at
+<https://csogroup.github.io/SelectSim/>.
 
 ## Citation
 
 If you use SelectSim in your research, please cite:
 
-> Iyer A, Mina M, Petrovic M, Ciriello G (2026). Evolving patterns of co-mutations from tumor initiation to metastatic progression. *TBD*. doi:[10.5281/zenodo.19680236](https://doi.org/10.5281/zenodo.19680236)
+> Iyer A, Mina M, Petrovic M, Ciriello G (2026). Evolving patterns of
+> co-mutations from tumor initiation to metastatic progression. *TBD*.
+> <doi:%5B10.5281/zenodo.19680236>\](<https://doi.org/10.5281/zenodo.19680236>)
 
-You can also run `citation("SelectSim")` inside R for a formatted reference.
+You can also run `citation("SelectSim")` inside R for a formatted
+reference.
 
 ## Contact
 
-- For bugs or feature requests, please use the [issue tracker](https://github.com/CSOgroup/SelectSim/issues).
-- For other questions, contact Prof. Giovanni Ciriello (giovanni.ciriello@unil.ch) or Arvind Iyer (ayalurarvind@gmail.com).
+- For bugs or feature requests, please use the [issue
+  tracker](https://github.com/CSOgroup/SelectSim/issues).
+- For other questions, contact Prof. Giovanni Ciriello
+  (<giovanni.ciriello@unil.ch>) or Arvind Iyer
+  (<ayalurarvind@gmail.com>).

@@ -134,9 +134,9 @@ Plot helpers for inspecting results and null model distributions.
 Example datasets bundled with the package.
 
 - [`luad_run_data`](https://csogroup.github.io/SelectSim/reference/luad_run_data.md)
-  : Lung adenocarcinoma from TCGA cohort as selectX run object
+  : Lung adenocarcinoma from TCGA cohort as SelectSim run object
 - [`luad_result`](https://csogroup.github.io/SelectSim/reference/luad_result.md)
-  : Lung adenocarcinoma from TCGA cohort as selectX run results
+  : Lung adenocarcinoma from TCGA cohort as SelectSim run results
 - [`luad_maf`](https://csogroup.github.io/SelectSim/reference/luad_maf.md)
   : Lung adenocarcinoma MAF from TCGA cohort
 - [`oncokb_genes`](https://csogroup.github.io/SelectSim/reference/oncokb_genes.md)

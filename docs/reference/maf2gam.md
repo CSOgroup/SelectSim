@@ -14,8 +14,7 @@ maf2gam(
   genes = NULL,
   fun.aggregate = length,
   binarize = TRUE,
-  fill = NA,
-  ...
+  fill = NA
 )
 ```
 
@@ -58,10 +57,6 @@ maf2gam(
 - fill:
 
   Value used for missing (sample, gene) combinations
-
-- ...:
-
-  Additional arguments passed to reshape2::acast
 
 ## Value
 

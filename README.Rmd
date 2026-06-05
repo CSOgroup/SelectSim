@@ -19,11 +19,11 @@ knitr::opts_chunk$set(
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19680236.svg)](https://doi.org/10.5281/zenodo.19680236)
 <!-- badges: end -->
 
-SelectSim is an R package that infers evolutionary dependencies — co-mutations and mutual exclusivities — between functional alterations across cancer genomes. It estimates the expected co-mutation frequency for each gene pair from individual mutation frequencies and per-sample tumor mutation burden (TMB), then evaluates significance against a permutation-based null model.
+SelectSim is an R package that infers evolutionary dependencies i.e co-mutations and mutual exclusivities — between functional alterations across cancer genomes. It estimates the expected co-mutation frequency for each gene pair from individual mutation frequencies and per-sample tumor mutation burden (TMB), then evaluates significance against a simulation based null model.
 
 ![SelectSim Method](man/figures/SelectSim_method.png)
 
-The method accounts for heterogeneous tumor types, tissue specificities, and distinct mutational processes through a covariate-aware weighting scheme. Significance is assessed as a weighted effect size with frequency-stratified FDR control.
+The method accounts for heterogeneous tumor types, tissue specificities, and distinct mutational processes through a covariate-aware weighting scheme. Significance is assessed as a weighted effect size with frequency-stratified FDR control generated via simulation.
 
 This package accompanies the manuscript:
 

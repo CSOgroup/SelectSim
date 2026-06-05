@@ -6,3 +6,6 @@
 ^\.github$
 ^INSTALLATION\.md$
 ^environment\.yml$
+^CONTRIBUTING\.md$
+^CODE_OF_CONDUCT\.md$
+^dev$
