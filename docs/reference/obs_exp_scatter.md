@@ -1,7 +1,9 @@
-# Create an AL object
+# Scatter plot of observed vs expected weighted co-mutation
 
-Create an Alteration Landscape (AL) object which contains gams and
-mutation burden of samples of associated gams.
+Plots each gene pair as a point with observed weighted co-mutation on
+the y-axis and expected (null model mean) on the x-axis. Significant
+co-mutations (CO) and mutual exclusivities (ME) are coloured;
+non-significant pairs are grey.
 
 ## Usage
 
@@ -13,12 +15,22 @@ obs_exp_scatter(result, title)
 
 - result:
 
-  result table of selectX obj\$result
+  Result table from `selectX()$result`.
 
 - title:
 
-  title of the plot
+  Plot title.
 
 ## Value
 
-a ggplot2 object with observed vs random overlap plot.
+A ggplot2 object.
+
+## Examples
+
+``` r
+# \donttest{
+data(luad_result, package = "SelectSim")
+obs_exp_scatter(result = luad_result, title = "TCGA LUAD")
+
+# }
+```

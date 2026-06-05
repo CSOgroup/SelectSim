@@ -19,3 +19,8 @@ Table of mutation counts per sample.
 \description{
 Count mutations per sample in a MAF file
 }
+\examples{
+data(luad_maf, package = "SelectSim")
+head(stat_maf_sample(luad_maf))
+
+}

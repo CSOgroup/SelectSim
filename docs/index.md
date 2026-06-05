@@ -20,7 +20,7 @@ This package accompanies the manuscript:
 
 > Iyer A, Mina M, Petrovic M, Ciriello G (2026). Evolving patterns of
 > co-mutations from tumor initiation to metastatic progression. *TBD*.
-> <doi:%5B10.5281/zenodo.19680236>\](<https://doi.org/10.5281/zenodo.19680236>)
+> doi: *TBD*
 
 ## Installation
 
@@ -77,7 +77,7 @@ If you use SelectSim in your research, please cite:
 
 > Iyer A, Mina M, Petrovic M, Ciriello G (2026). Evolving patterns of
 > co-mutations from tumor initiation to metastatic progression. *TBD*.
-> <doi:%5B10.5281/zenodo.19680236>\](<https://doi.org/10.5281/zenodo.19680236>)
+> doi: *TBD*
 
 You can also run `citation("SelectSim")` inside R for a formatted
 reference.

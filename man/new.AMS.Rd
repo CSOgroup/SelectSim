@@ -15,3 +15,7 @@ Empty AMS list object.
 \description{
 Initialize an Alteration Matrix Stats (AMS) container
 }
+\examples{
+new.AMS(matrix(0, 2, 2))
+
+}

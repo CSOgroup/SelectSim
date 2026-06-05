@@ -17,3 +17,8 @@ Effect size value(s)
 \description{
 Compute effect size between observed and expected overlap
 }
+\examples{
+effectSize(obs = 5, exp = 3)
+effectSize(obs = c(5, 2, 0), exp = c(3, 3, 1))
+
+}

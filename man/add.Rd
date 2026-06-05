@@ -15,3 +15,8 @@ Single matrix that is the element-wise sum of all matrices in x
 \description{
 Sum a list of matrices element-wise
 }
+\examples{
+mats <- list(matrix(1:4, 2, 2), matrix(1:4, 2, 2))
+add(mats)
+
+}

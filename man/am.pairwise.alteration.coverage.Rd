@@ -19,3 +19,14 @@ List with overlap and w_overlap sparse matrices.
 \description{
 Compute pairwise alteration coverage statistics
 }
+\examples{
+am <- matrix(c(0,1,1,0,1,1), nrow = 2,
+             dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+W  <- matrix(1, nrow = 2, ncol = 3,
+             dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+ovlp  <- am.pairwise.alteration.overlap(am)
+wovlp <- am.weight.pairwise.alteration.overlap(am, W)
+stats <- am.stats(am)
+am.pairwise.alteration.coverage(ovlp, stats, wovlp)
+
+}

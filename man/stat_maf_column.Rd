@@ -19,3 +19,8 @@ filtered_maf  a filtered maf file
 \description{
 \code{stat_maf_column()} takes a maf file and filters a MAF dataframe by retaining only the rows with a column value included in the values list
 }
+\examples{
+data(luad_maf, package = "SelectSim")
+stat_maf_column(luad_maf, column = "Variant_Classification")
+
+}

@@ -25,3 +25,13 @@ stat_maf_gene(maf, column = "Hugo_Symbol", ...)
 ## Value
 
 Table of mutation counts per gene.
+
+## Examples
+
+``` r
+data(luad_maf, package = "SelectSim")
+head(stat_maf_gene(luad_maf))
+#> v
+#>    A1BG    A1CF     A2M   A2ML1 A3GALT2  A4GALT 
+#>      17      20      26      36       1       1 
+```

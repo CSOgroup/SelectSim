@@ -1,6 +1,6 @@
-# A nice theme for making good plots
+# A clean ggplot2 theme for publication-quality plots
 
-A nice theme for making good plots
+A clean ggplot2 theme for publication-quality plots
 
 ## Usage
 
@@ -20,4 +20,13 @@ theme_Publication(base_size = 14, base_family = "sans")
 
 ## Value
 
-theme object
+A ggplot2 theme object.
+
+## Examples
+
+``` r
+library(ggplot2)
+ggplot(data.frame(x = 1:3, y = 1:3), aes(x, y)) +
+  geom_point() + theme_Publication()
+
+```

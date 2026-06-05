@@ -78,6 +78,24 @@
     <p>List of simulated binary matrices (one per permutation)</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">luad_run_data</span>, package <span class="op">=</span> <span class="st">"SelectSim"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">al</span>       <span class="op">&lt;-</span> <span class="fu"><a href="new.AL.general.html">new.AL.general</a></span><span class="op">(</span><span class="va">luad_run_data</span><span class="op">$</span><span class="va">M</span>,</span></span>
+<span class="r-in"><span>                           feat.covariates  <span class="op">=</span> <span class="va">luad_run_data</span><span class="op">$</span><span class="va">alteration.class</span>,</span></span>
+<span class="r-in"><span>                           sample.covariates <span class="op">=</span> <span class="va">luad_run_data</span><span class="op">$</span><span class="va">sample.class</span>,</span></span>
+<span class="r-in"><span>                           min.freq <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">temp_obj</span> <span class="op">&lt;-</span> <span class="fu"><a href="template.obj.gen.html">template.obj.gen</a></span><span class="op">(</span><span class="va">al</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">W</span>        <span class="op">&lt;-</span> <span class="fu"><a href="generateW_block.html">generateW_block</a></span><span class="op">(</span><span class="va">al</span>, lambda <span class="op">=</span> <span class="fl">0.3</span>, tau <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sims</span>     <span class="op">&lt;-</span> <span class="fu">null_model_parallel</span><span class="op">(</span><span class="va">al</span>, <span class="va">temp_obj</span><span class="op">$</span><span class="va">temp_mat</span>, <span class="va">W</span><span class="op">$</span><span class="va">W</span>,</span></span>
+<span class="r-in"><span>                                n.cores <span class="op">=</span> <span class="fl">1</span>, n.permut <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">sims</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

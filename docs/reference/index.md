@@ -14,7 +14,7 @@ Step-by-step building blocks called internally by `selectX`. Expose
 these directly for custom pipelines or debugging.
 
 - [`new.AL.general()`](https://csogroup.github.io/SelectSim/reference/new.AL.general.md)
-  : Create an AL object
+  : Create an Alteration Landscape (AL) object
 - [`get.blocks()`](https://csogroup.github.io/SelectSim/reference/get.blocks.md)
   : Get sample/alteration blocks
 - [`template.obj.gen()`](https://csogroup.github.io/SelectSim/reference/template.obj.gen.md)
@@ -22,9 +22,9 @@ these directly for custom pipelines or debugging.
 - [`generateS()`](https://csogroup.github.io/SelectSim/reference/generateS.md)
   : Generate S matrix
 - [`generateW_block()`](https://csogroup.github.io/SelectSim/reference/generateW_block.md)
-  : Generating the weight matrix taking sample covariate
+  : Generate block-aware sample weight matrix
 - [`generateW_mean_tmb()`](https://csogroup.github.io/SelectSim/reference/generateW_mean_tmb.md)
-  : Generating the weight matrix
+  : Generate sample weight matrix from TMB values
 - [`null_model_parallel()`](https://csogroup.github.io/SelectSim/reference/null_model_parallel.md)
   : Generating the null_simulation matrix
 - [`retrieveOutliers()`](https://csogroup.github.io/SelectSim/reference/retrieveOutliers.md)
@@ -45,7 +45,7 @@ Overlap computation, effect sizes, FDR estimation, and results table.
 - [`al.pairwise.alteration.stats()`](https://csogroup.github.io/SelectSim/reference/al.pairwise.alteration.stats.md)
   : Compute pairwise alteration statistics for an alteration landscape
 - [`am.pairwise.alteration.overlap()`](https://csogroup.github.io/SelectSim/reference/am.pairwise.alteration.overlap.md)
-  : Compute overlap stats
+  : Compute pairwise alteration co-occurrence counts
 - [`am.pairwise.alteration.coverage()`](https://csogroup.github.io/SelectSim/reference/am.pairwise.alteration.coverage.md)
   : Compute pairwise alteration coverage statistics
 - [`am.weight.pairwise.alteration.overlap()`](https://csogroup.github.io/SelectSim/reference/am.weight.pairwise.alteration.overlap.md)
@@ -119,15 +119,16 @@ construction.
 Plot helpers for inspecting results and null model distributions.
 
 - [`obs_exp_scatter()`](https://csogroup.github.io/SelectSim/reference/obs_exp_scatter.md)
-  : Create an AL object
+  : Scatter plot of observed vs expected weighted co-mutation
 - [`ridge_plot_ed()`](https://csogroup.github.io/SelectSim/reference/ridge_plot_ed.md)
-  : Generate a pairs background plot
+  : Ridge plot of null-model background distribution for significant
+  gene pairs
 - [`ridge_plot_ed_compare()`](https://csogroup.github.io/SelectSim/reference/ridge_plot_ed_compare.md)
-  : Generate a pairs background plot for two dataset comaprision
+  : Ridge plot comparing null-model distributions for two datasets
 - [`overlap_pair_extract()`](https://csogroup.github.io/SelectSim/reference/overlap_pair_extract.md)
-  : Extract the backgroun distribution
+  : Extract null-model weighted overlap distribution for a gene pair
 - [`theme_Publication()`](https://csogroup.github.io/SelectSim/reference/theme_Publication.md)
-  : A nice theme for making good plots
+  : A clean ggplot2 theme for publication-quality plots
 
 ## Datasets
 

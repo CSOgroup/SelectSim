@@ -5,25 +5,63 @@
 # Version : 0.1.6
 ###
 
-#' Create an AL object
+#' Create an Alteration Landscape (AL) object
 #'
-#' Create an Alteration Landscape (AL) object which contains gams and mutation burden of samples of associated gams.
+#' Builds an Alteration Landscape object from a list of genome alteration matrices
+#' and their corresponding tumor mutation burdens.
 #'
-#' @param am The binary alteration matrix with row as features and column as samples.
-#' @param feat.covariates gene/feature covariate.
-#' @param sample.covariates sample covariate.
-#' @param min.freq minimum frequency of genes to be mutated.
-#' @param verbose print the time and each steps.
-#' @return An Alteration Landscape (AL) object with the gam.
+#' @param am A named list with two required elements: \code{M} (a named list of binary
+#'   alteration matrices, each genes x samples) and \code{tmb} (a named list of data
+#'   frames, one per matrix in \code{M}, each with columns \code{sample} and
+#'   \code{mutation}). The names of \code{M} and \code{tmb} must match. All matrices
+#'   in \code{M} must have identical row and column names.
+#' @param feat.covariates Named character vector of alteration-type annotations, one
+#'   entry per feature (gene). Names must match rownames of the matrices in \code{M}.
+#'   If \code{NULL}, all features are labelled \code{"MUT"}.
+#' @param sample.covariates Named character vector of sample-type annotations, one
+#'   entry per sample. Names must match colnames of the matrices in \code{M}. If
+#'   \code{NULL}, all samples are labelled \code{"sample"}.
+#' @param min.freq Minimum number of samples a gene must be mutated in (strictly
+#'   greater than) to be retained. Features with \code{rowSums <= min.freq} are
+#'   dropped.
+#' @param verbose Logical; print progress messages.
+#' @return An Alteration Landscape (AL) object (list of class \code{"AL"}) containing
+#'   the filtered alteration matrices, TMB vectors, and covariate assignments.
+#'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' al <- new.AL.general(
+#'   am               = luad_run_data$M,
+#'   feat.covariates  = luad_run_data$alteration.class,
+#'   sample.covariates = luad_run_data$sample.class,
+#'   min.freq         = 10
+#' )
+#' }
+#'
 #' @export
 new.AL.general <- function(am,
                            feat.covariates = NULL,
                            sample.covariates = NULL,
                            min.freq,
                            verbose = FALSE) {
-  # Assert if the AM are provided or not
-  if (is.null(am$M)) {
-    stop("Problem:-->  Input data is null")
+  if (is.null(am$M)) stop("am$M is NULL: provide a named list of alteration matrices.")
+  if (is.null(am$tmb)) stop("am$tmb is NULL: provide a named list of TMB data frames.")
+  if (!all(names(am$M) %in% names(am$tmb))) {
+    stop("All names in am$M must have a matching entry in am$tmb.")
+  }
+  if (!all(sapply(am$tmb, function(t) all(c("sample", "mutation") %in% colnames(t))))) {
+    stop("Each data frame in am$tmb must have 'sample' and 'mutation' columns.")
+  }
+  if (length(am$M) > 1) {
+    ref_rows <- rownames(am$M[[1]])
+    ref_cols <- colnames(am$M[[1]])
+    if (!all(sapply(am$M[-1], function(m) identical(rownames(m), ref_rows)))) {
+      stop("All matrices in am$M must have identical rownames.")
+    }
+    if (!all(sapply(am$M[-1], function(m) identical(colnames(m), ref_cols)))) {
+      stop("All matrices in am$M must have identical colnames.")
+    }
   }
 
   # create the alteration landscape object
@@ -86,6 +124,16 @@ new.AL.general <- function(am,
 #' @param al The alteration landscape
 #' @return Classification of samples and alterations in blocks.
 #'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' al <- new.AL.general(luad_run_data$M,
+#'                      feat.covariates  = luad_run_data$alteration.class,
+#'                      sample.covariates = luad_run_data$sample.class,
+#'                      min.freq = 10)
+#' get.blocks(al)
+#' }
+#'
 #' @export
 get.blocks <- function(al) {
   if (is.null(al$alterations$alteration.class)) {
@@ -119,6 +167,11 @@ get.blocks <- function(al) {
 #' @param upperBound clip the values greater than 1 to keep it bounded between 0 to 1
 #' @return S the S matrix
 #'
+#' @examples
+#' gam <- matrix(c(0,1,1,0,1,1), nrow = 2,
+#'               dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+#' generateS(gam, sample.weights = c(s1 = 1, s2 = 1, s3 = 1))
+#'
 #' @export
 generateS <- function(gam,
                       sample.weights,
@@ -140,6 +193,16 @@ generateS <- function(gam,
 #' @param al Alteration landscape object
 #' @return A list with \code{template.obj} (per-block S matrices) and
 #'   \code{temp_mat} (full concatenated template matrices, one per GAM type).
+#'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' al <- new.AL.general(luad_run_data$M,
+#'                      feat.covariates  = luad_run_data$alteration.class,
+#'                      sample.covariates = luad_run_data$sample.class,
+#'                      min.freq = 10)
+#' template.obj.gen(al)
+#' }
 #'
 #' @export
 template.obj.gen <- function(al) {
@@ -171,15 +234,30 @@ template.obj.gen <- function(al) {
 }
 
 
-#' Generating the weight matrix
+#' Generate sample weight matrix from TMB values
 #'
-#' @param tmb TMB dataframe
-#' @param mean_tmb TMB dataframe
-#' @param ngenes Number of genes
-#' @param lambda weight penalty factor (default 0.3)
-#' @param tau fold change factor
-#' @param discrete True discrete weights
-#' @return weight matrix (i.e vector as matrix)
+#' @description
+#' Computes a per-sample weight matrix based on the ratio of each sample's TMB to
+#' the expected (mean) TMB. Samples with higher-than-expected TMB receive lower
+#' weights via a penalty \code{lambda}, controlled by the fold-change threshold
+#' \code{tau}.
+#'
+#' @param tmb Numeric vector of per-sample TMB values.
+#' @param mean_tmb Numeric scalar; the reference (expected) TMB used to compute
+#'   fold changes.
+#' @param ngenes Integer; number of genes (rows) in the output weight matrix.
+#' @param lambda Numeric; weight penalty factor. Higher values penalise
+#'   high-TMB samples more strongly (default 0.3).
+#' @param tau Numeric; fold-change threshold below which no penalty is applied
+#'   (default 1).
+#' @param discrete Logical; if \code{TRUE}, fold changes are rounded up before
+#'   applying the penalty (default \code{TRUE}).
+#' @return Numeric matrix of sample weights (ngenes x length(tmb)).
+#'
+#' @examples
+#' tmb      <- c(s1 = 10, s2 = 50, s3 = 20)
+#' mean_tmb <- 25
+#' generateW_mean_tmb(tmb, mean_tmb, ngenes = 3)
 #'
 #' @export
 generateW_mean_tmb <- function(tmb,
@@ -200,14 +278,33 @@ generateW_mean_tmb <- function(tmb,
 }
 
 
-#' Generating the weight matrix taking sample covariate
+#' Generate block-aware sample weight matrix
 #'
-#' @param al altearting landscape onject
-#' @param lambda penalty factor parameter
-#' @param tau fold change parameter
-#' @return Weight matrix
+#' @description
+#' Computes a sample weight matrix that accounts for sample-class covariates
+#' (blocks). Within each block the reference TMB is the block median; the
+#' overall reference used by \code{generateW_mean_tmb} is the mean of those
+#' block medians.
+#'
+#' @param al Alteration landscape object (from \code{new.AL.general}).
+#' @param lambda Numeric penalty factor for the weight computation.
+#' @param tau Numeric fold-change threshold below which no penalty is applied.
+#' @return List with \code{W_block} (per-block weight matrices), \code{W} (full
+#'   concatenated weight matrix), \code{W_median} (per-block median TMBs), and
+#'   \code{mean_TMB} (mean of block medians).
 #'
 #' @importFrom  stats median
+#'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' al <- new.AL.general(luad_run_data$M,
+#'                      feat.covariates  = luad_run_data$alteration.class,
+#'                      sample.covariates = luad_run_data$sample.class,
+#'                      min.freq = 10)
+#' generateW_block(al, lambda = 0.3, tau = 1)
+#' }
+#'
 #' @export
 generateW_block <- function(al, lambda, tau) {
   blocks <- get.blocks(al)
@@ -246,6 +343,21 @@ generateW_block <- function(al, lambda, tau) {
 #' @param n.permut Number of simulations
 #' @param seed Random seed
 #' @return List of simulated binary matrices (one per permutation)
+#'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' al       <- new.AL.general(luad_run_data$M,
+#'                            feat.covariates  = luad_run_data$alteration.class,
+#'                            sample.covariates = luad_run_data$sample.class,
+#'                            min.freq = 10)
+#' temp_obj <- template.obj.gen(al)
+#' W        <- generateW_block(al, lambda = 0.3, tau = 1)
+#' sims     <- null_model_parallel(al, temp_obj$temp_mat, W$W,
+#'                                 n.cores = 1, n.permut = 10)
+#' length(sims)
+#' }
+#'
 #' @export
 null_model_parallel <- function(al,
                                 temp_mat,
@@ -326,10 +438,24 @@ null_model_parallel <- function(al,
 #'
 #' Flags simulations whose mean per-gene and per-sample deviation from the
 #' observed counts falls in the top 10%, indicating numerical instability.
+#' These are removed before computing effect sizes to prevent them from
+#' inflating the null distribution.
 #'
 #' @param obj SelectX object (list with al and null fields)
 #' @param nSim Number of simulations in the null model
 #' @return Logical vector; TRUE for each null matrix flagged as an outlier.
+#'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' result <- selectX(M = luad_run_data$M,
+#'                   sample.class = luad_run_data$sample.class,
+#'                   alteration.class = luad_run_data$alteration.class,
+#'                   n.cores = 1, min.freq = 10, n.permut = 10,
+#'                   verbose = FALSE)
+#' outliers <- retrieveOutliers(result$obj, nSim = result$obj$nSim)
+#' sum(outliers)
+#' }
 #'
 #' @export
 retrieveOutliers <- function(obj, nSim = 1000) {

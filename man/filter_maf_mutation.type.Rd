@@ -26,3 +26,8 @@ Filtered MAF dataframe.
 \description{
 Filter a MAF dataframe by mutation type
 }
+\examples{
+data(luad_maf, package = "SelectSim")
+filter_maf_mutation.type(luad_maf, variants = "Missense_Mutation")
+
+}

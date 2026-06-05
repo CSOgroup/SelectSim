@@ -29,3 +29,10 @@ Filtered MAF dataframe containing only rows matching the allowed combinations.
 \description{
 Filter a MAF dataframe by specific gene-mutation combinations
 }
+\examples{
+data(luad_maf, package = "SelectSim")
+allowed <- data.frame(Hugo_Symbol  = c("TP53", "KRAS"),
+                      HGVSp_Short  = c("p.R175H", "p.G12C"))
+filter_maf_mutations(luad_maf, allowed)
+
+}

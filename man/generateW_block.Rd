@@ -2,20 +2,36 @@
 % Please edit documentation in R/selectX_create.R
 \name{generateW_block}
 \alias{generateW_block}
-\title{Generating the weight matrix taking sample covariate}
+\title{Generate block-aware sample weight matrix}
 \usage{
 generateW_block(al, lambda, tau)
 }
 \arguments{
-\item{al}{altearting landscape onject}
+\item{al}{Alteration landscape object (from \code{new.AL.general}).}
 
-\item{lambda}{penalty factor parameter}
+\item{lambda}{Numeric penalty factor for the weight computation.}
 
-\item{tau}{fold change parameter}
+\item{tau}{Numeric fold-change threshold below which no penalty is applied.}
 }
 \value{
-Weight matrix
+List with \code{W_block} (per-block weight matrices), \code{W} (full
+concatenated weight matrix), \code{W_median} (per-block median TMBs), and
+\code{mean_TMB} (mean of block medians).
 }
 \description{
-Generating the weight matrix taking sample covariate
+Computes a sample weight matrix that accounts for sample-class covariates
+(blocks). Within each block the reference TMB is the block median; the
+overall reference used by \code{generateW_mean_tmb} is the mean of those
+block medians.
+}
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+al <- new.AL.general(luad_run_data$M,
+                     feat.covariates  = luad_run_data$alteration.class,
+                     sample.covariates = luad_run_data$sample.class,
+                     min.freq = 10)
+generateW_block(al, lambda = 0.3, tau = 1)
+}
+
 }

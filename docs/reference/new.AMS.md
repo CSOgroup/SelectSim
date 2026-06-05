@@ -17,3 +17,12 @@ new.AMS(am)
 ## Value
 
 Empty AMS list object.
+
+## Examples
+
+``` r
+new.AMS(matrix(0, 2, 2))
+#> list()
+#> attr(,"class")
+#> [1] "AMS"
+```

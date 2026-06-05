@@ -17,3 +17,14 @@ A list with \code{template.obj} (per-block S matrices) and
 Computes the expected mutation probability matrices (one per GAM type, per
 sample block) used as the simulation background in \code{null_model_parallel}.
 }
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+al <- new.AL.general(luad_run_data$M,
+                     feat.covariates  = luad_run_data$alteration.class,
+                     sample.covariates = luad_run_data$sample.class,
+                     min.freq = 10)
+template.obj.gen(al)
+}
+
+}

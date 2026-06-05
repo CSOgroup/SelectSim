@@ -71,7 +71,7 @@ print(paste('##### Number of genes ####',length(genes_to_consider),sep="->"))
 #> [1] "##### Number of genes ####->396"
 ```
 
-- Let create a table schema of mutations to conisder and columns defined
+- Let create a table schema of mutations to consider and columns defined
   in maf file
 
 ``` r
@@ -124,12 +124,12 @@ print(paste('##### Number of lines ####',nrow(maf_genes),sep="->"))
 ``` r
 
 # Creating Truncating GAM
-tictoc::tic('##### Creating Truncating GAM ####')
+if (requireNamespace("tictoc", quietly = TRUE)) tictoc::tic('##### Creating Truncating GAM ####')
     maf_trunc = filter_maf_truncating(maf_genes,genes=oncokb_truncating_genes, custom_maf_schema)
     input_maf_trunc<-filter_maf_truncating(input_maf, custom_maf_schema)
     truncating_tmb <- data.frame('sample'=mut_samples,'mutation'=rep(0,length(mut_samples)))
     rownames(truncating_tmb)<-mut_samples
-    temp <- input_maf_trunc %>% count(sample) 
+    temp <- input_maf_trunc %>% count(sample)
     rownames(temp)<-temp$sample
     truncating_tmb[intersect(truncating_tmb$sample,temp$sample),]$mutation <-temp[intersect(truncating_tmb$sample,temp$sample),'n']
     tcga_truc_gam = maf2gam(maf_trunc,
@@ -143,8 +143,8 @@ tictoc::tic('##### Creating Truncating GAM ####')
                      fill=0)
     truncating_data <- list('gam'=tcga_truc_gam,
                             'tmb'=truncating_tmb)
-tictoc::toc()
-#> ##### Creating Truncating GAM ####: 0.077 sec elapsed
+if (requireNamespace("tictoc", quietly = TRUE)) tictoc::toc()
+#> ##### Creating Truncating GAM ####: 0.069 sec elapsed
 ```
 
 - Let generate the Missense data
@@ -156,7 +156,7 @@ tictoc::toc()
 ``` r
 
 # Creating Missense GAM
-tictoc::tic('##### Creating Missense GAM ####')
+if (requireNamespace("tictoc", quietly = TRUE)) tictoc::tic('##### Creating Missense GAM ####')
     maf_valid = filter_maf_schema(input_maf,
                              schema = custom_maf_schema,
                              column = 'mutation.type',
@@ -190,8 +190,8 @@ tictoc::tic('##### Creating Missense GAM ####')
     missesne_data <- list('gam'=missense_tcga_gam,
                           'tmb'=missense_tmb)
 
-tictoc::toc()
-#> ##### Creating Missense GAM ####: 0.638 sec elapsed
+if (requireNamespace("tictoc", quietly = TRUE)) tictoc::toc()
+#> ##### Creating Missense GAM ####: 0.628 sec elapsed
 ```
 
 #### Generating the run_object to run SelectSim

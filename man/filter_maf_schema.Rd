@@ -23,3 +23,10 @@ filtered_maf  a filtered maf file
 \description{
 \code{filter_maf_schema()} takes a maf file and filters a MAF dataframe by retaining only the rows with a column value included in the values list
 }
+\examples{
+data(luad_maf, package = "SelectSim")
+filter_maf_schema(luad_maf, TCGA_maf_schema,
+                  column = "mutation.type",
+                  values = TCGA_maf_schema$mutation.type$truncating)
+
+}

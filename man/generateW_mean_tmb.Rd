@@ -2,7 +2,7 @@
 % Please edit documentation in R/selectX_create.R
 \name{generateW_mean_tmb}
 \alias{generateW_mean_tmb}
-\title{Generating the weight matrix}
+\title{Generate sample weight matrix from TMB values}
 \usage{
 generateW_mean_tmb(
   tmb,
@@ -14,21 +14,34 @@ generateW_mean_tmb(
 )
 }
 \arguments{
-\item{tmb}{TMB dataframe}
+\item{tmb}{Numeric vector of per-sample TMB values.}
 
-\item{mean_tmb}{TMB dataframe}
+\item{mean_tmb}{Numeric scalar; the reference (expected) TMB used to compute
+fold changes.}
 
-\item{ngenes}{Number of genes}
+\item{ngenes}{Integer; number of genes (rows) in the output weight matrix.}
 
-\item{lambda}{weight penalty factor (default 0.3)}
+\item{lambda}{Numeric; weight penalty factor. Higher values penalise
+high-TMB samples more strongly (default 0.3).}
 
-\item{tau}{fold change factor}
+\item{tau}{Numeric; fold-change threshold below which no penalty is applied
+(default 1).}
 
-\item{discrete}{True discrete weights}
+\item{discrete}{Logical; if \code{TRUE}, fold changes are rounded up before
+applying the penalty (default \code{TRUE}).}
 }
 \value{
-weight matrix (i.e vector as matrix)
+Numeric matrix of sample weights (ngenes x length(tmb)).
 }
 \description{
-Generating the weight matrix
+Computes a per-sample weight matrix based on the ratio of each sample's TMB to
+the expected (mean) TMB. Samples with higher-than-expected TMB receive lower
+weights via a penalty \code{lambda}, controlled by the fold-change threshold
+\code{tau}.
+}
+\examples{
+tmb      <- c(s1 = 10, s2 = 50, s3 = 20)
+mean_tmb <- 25
+generateW_mean_tmb(tmb, mean_tmb, ngenes = 3)
+
 }

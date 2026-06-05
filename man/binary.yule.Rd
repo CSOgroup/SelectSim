@@ -17,3 +17,10 @@ Matrix of Yule Q coefficients
 \description{
 Compute Yule Q coefficient for all gene pairs
 }
+\examples{
+am   <- matrix(c(0,1,1,0,1,1), nrow = 2,
+               dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+ovlp <- am.pairwise.alteration.overlap(am)
+binary.yule(ovlp, am)
+
+}

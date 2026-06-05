@@ -47,3 +47,15 @@ Data frame with one row per gene pair and columns for overlap, effect sizes, FDR
 \description{
 Build the full interaction results table from selectX outputs
 }
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+result <- selectX(M = luad_run_data$M,
+                  sample.class = luad_run_data$sample.class,
+                  alteration.class = luad_run_data$alteration.class,
+                  n.cores = 1, min.freq = 10, n.permut = 10,
+                  verbose = FALSE)
+head(result$result)
+}
+
+}

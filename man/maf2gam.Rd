@@ -41,3 +41,9 @@ Numeric matrix (samples x genes) representing the gene alteration matrix.
 \description{
 \code{maf2gam()} takes a maf file and converts into gam
 }
+\examples{
+data(luad_maf, package = "SelectSim")
+gam <- maf2gam(luad_maf)
+dim(gam)
+
+}

@@ -15,3 +15,14 @@ Classification of samples and alterations in blocks.
 \description{
 Get sample/alteration blocks
 }
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+al <- new.AL.general(luad_run_data$M,
+                     feat.covariates  = luad_run_data$alteration.class,
+                     sample.covariates = luad_run_data$sample.class,
+                     min.freq = 10)
+get.blocks(al)
+}
+
+}

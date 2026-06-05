@@ -39,6 +39,21 @@
 #' @param seed a random seed
 #' @return result  a SelectSim object with background model and other info along with result table
 #'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' result <- selectX(
+#'   M                = luad_run_data$M,
+#'   sample.class     = luad_run_data$sample.class,
+#'   alteration.class = luad_run_data$alteration.class,
+#'   n.cores          = 1,
+#'   min.freq         = 10,
+#'   n.permut         = 10,
+#'   verbose          = FALSE
+#' )
+#' head(result$result)
+#' }
+#'
 #' @export
 selectX <- function(M,
                     sample.class,
@@ -55,44 +70,45 @@ selectX <- function(M,
                     maxFDR = 0.25,
                     seed = 42) {
   set.seed(seed)
+  use_tictoc <- verbose && requireNamespace("tictoc", quietly = TRUE)
   if (verbose) {
     print(paste("#### Creating SelectSim object ####"))
-    tictoc::tic("Total time taken:")
+    if (use_tictoc) tictoc::tic("Total time taken:")
   }
 
   if (verbose) {
     print(paste("Step1-> Parsing and Filtering GAM..."))
-    tictoc::tic("Time:")
+    if (use_tictoc) tictoc::tic("Time:")
   }
   al <- new.AL.general(M, alteration.class, sample.class, min.freq, verbose)
   if (verbose) {
     print(paste("-> Alteration Landscape object created"))
-    tictoc::toc()
+    if (use_tictoc) tictoc::toc()
   }
 
   if (verbose) {
     print(paste("Step2-> Generating Template object..."))
-    tictoc::tic("Time:")
+    if (use_tictoc) tictoc::tic("Time:")
   }
   temp.data <- template.obj.gen(al)
   if (verbose) {
     print(paste("-> Template object created"))
-    tictoc::toc()
+    if (use_tictoc) tictoc::toc()
   }
 
   if (verbose) {
     print(paste("Step3-> Generating sample weight matrix..."))
-    tictoc::tic("Time:")
+    if (use_tictoc) tictoc::tic("Time:")
   }
   W <- generateW_block(al, lambda, tau)
   if (verbose) {
     print(paste("-> Weight Matrix created"))
-    tictoc::toc()
+    if (use_tictoc) tictoc::toc()
   }
 
   if (verbose) {
     print(paste("Step4-> Generating null model..."))
-    tictoc::tic("Time:")
+    if (use_tictoc) tictoc::tic("Time:")
   }
   sim <- null_model_parallel(al, temp.data$temp_mat, W$W, n.cores, n.permut)
   obj <- list("al" = al, "W" = W, "T" = temp.data, "null" = sim, "nSim" = n.permut)
@@ -108,14 +124,14 @@ selectX <- function(M,
     obj$nSim <- length(which(!outliers))
   }
   if (verbose) {
-    tictoc::toc()
+    if (use_tictoc) tictoc::toc()
     print(paste("-> Null model generated"))
     print(paste("### SelectSim object created ###"))
   }
 
   if (verbose) {
     print(paste("#### Computing EDs on the dataset ####"))
-    tictoc::tic("Time:")
+    if (use_tictoc) tictoc::tic("Time:")
   }
   al <- obj$al
   als <- al.stats(obj)
@@ -134,11 +150,11 @@ selectX <- function(M,
   obj$robs.co <- robs.co
   obj$wrobs.co <- wrobs.co
   if (verbose) {
-    tictoc::toc()
+    if (use_tictoc) tictoc::toc()
     print(paste("#### EDs computed ####"))
   }
 
-  if (verbose) tictoc::toc()
+  if (use_tictoc) tictoc::toc()
 
   if (save.object) {
     saveRDS(obj, file = paste(folder, "selectsim_object.rds", sep = ""))

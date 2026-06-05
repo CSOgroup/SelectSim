@@ -1,7 +1,8 @@
-# Generate a pairs background plot
+# Ridge plot of null-model background distribution for significant gene pairs
 
-Create an Alteration Landscape (AL) object which contains gams and
-mutation burden of samples of associated gams.
+For each significant evolutionary dependency in `result_df`, plots the
+null-model weighted-overlap distribution as a ridge, with vertical lines
+marking the observed overlap (red) and mean background (blue).
 
 ## Usage
 
@@ -13,12 +14,33 @@ ridge_plot_ed(result_df, obj)
 
 - result_df:
 
-  result table of selectX obj\$result
+  Subset of the result table from `selectX()$result` containing only the
+  pairs you want to display (e.g., significant hits).
 
 - obj:
 
-  selectX obj
+  SelectX object (`selectX()$obj`).
 
 ## Value
 
-a ggplot2 object with observed vs random overlap plot.
+A ggplot2 ridge-plot object.
+
+## Examples
+
+``` r
+# \donttest{
+data(luad_run_data, package = "SelectSim")
+result <- selectX(M = luad_run_data$M,
+                  sample.class = luad_run_data$sample.class,
+                  alteration.class = luad_run_data$alteration.class,
+                  n.cores = 1, min.freq = 10, n.permut = 10,
+                  verbose = FALSE)
+sig_pairs <- head(result$result[result$result$FDR, ], 3)
+if (nrow(sig_pairs) > 0) ridge_plot_ed(sig_pairs, result$obj)
+#> Picking joint bandwidth of 1.82
+#> Warning: Vectorized input to `element_text()` is not officially supported.
+#> ℹ Results may be unexpected or may change in future versions of ggplot2.
+#> Picking joint bandwidth of 1.82
+
+# }
+```

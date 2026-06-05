@@ -21,3 +21,18 @@ List of effect size vectors, one per permutation.
 \description{
 Compute effect sizes for null model permutations
 }
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+result  <- selectX(M = luad_run_data$M,
+                   sample.class = luad_run_data$sample.class,
+                   alteration.class = luad_run_data$alteration.class,
+                   n.cores = 1, min.freq = 10, n.permut = 10,
+                   verbose = FALSE)
+null_ov  <- r.am.pairwise.alteration.overlap(result$obj$null,
+                                             n.permut = result$obj$nSim)
+mean_mat <- Reduce("+", null_ov) / result$obj$nSim
+r.effectSize(null_ov, mean_mat, n.permut = result$obj$nSim)
+}
+
+}

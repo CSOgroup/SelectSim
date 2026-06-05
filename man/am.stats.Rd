@@ -15,3 +15,9 @@ AMS object with basic counts: n.samples, n.alterations, n.occurrences, per-sampl
 \description{
 Compute summary statistics for a binary alteration matrix
 }
+\examples{
+am <- matrix(c(0,1,1,0,1,1), nrow = 2,
+             dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+am.stats(am)
+
+}

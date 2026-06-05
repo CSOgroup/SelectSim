@@ -74,6 +74,11 @@ GENIE_maf_schema <- list(
 #' @param ... Other options
 #' @return filtered_maf  a filtered maf file
 #'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' filter_maf_column(luad_maf, values = "Missense_Mutation",
+#'                   column = "Variant_Classification")
+#'
 #' @export
 filter_maf_column <- function(maf, # the maf as dataframe
                               values, # values as list to filter
@@ -112,6 +117,15 @@ filter_maf_column <- function(maf, # the maf as dataframe
 #' @param values A dataframe of (column, value) pairs to match against
 #' @param ... Additional arguments passed to merge
 #' @return Filtered MAF dataframe containing only rows matching the value combinations.
+#'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' combos <- data.frame(Hugo_Symbol = "TP53",
+#'                      Variant_Classification = "Missense_Mutation")
+#' filter_maf_complex(luad_maf, combos,
+#'                    by.x = c("Hugo_Symbol","Variant_Classification"),
+#'                    by.y = c("Hugo_Symbol","Variant_Classification"))
+#'
 #' @export
 filter_maf_complex <- function(maf, values, ...) {
   filtered_maf <- merge(maf, values, suffixes = c("", "_to.ignore"), ...)
@@ -126,6 +140,12 @@ filter_maf_complex <- function(maf, values, ...) {
 #' @param sample.col Column name containing sample IDs
 #' @param ... Additional arguments passed to filter_maf_column
 #' @return Filtered MAF dataframe.
+#'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' ids <- unique(luad_maf$Tumor_Sample_Barcode)[1:5]
+#' filter_maf_sample(luad_maf, samples = ids)
+#'
 #' @export
 filter_maf_sample <- function(maf, samples, sample.col = "Tumor_Sample_Barcode", ...) {
   filtered_maf <- filter_maf_column(maf, values = samples, column = sample.col, ...)
@@ -139,6 +159,11 @@ filter_maf_sample <- function(maf, samples, sample.col = "Tumor_Sample_Barcode",
 #' @param gene.col Column name containing gene symbols
 #' @param ... Additional arguments passed to filter_maf_column
 #' @return Filtered MAF dataframe.
+#'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' filter_maf_gene.name(luad_maf, genes = c("TP53", "KRAS"))
+#'
 #' @export
 filter_maf_gene.name <- function(maf, genes, gene.col = "Hugo_Symbol", ...) {
   filtered_maf <- filter_maf_column(maf, values = genes, column = gene.col, ...)
@@ -152,6 +177,11 @@ filter_maf_gene.name <- function(maf, genes, gene.col = "Hugo_Symbol", ...) {
 #' @param variant.col Column name containing variant classifications
 #' @param ... Additional arguments passed to filter_maf_column
 #' @return Filtered MAF dataframe.
+#'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' filter_maf_mutation.type(luad_maf, variants = "Missense_Mutation")
+#'
 #' @export
 filter_maf_mutation.type <- function(maf, variants, variant.col = "Variant_Classification", ...) {
   filtered_maf <- filter_maf_column(maf, values = variants, column = variant.col, ...)
@@ -166,6 +196,13 @@ filter_maf_mutation.type <- function(maf, variants, variant.col = "Variant_Class
 #' @param values.col Corresponding columns in values to join on
 #' @param ... Additional arguments passed to filter_maf_complex
 #' @return Filtered MAF dataframe containing only rows matching the allowed combinations.
+#'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' allowed <- data.frame(Hugo_Symbol  = c("TP53", "KRAS"),
+#'                       HGVSp_Short  = c("p.R175H", "p.G12C"))
+#' filter_maf_mutations(luad_maf, allowed)
+#'
 #' @export
 filter_maf_mutations <- function(maf, values, maf.col = c("Hugo_Symbol", "HGVSp_Short"), values.col = maf.col, ...) {
   filtered_maf <- filter_maf_complex(maf, values = values, by.x = maf.col, by.y = values.col, ...)
@@ -188,6 +225,12 @@ filter_maf_mutations <- function(maf, values, maf.col = c("Hugo_Symbol", "HGVSp_
 #' @param ... Other options
 #' @return filtered_maf  a filtered maf file
 #'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' filter_maf_schema(luad_maf, TCGA_maf_schema,
+#'                   column = "mutation.type",
+#'                   values = TCGA_maf_schema$mutation.type$truncating)
+#'
 #' @export
 filter_maf_schema <- function(maf, schema = TCGA_maf_schema, column, values, ...) {
   variant.col <- schema[["column"]][[column]]
@@ -206,6 +249,10 @@ filter_maf_schema <- function(maf, schema = TCGA_maf_schema, column, values, ...
 #' @param schema a schema of datafrane check Select::TCGA_maf_schema for example
 #' @param ... Other options
 #' @return filtered_maf  a filtered maf file
+#'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' filter_maf_truncating(luad_maf)
 #'
 #' @export
 filter_maf_truncating <- function(maf, schema = TCGA_maf_schema, ...) {
@@ -226,6 +273,10 @@ filter_maf_truncating <- function(maf, schema = TCGA_maf_schema, ...) {
 #' @param ... Other options
 #' @return filtered_maf  a filtered maf file
 #'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' filter_maf_missense(luad_maf)
+#'
 #' @export
 filter_maf_missense <- function(maf, schema = TCGA_maf_schema, ...) {
   column <- "mutation.type"
@@ -244,6 +295,10 @@ filter_maf_missense <- function(maf, schema = TCGA_maf_schema, ...) {
 #' @param schema a schema of datafrane check Select::TCGA_maf_schema for example
 #' @param ... Other options
 #' @return filtered_maf  a filtered maf file
+#'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' filter_maf_ignore(luad_maf)
 #'
 #' @export
 filter_maf_ignore <- function(maf, schema = TCGA_maf_schema, ...) {
@@ -266,6 +321,10 @@ filter_maf_ignore <- function(maf, schema = TCGA_maf_schema, ...) {
 #' @param ... Other options
 #' @return filtered_maf  a filtered maf file
 #'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' stat_maf_column(luad_maf, column = "Variant_Classification")
+#'
 #' @export
 
 stat_maf_column <- function(maf, column, ...) {
@@ -281,6 +340,10 @@ stat_maf_column <- function(maf, column, ...) {
 #' @param ... Additional arguments passed to stat_maf_column
 #' @return Table of mutation counts per sample.
 #'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' head(stat_maf_sample(luad_maf))
+#'
 #' @export
 stat_maf_sample <- function(maf, column = "Tumor_Sample_Barcode", ...) {
   return(stat_maf_column(maf, column, ...))
@@ -292,6 +355,10 @@ stat_maf_sample <- function(maf, column = "Tumor_Sample_Barcode", ...) {
 #' @param column Column name containing gene symbols
 #' @param ... Additional arguments passed to stat_maf_column
 #' @return Table of mutation counts per gene.
+#'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' head(stat_maf_gene(luad_maf))
 #'
 #' @export
 stat_maf_gene <- function(maf, column = "Hugo_Symbol", ...) {
@@ -316,6 +383,11 @@ stat_maf_gene <- function(maf, column = "Hugo_Symbol", ...) {
 #' @param binarize If TRUE, convert aggregated counts to binary presence/absence
 #' @param fill Value used for missing (sample, gene) combinations
 #' @return Numeric matrix (samples x genes) representing the gene alteration matrix.
+#'
+#' @examples
+#' data(luad_maf, package = "SelectSim")
+#' gam <- maf2gam(luad_maf)
+#' dim(gam)
 #'
 #' @export
 maf2gam <- function(maf,

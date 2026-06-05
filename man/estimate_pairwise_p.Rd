@@ -21,3 +21,15 @@ Vector of p-values, one per row in results.
 \description{
 Compute p-values for all gene pairs in a results table
 }
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+result <- selectX(M = luad_run_data$M,
+                  sample.class = luad_run_data$sample.class,
+                  alteration.class = luad_run_data$alteration.class,
+                  n.cores = 1, min.freq = 10, n.permut = 10,
+                  verbose = FALSE, estimate_pairwise = TRUE)
+head(result$result[, c("SFE_1","SFE_2","pairwise_p")])
+}
+
+}

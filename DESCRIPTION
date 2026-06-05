@@ -1,6 +1,5 @@
 Package: SelectSim
-Title: Selected Events Linked by Evolutionary Conditions Across Human
-    Tumors
+Title: Selected Events Linked by Evolutionary Conditions Across Human Tumors
 Version: 0.1.6
 Authors@R: c(
     person("Arvind", "Iyer", , "ayalurarvind@gmail.com", role = c("aut", "cre"),
@@ -29,13 +28,12 @@ Imports:
     parallel,
     Rcpp,
     Rfast,
-    stats,
-    tictoc
+    stats
 Suggests:
     knitr,
     rmarkdown,
-    spelling,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tictoc
 LinkingTo:
     Rcpp,
     RcppArmadillo

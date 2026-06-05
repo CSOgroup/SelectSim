@@ -29,3 +29,13 @@ estimateFDR2(obs, exp, nSim, maxFDR = 0.25)
 ## Value
 
 Vector of FDR values, one per element of obs.
+
+## Examples
+
+``` r
+set.seed(1)
+obs <- c(0.8, 0.5, 0.3, 0.1)
+exp <- runif(400)
+estimateFDR2(obs, exp, nSim = 100)
+#> [1] 0.72 1.00 1.00 1.00
+```

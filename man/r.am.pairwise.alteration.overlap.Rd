@@ -9,13 +9,25 @@ r.am.pairwise.alteration.overlap(null, n.permut, n.cores = 1)
 \arguments{
 \item{null}{The null model (list of simulated binary matrices)}
 
-\item{n.permut}{The number of permutation steps}
+\item{n.permut}{Accepted for API compatibility; currently unused internally.}
 
-\item{n.cores}{The number of cores}
+\item{n.cores}{Accepted for API compatibility; currently unused internally.}
 }
 \value{
-overlap the overlap summed across permutations
+Overlap matrix summed across all permutations.
 }
 \description{
 Compute null overlap matrix
+}
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+result <- selectX(M = luad_run_data$M,
+                  sample.class = luad_run_data$sample.class,
+                  alteration.class = luad_run_data$alteration.class,
+                  n.cores = 1, min.freq = 10, n.permut = 10,
+                  verbose = FALSE)
+r.am.pairwise.alteration.overlap(result$obj$null, n.permut = result$obj$nSim)
+}
+
 }

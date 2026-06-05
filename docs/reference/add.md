@@ -17,3 +17,13 @@ add(x)
 ## Value
 
 Single matrix that is the element-wise sum of all matrices in x
+
+## Examples
+
+``` r
+mats <- list(matrix(1:4, 2, 2), matrix(1:4, 2, 2))
+add(mats)
+#>      [,1] [,2]
+#> [1,]    2    6
+#> [2,]    4    8
+```

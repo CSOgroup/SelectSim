@@ -62,3 +62,12 @@ maf2gam(
 
 Numeric matrix (samples x genes) representing the gene alteration
 matrix.
+
+## Examples
+
+``` r
+data(luad_maf, package = "SelectSim")
+gam <- maf2gam(luad_maf)
+dim(gam)
+#> [1]   502 18707
+```

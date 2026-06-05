@@ -10,6 +10,9 @@
 #' @param al The alteration landscape object (checked for NULL)
 #' @return Empty ALS list object.
 #'
+#' @examples
+#' new.ALS(list())
+#'
 #' @export
 new.ALS <- function(al) {
   if (is.null(al)) stop("Input al is NULL")
@@ -22,6 +25,9 @@ new.ALS <- function(al) {
 #' @param am The alteration matrix (checked for NULL)
 #' @return Empty AMS list object.
 #'
+#' @examples
+#' new.AMS(matrix(0, 2, 2))
+#'
 #' @export
 new.AMS <- function(am) {
   if (is.null(am)) stop("Input am is NULL")
@@ -33,6 +39,11 @@ new.AMS <- function(am) {
 #'
 #' @param am Binary alteration matrix (features x samples)
 #' @return AMS object with basic counts: n.samples, n.alterations, n.occurrences, per-sample and per-feature counts.
+#'
+#' @examples
+#' am <- matrix(c(0,1,1,0,1,1), nrow = 2,
+#'              dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+#' am.stats(am)
 #'
 #' @export
 am.stats <- function(am) {
@@ -55,6 +66,17 @@ am.stats <- function(am) {
 #'
 #' @param al SelectX object (list containing al, W, etc. as returned by selectX)
 #' @return ALS object with overall and per-block alteration statistics.
+#'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' result <- selectX(M = luad_run_data$M,
+#'                   sample.class = luad_run_data$sample.class,
+#'                   alteration.class = luad_run_data$alteration.class,
+#'                   n.cores = 1, min.freq = 10, n.permut = 10,
+#'                   verbose = FALSE)
+#' stats <- al.stats(result$obj)
+#' }
 #'
 #' @export
 al.stats <- function(al) {
@@ -89,12 +111,17 @@ al.stats <- function(al) {
 }
 
 ###
-#' Compute overlap stats
+#' Compute pairwise alteration co-occurrence counts
 #'
 #' @importFrom  Matrix sparseMatrix
 #' @importFrom  Matrix t
-#' @param am The alteration matrix
-#' @return overlap the overlap between the pairs
+#' @param am Binary alteration matrix (features x samples)
+#' @return Square matrix of pairwise co-occurrence counts (features x features).
+#'
+#' @examples
+#' am <- matrix(c(0,1,1,0,1,1), nrow = 2,
+#'              dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+#' am.pairwise.alteration.overlap(am)
 #'
 #' @export
 am.pairwise.alteration.overlap <- function(am) {
@@ -110,6 +137,13 @@ am.pairwise.alteration.overlap <- function(am) {
 #' @param W Weight matrix (features x samples) with per-sample TMB weights
 #' @return Weighted pairwise overlap matrix (features x features).
 #'
+#' @examples
+#' am <- matrix(c(0,1,1,0,1,1), nrow = 2,
+#'              dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+#' W  <- matrix(1, nrow = 2, ncol = 3,
+#'              dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+#' am.weight.pairwise.alteration.overlap(am, W)
+#'
 #' @export
 am.weight.pairwise.alteration.overlap <- function(am, W) {
   A <- am * 1
@@ -124,6 +158,16 @@ am.weight.pairwise.alteration.overlap <- function(am, W) {
 #' @param M.stats The alteration matrix stats (from am.stats)
 #' @param w_overlap_M The weighted pairwise overlap matrix
 #' @return List with overlap and w_overlap sparse matrices.
+#'
+#' @examples
+#' am <- matrix(c(0,1,1,0,1,1), nrow = 2,
+#'              dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+#' W  <- matrix(1, nrow = 2, ncol = 3,
+#'              dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+#' ovlp  <- am.pairwise.alteration.overlap(am)
+#' wovlp <- am.weight.pairwise.alteration.overlap(am, W)
+#' stats <- am.stats(am)
+#' am.pairwise.alteration.coverage(ovlp, stats, wovlp)
 #'
 #' @export
 am.pairwise.alteration.coverage <- function(overlap_M, M.stats, w_overlap_M) {
@@ -144,6 +188,17 @@ am.pairwise.alteration.coverage <- function(overlap_M, M.stats, w_overlap_M) {
 #' @param als Alteration landscape stats (from al.stats); computed internally if NULL
 #' @param do.blocks Whether to also compute block-level pairwise stats
 #' @return List with overlap and w_overlap matrices, plus optional sample.blocks entries.
+#'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' result <- selectX(M = luad_run_data$M,
+#'                   sample.class = luad_run_data$sample.class,
+#'                   alteration.class = luad_run_data$alteration.class,
+#'                   n.cores = 1, min.freq = 10, n.permut = 10,
+#'                   verbose = FALSE)
+#' al.pairwise.alteration.stats(result$obj)
+#' }
 #'
 #' @export
 al.pairwise.alteration.stats <- function(al, als = NULL, do.blocks = FALSE) {
@@ -174,9 +229,20 @@ al.pairwise.alteration.stats <- function(al, als = NULL, do.blocks = FALSE) {
 #' Compute null overlap matrix
 #'
 #' @param null The null model (list of simulated binary matrices)
-#' @param n.permut The number of permutation steps
-#' @param n.cores The number of cores
-#' @return overlap the overlap summed across permutations
+#' @param n.permut Accepted for API compatibility; currently unused internally.
+#' @param n.cores Accepted for API compatibility; currently unused internally.
+#' @return Overlap matrix summed across all permutations.
+#'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' result <- selectX(M = luad_run_data$M,
+#'                   sample.class = luad_run_data$sample.class,
+#'                   alteration.class = luad_run_data$alteration.class,
+#'                   n.cores = 1, min.freq = 10, n.permut = 10,
+#'                   verbose = FALSE)
+#' r.am.pairwise.alteration.overlap(result$obj$null, n.permut = result$obj$nSim)
+#' }
 #'
 #' @export
 r.am.pairwise.alteration.overlap <- function(null, n.permut, n.cores = 1) {
@@ -185,10 +251,22 @@ r.am.pairwise.alteration.overlap <- function(null, n.permut, n.cores = 1) {
 #' Compute null weighted overlap matrix
 #'
 #' @param null The null model (list of simulated binary matrices)
-#' @param W The weight matrix
-#' @param n.permut The number of permutation steps
-#' @param n.cores The number of cores
-#' @return weighted overlap summed across permutations
+#' @param W The weight matrix (features x samples)
+#' @param n.permut Accepted for API compatibility; currently unused internally.
+#' @param n.cores Accepted for API compatibility; currently unused internally.
+#' @return Weighted overlap matrix summed across all permutations.
+#'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' result <- selectX(M = luad_run_data$M,
+#'                   sample.class = luad_run_data$sample.class,
+#'                   alteration.class = luad_run_data$alteration.class,
+#'                   n.cores = 1, min.freq = 10, n.permut = 10,
+#'                   verbose = FALSE)
+#' w.r.am.pairwise.alteration.overlap(result$obj$null, W = result$obj$W$W,
+#'                                    n.permut = result$obj$nSim)
+#' }
 #'
 #' @export
 w.r.am.pairwise.alteration.overlap <- function(null, W, n.permut, n.cores = 1) {
@@ -199,6 +277,10 @@ w.r.am.pairwise.alteration.overlap <- function(null, W, n.permut, n.cores = 1) {
 #' @param x List of matrices of identical dimensions
 #' @return Single matrix that is the element-wise sum of all matrices in x
 #'
+#' @examples
+#' mats <- list(matrix(1:4, 2, 2), matrix(1:4, 2, 2))
+#' add(mats)
+#'
 #' @export
 add <- function(x) Reduce("+", x)
 #' Compute effect size between observed and expected overlap
@@ -206,6 +288,10 @@ add <- function(x) Reduce("+", x)
 #' @param obs The observed overlap values
 #' @param exp The expected (null model mean) overlap values
 #' @return Effect size value(s)
+#'
+#' @examples
+#' effectSize(obs = 5, exp = 3)
+#' effectSize(obs = c(5, 2, 0), exp = c(3, 3, 1))
 #'
 #' @export
 effectSize <- function(obs, exp) {
@@ -220,6 +306,20 @@ effectSize <- function(obs, exp) {
 #' @param n.cores Number of cores (currently unused; sequential only)
 #' @return List of effect size vectors, one per permutation.
 #'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' result  <- selectX(M = luad_run_data$M,
+#'                    sample.class = luad_run_data$sample.class,
+#'                    alteration.class = luad_run_data$alteration.class,
+#'                    n.cores = 1, min.freq = 10, n.permut = 10,
+#'                    verbose = FALSE)
+#' null_ov  <- r.am.pairwise.alteration.overlap(result$obj$null,
+#'                                              n.permut = result$obj$nSim)
+#' mean_mat <- Reduce("+", null_ov) / result$obj$nSim
+#' r.effectSize(null_ov, mean_mat, n.permut = result$obj$nSim)
+#' }
+#'
 #' @export
 r.effectSize <- function(null_overlap, mean_mat, n.permut = 1000, n.cores = 1) {
   foreach::registerDoSEQ()
@@ -232,6 +332,12 @@ r.effectSize <- function(null_overlap, mean_mat, n.permut = 1000, n.cores = 1) {
 #' @param overlap The pairwise overlap matrix
 #' @param mat The binary GAM (features x samples)
 #' @return Matrix of Yule Q coefficients
+#'
+#' @examples
+#' am   <- matrix(c(0,1,1,0,1,1), nrow = 2,
+#'                dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+#' ovlp <- am.pairwise.alteration.overlap(am)
+#' binary.yule(ovlp, am)
 #'
 #' @export
 binary.yule <- function(overlap, mat) {
@@ -257,6 +363,12 @@ binary.yule <- function(overlap, mat) {
 #' @param nSim Number of permutations used to generate exp
 #' @param maxFDR FDR cutoff; scanning stops once FDR exceeds this value
 #' @return Vector of FDR values, one per element of obs.
+#'
+#' @examples
+#' set.seed(1)
+#' obs <- c(0.8, 0.5, 0.3, 0.1)
+#' exp <- runif(400)
+#' estimateFDR2(obs, exp, nSim = 100)
 #'
 #' @export
 estimateFDR2 <- function(obs, exp, nSim, maxFDR = 0.25) {
@@ -299,6 +411,17 @@ estimateFDR2 <- function(obs, exp, nSim, maxFDR = 0.25) {
 #' @param gene2 Name of the second gene/alteration
 #' @return Two-sided empirical p-value
 #'
+#' @examples
+#' set.seed(1)
+#' genes <- c("geneA", "geneB")
+#' robs_co <- lapply(seq_len(20), function(i) {
+#'   m <- matrix(sample(0:5, 4, replace = TRUE), 2, 2,
+#'               dimnames = list(genes, genes))
+#'   m
+#' })
+#' obs_co <- matrix(c(5, 3, 3, 4), 2, 2, dimnames = list(genes, genes))
+#' estimate_p_val(robs_co, obs_co, "geneA", "geneB")
+#'
 #' @export
 
 estimate_p_val <- function(robs_co, obs.co, gene1, gene2) {
@@ -319,6 +442,17 @@ estimate_p_val <- function(robs_co, obs.co, gene1, gene2) {
 #' @param results Results data frame with SFE_1 and SFE_2 columns
 #' @param nSim Number of permutations
 #' @return Vector of p-values, one per row in results.
+#'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' result <- selectX(M = luad_run_data$M,
+#'                   sample.class = luad_run_data$sample.class,
+#'                   alteration.class = luad_run_data$alteration.class,
+#'                   n.cores = 1, min.freq = 10, n.permut = 10,
+#'                   verbose = FALSE, estimate_pairwise = TRUE)
+#' head(result$result[, c("SFE_1","SFE_2","pairwise_p")])
+#' }
 #'
 #' @export
 estimate_pairwise_p <- function(obs, exp, results, nSim) {
@@ -354,8 +488,19 @@ estimate_pairwise_p <- function(obs, exp, results, nSim) {
 #' @param n.cores Number of cores
 #' @param n.permut Number of permutations
 #' @return Data frame with one row per gene pair and columns for overlap, effect sizes, FDR, and interaction type.
-#' @export
 #'
+#' @examples
+#' \donttest{
+#' data(luad_run_data, package = "SelectSim")
+#' result <- selectX(M = luad_run_data$M,
+#'                   sample.class = luad_run_data$sample.class,
+#'                   alteration.class = luad_run_data$alteration.class,
+#'                   n.cores = 1, min.freq = 10, n.permut = 10,
+#'                   verbose = FALSE)
+#' head(result$result)
+#' }
+#'
+#' @export
 interaction.table <- function(al,
                               als,
                               obs,

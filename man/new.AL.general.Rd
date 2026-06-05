@@ -2,7 +2,7 @@
 % Please edit documentation in R/selectX_create.R
 \name{new.AL.general}
 \alias{new.AL.general}
-\title{Create an AL object}
+\title{Create an Alteration Landscape (AL) object}
 \usage{
 new.AL.general(
   am,
@@ -13,19 +13,43 @@ new.AL.general(
 )
 }
 \arguments{
-\item{am}{The binary alteration matrix with row as features and column as samples.}
+\item{am}{A named list with two required elements: \code{M} (a named list of binary
+alteration matrices, each genes x samples) and \code{tmb} (a named list of data
+frames, one per matrix in \code{M}, each with columns \code{sample} and
+\code{mutation}). The names of \code{M} and \code{tmb} must match. All matrices
+in \code{M} must have identical row and column names.}
 
-\item{feat.covariates}{gene/feature covariate.}
+\item{feat.covariates}{Named character vector of alteration-type annotations, one
+entry per feature (gene). Names must match rownames of the matrices in \code{M}.
+If \code{NULL}, all features are labelled \code{"MUT"}.}
 
-\item{sample.covariates}{sample covariate.}
+\item{sample.covariates}{Named character vector of sample-type annotations, one
+entry per sample. Names must match colnames of the matrices in \code{M}. If
+\code{NULL}, all samples are labelled \code{"sample"}.}
 
-\item{min.freq}{minimum frequency of genes to be mutated.}
+\item{min.freq}{Minimum number of samples a gene must be mutated in (strictly
+greater than) to be retained. Features with \code{rowSums <= min.freq} are
+dropped.}
 
-\item{verbose}{print the time and each steps.}
+\item{verbose}{Logical; print progress messages.}
 }
 \value{
-An Alteration Landscape (AL) object with the gam.
+An Alteration Landscape (AL) object (list of class \code{"AL"}) containing
+the filtered alteration matrices, TMB vectors, and covariate assignments.
 }
 \description{
-Create an Alteration Landscape (AL) object which contains gams and mutation burden of samples of associated gams.
+Builds an Alteration Landscape object from a list of genome alteration matrices
+and their corresponding tumor mutation burdens.
+}
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+al <- new.AL.general(
+  am               = luad_run_data$M,
+  feat.covariates  = luad_run_data$alteration.class,
+  sample.covariates = luad_run_data$sample.class,
+  min.freq         = 10
+)
+}
+
 }

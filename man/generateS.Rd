@@ -19,3 +19,9 @@ S the S matrix
 \description{
 Generate S matrix
 }
+\examples{
+gam <- matrix(c(0,1,1,0,1,1), nrow = 2,
+              dimnames = list(c("geneA","geneB"), c("s1","s2","s3")))
+generateS(gam, sample.weights = c(s1 = 1, s2 = 1, s3 = 1))
+
+}

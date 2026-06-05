@@ -21,3 +21,9 @@ Filtered MAF dataframe.
 \description{
 Filter a MAF dataframe by sample ID
 }
+\examples{
+data(luad_maf, package = "SelectSim")
+ids <- unique(luad_maf$Tumor_Sample_Barcode)[1:5]
+filter_maf_sample(luad_maf, samples = ids)
+
+}

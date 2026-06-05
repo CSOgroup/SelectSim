@@ -25,3 +25,18 @@ List of simulated binary matrices (one per permutation)
 \description{
 Generating the null_simulation matrix
 }
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+al       <- new.AL.general(luad_run_data$M,
+                           feat.covariates  = luad_run_data$alteration.class,
+                           sample.covariates = luad_run_data$sample.class,
+                           min.freq = 10)
+temp_obj <- template.obj.gen(al)
+W        <- generateW_block(al, lambda = 0.3, tau = 1)
+sims     <- null_model_parallel(al, temp_obj$temp_mat, W$W,
+                                n.cores = 1, n.permut = 10)
+length(sims)
+}
+
+}

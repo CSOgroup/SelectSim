@@ -25,6 +25,5 @@ co-mutations from tumor initiation to metastatic progression.
       author = {Arvind Iyer and Marco Mina and Miljan Petrovic and Giovanni Ciriello},
       journal = {TBD},
       year = {2026},
-      doi = {https://doi.org/10.5281/zenodo.19680236},
       url = {https://github.com/CSOgroup/SelectSim},
     }

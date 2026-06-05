@@ -21,3 +21,10 @@ Vector of FDR values, one per element of obs.
 \description{
 Estimate FDR by scanning observed vs null effect sizes
 }
+\examples{
+set.seed(1)
+obs <- c(0.8, 0.5, 0.3, 0.1)
+exp <- runif(400)
+estimateFDR2(obs, exp, nSim = 100)
+
+}

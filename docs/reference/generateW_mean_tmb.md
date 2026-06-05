@@ -1,6 +1,9 @@
-# Generating the weight matrix
+# Generate sample weight matrix from TMB values
 
-Generating the weight matrix
+Computes a per-sample weight matrix based on the ratio of each sample's
+TMB to the expected (mean) TMB. Samples with higher-than-expected TMB
+receive lower weights via a penalty `lambda`, controlled by the
+fold-change threshold `tau`.
 
 ## Usage
 
@@ -19,28 +22,44 @@ generateW_mean_tmb(
 
 - tmb:
 
-  TMB dataframe
+  Numeric vector of per-sample TMB values.
 
 - mean_tmb:
 
-  TMB dataframe
+  Numeric scalar; the reference (expected) TMB used to compute fold
+  changes.
 
 - ngenes:
 
-  Number of genes
+  Integer; number of genes (rows) in the output weight matrix.
 
 - lambda:
 
-  weight penalty factor (default 0.3)
+  Numeric; weight penalty factor. Higher values penalise high-TMB
+  samples more strongly (default 0.3).
 
 - tau:
 
-  fold change factor
+  Numeric; fold-change threshold below which no penalty is applied
+  (default 1).
 
 - discrete:
 
-  True discrete weights
+  Logical; if `TRUE`, fold changes are rounded up before applying the
+  penalty (default `TRUE`).
 
 ## Value
 
-weight matrix (i.e vector as matrix)
+Numeric matrix of sample weights (ngenes x length(tmb)).
+
+## Examples
+
+``` r
+tmb      <- c(s1 = 10, s2 = 50, s3 = 20)
+mean_tmb <- 25
+generateW_mean_tmb(tmb, mean_tmb, ngenes = 3)
+#>      [,1]      [,2] [,3]
+#> [1,]    1 0.7692308    1
+#> [2,]    1 0.7692308    1
+#> [3,]    1 0.7692308    1
+```

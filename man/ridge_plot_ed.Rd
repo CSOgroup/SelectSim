@@ -2,18 +2,34 @@
 % Please edit documentation in R/selectX_plot.R
 \name{ridge_plot_ed}
 \alias{ridge_plot_ed}
-\title{Generate a pairs background plot}
+\title{Ridge plot of null-model background distribution for significant gene pairs}
 \usage{
 ridge_plot_ed(result_df, obj)
 }
 \arguments{
-\item{result_df}{result table of selectX obj$result}
+\item{result_df}{Subset of the result table from \code{selectX()$result} containing
+only the pairs you want to display (e.g., significant hits).}
 
-\item{obj}{selectX obj}
+\item{obj}{SelectX object (\code{selectX()$obj}).}
 }
 \value{
-a ggplot2 object with observed vs random overlap plot.
+A ggplot2 ridge-plot object.
 }
 \description{
-Create an Alteration Landscape (AL) object which contains gams and mutation burden of samples of associated gams.
+For each significant evolutionary dependency in \code{result_df}, plots the
+null-model weighted-overlap distribution as a ridge, with vertical lines
+marking the observed overlap (red) and mean background (blue).
+}
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+result <- selectX(M = luad_run_data$M,
+                  sample.class = luad_run_data$sample.class,
+                  alteration.class = luad_run_data$alteration.class,
+                  n.cores = 1, min.freq = 10, n.permut = 10,
+                  verbose = FALSE)
+sig_pairs <- head(result$result[result$result$FDR, ], 3)
+if (nrow(sig_pairs) > 0) ridge_plot_ed(sig_pairs, result$obj)
+}
+
 }

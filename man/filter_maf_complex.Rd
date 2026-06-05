@@ -19,3 +19,12 @@ Filtered MAF dataframe containing only rows matching the value combinations.
 \description{
 Filter a MAF dataframe by a combination of column values
 }
+\examples{
+data(luad_maf, package = "SelectSim")
+combos <- data.frame(Hugo_Symbol = "TP53",
+                     Variant_Classification = "Missense_Mutation")
+filter_maf_complex(luad_maf, combos,
+                   by.x = c("Hugo_Symbol","Variant_Classification"),
+                   by.y = c("Hugo_Symbol","Variant_Classification"))
+
+}

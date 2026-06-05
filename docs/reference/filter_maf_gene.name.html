@@ -70,6 +70,1324 @@
     <p>Filtered MAF dataframe.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">luad_maf</span>, package <span class="op">=</span> <span class="st">"SelectSim"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">filter_maf_gene.name</span><span class="op">(</span><span class="va">luad_maf</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TP53"</span>, <span class="st">"KRAS"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Chromosome Start_Position End_Position Hugo_Symbol</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34             12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 313            12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 725            12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1807           17        7577123      7577123        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3364           17        7578235      7578235        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3869           12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4581           12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4657           17        7578403      7578403        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5500           17        7578514      7578514        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7126           17        7577537      7577537        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8140           17        7579373      7579373        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8909           17        7578397      7578412        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9049           12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9237           12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9313           17        7577108      7577108        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9314           17        7578406      7578406        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10091          17        7577096      7577096        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11169          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11234          17        7579312      7579312        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11452          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11844          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12270          17        7577099      7577099        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12899          17        7578268      7578268        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13625          17        7578466      7578466        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13808          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14045          17        7577097      7577097        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15086          17        7577535      7577535        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15591          17        7574003      7574003        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15592          17        7577095      7577095        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16161          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16174          17        7578263      7578263        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16327          17        7577535      7577535        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16328          17        7578264      7578264        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16694          17        7579485      7579485        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17347          17        7577568      7577568        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17919          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18184          17        7577535      7577535        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18185          17        7578175      7578175        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18614          17        7578492      7578492        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19009          17        7577559      7577559        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21889          17        7578455      7578455        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22422          17        7577090      7577090        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23197          17        7579470      7579472        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26280          17        7578556      7578556        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27260          17        7577099      7577099        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28105          17        7577082      7577082        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28935          17        7577081      7577081        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30247          17        7576928      7576928        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34459          17        7579361      7579361        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36562          17        7573967      7573967        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36706          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36787          17        7574034      7574034        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37458          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37691          17        7577548      7577548        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38390          17        7578427      7578427        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38573          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39232          17        7577547      7577547        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40220          17        7577587      7577587        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41129          17        7578536      7578536        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41432          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41759          17        7574021      7574021        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42627          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42693          17        7578212      7578212        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43597          17        7579485      7579485        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45030          17        7577157      7577157        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46182          17        7579312      7579312        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47617          17        7574017      7574017        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50070          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50659          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51169          12       25398262     25398262        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51332          17        7578419      7578419        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53054          17        7573982      7573982        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53723          17        7578550      7578550        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54023          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54359          17        7578271      7578271        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54585          17        7577547      7577547        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54586          17        7577548      7577548        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55096          17        7579528      7579528        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55602          17        7578398      7578398        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55603          17        7579457      7579457        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56031          17        7579312      7579312        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56337          17        7578212      7578212        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56753          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56805          17        7577108      7577108        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57015          12       25398281     25398281        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57419          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57695          17        7578406      7578406        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60459          17        7576855      7576855        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60927          17        7577120      7577120        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61055          17        7574012      7574012        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61735          17        7577058      7577058        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62081          17        7579374      7579374        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62883          17        7578235      7578235        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63931          17        7577121      7577121        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65390          17        7577570      7577570        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66170          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66945          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67117          17        7578457      7578457        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67763          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67798          17        7578208      7578208        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68201          17        7578224      7578224        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68776          17        7577046      7577046        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69534          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69800          17        7578393      7578393        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70086          17        7578203      7578203        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70903          17        7577153      7577153        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71974          17        7579414      7579414        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72276          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72442          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72572          17        7578290      7578290        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72573          17        7578457      7578457        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73198          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73375          17        7577085      7577085        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73505          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74067          17        7577085      7577085        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74392          17        7578458      7578458        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75314          17        7578370      7578370        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76151          17        7579526      7579526        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76301          17        7577536      7577536        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76688          17        7577609      7577609        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77136          17        7577124      7577124        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77685          17        7578382      7578382        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77686          17        7578406      7578406        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77896          17        7574018      7574018        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78027          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78395          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78516          17        7577094      7577094        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78902          17        7576852      7576852        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80079          17        7577570      7577570        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81134          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81519          17        7578461      7578461        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82240          17        7577551      7577551        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82804          17        7578433      7578433        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83006          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83481          17        7577097      7577097        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83804          17        7578474      7578475        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84252          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84469          17        7574012      7574012        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84829          17        7576910      7576910        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85484          17        7577120      7577120        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85946          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86847          12       25398282     25398282        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86865          17        7577022      7577025        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87255          17        7578499      7578499        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87256          17        7578508      7578508        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87819          17        7578503      7578518        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88475          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88610          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88857          17        7574026      7574026        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89680          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90864          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90930          17        7578500      7578500        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91440          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91659          17        7578442      7578442        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92504          17        7578526      7578526        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92652          17        7573991      7573991        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93281          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93382          17        7576897      7576897        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94585          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94741          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94779          17        7578507      7578507        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94970          17        7579533      7579533        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95210          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95341          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95566          17        7573964      7573964        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95567          17        7579583      7579583        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95909          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96234          17        7578457      7578457        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97243          12       25398282     25398282        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97308          17        7579329      7579329        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97618          12       25380196     25380196        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97619          12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97671          17        7578498      7578498        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97994          17        7579312      7579312        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98342          12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98392          17        7577058      7577058        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99094          17        7577120      7577120        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100762         17        7578395      7578395        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101439         17        7576855      7576855        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102217         17        7577534      7577534        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103315         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103672         17        7578457      7578457        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104280         12       25398282     25398282        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104378         17        7576897      7576897        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104850         17        7574012      7574012        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104985         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105167         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105750         17        7577018      7577018        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106194         17        7578235      7578235        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106704         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107204         17        7577114      7577114        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107550         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108157         17        7577547      7577547        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108158         17        7577548      7577548        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108523         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108680         17        7574000      7574000        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110039         17        7578469      7578469        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111967         17        7576897      7576897        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112917         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113239         17        7578212      7578212        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113752         17        7577052      7577052        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114277         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114377         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114445         17        7574017      7574017        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114790         17        7577141      7577141        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115026         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115267         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115380         17        7578500      7578500        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116031         17        7577100      7577100        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116697         17        7579358      7579358        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117520         17        7574018      7574018        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117802         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119417         17        7578271      7578271        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120209         17        7577121      7577121        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120517         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121119         17        7578555      7578555        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122047         17        7578457      7578457        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122666         17        7577141      7577141        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122765         17        7577117      7577117        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123039         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123297         17        7576853      7576853        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123819         17        7578401      7578401        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124190         17        7579311      7579311        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125394         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125429         17        7578257      7578257        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125615         12       25398281     25398281        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125768         17        7578461      7578461        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125899         17        7578268      7578268        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126135         17        7577574      7577574        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126256         17        7578192      7578192        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126537         17        7577594      7577595        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127108         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127164         17        7578455      7578455        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127165         17        7579536      7579545        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127507         17        7577547      7577547        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128106         17        7578392      7578392        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128210         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128437         12       25380276     25380276        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128536         17        7577100      7577100        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129049         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129148         17        7577565      7577565        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131533         12       25380276     25380276        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132172         17        7578550      7578550        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133221         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133359         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133360         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133535         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134327         17        7577130      7577130        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134922         17        7578431      7578431        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135477         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135835         12       25380275     25380275        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135949         17        7574027      7574027        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136497         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136613         17        7573976      7573976        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137745         17        7578506      7578523        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139153         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139344         17        7578448      7578448        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139345         17        7579312      7579312        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140084         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140291         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140493         17        7579312      7579312        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140927         17        7577097      7577097        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142276         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142683         17        7577538      7577538        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143746         12       25378562     25378562        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143843         17        7577610      7577610        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144297         17        7578403      7578403        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144414         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144720         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144867         17        7578263      7578263        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145292         17        7579312      7579312        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146388         17        7578542      7578542        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146638         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147471         17        7577105      7577105        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147472         17        7577138      7577138        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147653         17        7578442      7578442        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147780         12       25398281     25398281        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147896         17        7578275      7578275        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148122         17        7579481      7579482        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148762         17        7578461      7578461        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149469         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149759         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149847         17        7577089      7577094        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150095         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150096         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150131         17        7578455      7578455        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150502         17        7577532      7577532        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150952         17        7577573      7577573        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151338         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151664         17        7577538      7577538        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151950         17        7578457      7578457        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 152882         17        7577127      7577127        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153708         17        7574017      7574017        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156277         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156374         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156822         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157091         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157092         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157633         17        7577551      7577551        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158384         17        7578275      7578275        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158850         17        7577129      7577129        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159685         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160262         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160332         17        7577121      7577121        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160703         17        7578475      7578475        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 161565         17        7578461      7578461        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162241         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162462         17        7578489      7578489        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 163110         17        7578437      7578437        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 164381         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165122         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165161         17        7577114      7577114        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165823         17        7577507      7577507        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 166827         17        7577058      7577058        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167308         17        7578403      7578403        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167841         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168331         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168484         17        7577538      7577538        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169111         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169378         17        7578443      7578443        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169472         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169520         17        7578419      7578419        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170325         17        7578275      7578275        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171686         17        7578190      7578190        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171779         17        7578556      7578556        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171826         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172232         17        7578271      7578271        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172727         17        7578271      7578271        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 173513         17        7577541      7577541        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174538         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174965         17        7578469      7578469        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 175888         17        7574006      7574007        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176328         17        7577538      7577538        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176827         12       25398282     25398282        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177227         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177831         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 178205         17        7578275      7578277        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 178206         17        7579420      7579420        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 179471         17        7577082      7577082        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 179582         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 181555         17        7574026      7574026        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182025         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182172         17        7574000      7574000        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182675         17        7578190      7578190        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182841         17        7579358      7579358        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 183190         17        7578463      7578463        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 183740         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 184377         17        7577552      7577569        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 184836         17        7576852      7576852        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185293         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185765         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185904         17        7577085      7577085        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186414         17        7577082      7577082        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186492         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186507         17        7578507      7578507        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186583         17        7577509      7577509        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186990         12       25398220     25398220        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 187294         17        7577120      7577120        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 188929         17        7578457      7578457        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 189920         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190003         17        7579591      7579591        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190570         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190784         17        7578236      7578236        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 191693         17        7578443      7578443        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192134         17        7578235      7578235        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192815         17        7579373      7579373        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192943         17        7578534      7578534        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193081         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193442         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193988         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 194812         17        7577094      7577094        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 194930         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 195021         17        7577536      7577536        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 195625         17        7577547      7577547        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196085         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196164         17        7579310      7579310        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196566         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196866         17        7579312      7579312        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197338         17        7578272      7578272        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197393         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197636         12       25398262     25398262        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197684         17        7577120      7577120        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197857         17        7576852      7576852        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198010         17        7577556      7577556        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198210         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198696         17        7578463      7578466        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 199043         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 199823         17        7578290      7578290        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200372         12       25398282     25398282        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200460         17        7578413      7578413        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200972         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 201065         17        7577556      7577556        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 201524         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202000         12       25398282     25398282        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202045         17        7577046      7577046        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202386         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202709         17        7577566      7577566        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202710         17        7579518      7579518        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203076         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203304         17        7578475      7578475        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203660         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 204117         17        7578475      7578475        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 204803         17        7577082      7577082        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205130         17        7577509      7577509        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205833         17        7577120      7577120        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205834         17        7578266      7578266        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 207571         17        7577539      7577539        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 208479         17        7577082      7577082        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 209543         17        7577117      7577117        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 210890         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 210985         17        7574000      7574000        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 211567         17        7577574      7577574        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 211994         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212233         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212322         17        7578457      7578457        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212792         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212951         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213105         17        7576853      7576853        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213302         17        7577099      7577099        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213670         17        7578454      7578454        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213959         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214076         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214284         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214408         17        7577535      7577535        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214993         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215052         17        7578448      7578448        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215053         17        7579525      7579525        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215431         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215528         17        7577556      7577556        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 216154         17        7578257      7578257        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 216768         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 217013         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 217639         12       25398262     25398262        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 219835         12       25398285     25398285        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 220029         12       25398284     25398284        KRAS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 220428         17        7577046      7577046        TP53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Variant_Classification         Tumor_Sample_Barcode          sample</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34          Missense_Mutation TCGA-05-4244-01A-01D-1105-08 TCGA-05-4244-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 313         Missense_Mutation TCGA-05-4249-01A-01D-1105-08 TCGA-05-4249-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 725         Missense_Mutation TCGA-05-4250-01A-01D-1105-08 TCGA-05-4250-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1807        Missense_Mutation TCGA-05-4382-01A-01D-1931-08 TCGA-05-4382-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3364        Missense_Mutation TCGA-05-4384-01A-01D-1753-08 TCGA-05-4384-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3869        Missense_Mutation TCGA-05-4390-01A-02D-1753-08 TCGA-05-4390-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4581        Missense_Mutation TCGA-05-4395-01A-01D-1265-08 TCGA-05-4395-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4657        Missense_Mutation TCGA-05-4395-01A-01D-1265-08 TCGA-05-4395-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5500          Frame_Shift_Del TCGA-05-4396-01A-21D-1855-08 TCGA-05-4396-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7126          Frame_Shift_Del TCGA-05-4397-01A-01D-1265-08 TCGA-05-4397-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8140        Missense_Mutation TCGA-05-4398-01A-01D-1265-08 TCGA-05-4398-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8909          Frame_Shift_Del TCGA-05-4402-01A-01D-1265-08 TCGA-05-4402-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9049        Missense_Mutation TCGA-05-4403-01A-01D-1265-08 TCGA-05-4403-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9237        Missense_Mutation TCGA-05-4405-01A-21D-1855-08 TCGA-05-4405-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9313        Missense_Mutation TCGA-05-4405-01A-21D-1855-08 TCGA-05-4405-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9314        Missense_Mutation TCGA-05-4405-01A-21D-1855-08 TCGA-05-4405-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10091       Missense_Mutation TCGA-05-4410-01A-21D-1855-08 TCGA-05-4410-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11169       Missense_Mutation TCGA-05-4415-01A-22D-1855-08 TCGA-05-4415-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11234                  Silent TCGA-05-4415-01A-22D-1855-08 TCGA-05-4415-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11452       Missense_Mutation TCGA-05-4417-01A-22D-1855-08 TCGA-05-4417-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11844       Missense_Mutation TCGA-05-4418-01A-01D-1265-08 TCGA-05-4418-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12270       Missense_Mutation TCGA-05-4420-01A-01D-1265-08 TCGA-05-4420-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12899       Missense_Mutation TCGA-05-4424-01A-22D-1855-08 TCGA-05-4424-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13625       Missense_Mutation TCGA-05-4426-01A-01D-1265-08 TCGA-05-4426-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13808       Missense_Mutation TCGA-05-4427-01A-21D-1855-08 TCGA-05-4427-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14045       Missense_Mutation TCGA-05-4427-01A-21D-1855-08 TCGA-05-4427-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15086       Missense_Mutation TCGA-05-4430-01A-02D-1265-08 TCGA-05-4430-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15591       Nonsense_Mutation TCGA-05-4432-01A-01D-1265-08 TCGA-05-4432-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15592       Missense_Mutation TCGA-05-4432-01A-01D-1265-08 TCGA-05-4432-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16161       Missense_Mutation TCGA-05-4433-01A-22D-1855-08 TCGA-05-4433-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16174       Nonsense_Mutation TCGA-05-4433-01A-22D-1855-08 TCGA-05-4433-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16327       Missense_Mutation TCGA-05-5423-01A-01D-1625-08 TCGA-05-5423-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16328       Missense_Mutation TCGA-05-5423-01A-01D-1625-08 TCGA-05-5423-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16694       Nonsense_Mutation TCGA-05-5425-01A-02D-1625-08 TCGA-05-5425-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17347       Missense_Mutation TCGA-05-5428-01A-01D-1625-08 TCGA-05-5428-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17919       Missense_Mutation TCGA-35-3615-01A-01D-1040-01 TCGA-35-3615-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18184       Missense_Mutation TCGA-35-4122-01A-01D-1105-08 TCGA-35-4122-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18185             Splice_Site TCGA-35-4122-01A-01D-1105-08 TCGA-35-4122-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18614       Nonsense_Mutation TCGA-35-4123-01A-01D-1105-08 TCGA-35-4123-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19009       Missense_Mutation TCGA-35-5375-01A-01D-1625-08 TCGA-35-5375-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21889       Missense_Mutation TCGA-38-4632-01A-01D-1753-08 TCGA-38-4632-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22422       Missense_Mutation TCGA-38-6178-01A-11D-1753-08 TCGA-38-6178-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23197         Frame_Shift_Del TCGA-44-2656-01A-41D-A27T-08 TCGA-44-2656-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26280             Splice_Site TCGA-44-2659-01A-01D-0969-08 TCGA-44-2659-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27260       Missense_Mutation TCGA-44-2662-01A-01D-A271-08 TCGA-44-2662-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28105       Nonsense_Mutation TCGA-44-2668-01A-01D-A271-08 TCGA-44-2668-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28935       Missense_Mutation TCGA-44-3396-01A-01D-1553-08 TCGA-44-3396-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30247             Splice_Site TCGA-44-3918-01A-01D-A271-08 TCGA-44-3918-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34459       Missense_Mutation TCGA-44-5644-01A-21D-2036-08 TCGA-44-5644-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36562       Nonsense_Mutation TCGA-44-5645-01A-51D-A27T-08 TCGA-44-5645-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36706       Missense_Mutation TCGA-44-6145-01A-11D-1753-08 TCGA-44-6145-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36787             Splice_Site TCGA-44-6145-01A-11D-1753-08 TCGA-44-6145-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37458       Missense_Mutation TCGA-44-6146-01A-31D-A27T-08 TCGA-44-6146-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37691       Missense_Mutation TCGA-44-6774-01A-21D-1855-08 TCGA-44-6774-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38390       Missense_Mutation TCGA-44-6775-01A-31D-A27T-08 TCGA-44-6775-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38573       Missense_Mutation TCGA-44-6776-01A-11D-1855-08 TCGA-44-6776-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39232       Missense_Mutation TCGA-44-6777-01A-11D-1855-08 TCGA-44-6777-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40220       Missense_Mutation TCGA-44-6778-01A-11D-1855-08 TCGA-44-6778-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41129       Missense_Mutation TCGA-44-6779-01A-11D-1855-08 TCGA-44-6779-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41432       Missense_Mutation TCGA-44-7659-01A-11D-2063-08 TCGA-44-7659-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41759       Nonsense_Mutation TCGA-44-7660-01A-11D-2063-08 TCGA-44-7660-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42627       Missense_Mutation TCGA-44-7661-01A-11D-2063-08 TCGA-44-7661-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42693       Nonsense_Mutation TCGA-44-7661-01A-11D-2063-08 TCGA-44-7661-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43597       Nonsense_Mutation TCGA-44-7662-01A-11D-2063-08 TCGA-44-7662-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45030             Splice_Site TCGA-44-7667-01A-31D-2063-08 TCGA-44-7667-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46182                  Silent TCGA-44-7669-01A-21D-2063-08 TCGA-44-7669-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47617       Missense_Mutation TCGA-44-7670-01A-11D-2063-08 TCGA-44-7670-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50070       Missense_Mutation TCGA-44-7671-01A-11D-2063-08 TCGA-44-7671-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50659       Missense_Mutation TCGA-44-7672-01A-11D-2063-08 TCGA-44-7672-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51169       Missense_Mutation TCGA-44-8117-01A-11D-2238-08 TCGA-44-8117-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51332       Nonsense_Mutation TCGA-44-8117-01A-11D-2238-08 TCGA-44-8117-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53054       Nonsense_Mutation TCGA-44-8120-01A-11D-2238-08 TCGA-44-8120-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53723       Missense_Mutation TCGA-44-A479-01A-31D-A24D-08 TCGA-44-A479-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54023       Missense_Mutation TCGA-44-A47A-01A-21D-A24D-08 TCGA-44-A47A-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54359       Missense_Mutation TCGA-44-A47G-01A-21D-A24D-08 TCGA-44-A47G-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54585       Missense_Mutation TCGA-44-A4SS-01A-11D-A24P-08 TCGA-44-A4SS-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54586       Missense_Mutation TCGA-44-A4SS-01A-11D-A24P-08 TCGA-44-A4SS-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55096       Nonsense_Mutation TCGA-44-A4SU-01A-11D-A24P-08 TCGA-44-A4SU-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55602         Frame_Shift_Del TCGA-49-4487-01A-21D-1855-08 TCGA-49-4487-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55603       Missense_Mutation TCGA-49-4487-01A-21D-1855-08 TCGA-49-4487-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56031                  Silent TCGA-49-4488-01A-01D-1753-08 TCGA-49-4488-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56337       Nonsense_Mutation TCGA-49-4490-01A-21D-1855-08 TCGA-49-4490-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56753       Missense_Mutation TCGA-49-4505-01A-01D-1931-08 TCGA-49-4505-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56805       Missense_Mutation TCGA-49-4505-01A-01D-1931-08 TCGA-49-4505-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57015       Missense_Mutation TCGA-49-4506-01A-01D-1265-08 TCGA-49-4506-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57419       Missense_Mutation TCGA-49-4510-01A-01D-1265-08 TCGA-49-4510-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57695       Missense_Mutation TCGA-49-4514-01A-21D-1855-08 TCGA-49-4514-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60459       Nonsense_Mutation TCGA-49-6767-01A-11D-1855-08 TCGA-49-6767-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60927       Missense_Mutation TCGA-49-AAQV-01A-11D-A397-08 TCGA-49-AAQV-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61055       Nonsense_Mutation TCGA-49-AAR0-01A-21D-A397-08 TCGA-49-AAR0-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61735         Frame_Shift_Del TCGA-49-AAR3-01A-11D-A410-08 TCGA-49-AAR3-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62081       Missense_Mutation TCGA-49-AAR4-01A-12D-A410-08 TCGA-49-AAR4-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62883       Missense_Mutation TCGA-49-AAR9-01A-21D-A410-08 TCGA-49-AAR9-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63931       Missense_Mutation TCGA-49-AARE-01A-11D-A410-08 TCGA-49-AARE-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65390       Missense_Mutation TCGA-49-AARN-01A-21D-A410-08 TCGA-49-AARN-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66170       Missense_Mutation TCGA-49-AARO-01A-12D-A410-08 TCGA-49-AARO-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66945       Missense_Mutation TCGA-49-AARQ-01A-11D-A410-08 TCGA-49-AARQ-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67117       Missense_Mutation TCGA-49-AARQ-01A-11D-A410-08 TCGA-49-AARQ-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67763       Missense_Mutation TCGA-4B-A93V-01A-11D-A397-08 TCGA-4B-A93V-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67798       Missense_Mutation TCGA-4B-A93V-01A-11D-A397-08 TCGA-4B-A93V-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68201       Nonsense_Mutation TCGA-50-5045-01A-01D-1625-08 TCGA-50-5045-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68776       Nonsense_Mutation TCGA-50-5049-01A-01D-1625-08 TCGA-50-5049-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69534       Missense_Mutation TCGA-50-5051-01A-21D-1855-08 TCGA-50-5051-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69800       Missense_Mutation TCGA-50-5066-01A-01D-1625-08 TCGA-50-5066-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70086       Missense_Mutation TCGA-50-5068-01A-01D-1625-08 TCGA-50-5068-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70903       Missense_Mutation TCGA-50-5930-01A-11D-1753-08 TCGA-50-5930-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71974       Nonsense_Mutation TCGA-50-5931-01A-11D-1753-08 TCGA-50-5931-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72276       Missense_Mutation TCGA-50-5932-01A-11D-1753-08 TCGA-50-5932-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72442       Missense_Mutation TCGA-50-5933-01A-11D-1753-08 TCGA-50-5933-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72572             Splice_Site TCGA-50-5933-01A-11D-1753-08 TCGA-50-5933-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72573       Missense_Mutation TCGA-50-5933-01A-11D-1753-08 TCGA-50-5933-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73198       Missense_Mutation TCGA-50-5936-01A-11D-1625-08 TCGA-50-5936-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73375       Missense_Mutation TCGA-50-5939-01A-11D-1625-08 TCGA-50-5939-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73505       Missense_Mutation TCGA-50-5941-01A-11D-1753-08 TCGA-50-5941-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74067       Nonsense_Mutation TCGA-50-5944-01A-11D-1753-08 TCGA-50-5944-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74392         Frame_Shift_Del TCGA-50-5946-01A-11D-1753-08 TCGA-50-5946-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75314             Splice_Site TCGA-50-6590-01A-12D-1855-08 TCGA-50-6590-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76151         Frame_Shift_Del TCGA-50-6591-01A-11D-1753-08 TCGA-50-6591-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76301       Missense_Mutation TCGA-50-6592-01A-11D-1753-08 TCGA-50-6592-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76688             Splice_Site TCGA-50-6593-01A-11D-1753-08 TCGA-50-6593-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77136       Missense_Mutation TCGA-50-6594-01A-11D-1753-08 TCGA-50-6594-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77685       Nonsense_Mutation TCGA-50-6595-01A-12D-1855-08 TCGA-50-6595-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77686       Missense_Mutation TCGA-50-6595-01A-12D-1855-08 TCGA-50-6595-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77896       Missense_Mutation TCGA-50-6673-01A-11D-1945-08 TCGA-50-6673-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78027       Missense_Mutation TCGA-50-7109-01A-11D-2036-08 TCGA-50-7109-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78395       Missense_Mutation TCGA-50-8459-01A-11D-2323-08 TCGA-50-8459-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78516       Missense_Mutation TCGA-50-8460-01A-11D-2323-08 TCGA-50-8460-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78902             Splice_Site TCGA-53-7624-01A-11D-2063-08 TCGA-53-7624-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80079       Missense_Mutation TCGA-53-7626-01A-12D-2063-08 TCGA-53-7626-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81134       Missense_Mutation TCGA-53-7813-01A-11D-2167-08 TCGA-53-7813-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81519       Missense_Mutation TCGA-53-A4EZ-01A-12D-A24P-08 TCGA-53-A4EZ-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82240       Missense_Mutation TCGA-55-1592-01A-01D-0969-08 TCGA-55-1592-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82804       Nonsense_Mutation TCGA-55-1594-01A-01D-1040-01 TCGA-55-1594-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83006       Missense_Mutation TCGA-55-1595-01A-01D-0969-08 TCGA-55-1595-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83481       Missense_Mutation TCGA-55-1596-01A-01D-1040-01 TCGA-55-1596-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83804         Frame_Shift_Del TCGA-55-5899-01A-11D-1625-08 TCGA-55-5899-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84252       Missense_Mutation TCGA-55-6642-01A-11D-1855-08 TCGA-55-6642-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84469         Frame_Shift_Del TCGA-55-6712-01A-11D-1855-08 TCGA-55-6712-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84829         Frame_Shift_Del TCGA-55-6968-01A-11D-1945-08 TCGA-55-6968-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85484       Missense_Mutation TCGA-55-6969-01A-11D-1945-08 TCGA-55-6969-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85946       Missense_Mutation TCGA-55-6970-01A-11D-1945-08 TCGA-55-6970-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86847       Missense_Mutation TCGA-55-6975-01A-11D-1945-08 TCGA-55-6975-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86865         Frame_Shift_Del TCGA-55-6975-01A-11D-1945-08 TCGA-55-6975-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87255       Missense_Mutation TCGA-55-6979-01A-11D-1945-08 TCGA-55-6979-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87256       Missense_Mutation TCGA-55-6979-01A-11D-1945-08 TCGA-55-6979-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87819         Frame_Shift_Del TCGA-55-6980-01A-11D-1945-08 TCGA-55-6980-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88475       Missense_Mutation TCGA-55-6983-01A-11D-1945-08 TCGA-55-6983-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88610       Missense_Mutation TCGA-55-6984-01A-11D-1945-08 TCGA-55-6984-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88857       Missense_Mutation TCGA-55-6985-01A-11D-1945-08 TCGA-55-6985-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89680       Missense_Mutation TCGA-55-7281-01A-11D-2036-08 TCGA-55-7281-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90864       Missense_Mutation TCGA-55-7283-01A-11D-2036-08 TCGA-55-7283-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90930       Nonsense_Mutation TCGA-55-7283-01A-11D-2036-08 TCGA-55-7283-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91440       Missense_Mutation TCGA-55-7284-01B-11D-2238-08 TCGA-55-7284-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91659       Missense_Mutation TCGA-55-7570-01A-11D-2036-08 TCGA-55-7570-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92504       Missense_Mutation TCGA-55-7573-01A-11D-2036-08 TCGA-55-7573-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92652       Nonsense_Mutation TCGA-55-7574-01A-11D-2036-08 TCGA-55-7574-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93281       Missense_Mutation TCGA-55-7576-01A-11D-2063-08 TCGA-55-7576-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93382       Nonsense_Mutation TCGA-55-7576-01A-11D-2063-08 TCGA-55-7576-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94585       Missense_Mutation TCGA-55-7725-01A-11D-2167-08 TCGA-55-7725-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94741       Missense_Mutation TCGA-55-7726-01A-11D-2167-08 TCGA-55-7726-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94779       Nonsense_Mutation TCGA-55-7726-01A-11D-2167-08 TCGA-55-7726-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94970       Nonsense_Mutation TCGA-55-7727-01A-11D-2167-08 TCGA-55-7727-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95210       Missense_Mutation TCGA-55-7728-01A-11D-2184-08 TCGA-55-7728-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95341       Missense_Mutation TCGA-55-7815-01A-11D-2167-08 TCGA-55-7815-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95566       Missense_Mutation TCGA-55-7903-01A-11D-2167-08 TCGA-55-7903-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95567         Frame_Shift_Del TCGA-55-7903-01A-11D-2167-08 TCGA-55-7903-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95909       Missense_Mutation TCGA-55-7907-01A-11D-2167-08 TCGA-55-7907-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96234       Missense_Mutation TCGA-55-7907-01A-11D-2167-08 TCGA-55-7907-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97243       Missense_Mutation TCGA-55-7910-01A-11D-2167-08 TCGA-55-7910-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97308       Missense_Mutation TCGA-55-7910-01A-11D-2167-08 TCGA-55-7910-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97618       Nonsense_Mutation TCGA-55-7911-01A-11D-2167-08 TCGA-55-7911-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97619       Missense_Mutation TCGA-55-7911-01A-11D-2167-08 TCGA-55-7911-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97671       Missense_Mutation TCGA-55-7911-01A-11D-2167-08 TCGA-55-7911-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97994                  Silent TCGA-55-7913-01B-11D-2238-08 TCGA-55-7913-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98342       Missense_Mutation TCGA-55-7914-01A-11D-2167-08 TCGA-55-7914-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98392         Frame_Shift_Del TCGA-55-7914-01A-11D-2167-08 TCGA-55-7914-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99094       Missense_Mutation TCGA-55-7994-01A-11D-2184-08 TCGA-55-7994-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100762      Missense_Mutation TCGA-55-7995-01A-11D-2184-08 TCGA-55-7995-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101439      Nonsense_Mutation TCGA-55-8085-01A-11D-2238-08 TCGA-55-8085-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102217      Missense_Mutation TCGA-55-8089-01A-11D-2238-08 TCGA-55-8089-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103315      Missense_Mutation TCGA-55-8090-01A-11D-2238-08 TCGA-55-8090-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103672      Missense_Mutation TCGA-55-8092-01A-11D-2238-08 TCGA-55-8092-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104280      Missense_Mutation TCGA-55-8094-01A-11D-2238-08 TCGA-55-8094-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104378      Nonsense_Mutation TCGA-55-8094-01A-11D-2238-08 TCGA-55-8094-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104850      Nonsense_Mutation TCGA-55-8096-01A-11D-2238-08 TCGA-55-8096-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104985      Missense_Mutation TCGA-55-8097-01A-11D-2238-08 TCGA-55-8097-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105167      Missense_Mutation TCGA-55-8203-01A-11D-2238-08 TCGA-55-8203-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105750            Splice_Site TCGA-55-8204-01A-11D-2238-08 TCGA-55-8204-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106194      Missense_Mutation TCGA-55-8205-01A-11D-2238-08 TCGA-55-8205-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106704      Missense_Mutation TCGA-55-8207-01A-11D-2238-08 TCGA-55-8207-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107204      Missense_Mutation TCGA-55-8208-01A-11D-2238-08 TCGA-55-8208-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107550      Missense_Mutation TCGA-55-8299-01A-11D-2284-08 TCGA-55-8299-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108157      Missense_Mutation TCGA-55-8301-01A-11D-2284-08 TCGA-55-8301-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108158      Missense_Mutation TCGA-55-8301-01A-11D-2284-08 TCGA-55-8301-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108523      Missense_Mutation TCGA-55-8302-01A-11D-2323-08 TCGA-55-8302-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108680      Nonsense_Mutation TCGA-55-8302-01A-11D-2323-08 TCGA-55-8302-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110039      Missense_Mutation TCGA-55-8506-01A-11D-2393-08 TCGA-55-8506-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111967      Nonsense_Mutation TCGA-55-8507-01A-11D-2393-08 TCGA-55-8507-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112917      Missense_Mutation TCGA-55-8508-01A-11D-2393-08 TCGA-55-8508-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113239      Nonsense_Mutation TCGA-55-8510-01A-11D-2393-08 TCGA-55-8510-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113752        Frame_Shift_Del TCGA-55-8511-01A-11D-2393-08 TCGA-55-8511-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114277      Missense_Mutation TCGA-55-8512-01A-11D-2393-08 TCGA-55-8512-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114377      Missense_Mutation TCGA-55-8514-01A-11D-2393-08 TCGA-55-8514-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114445      Missense_Mutation TCGA-55-8514-01A-11D-2393-08 TCGA-55-8514-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114790      Missense_Mutation TCGA-55-8614-01A-11D-2393-08 TCGA-55-8614-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115026      Missense_Mutation TCGA-55-8615-01A-11D-2393-08 TCGA-55-8615-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115267      Missense_Mutation TCGA-55-8616-01A-11D-2393-08 TCGA-55-8616-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115380      Nonsense_Mutation TCGA-55-8616-01A-11D-2393-08 TCGA-55-8616-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116031      Missense_Mutation TCGA-55-8620-01A-11D-2393-08 TCGA-55-8620-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116697      Missense_Mutation TCGA-55-A48X-01A-11D-A24D-08 TCGA-55-A48X-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117520      Missense_Mutation TCGA-55-A48Z-01A-12D-A24P-08 TCGA-55-A48Z-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117802      Missense_Mutation TCGA-55-A490-01A-11D-A24D-08 TCGA-55-A490-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119417      Missense_Mutation TCGA-55-A491-01A-11D-A24D-08 TCGA-55-A491-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120209      Missense_Mutation TCGA-55-A493-01A-11D-A24D-08 TCGA-55-A493-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120517      Missense_Mutation TCGA-55-A494-01A-11D-A24P-08 TCGA-55-A494-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121119            Splice_Site TCGA-55-A4DF-01A-11D-A24D-08 TCGA-55-A4DF-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122047      Missense_Mutation TCGA-55-A4DG-01A-11D-A24D-08 TCGA-55-A4DG-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122666      Missense_Mutation TCGA-55-A57B-01A-12D-A397-08 TCGA-55-A57B-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122765      Missense_Mutation TCGA-62-8394-01A-11D-2323-08 TCGA-62-8394-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123039      Missense_Mutation TCGA-62-8398-01A-11D-2323-08 TCGA-62-8398-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123297      Missense_Mutation TCGA-62-8399-01A-21D-2323-08 TCGA-62-8399-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123819      Missense_Mutation TCGA-62-8402-01A-11D-2323-08 TCGA-62-8402-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124190            Splice_Site TCGA-62-A46O-01A-11D-A24D-08 TCGA-62-A46O-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125394      Missense_Mutation TCGA-62-A46R-01A-11D-A24D-08 TCGA-62-A46R-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125429      Nonsense_Mutation TCGA-62-A46R-01A-11D-A24D-08 TCGA-62-A46R-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125615      Missense_Mutation TCGA-62-A46S-01A-11D-A24D-08 TCGA-62-A46S-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125768      Missense_Mutation TCGA-62-A46U-01A-11D-A24D-08 TCGA-62-A46U-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125899      Missense_Mutation TCGA-62-A46Y-01A-11D-A24D-08 TCGA-62-A46Y-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126135      Missense_Mutation TCGA-62-A471-01A-12D-A24D-08 TCGA-62-A471-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126256        Frame_Shift_Del TCGA-62-A472-01A-11D-A24D-08 TCGA-62-A472-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126537        Frame_Shift_Del TCGA-64-1676-01A-01D-0969-08 TCGA-64-1676-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127108      Missense_Mutation TCGA-64-1677-01A-01W-0928-08 TCGA-64-1677-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127164      Missense_Mutation TCGA-64-1677-01A-01W-0928-08 TCGA-64-1677-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127165        Frame_Shift_Del TCGA-64-1677-01A-01W-0928-08 TCGA-64-1677-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127507      Missense_Mutation TCGA-64-1679-01A-21D-2063-08 TCGA-64-1679-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128106      Missense_Mutation TCGA-64-1681-01A-11D-2063-08 TCGA-64-1681-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128210      Missense_Mutation TCGA-64-5774-01A-01D-1625-08 TCGA-64-5774-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128437      Missense_Mutation TCGA-64-5775-01A-01D-1625-08 TCGA-64-5775-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128536      Missense_Mutation TCGA-64-5775-01A-01D-1625-08 TCGA-64-5775-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129049      Missense_Mutation TCGA-64-5778-01A-01D-1625-08 TCGA-64-5778-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129148      Missense_Mutation TCGA-64-5778-01A-01D-1625-08 TCGA-64-5778-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131533      Missense_Mutation TCGA-64-5815-01A-01D-1625-08 TCGA-64-5815-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132172      Missense_Mutation TCGA-67-3771-01A-01D-1040-01 TCGA-67-3771-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133221      Missense_Mutation TCGA-67-3773-01A-01D-1040-01 TCGA-67-3773-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133359      Missense_Mutation TCGA-67-3774-01A-01D-1040-01 TCGA-67-3774-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133360      Missense_Mutation TCGA-67-3774-01A-01D-1040-01 TCGA-67-3774-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133535      Missense_Mutation TCGA-67-4679-01B-01D-1753-08 TCGA-67-4679-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134327      Missense_Mutation TCGA-69-7760-01A-11D-2167-08 TCGA-69-7760-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134922      Nonsense_Mutation TCGA-69-7765-01A-11D-2167-08 TCGA-69-7765-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135477      Missense_Mutation TCGA-69-7973-01A-11D-2184-08 TCGA-69-7973-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135835      Missense_Mutation TCGA-69-7974-01A-11D-2184-08 TCGA-69-7974-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135949      Missense_Mutation TCGA-69-7974-01A-11D-2184-08 TCGA-69-7974-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136497      Missense_Mutation TCGA-69-7978-01A-11D-2184-08 TCGA-69-7978-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136613      Nonsense_Mutation TCGA-69-7978-01A-11D-2184-08 TCGA-69-7978-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137745           In_Frame_Del TCGA-69-7979-01A-11D-2184-08 TCGA-69-7979-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139153      Missense_Mutation TCGA-69-7980-01A-11D-2184-08 TCGA-69-7980-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139344      Missense_Mutation TCGA-69-7980-01A-11D-2184-08 TCGA-69-7980-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139345                 Silent TCGA-69-7980-01A-11D-2184-08 TCGA-69-7980-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140084      Missense_Mutation TCGA-69-8253-01A-11D-2284-08 TCGA-69-8253-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140291      Missense_Mutation TCGA-69-8254-01A-11D-2284-08 TCGA-69-8254-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140493                 Silent TCGA-69-8255-01A-11D-2284-08 TCGA-69-8255-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140927      Missense_Mutation TCGA-69-A59K-01A-11D-A25L-08 TCGA-69-A59K-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142276      Missense_Mutation TCGA-73-4662-01A-01D-1265-08 TCGA-73-4662-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142683      Missense_Mutation TCGA-73-4666-01A-01D-1265-08 TCGA-73-4666-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143746      Missense_Mutation TCGA-73-4670-01A-01D-1265-08 TCGA-73-4670-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143843            Splice_Site TCGA-73-4670-01A-01D-1265-08 TCGA-73-4670-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144297      Missense_Mutation TCGA-73-4676-01A-01D-1753-08 TCGA-73-4676-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144414      Missense_Mutation TCGA-73-4677-01A-01D-1265-08 TCGA-73-4677-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144720      Missense_Mutation TCGA-73-7498-01A-12D-2184-08 TCGA-73-7498-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144867      Nonsense_Mutation TCGA-73-7499-01A-11D-2184-08 TCGA-73-7499-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145292                 Silent TCGA-73-A9RS-01A-11D-A410-08 TCGA-73-A9RS-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146388      Missense_Mutation TCGA-75-5125-01A-01D-1753-08 TCGA-75-5125-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146638      Missense_Mutation TCGA-75-5126-01A-01D-1753-08 TCGA-75-5126-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147471      Missense_Mutation TCGA-75-5146-01A-01D-1625-08 TCGA-75-5146-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147472      Missense_Mutation TCGA-75-5146-01A-01D-1625-08 TCGA-75-5146-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147653      Missense_Mutation TCGA-75-5147-01A-01D-1625-08 TCGA-75-5147-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147780      Missense_Mutation TCGA-75-6206-01A-11D-1753-08 TCGA-75-6206-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147896      Nonsense_Mutation TCGA-75-6207-01A-11D-1753-08 TCGA-75-6207-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148122        Frame_Shift_Ins TCGA-75-6211-01A-11D-1753-08 TCGA-75-6211-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148762      Missense_Mutation TCGA-75-6214-01A-41D-1945-08 TCGA-75-6214-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149469      Missense_Mutation TCGA-75-7027-01A-11D-1945-08 TCGA-75-7027-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149759      Missense_Mutation TCGA-75-7030-01A-11D-1945-08 TCGA-75-7030-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149847           In_Frame_Del TCGA-75-7031-01A-11D-1945-08 TCGA-75-7031-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150095      Missense_Mutation TCGA-78-7145-01A-11D-2036-08 TCGA-78-7145-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150096      Missense_Mutation TCGA-78-7145-01A-11D-2036-08 TCGA-78-7145-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150131      Missense_Mutation TCGA-78-7145-01A-11D-2036-08 TCGA-78-7145-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150502      Missense_Mutation TCGA-78-7146-01A-11D-2036-08 TCGA-78-7146-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150952      Nonsense_Mutation TCGA-78-7147-01A-11D-2036-08 TCGA-78-7147-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151338      Missense_Mutation TCGA-78-7148-01A-11D-2036-08 TCGA-78-7148-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151664      Missense_Mutation TCGA-78-7149-01A-11D-2036-08 TCGA-78-7149-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151950      Missense_Mutation TCGA-78-7150-01A-21D-2036-08 TCGA-78-7150-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 152882      Missense_Mutation TCGA-78-7154-01A-11D-2036-08 TCGA-78-7154-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153708      Missense_Mutation TCGA-78-7155-01A-11D-2036-08 TCGA-78-7155-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156277      Missense_Mutation TCGA-78-7160-01A-11D-2036-08 TCGA-78-7160-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156374      Missense_Mutation TCGA-78-7161-01A-11D-2036-08 TCGA-78-7161-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156822      Missense_Mutation TCGA-78-7166-01A-12D-2063-08 TCGA-78-7166-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157091      Missense_Mutation TCGA-78-7167-01A-11D-2063-08 TCGA-78-7167-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157092      Missense_Mutation TCGA-78-7167-01A-11D-2063-08 TCGA-78-7167-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157633      Missense_Mutation TCGA-78-7220-01A-11D-2036-08 TCGA-78-7220-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158384      Nonsense_Mutation TCGA-78-7535-01A-11D-2063-08 TCGA-78-7535-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158850      Missense_Mutation TCGA-78-7536-01A-11D-2063-08 TCGA-78-7536-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159685      Missense_Mutation TCGA-78-7539-01A-11D-2063-08 TCGA-78-7539-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160262      Missense_Mutation TCGA-78-7540-01A-11D-2063-08 TCGA-78-7540-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160332      Missense_Mutation TCGA-78-7540-01A-11D-2063-08 TCGA-78-7540-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160703        Frame_Shift_Del TCGA-78-7542-01A-21D-2063-08 TCGA-78-7542-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 161565      Missense_Mutation TCGA-78-8640-01A-11D-2393-08 TCGA-78-8640-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162241      Missense_Mutation TCGA-78-8655-01A-11D-2393-08 TCGA-78-8655-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162462        Frame_Shift_Del TCGA-78-8660-01A-11D-2393-08 TCGA-78-8660-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 163110      Nonsense_Mutation TCGA-78-8662-01A-11D-2393-08 TCGA-78-8662-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 164381      Missense_Mutation TCGA-80-5608-01A-31D-1945-08 TCGA-80-5608-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165122      Missense_Mutation TCGA-83-5908-01A-21D-2284-08 TCGA-83-5908-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165161      Missense_Mutation TCGA-83-5908-01A-21D-2284-08 TCGA-83-5908-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165823      Missense_Mutation TCGA-86-6851-01A-11D-1945-08 TCGA-86-6851-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 166827      Nonsense_Mutation TCGA-86-7701-01A-11D-2167-08 TCGA-86-7701-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167308      Missense_Mutation TCGA-86-7711-01A-11D-2063-08 TCGA-86-7711-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167841      Missense_Mutation TCGA-86-7713-01A-11D-2063-08 TCGA-86-7713-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168331      Missense_Mutation TCGA-86-7953-01A-11D-2184-08 TCGA-86-7953-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168484      Missense_Mutation TCGA-86-7954-01A-11D-2184-08 TCGA-86-7954-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169111      Missense_Mutation TCGA-86-8054-01A-11D-2238-08 TCGA-86-8054-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169378      Missense_Mutation TCGA-86-8055-01A-11D-2238-08 TCGA-86-8055-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169472      Missense_Mutation TCGA-86-8056-01A-11D-2238-08 TCGA-86-8056-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169520      Missense_Mutation TCGA-86-8056-01A-11D-2238-08 TCGA-86-8056-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170325      Nonsense_Mutation TCGA-86-8073-01A-11D-2238-08 TCGA-86-8073-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171686      Missense_Mutation TCGA-86-8074-01A-11D-2238-08 TCGA-86-8074-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171779            Splice_Site TCGA-86-8075-01A-11D-2238-08 TCGA-86-8075-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171826      Missense_Mutation TCGA-86-8076-01A-31D-2238-08 TCGA-86-8076-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172232      Missense_Mutation TCGA-86-8279-01A-11D-2284-08 TCGA-86-8279-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172727      Missense_Mutation TCGA-86-8280-01A-11D-2284-08 TCGA-86-8280-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 173513      Missense_Mutation TCGA-86-8358-01A-11D-2323-08 TCGA-86-8358-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174538      Missense_Mutation TCGA-86-8359-01A-11D-2323-08 TCGA-86-8359-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174965        Frame_Shift_Del TCGA-86-8585-01A-11D-2393-08 TCGA-86-8585-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 175888        Frame_Shift_Ins TCGA-86-8672-01A-21D-2393-08 TCGA-86-8672-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176328      Missense_Mutation TCGA-86-8673-01A-11D-2393-08 TCGA-86-8673-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176827      Missense_Mutation TCGA-86-8674-01A-21D-2393-08 TCGA-86-8674-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177227      Missense_Mutation TCGA-86-A456-01A-11D-A24D-08 TCGA-86-A456-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177831      Missense_Mutation TCGA-86-A4JF-01A-11D-A24P-08 TCGA-86-A4JF-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 178205           In_Frame_Del TCGA-86-A4JF-01A-11D-A24P-08 TCGA-86-A4JF-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 178206        Frame_Shift_Del TCGA-86-A4JF-01A-11D-A24P-08 TCGA-86-A4JF-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 179471      Missense_Mutation TCGA-86-A4P7-01A-11D-A24P-08 TCGA-86-A4P7-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 179582      Missense_Mutation TCGA-91-6828-01A-11D-1855-08 TCGA-91-6828-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 181555      Missense_Mutation TCGA-91-6831-01A-11D-1855-08 TCGA-91-6831-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182025      Missense_Mutation TCGA-91-6836-01A-21D-1855-08 TCGA-91-6836-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182172      Nonsense_Mutation TCGA-91-6836-01A-21D-1855-08 TCGA-91-6836-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182675      Missense_Mutation TCGA-91-6840-01A-11D-1945-08 TCGA-91-6840-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182841      Missense_Mutation TCGA-91-6847-01A-11D-1945-08 TCGA-91-6847-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 183190      Missense_Mutation TCGA-91-6848-01A-11D-1945-08 TCGA-91-6848-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 183740      Missense_Mutation TCGA-91-6849-01A-11D-1945-08 TCGA-91-6849-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 184377           In_Frame_Del TCGA-91-8499-01A-11D-2393-08 TCGA-91-8499-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 184836            Splice_Site TCGA-91-A4BC-01A-11D-A24D-08 TCGA-91-A4BC-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185293      Missense_Mutation TCGA-93-7347-01A-11D-2184-08 TCGA-93-7347-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185765      Missense_Mutation TCGA-93-8067-01A-11D-2284-08 TCGA-93-8067-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185904      Missense_Mutation TCGA-93-8067-01A-11D-2284-08 TCGA-93-8067-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186414      Missense_Mutation TCGA-93-A4JN-01A-11D-A24P-08 TCGA-93-A4JN-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186492      Missense_Mutation TCGA-93-A4JO-01A-21D-A24P-08 TCGA-93-A4JO-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186507      Missense_Mutation TCGA-93-A4JO-01A-21D-A24P-08 TCGA-93-A4JO-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186583      Nonsense_Mutation TCGA-93-A4JP-01A-11D-A24P-08 TCGA-93-A4JP-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186990      Missense_Mutation TCGA-95-7039-01A-11D-1945-08 TCGA-95-7039-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 187294      Missense_Mutation TCGA-95-7039-01A-11D-1945-08 TCGA-95-7039-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 188929      Missense_Mutation TCGA-95-7043-01A-11D-1945-08 TCGA-95-7043-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 189920      Missense_Mutation TCGA-95-7562-01A-11D-2238-08 TCGA-95-7562-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190003            Splice_Site TCGA-95-7562-01A-11D-2238-08 TCGA-95-7562-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190570      Missense_Mutation TCGA-95-7567-01A-11D-2063-08 TCGA-95-7567-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190784      Missense_Mutation TCGA-95-7567-01A-11D-2063-08 TCGA-95-7567-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 191693      Missense_Mutation TCGA-95-7944-01A-11D-2184-08 TCGA-95-7944-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192134      Missense_Mutation TCGA-95-7947-01A-11D-2184-08 TCGA-95-7947-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192815      Missense_Mutation TCGA-95-8039-01A-11D-2238-08 TCGA-95-8039-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192943      Missense_Mutation TCGA-95-8494-01A-11D-2323-08 TCGA-95-8494-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193081      Missense_Mutation TCGA-95-A4VK-01A-11D-A25L-08 TCGA-95-A4VK-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193442      Missense_Mutation TCGA-95-A4VN-01A-11D-A25L-08 TCGA-95-A4VN-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193988      Missense_Mutation TCGA-95-A4VP-01A-21D-A25L-08 TCGA-95-A4VP-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 194812      Missense_Mutation TCGA-97-7553-01A-21D-2036-08 TCGA-97-7553-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 194930      Missense_Mutation TCGA-97-7554-01A-11D-2036-08 TCGA-97-7554-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 195021      Missense_Mutation TCGA-97-7554-01A-11D-2036-08 TCGA-97-7554-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 195625      Missense_Mutation TCGA-97-7937-01A-11D-2167-08 TCGA-97-7937-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196085      Missense_Mutation TCGA-97-7938-01A-11D-2167-08 TCGA-97-7938-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196164            Splice_Site TCGA-97-7938-01A-11D-2167-08 TCGA-97-7938-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196566      Missense_Mutation TCGA-97-7941-01A-11D-2184-08 TCGA-97-7941-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196866                 Silent TCGA-97-8172-01A-11D-2284-08 TCGA-97-8172-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197338      Missense_Mutation TCGA-97-8175-01A-11D-2284-08 TCGA-97-8175-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197393      Missense_Mutation TCGA-97-8176-01A-11D-2393-08 TCGA-97-8176-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197636      Missense_Mutation TCGA-97-8179-01A-11D-2284-08 TCGA-97-8179-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197684      Missense_Mutation TCGA-97-8179-01A-11D-2284-08 TCGA-97-8179-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197857            Splice_Site TCGA-97-8547-01A-11D-2393-08 TCGA-97-8547-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198010      Missense_Mutation TCGA-97-A4LX-01A-11D-A24P-08 TCGA-97-A4LX-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198210      Missense_Mutation TCGA-97-A4M0-01A-11D-A24P-08 TCGA-97-A4M0-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198696           In_Frame_Del TCGA-97-A4M1-01A-11D-A24P-08 TCGA-97-A4M1-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 199043      Missense_Mutation TCGA-97-A4M5-01A-11D-A24P-08 TCGA-97-A4M5-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 199823            Splice_Site TCGA-99-7458-01A-11D-2036-08 TCGA-99-7458-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200372      Missense_Mutation TCGA-99-8025-01A-11D-2238-08 TCGA-99-8025-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200460      Missense_Mutation TCGA-99-8025-01A-11D-2238-08 TCGA-99-8025-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200972      Missense_Mutation TCGA-99-8028-01A-11D-2238-08 TCGA-99-8028-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 201065      Missense_Mutation TCGA-99-8028-01A-11D-2238-08 TCGA-99-8028-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 201524      Missense_Mutation TCGA-99-8032-01A-11D-2238-08 TCGA-99-8032-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202000      Missense_Mutation TCGA-99-8033-01A-11D-2238-08 TCGA-99-8033-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202045      Nonsense_Mutation TCGA-99-8033-01A-11D-2238-08 TCGA-99-8033-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202386      Missense_Mutation TCGA-J2-8194-01A-11D-2238-08 TCGA-J2-8194-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202709      Missense_Mutation TCGA-J2-A4AD-01A-11D-A24D-08 TCGA-J2-A4AD-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202710      Missense_Mutation TCGA-J2-A4AD-01A-11D-A24D-08 TCGA-J2-A4AD-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203076      Missense_Mutation TCGA-J2-A4AG-01A-11D-A24D-08 TCGA-J2-A4AG-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203304      Missense_Mutation TCGA-L4-A4E5-01A-11D-A24P-08 TCGA-L4-A4E5-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203660      Missense_Mutation TCGA-L9-A443-01A-12D-A24D-08 TCGA-L9-A443-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 204117      Missense_Mutation TCGA-L9-A444-01A-21D-A24D-08 TCGA-L9-A444-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 204803      Missense_Mutation TCGA-L9-A5IP-01A-21D-A397-08 TCGA-L9-A5IP-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205130      Missense_Mutation TCGA-L9-A743-01A-43D-A397-08 TCGA-L9-A743-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205833      Missense_Mutation TCGA-L9-A7SV-01A-11D-A397-08 TCGA-L9-A7SV-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205834      Missense_Mutation TCGA-L9-A7SV-01A-11D-A397-08 TCGA-L9-A7SV-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 207571      Missense_Mutation TCGA-L9-A8F4-01A-11D-A397-08 TCGA-L9-A8F4-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 208479      Missense_Mutation TCGA-MN-A4N1-01A-11D-A24P-08 TCGA-MN-A4N1-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 209543      Missense_Mutation TCGA-MN-A4N4-01A-12D-A24P-08 TCGA-MN-A4N4-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 210890      Missense_Mutation TCGA-MN-A4N5-01A-11D-A24P-08 TCGA-MN-A4N5-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 210985      Nonsense_Mutation TCGA-MN-A4N5-01A-11D-A24P-08 TCGA-MN-A4N5-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 211567      Missense_Mutation TCGA-MP-A4SV-01A-11D-A24P-08 TCGA-MP-A4SV-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 211994      Missense_Mutation TCGA-MP-A4SY-01A-21D-A24P-08 TCGA-MP-A4SY-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212233      Missense_Mutation TCGA-MP-A4T4-01A-11D-A25L-08 TCGA-MP-A4T4-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212322      Missense_Mutation TCGA-MP-A4T4-01A-11D-A25L-08 TCGA-MP-A4T4-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212792      Missense_Mutation TCGA-MP-A4T7-01A-11D-A24P-08 TCGA-MP-A4T7-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212951      Missense_Mutation TCGA-MP-A4T8-01A-11D-A24P-08 TCGA-MP-A4T8-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213105                 Silent TCGA-MP-A4T9-01A-11D-A24P-08 TCGA-MP-A4T9-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213302      Missense_Mutation TCGA-MP-A4TA-01A-21D-A24P-08 TCGA-MP-A4TA-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213670      Missense_Mutation TCGA-MP-A4TC-01A-11D-A24P-08 TCGA-MP-A4TC-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213959      Missense_Mutation TCGA-MP-A4TD-01A-32D-A25L-08 TCGA-MP-A4TD-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214076      Missense_Mutation TCGA-MP-A4TE-01A-22D-A25L-08 TCGA-MP-A4TE-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214284      Missense_Mutation TCGA-MP-A4TF-01A-11D-A25L-08 TCGA-MP-A4TF-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214408      Missense_Mutation TCGA-MP-A4TF-01A-11D-A25L-08 TCGA-MP-A4TF-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214993      Missense_Mutation TCGA-MP-A4TI-01A-21D-A24P-08 TCGA-MP-A4TI-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215052      Missense_Mutation TCGA-MP-A4TI-01A-21D-A24P-08 TCGA-MP-A4TI-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215053                 Silent TCGA-MP-A4TI-01A-21D-A24P-08 TCGA-MP-A4TI-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215431      Missense_Mutation TCGA-MP-A4TK-01A-11D-A24P-08 TCGA-MP-A4TK-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215528      Missense_Mutation TCGA-MP-A4TK-01A-11D-A24P-08 TCGA-MP-A4TK-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 216154      Nonsense_Mutation TCGA-NJ-A4YF-01A-12D-A25L-08 TCGA-NJ-A4YF-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 216768      Missense_Mutation TCGA-NJ-A4YG-01A-22D-A25L-08 TCGA-NJ-A4YG-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 217013      Missense_Mutation TCGA-NJ-A4YI-01A-11D-A25L-08 TCGA-NJ-A4YI-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 217639      Missense_Mutation TCGA-NJ-A4YP-01A-11D-A25L-08 TCGA-NJ-A4YP-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 219835      Missense_Mutation TCGA-NJ-A55O-01A-11D-A25L-08 TCGA-NJ-A55O-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 220029      Missense_Mutation TCGA-NJ-A55R-01A-11D-A25L-08 TCGA-NJ-A55R-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 220428      Nonsense_Mutation TCGA-O1-A52J-01A-11D-A25L-08 TCGA-O1-A52J-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               HGVSp_Short</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34                 p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 313                p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 725                p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1807              p.V272G</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3364              p.Y205C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3869               p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4581               p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4657              p.C176Y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5500         p.K139Rfs*31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7126         p.R249Gfs*96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8140              p.G105D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8909         p.V173Afs*69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9049               p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9237               p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9313              p.C277F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9314              p.R175H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10091             p.D281V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11169              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11234             p.T125T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11452              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11844              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12270             p.R280I</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12899             p.L194R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13625             p.T155I</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13808              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14045             p.D281N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15086             p.R249M</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15591             p.R342*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15592             p.D281E</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16161              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16174             p.R196*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16327             p.R249M</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16328             p.I195M</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16694              p.E68*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17347             p.C238Y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17919              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18184             p.R249M</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18185       p.X224_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18614             p.W146*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19009             p.S241F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21889             p.A159P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22422             p.R283P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23197         p.P72Rfs*51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26280       p.X126_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27260             p.R280T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28105             p.E286*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28935             p.E286G</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30247       p.X307_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34459             p.F109C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36562             p.Q354*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36706              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36787       p.X332_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37458              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37691             p.G245C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38390             p.H168L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38573              p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39232             p.G245V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40220             p.I232F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41129             p.K132E</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41432              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41759             p.E336*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42627              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42693             p.R213*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43597              p.E68*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45030       p.X261_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46182             p.T125T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47617             p.R337L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50070              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50659              p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51169              p.L19F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51332             p.E171*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53054             p.E349*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53723             p.S127F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54023              p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54359             p.H193L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54585             p.G245V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54586             p.G245C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55096              p.W53*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55602        p.H178Tfs*69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55603              p.P77L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56031             p.T125T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56337             p.R213*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56753              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56805             p.C277F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57015              p.G13D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57419              p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57695             p.R175H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60459             p.Q331*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60927             p.R273H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61055             p.E339*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61735        p.E294Sfs*51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62081             p.G105C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62883             p.Y205C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63931             p.R273G</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65390             p.M237I</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66170              p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66945              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67117             p.R158L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67763              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67798             p.H214R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68201             p.R209*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68776             p.E298*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69534              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69800             p.H179Q</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70086             p.V216M</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70903             p.G262V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71974              p.W91*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72276              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72442              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72572       p.X187_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72573             p.R158L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73198              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73375             p.E285K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73505              p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74067             p.E285*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74392        p.R158Afs*12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75314       p.X187_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76151         p.F54Sfs*69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76301             p.R249G</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76688       p.X225_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77136             p.V272M</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77685             p.S183*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77686             p.R175H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77896             p.R337C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78027              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78395              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78516             p.R282W</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78902       p.X331_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80079             p.M237I</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81134              p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81519             p.V157F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82240             p.G244C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82804             p.S166*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83006              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83481             p.D281Y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83804        p.P152Lfs*18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84252              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84469         p.E339Rfs*6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84829        p.S313Afs*32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85484             p.R273L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85946              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86847              p.G13C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86865        p.K305Efs*39</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87255             p.Q144L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87256             p.C141F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87819        p.A138Cfs*27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88475              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88610              p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88857             p.G334V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89680              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90864              p.G12S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90930             p.Q144*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91440              p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91659             p.Y163C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92504             p.C135F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92652             p.E346*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93281              p.G12S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93382             p.Q317*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94585              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94741              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94779             p.C141*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94970              p.Q52*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95210              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95341              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95566             p.A355T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95567          p.L35Cfs*9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95909              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96234             p.R158P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97243              p.G13C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97308             p.K120E</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97618              p.K88*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97619              p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97671             p.Q144H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97994             p.T125T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98342              p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98392        p.E294Sfs*51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99094             p.R273L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100762            p.H179Y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101439            p.Q331*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102217            p.R249S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103315             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103672            p.R158L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104280             p.G13C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104378            p.Q317*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104850            p.E339*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104985             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105167             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105750      p.X307_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106194            p.Y205C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106704             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107204            p.C275F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107550             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108157            p.G245V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108158            p.G245S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108523             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108680            p.E343*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110039            p.G154V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111967            p.Q317*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112917             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113239            p.R213*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113752       p.H296Tfs*49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114277             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114377             p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114445            p.R337P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114790            p.G266V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115026             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115267             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115380            p.Q144*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116031            p.R280G</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116697            p.R110L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117520            p.R337C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117802             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119417            p.H193R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120209            p.R273S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120517             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121119      p.X126_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122047            p.R158L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122666            p.G266V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122765            p.V274G</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123039             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123297            p.Q331H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123819            p.P177T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124190      p.X125_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125394             p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125429            p.E198*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125615             p.G13D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125768            p.V157L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125899            p.L194R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126135            p.Y236C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126256       p.Y220Mfs*27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126537       p.C229Yfs*10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127108             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127164            p.A159P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127165        p.D48Nfs*72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127507            p.G245V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128106            p.E180K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128210             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128437             p.Q61L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128536            p.R280G</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129049             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129148            p.N239S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131533             p.Q61L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132172            p.S127C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133221             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133359             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133360             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133535             p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134327            p.F270V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134922            p.Q167*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135477             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135835             p.Q61H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135949            p.G334W</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136497             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136613            p.K351*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137745     p.Q136_C141del</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139153             p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139344            p.A161V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139345            p.T125T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140084             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140291             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140493            p.T125T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140927            p.D281Y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142276             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142683            p.R248P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143746            p.A146P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143843      p.X225_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144297            p.C176F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144414             p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144720             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144867            p.R196*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145292            p.T125T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146388            p.L130F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146638             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147471            p.P278H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147472            p.R267L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147653            p.Y163C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147780             p.G13D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147896            p.Q192*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148122        p.A69Gfs*80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148762            p.V157F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149469             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149759             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149847     p.R282_R283del</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150095             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150096             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150131            p.A159P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150502            p.P250L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150952            p.Y236*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151338             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151664            p.R248L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151950            p.R158L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 152882            p.E271K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153708            p.R337L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156277             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156374             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156822             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157091             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157092             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157633            p.G244C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158384            p.Q192*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158850            p.F270C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159685             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160262             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160332            p.R273C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160703       p.P152Rfs*18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 161565            p.V157L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162241             p.G12S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162462       p.D148Ifs*22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 163110            p.Q165*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 164381             p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165122             p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165161            p.C275F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165823            p.E258D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 166827            p.E294*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167308            p.C176F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167841             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168331             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168484            p.R248L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169111             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169378            p.Y163H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169472             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169520            p.E171K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170325            p.Q192*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171686            p.Y220C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171779      p.X126_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171826             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172232            p.H193R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172727            p.H193P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 173513            p.N247I</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174538             p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174965       p.G154Afs*16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 175888        p.F341Efs*7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176328            p.R248L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 176827             p.G13C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177227             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177831             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 178205          p.P191del</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 178206        p.S90Pfs*33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 179471            p.E286K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 179582             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 181555            p.G334V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182025             p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182172            p.E343*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182675            p.Y220C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 182841            p.R110L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 183190            p.R156P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 183740             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 184377     p.C238_M243del</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 184836      p.X331_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185293             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185765             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 185904            p.E285K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186414            p.E286Q</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186492             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186507            p.C141W</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186583            p.E258*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 186990             p.D33E</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 187294            p.R273L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 188929            p.R158L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 189920             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190003       p.X33_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190570             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 190784            p.Y205H</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 191693            p.Y163D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192134            p.Y205C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192815            p.G105D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 192943            p.K132N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193081             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193442             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 193988             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 194812            p.R282W</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 194930             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 195021            p.R249W</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 195625            p.G245V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196085             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196164      p.X125_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196566             p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 196866            p.T125T</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197338            p.H193N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197393             p.G12S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197636             p.L19F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197684            p.R273L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 197857      p.X331_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198010            p.C242F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198210             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 198696 p.T155_R156delinsN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 199043             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 199823      p.X187_splice</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200372             p.G13C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200460            p.V173L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 200972             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 201065            p.C242F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 201524             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202000             p.G13C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202045            p.E298*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202386             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202709            p.N239D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 202710             p.D57N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203076             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203304            p.P152L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 203660             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 204117            p.P152L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 204803            p.E286K</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205130            p.E258Q</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205833            p.R273L</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 205834            p.I195F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 207571            p.R248W</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 208479            p.E286Q</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 209543            p.V274D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 210890             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 210985            p.E343*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 211567            p.Y236C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 211994             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212233             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212322            p.R158P</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212792             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 212951             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213105            p.Q331Q</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213302            p.R280I</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213670            p.A159V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 213959             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214076             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214284             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214408            p.R249M</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 214993             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215052            p.A161D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215053             p.F54F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215431             p.G12V</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 215528            p.C242F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 216154            p.E198*</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 216768             p.G12D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 217013             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 217639             p.L19F</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 219835             p.G12C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 220029             p.G12A</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 220428            p.E298*</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

@@ -15,3 +15,7 @@ Empty ALS list object.
 \description{
 Initialize an Alteration Landscape Stats (ALS) container
 }
+\examples{
+new.ALS(list())
+
+}

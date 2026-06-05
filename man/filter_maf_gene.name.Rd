@@ -21,3 +21,8 @@ Filtered MAF dataframe.
 \description{
 Filter a MAF dataframe by gene name
 }
+\examples{
+data(luad_maf, package = "SelectSim")
+filter_maf_gene.name(luad_maf, genes = c("TP53", "KRAS"))
+
+}

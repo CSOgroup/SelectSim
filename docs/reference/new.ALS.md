@@ -17,3 +17,12 @@ new.ALS(al)
 ## Value
 
 Empty ALS list object.
+
+## Examples
+
+``` r
+new.ALS(list())
+#> list()
+#> attr(,"class")
+#> [1] "ALS"
+```

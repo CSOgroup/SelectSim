@@ -19,3 +19,15 @@ List with overlap and w_overlap matrices, plus optional sample.blocks entries.
 \description{
 Compute pairwise alteration statistics for an alteration landscape
 }
+\examples{
+\donttest{
+data(luad_run_data, package = "SelectSim")
+result <- selectX(M = luad_run_data$M,
+                  sample.class = luad_run_data$sample.class,
+                  alteration.class = luad_run_data$alteration.class,
+                  n.cores = 1, min.freq = 10, n.permut = 10,
+                  verbose = FALSE)
+al.pairwise.alteration.stats(result$obj)
+}
+
+}

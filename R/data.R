@@ -1,13 +1,27 @@
-#' Lung adenocarcinoma from TCGA cohort as SelectSim run object 
+#' Lung adenocarcinoma from TCGA cohort as SelectSim run object
 #'
-#' A dataset containing the genome alteration matrix and tumor mutation burden along with sample,alteration annotation as list object
-#'
+#' Pre-processed TCGA LUAD data ready to pass directly to \code{selectX()}.
 #'
 #' @docType data
 #' @keywords datasets
 #' @name luad_run_data
 #' @usage data(luad_run_data)
-#' @format A list object with GAMs and TMBs along with sample & alteration annotations.
+#' @format A named list with four elements:
+#' \describe{
+#'   \item{M}{A named list containing:
+#'     \describe{
+#'       \item{M}{A named list of binary alteration matrices (genes x samples),
+#'         one per alteration type (e.g., \code{missense}, \code{truncating}).}
+#'       \item{tmb}{A named list of data frames, one per alteration type, each
+#'         with columns \code{sample} (character) and \code{mutation} (integer
+#'         TMB count).}
+#'     }
+#'   }
+#'   \item{sample.class}{Named character vector of sample-type annotations
+#'     (length = number of samples). Names are sample IDs.}
+#'   \item{alteration.class}{Named character vector of alteration-type annotations
+#'     (length = number of genes). Names are gene symbols.}
+#' }
 NULL
 
 
