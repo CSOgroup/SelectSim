@@ -144,7 +144,7 @@ if (requireNamespace("tictoc", quietly = TRUE)) tictoc::tic('##### Creating Trun
     truncating_data <- list('gam'=tcga_truc_gam,
                             'tmb'=truncating_tmb)
 if (requireNamespace("tictoc", quietly = TRUE)) tictoc::toc()
-#> ##### Creating Truncating GAM ####: 0.166 sec elapsed
+#> ##### Creating Truncating GAM ####: 0.165 sec elapsed
 ```
 
 - Let generate the Missense data
@@ -191,7 +191,7 @@ if (requireNamespace("tictoc", quietly = TRUE)) tictoc::tic('##### Creating Miss
                           'tmb'=missense_tmb)
 
 if (requireNamespace("tictoc", quietly = TRUE)) tictoc::toc()
-#> ##### Creating Missense GAM ####: 1.669 sec elapsed
+#> ##### Creating Missense GAM ####: 1.62 sec elapsed
 ```
 
 #### Generating the run_object to run SelectSim
