@@ -5,16 +5,19 @@ bibentry(
   title    = "Evolving patterns of co-mutations from tumor initiation to metastatic progression",
   author   = c(
     person("Arvind",  "Iyer"),
-    person("Marco",   "Mina"),
     person("Miljan",  "Petrovic"),
+    person("Debora",  "Sesia"),
+    person("Luca",    "Nanni"),
+    person("Marco",   "Mina"),
     person("Giovanni","Ciriello")
   ),
-  journal  = "TBD",
+  journal  = "Nature Genetics",
   year     = "2026",
-  doi      = "",   # fill in DOI once assigned
-  url      = "https://github.com/CSOgroup/SelectSim",
+  doi      = "10.1038/s41588-026-02661-4",
+  url      = "https://doi.org/10.1038/s41588-026-02661-4",
   textVersion = paste(
-    "Iyer A, Mina M, Petrovic M, Ciriello G (2026).",
-    "Evolving patterns of co-mutations from tumor initiation to metastatic progression."
+    "Iyer A, Petrovic M, Sesia D, Nanni L, Mina M, Ciriello G (2026).",
+    "Evolving patterns of co-mutations from tumor initiation to metastatic progression.",
+    "Nature Genetics. doi:10.1038/s41588-026-02661-4"
   )
 )

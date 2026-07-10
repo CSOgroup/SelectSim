@@ -28,9 +28,10 @@ frequency-stratified FDR control generated via simulation.
 
 This package accompanies the manuscript:
 
-> Iyer A, Mina M, Petrovic M, Ciriello G (2026). Evolving patterns of
-> co-mutations from tumor initiation to metastatic progression. *TBD*.
-> doi: *TBD*
+> Iyer A, Petrovic M, Sesia D, Nanni L, Mina M, Ciriello G (2026).
+> Evolving patterns of co-mutations from tumor initiation to
+> metastatic progression. *Nature Genetics*. doi:
+> [10.1038/s41588-026-02661-4](https://doi.org/10.1038/s41588-026-02661-4)
 
 ## Installation
 
@@ -83,9 +84,10 @@ Full documentation and vignettes are available at
 
 If you use SelectSim in your research, please cite:
 
-> Iyer A, Mina M, Petrovic M, Ciriello G (2026). Evolving patterns of
-> co-mutations from tumor initiation to metastatic progression. *TBD*.
-> doi: *TBD*
+> Iyer A, Petrovic M, Sesia D, Nanni L, Mina M, Ciriello G (2026).
+> Evolving patterns of co-mutations from tumor initiation to
+> metastatic progression. *Nature Genetics*. doi:
+> [10.1038/s41588-026-02661-4](https://doi.org/10.1038/s41588-026-02661-4)
 
 You can also run `citation("SelectSim")` inside R for a formatted
 reference.
