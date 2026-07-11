@@ -144,7 +144,7 @@ if (requireNamespace("tictoc", quietly = TRUE)) tictoc::tic('##### Creating Trun
     truncating_data <- list('gam'=tcga_truc_gam,
                             'tmb'=truncating_tmb)
 if (requireNamespace("tictoc", quietly = TRUE)) tictoc::toc()
-#> ##### Creating Truncating GAM ####: 0.165 sec elapsed
+#> ##### Creating Truncating GAM ####: 0.174 sec elapsed
 ```
 
 - Let generate the Missense data
@@ -191,7 +191,7 @@ if (requireNamespace("tictoc", quietly = TRUE)) tictoc::tic('##### Creating Miss
                           'tmb'=missense_tmb)
 
 if (requireNamespace("tictoc", quietly = TRUE)) tictoc::toc()
-#> ##### Creating Missense GAM ####: 1.62 sec elapsed
+#> ##### Creating Missense GAM ####: 1.34 sec elapsed
 ```
 
 #### Generating the run_object to run SelectSim
@@ -253,7 +253,7 @@ str(run_data)
 
 # Print the sessionInfo
 sessionInfo()
-#> R version 4.6.0 (2026-04-24)
+#> R version 4.6.1 (2026-06-24)
 #> Platform: x86_64-pc-linux-gnu
 #> Running under: Ubuntu 24.04.4 LTS
 #> 
@@ -278,25 +278,25 @@ sessionInfo()
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] sass_0.4.10           generics_0.1.4        tidyr_1.3.2          
-#>  [4] rstatix_0.7.3         lattice_0.22-9        digest_0.6.39        
-#>  [7] magrittr_2.0.5        evaluate_1.0.5        grid_4.6.0           
+#>  [4] rstatix_1.0.0         lattice_0.22-9        digest_0.6.39        
+#>  [7] magrittr_2.0.5        evaluate_1.0.5        grid_4.6.1           
 #> [10] RColorBrewer_1.1-3    iterators_1.0.14      fastmap_1.2.0        
 #> [13] Matrix_1.7-5          foreach_1.5.2         doParallel_1.0.17    
 #> [16] jsonlite_2.0.0        backports_1.5.1       Formula_1.2-5        
 #> [19] purrr_1.2.2           doRNG_1.8.6.3         scales_1.4.0         
 #> [22] codetools_0.2-20      textshaping_1.0.5     jquerylib_0.1.4      
 #> [25] abind_1.4-8           cli_3.6.6             zigg_0.0.2           
-#> [28] rlang_1.2.0           cachem_1.1.0          yaml_2.3.12          
-#> [31] otel_0.2.0            tools_4.6.0           parallel_4.6.0       
-#> [34] ggsignif_0.6.4        ggplot2_4.0.3         ggpubr_0.6.3         
+#> [28] rlang_1.3.0           cachem_1.1.0          yaml_2.3.12          
+#> [31] otel_0.2.0            tools_4.6.1           parallel_4.6.1       
+#> [34] ggsignif_0.6.4        ggplot2_4.0.3         ggpubr_1.0.0         
 #> [37] rngtools_1.5.2        Rfast_2.1.5.2         broom_1.0.13         
 #> [40] vctrs_0.7.3           R6_2.6.1              ggridges_0.5.7       
 #> [43] lifecycle_1.0.5       fs_2.1.0              car_3.1-5            
 #> [46] ragg_1.5.2            pkgconfig_2.0.3       desc_1.4.3           
-#> [49] RcppParallel_5.1.11-2 pkgdown_2.2.0         bslib_0.11.0         
-#> [52] pillar_1.11.1         gtable_0.3.6          Rcpp_1.1.1-1.1       
-#> [55] glue_1.8.1            systemfonts_1.3.2     xfun_0.58            
+#> [49] RcppParallel_5.1.11-2 pkgdown_2.2.1         bslib_0.11.0         
+#> [52] pillar_1.11.1         gtable_0.3.6          Rcpp_1.1.2           
+#> [55] glue_1.8.1            systemfonts_1.3.2     xfun_0.60            
 #> [58] tibble_3.3.1          tidyselect_1.2.1      knitr_1.51           
 #> [61] farver_2.1.2          htmltools_0.5.9       rmarkdown_2.31       
-#> [64] carData_3.0-6         compiler_4.6.0        S7_0.2.2
+#> [64] carData_3.0-6         compiler_4.6.1        S7_0.2.2
 ```

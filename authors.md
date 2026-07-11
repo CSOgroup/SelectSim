@@ -17,13 +17,15 @@
 Source:
 [`inst/CITATION`](https://github.com/CSOgroup/SelectSim/blob/main/inst/CITATION)
 
-Iyer A, Mina M, Petrovic M, Ciriello G (2026). Evolving patterns of
-co-mutations from tumor initiation to metastatic progression.
+Iyer A, Petrovic M, Sesia D, Nanni L, Mina M, Ciriello G (2026).
+Evolving patterns of co-mutations from tumor initiation to metastatic
+progression. Nature Genetics. doi:10.1038/s41588-026-02661-4
 
     @Article{,
       title = {Evolving patterns of co-mutations from tumor initiation to metastatic progression},
-      author = {Arvind Iyer and Marco Mina and Miljan Petrovic and Giovanni Ciriello},
-      journal = {TBD},
+      author = {Arvind Iyer and Miljan Petrovic and Debora Sesia and Luca Nanni and Marco Mina and Giovanni Ciriello},
+      journal = {Nature Genetics},
       year = {2026},
-      url = {https://github.com/CSOgroup/SelectSim},
+      doi = {10.1038/s41588-026-02661-4},
+      url = {https://doi.org/10.1038/s41588-026-02661-4},
     }

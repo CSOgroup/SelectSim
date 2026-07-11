@@ -23,6 +23,11 @@
   [CSOgroup/SelectSim](https://github.com/CSOgroup/SelectSim); `dev`
   branch merged into `main` for initial public release.
 - Bumped version to 0.1.6 across all source files
+- Updated citation (`inst/CITATION`, `README`) to the published Nature
+  Genetics article: Iyer A, Petrovic M, Sesia D, Nanni L, Mina M,
+  Ciriello G (2026). Evolving patterns of co-mutations from tumor
+  initiation to metastatic progression. *Nature Genetics*.
+  <doi:10.1038/s41588-026-02661-4>
 
 ## SelectSim 0.0.1.3
 
