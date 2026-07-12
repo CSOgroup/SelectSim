@@ -1,15 +1,15 @@
 Package: SelectSim
-Title: Selected Events Linked by Evolutionary Conditions Across Human Tumors
+Title: Selected Events Linked by Evolutionary Conditions in Cancer
 Version: 0.1.6
 Authors@R: c(
-    person("Arvind", "Iyer", , "ayalurarvind@gmail.com", role = c("aut", "cre"),
+    person("Arvind", "Iyer", , "ayalurarvind@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-8247-700X")),
     person("Marco", "Mina", , "marco.mina.85@gmail.com", role = "aut"),
-    person("Miljan", "Petrovic", , "miljanpet93@gmail.com", role = "aut"),
-    person("Giovanni", "Ciriello", , "giovanni.ciriello@unil.ch", role = "aut",
+    person("Miljan", "Petrovic", , "miljanpet93@gmail.com", role = c("aut", "cph")),
+    person("Giovanni", "Ciriello", , "giovanni.ciriello@unil.ch", role = c("aut", "cph"),
            comment = c(ORCID = "0000-0003-2021-8683"))
   )
-Description: Implements the SelectSim methodology for identifying patterns of
+Description: Implements the 'SelectSim' methodology for identifying patterns of
     co-occurrence and mutual exclusivity between functional genomic alterations
     in cancer cohorts. The package processes mutation annotation data, constructs
     alteration matrices, estimates expected alteration-pair frequencies, and

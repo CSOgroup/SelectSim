@@ -30,7 +30,6 @@ This package accompanies the manuscript: Iyer A, Mina M, Petrovic M, Ciriello G 
 - You can install the development version of SelectSim from [GitHub](https://github.com/CSOgroup/SelectSim) with:
 
 ``` r
-# install.packages("devtools")
 devtools::install_github("CSOgroup/SelectSim",dependencies = TRUE, build_vignettes = TRUE)
 ```
 
@@ -106,7 +105,6 @@ result_obj$result %>% filter(nFDR2<=0.25) %>% count(type)
 ##### Plotting a scatter plot of co-mutation
 ```{r}
 # Filtering significant hits and plotting
-options(repr.plot.width = 7, repr.plot.height = 7)
 obs_exp_scatter(result = result_obj$result,title = 'TCGA LUAD')
 ```
 
