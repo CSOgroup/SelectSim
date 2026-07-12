@@ -9,8 +9,12 @@ Authors@R: c(
     person("Giovanni", "Ciriello", , "giovanni.ciriello@unil.ch", role = "aut",
            comment = c(ORCID = "0000-0003-2021-8683"))
   )
-Description: This R package implements the SelectSim methodology to infer
-    co-mutations between functional alterations in cancer.
+Description: Implements the SelectSim methodology for identifying patterns of
+    co-occurrence and mutual exclusivity between functional genomic alterations
+    in cancer cohorts. The package processes mutation annotation data, constructs
+    alteration matrices, estimates expected alteration-pair frequencies, and
+    quantifies deviations associated with selective interactions. The methodology
+    is described in Iyer et al. (2026) <doi:10.1038/s41588-026-02661-4>.
 License: MIT + file LICENSE
 URL: https://csogroup.github.io/SelectSim/
 BugReports: https://github.com/CSOgroup/SelectSim/issues
