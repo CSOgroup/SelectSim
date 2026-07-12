@@ -44,7 +44,7 @@ pak::pak("CSOgroup/SelectSim")
 ```
 
 For more details on installation refer to
-[INSTALLATION](INSTALLATION.md).
+[INSTALLATION](https://github.com/CSOgroup/SelectSim/blob/main/INSTALLATION.md).
 
 ## Quick start
 
