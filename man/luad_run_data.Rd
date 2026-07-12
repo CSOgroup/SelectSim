@@ -25,7 +25,16 @@ TMB count).}
 \usage{
 data(luad_run_data)
 }
+\value{
+A named list containing preprocessed LUAD input data for
+\code{selectX()}.
+}
 \description{
-Pre-processed TCGA LUAD data ready to pass directly to \code{selectX()}.
+Preprocessed TCGA LUAD data ready to pass directly to \code{selectX()}.
+}
+\examples{
+data(luad_run_data)
+names(luad_run_data)
+str(luad_run_data, max.level = 1)
 }
 \keyword{datasets}

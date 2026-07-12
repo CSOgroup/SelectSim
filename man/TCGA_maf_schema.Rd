@@ -6,6 +6,12 @@
 \usage{
 TCGA_maf_schema
 }
+\value{
+A list defining the expected TCGA MAF column schema.
+}
 \description{
 TCGA_maf_schema: schema for TCGA maf file to process the mutations
+}
+\examples{
+str(TCGA_maf_schema)
 }

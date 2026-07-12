@@ -5,12 +5,20 @@
 \alias{luad_maf}
 \title{Lung adenocarcinoma MAF from TCGA cohort}
 \format{
-A dataframe
+A data frame
 }
 \usage{
 data(luad_maf)
 }
+\value{
+A data frame containing TCGA LUAD mutation data.
+}
 \description{
 MAF file of LUAD from TCGA
+}
+\examples{
+data(luad_maf)
+dim(luad_maf)
+head(luad_maf)
 }
 \keyword{datasets}

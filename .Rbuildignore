@@ -6,3 +6,4 @@
 ^\.github$
 ^INSTALLATION\.md$
 ^dev$
+^cran-comments\.md$

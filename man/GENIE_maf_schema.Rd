@@ -6,6 +6,12 @@
 \usage{
 GENIE_maf_schema
 }
+\value{
+A list defining the expected GENIE MAF column schema.
+}
 \description{
 GENIE_maf_schema: schema for GENIE maf file to process the mutations
+}
+\examples{
+str(GENIE_maf_schema)
 }

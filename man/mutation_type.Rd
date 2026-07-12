@@ -6,6 +6,12 @@
 \usage{
 mutation_type
 }
+\value{
+A list containing the supported mutation-type classifications.
+}
 \description{
 Mutation list object
+}
+\examples{
+str(mutation_type)
 }

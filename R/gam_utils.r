@@ -12,6 +12,9 @@
 #' Mutation list object
 #'
 #' @export
+#' @return A list containing the supported mutation-type classifications.
+#' @examples
+#' str(mutation_type)
 mutation_type <- list(
   "truncating" = c("Nonsense_Mutation", "Frame_Shift_Ins", "Frame_Shift_Del", "Splice_Site", "In_Frame_Ins", "In_Frame_Del"),
   "missense" = c("Missense_Mutation", "Splice_Site"),
@@ -22,6 +25,9 @@ mutation_type <- list(
 #' TCGA_maf_schema: schema for TCGA maf file to process the mutations
 #'
 #' @export
+#' @return A list defining the expected TCGA MAF column schema.
+#' @examples
+#' str(TCGA_maf_schema)
 TCGA_maf_schema <- list(
   "name" = "TCGA_maf",
   "column" = list(
@@ -43,6 +49,9 @@ TCGA_maf_schema <- list(
 #' GENIE_maf_schema: schema for GENIE maf file to process the mutations
 #'
 #' @export
+#' @return A list defining the expected GENIE MAF column schema.
+#' @examples
+#' str(GENIE_maf_schema)
 GENIE_maf_schema <- list(
   "column" = list(
     "gene" = "Hugo_Symbol",
