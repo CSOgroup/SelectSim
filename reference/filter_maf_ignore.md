@@ -17,7 +17,7 @@ filter_maf_ignore(maf, schema = TCGA_maf_schema, ...)
 
 - schema:
 
-  a schema of datafrane check Select::TCGA_maf_schema for example
+  a data-frame schema; see `TCGA_maf_schema` for an example
 
 - ...:
 

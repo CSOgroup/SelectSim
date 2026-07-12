@@ -47,9 +47,35 @@
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>A dataframe</p>
+    <p>A data frame</p>
+    </div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A data frame containing TCGA LUAD mutation data.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">luad_maf</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">luad_maf</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 220734      8</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">luad_maf</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Chromosome Start_Position End_Position   Hugo_Symbol Variant_Classification</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         10      101814119    101814119          CPN1      Missense_Mutation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         10      129902901    129902901         MKI67                 Silent</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         10       21104601     21104606          NEBL           In_Frame_Del</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         10       45652518     45652518 RP11-445N18.7                    RNA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5         10       50667200     50667200         ERCC6                 Silent</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6         10         532472       532472         DIP2C            Splice_Site</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Tumor_Sample_Barcode          sample    HGVSp_Short</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 TCGA-05-4244-01A-01D-1105-08 TCGA-05-4244-01        p.H366D</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 TCGA-05-4244-01A-01D-1105-08 TCGA-05-4244-01       p.N2401N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 TCGA-05-4244-01A-01D-1105-08 TCGA-05-4244-01 p.S730_V731del</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 TCGA-05-4244-01A-01D-1105-08 TCGA-05-4244-01              .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 TCGA-05-4244-01A-01D-1105-08 TCGA-05-4244-01       p.S1381S</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 TCGA-05-4244-01A-01D-1105-08 TCGA-05-4244-01   p.X29_splice</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

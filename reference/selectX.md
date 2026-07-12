@@ -44,7 +44,7 @@ selectX(
 
 - min.freq:
 
-  number of samples for features to be atleast mutated in.
+  number of samples for features to be at least mutated in.
 
 - n.permut:
 

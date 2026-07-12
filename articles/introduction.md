@@ -21,7 +21,6 @@ initiation to metastatic progression.* Nature Genetics.
 
 ``` r
 
-# install.packages("devtools")
 devtools::install_github("CSOgroup/SelectSim",dependencies = TRUE, build_vignettes = TRUE)
 ```
 
@@ -173,13 +172,12 @@ result_obj$result %>% filter(nFDR2<=0.25) %>% count(type)
 ``` r
 
 # Filtering significant hits and plotting
-options(repr.plot.width = 7, repr.plot.height = 7)
 obs_exp_scatter(result = result_obj$result,title = 'TCGA LUAD')
 ```
 
 ![](introduction_files/figure-html/unnamed-chunk-7-1.png)
 
-### SessionInfo
+### Session information
 
 ``` r
 

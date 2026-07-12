@@ -64,7 +64,7 @@
                         <h4 data-toc-skip class="author">Arvind
 Iyer</h4>
             
-            <h4 data-toc-skip class="date">2026-07-11</h4>
+            <h4 data-toc-skip class="date">2026-07-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/CSOgroup/SelectSim/blob/main/vignettes/data_processing.Rmd" class="external-link"><code>vignettes/data_processing.Rmd</code></a></small>
       <div class="d-none name"><code>data_processing.Rmd</code></div>
@@ -87,8 +87,7 @@ background model and other utility functions.</li>
 <li>You can install the development version of SelectSim from <a href="https://github.com/CSOgroup/SelectSim" class="external-link">GitHub</a> with:</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"CSOgroup/SelectSim"</span>,dependencies <span class="op">=</span> <span class="cn">TRUE</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"CSOgroup/SelectSim"</span>,dependencies <span class="op">=</span> <span class="cn">TRUE</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>For more details on installation refer to <a href="https://github.com/CSOgroup/SelectSim/blob/main/INSTALLATION.md" class="external-link">INSTALLATION</a>
 </li>
@@ -208,7 +207,7 @@ of all genes in consideration.</li>
 <span>    <span class="va">truncating_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">'gam'</span><span class="op">=</span><span class="va">tcga_truc_gam</span>,</span>
 <span>                            <span class="st">'tmb'</span><span class="op">=</span><span class="va">truncating_tmb</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"tictoc"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ##### Creating Truncating GAM ####: 0.174 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; ##### Creating Truncating GAM ####: 0.161 sec elapsed</span></span></code></pre></div>
 <ul>
 <li>Let generate the Missense data
 <ul>
@@ -256,7 +255,7 @@ all genes in consideration.</li>
 <span>                          <span class="st">'tmb'</span><span class="op">=</span><span class="va">missense_tmb</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"tictoc"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ##### Creating Missense GAM ####: 1.34 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; ##### Creating Missense GAM ####: 1.508 sec elapsed</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="generating-the-run_object-to-run-selectsim">Generating the run_object to run SelectSim<a class="anchor" aria-label="anchor" href="#generating-the-run_object-to-run-selectsim"></a>
@@ -317,7 +316,7 @@ to see how to run selectX to discover EDs.</li>
 </div>
 </div>
 <div class="section level3">
-<h3 id="sessioninfo">SessionInfo<a class="anchor" aria-label="anchor" href="#sessioninfo"></a>
+<h3 id="session-information">Session information<a class="anchor" aria-label="anchor" href="#session-information"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Print the sessionInfo</span></span>

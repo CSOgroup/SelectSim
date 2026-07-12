@@ -25,12 +25,12 @@ filter_maf_column(maf, values, column, inclusive = TRUE, fixed = TRUE, ...)
 
 - inclusive:
 
-  a boolena to include or exclude the dataframe with values in list
+  a boolean to include or exclude the data frame with values in list
   provided
 
 - fixed:
 
-  a grep argument to specify if grep use the argumnet as string or not
+  a grep argument to specify if grep use the argument as string or not
 
 - ...:
 

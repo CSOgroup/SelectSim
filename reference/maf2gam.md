@@ -67,7 +67,11 @@ matrix.
 
 ``` r
 data(luad_maf, package = "SelectSim")
-gam <- maf2gam(luad_maf)
+small_maf <- luad_maf[
+  luad_maf$Tumor_Sample_Barcode %in%
+    unique(luad_maf$Tumor_Sample_Barcode)[1:5],
+]
+gam <- maf2gam(small_maf)
 dim(gam)
-#> [1]   502 18707
+#> [1]    5 2726
 ```

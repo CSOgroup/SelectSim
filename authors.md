@@ -2,14 +2,14 @@
 
 ## Authors
 
-- **Arvind Iyer**. Author, maintainer.
+- **Arvind Iyer**. Author, maintainer, copyright holder.
   [](https://orcid.org/0000-0002-8247-700X)
 
 - **Marco Mina**. Author.
 
-- **Miljan Petrovic**. Author.
+- **Miljan Petrovic**. Author, copyright holder.
 
-- **Giovanni Ciriello**. Author.
+- **Giovanni Ciriello**. Author, copyright holder.
   [](https://orcid.org/0000-0003-2021-8683)
 
 ## Citation

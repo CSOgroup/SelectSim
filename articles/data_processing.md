@@ -13,7 +13,6 @@
 
 ``` r
 
-# install.packages("devtools")
 devtools::install_github("CSOgroup/SelectSim",dependencies = TRUE, build_vignettes = TRUE)
 ```
 
@@ -144,7 +143,7 @@ if (requireNamespace("tictoc", quietly = TRUE)) tictoc::tic('##### Creating Trun
     truncating_data <- list('gam'=tcga_truc_gam,
                             'tmb'=truncating_tmb)
 if (requireNamespace("tictoc", quietly = TRUE)) tictoc::toc()
-#> ##### Creating Truncating GAM ####: 0.174 sec elapsed
+#> ##### Creating Truncating GAM ####: 0.161 sec elapsed
 ```
 
 - Let generate the Missense data
@@ -191,7 +190,7 @@ if (requireNamespace("tictoc", quietly = TRUE)) tictoc::tic('##### Creating Miss
                           'tmb'=missense_tmb)
 
 if (requireNamespace("tictoc", quietly = TRUE)) tictoc::toc()
-#> ##### Creating Missense GAM ####: 1.34 sec elapsed
+#> ##### Creating Missense GAM ####: 1.508 sec elapsed
 ```
 
 #### Generating the run_object to run SelectSim
@@ -247,7 +246,7 @@ str(run_data)
 - Save the `run_data` and check the introduction vignette to see how to
   run selectX to discover EDs.
 
-### SessionInfo
+### Session information
 
 ``` r
 

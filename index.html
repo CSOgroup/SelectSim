@@ -17,8 +17,8 @@
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="SelectSim — Evolutionary dependencies in cancer">
-<meta name="description" content="This R package implements the SelectSim methodology to infer co-mutations between functional alterations in cancer.">
-<meta property="og:description" content="This R package implements the SelectSim methodology to infer co-mutations between functional alterations in cancer.">
+<meta name="description" content="Implements the SelectSim methodology for identifying patterns of co-occurrence and mutual exclusivity between functional genomic alterations in cancer cohorts. The package processes mutation annotation data, constructs alteration matrices, estimates expected alteration-pair frequencies, and quantifies deviations associated with selective interactions. The methodology is described in Iyer et al. (2026) &lt;doi:10.1038/s41588-026-02661-4&gt;.">
+<meta property="og:description" content="Implements the SelectSim methodology for identifying patterns of co-occurrence and mutual exclusivity between functional genomic alterations in cancer cohorts. The package processes mutation annotation data, constructs alteration matrices, estimates expected alteration-pair frequencies, and quantifies deviations associated with selective interactions. The methodology is described in Iyer et al. (2026) &lt;doi:10.1038/s41588-026-02661-4&gt;.">
 <meta property="og:image" content="https://csogroup.github.io/SelectSim/logo.svg">
 </head>
 <body>
@@ -72,7 +72,7 @@ SelectSim Method
 </figcaption></figure><p>The method accounts for heterogeneous tumor types, tissue specificities, and distinct mutational processes through a covariate-aware weighting scheme. Significance is assessed as a weighted effect size with frequency-stratified FDR control generated via simulation.</p>
 <p>This package accompanies the manuscript:</p>
 <blockquote>
-<p>Iyer A, Petrovic M, Sesia D, Nanni L, Mina M, Ciriello G (2026). Evolving patterns of co-mutations from tumor initiation to metastatic progression. <em>Nature Genetics</em>. doi: <a href="https://doi.org/10.1038/s41588-026-02661-4" class="external-link">10.1038/s41588-026-02661-4</a></p>
+<p>Iyer A, Petrovic M, Sesia D, Nanni L, Mina M, Ciriello G (2026). Evolving patterns of co-mutations from tumor initiation to metastatic progression. <em>Nature Genetics</em>. DOI: <a href="https://doi.org/10.1038/s41588-026-02661-4" class="external-link">10.1038/s41588-026-02661-4</a></p>
 </blockquote>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -81,7 +81,7 @@ SelectSim Method
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"CSOgroup/SelectSim"</span><span class="op">)</span></span></code></pre></div>
-<p>For more details on installation refer to <a href="INSTALLATION.html">INSTALLATION</a>.</p>
+<p>For more details on installation refer to <a href="https://github.com/CSOgroup/SelectSim/blob/main/INSTALLATION.md" class="external-link">INSTALLATION</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
@@ -120,7 +120,7 @@ SelectSim Method
 </h2>
 <p>If you use SelectSim in your research, please cite:</p>
 <blockquote>
-<p>Iyer A, Petrovic M, Sesia D, Nanni L, Mina M, Ciriello G (2026). Evolving patterns of co-mutations from tumor initiation to metastatic progression. <em>Nature Genetics</em>. doi: <a href="https://doi.org/10.1038/s41588-026-02661-4" class="external-link">10.1038/s41588-026-02661-4</a></p>
+<p>Iyer A, Petrovic M, Sesia D, Nanni L, Mina M, Ciriello G (2026). Evolving patterns of co-mutations from tumor initiation to metastatic progression. <em>Nature Genetics</em>. DOI: <a href="https://doi.org/10.1038/s41588-026-02661-4" class="external-link">10.1038/s41588-026-02661-4</a></p>
 </blockquote>
 <p>You can also run <code>citation("SelectSim")</code> inside R for a formatted reference.</p>
 </div>
@@ -159,10 +159,10 @@ SelectSim Method
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Arvind Iyer <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-8247-700X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Arvind Iyer <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-8247-700X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>Marco Mina <br><small class="roles"> Author </small>   </li>
-<li>Miljan Petrovic <br><small class="roles"> Author </small>   </li>
-<li>Giovanni Ciriello <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-2021-8683" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Miljan Petrovic <br><small class="roles"> Author, copyright holder </small>   </li>
+<li>Giovanni Ciriello <br><small class="roles"> Author, copyright holder </small> <a href="https://orcid.org/0000-0003-2021-8683" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 

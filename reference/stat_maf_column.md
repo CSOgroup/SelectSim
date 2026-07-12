@@ -17,7 +17,7 @@ stat_maf_column(maf, column, ...)
 
 - column:
 
-  a schema of datafrane check Select::TCGA_maf_schema for example
+  a data-frame schema; see `TCGA_maf_schema` for an example
 
 - ...:
 

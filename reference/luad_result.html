@@ -47,9 +47,49 @@
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>A dataframe</p>
+    <p>A data frame</p>
+    </div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A data frame containing SelectSim results for the LUAD cohort.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">luad_result</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">luad_result</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 253  22</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">luad_result</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              SFE_1 SFE_2         name support_1 support_2     freq_1    freq_2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> KRAS - TP53   KRAS  TP53  KRAS - TP53       154       221 0.30677291 0.4402390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> EGFR - KRAS   EGFR  KRAS  EGFR - KRAS        57       154 0.11354582 0.3067729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> STK11 - TP53 STK11  TP53 STK11 - TP53        59       221 0.11752988 0.4402390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BRAF - KRAS   BRAF  KRAS  BRAF - KRAS        35       154 0.06972112 0.3067729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> KRAS - STK11  KRAS STK11 KRAS - STK11       154        59 0.30677291 0.1175299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> EGFR - TP53   EGFR  TP53  EGFR - TP53        57       221 0.11354582 0.4402390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              overlap  w_overlap max_overlap freq_overlap r_overlap w_r_overlap</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> KRAS - TP53       49 35.8760174         154   0.31818182  98.63545    58.47438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> EGFR - KRAS        0  0.0000000          57   0.00000000  31.23746    16.91865</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> STK11 - TP53      13  9.5456386          59   0.22033898  38.97882    22.40677</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BRAF - KRAS        2  0.9821429          35   0.05714286  19.41137    10.41048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> KRAS - STK11      28 25.9230769          59   0.47457627  32.38016    17.43253</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> EGFR - TP53       32 29.3335097          57   0.56140351  37.53623    21.67706</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     wES        wFDR        nES mean_r_nES         nFDR cum_freq</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> KRAS - TP53  -15.979458 0.000000000 -13.985761 -1.9936978 0.0000000000      375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> EGFR - KRAS  -11.963290 0.000000000 -10.707528 -1.2557624 0.0000000000      211</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> STK11 - TP53  -9.094190 0.000000000  -7.750181 -1.3440086 0.0000000000      280</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BRAF - KRAS   -6.666841 0.002787068  -5.688806 -0.9780349 0.0002787068      189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> KRAS - STK11   6.003722 0.004905240   4.765036  1.2386861 0.0017837235      213</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> EGFR - TP53    5.413925 0.005574136   4.159880  1.2540444 0.0040876997      278</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     nFDR2 type  FDR</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> KRAS - TP53  0.0000000000   ME TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> EGFR - KRAS  0.0000000000   ME TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> STK11 - TP53 0.0000000000   ME TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BRAF - KRAS  0.0002787068   ME TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> KRAS - STK11 0.0017837235   CO TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> EGFR - TP53  0.0040876997   CO TRUE</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

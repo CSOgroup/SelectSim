@@ -11,4 +11,45 @@ data(luad_result)
 
 ## Format
 
-A dataframe
+A data frame
+
+## Value
+
+A data frame containing SelectSim results for the LUAD cohort.
+
+## Examples
+
+``` r
+data(luad_result)
+dim(luad_result)
+#> [1] 253  22
+head(luad_result)
+#>              SFE_1 SFE_2         name support_1 support_2     freq_1    freq_2
+#> KRAS - TP53   KRAS  TP53  KRAS - TP53       154       221 0.30677291 0.4402390
+#> EGFR - KRAS   EGFR  KRAS  EGFR - KRAS        57       154 0.11354582 0.3067729
+#> STK11 - TP53 STK11  TP53 STK11 - TP53        59       221 0.11752988 0.4402390
+#> BRAF - KRAS   BRAF  KRAS  BRAF - KRAS        35       154 0.06972112 0.3067729
+#> KRAS - STK11  KRAS STK11 KRAS - STK11       154        59 0.30677291 0.1175299
+#> EGFR - TP53   EGFR  TP53  EGFR - TP53        57       221 0.11354582 0.4402390
+#>              overlap  w_overlap max_overlap freq_overlap r_overlap w_r_overlap
+#> KRAS - TP53       49 35.8760174         154   0.31818182  98.63545    58.47438
+#> EGFR - KRAS        0  0.0000000          57   0.00000000  31.23746    16.91865
+#> STK11 - TP53      13  9.5456386          59   0.22033898  38.97882    22.40677
+#> BRAF - KRAS        2  0.9821429          35   0.05714286  19.41137    10.41048
+#> KRAS - STK11      28 25.9230769          59   0.47457627  32.38016    17.43253
+#> EGFR - TP53       32 29.3335097          57   0.56140351  37.53623    21.67706
+#>                     wES        wFDR        nES mean_r_nES         nFDR cum_freq
+#> KRAS - TP53  -15.979458 0.000000000 -13.985761 -1.9936978 0.0000000000      375
+#> EGFR - KRAS  -11.963290 0.000000000 -10.707528 -1.2557624 0.0000000000      211
+#> STK11 - TP53  -9.094190 0.000000000  -7.750181 -1.3440086 0.0000000000      280
+#> BRAF - KRAS   -6.666841 0.002787068  -5.688806 -0.9780349 0.0002787068      189
+#> KRAS - STK11   6.003722 0.004905240   4.765036  1.2386861 0.0017837235      213
+#> EGFR - TP53    5.413925 0.005574136   4.159880  1.2540444 0.0040876997      278
+#>                     nFDR2 type  FDR
+#> KRAS - TP53  0.0000000000   ME TRUE
+#> EGFR - KRAS  0.0000000000   ME TRUE
+#> STK11 - TP53 0.0000000000   ME TRUE
+#> BRAF - KRAS  0.0002787068   ME TRUE
+#> KRAS - STK11 0.0017837235   CO TRUE
+#> EGFR - TP53  0.0040876997   CO TRUE
+```
