@@ -9,7 +9,7 @@ filter_maf_ignore(maf, schema = TCGA_maf_schema, ...)
 \arguments{
 \item{maf}{a maf as dataframe}
 
-\item{schema}{a schema of datafrane check Select::TCGA_maf_schema for example}
+\item{schema}{a data-frame schema; see \code{TCGA_maf_schema} for an example}
 
 \item{...}{Other options}
 }

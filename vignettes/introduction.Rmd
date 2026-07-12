@@ -111,7 +111,7 @@ obs_exp_scatter(result = result_obj$result,title = 'TCGA LUAD')
 ```
 
 
-### SessionInfo
+### Session information
 ```{r}
 # Print the sessionInfo
 sessionInfo()

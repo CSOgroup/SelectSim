@@ -43,7 +43,11 @@ Numeric matrix (samples x genes) representing the gene alteration matrix.
 }
 \examples{
 data(luad_maf, package = "SelectSim")
-gam <- maf2gam(luad_maf)
+small_maf <- luad_maf[
+  luad_maf$Tumor_Sample_Barcode \%in\%
+    unique(luad_maf$Tumor_Sample_Barcode)[1:5],
+]
+gam <- maf2gam(small_maf)
 dim(gam)
 
 }

@@ -203,7 +203,7 @@ str(run_data)
 
 - Save the `run_data` and check the introduction vignette to see how to run selectX to discover EDs. 
 
-### SessionInfo
+### Session information
 ```{r}
 # Print the sessionInfo
 sessionInfo()
