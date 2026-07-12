@@ -27,7 +27,6 @@ knitr::opts_chunk$set(
 - You can install the development version of SelectSim from [GitHub](https://github.com/CSOgroup/SelectSim) with:
 
 ``` r
-# install.packages("devtools")
 devtools::install_github("CSOgroup/SelectSim",dependencies = TRUE, build_vignettes = TRUE)
 ```
 
@@ -203,7 +202,7 @@ str(run_data)
 
 - Save the `run_data` and check the introduction vignette to see how to run selectX to discover EDs. 
 
-### SessionInfo
+### Session information
 ```{r}
 # Print the sessionInfo
 sessionInfo()

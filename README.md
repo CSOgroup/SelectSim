@@ -30,7 +30,7 @@ This package accompanies the manuscript:
 
 > Iyer A, Petrovic M, Sesia D, Nanni L, Mina M, Ciriello G (2026).
 > Evolving patterns of co-mutations from tumor initiation to metastatic
-> progression. *Nature Genetics*. doi:
+> progression. *Nature Genetics*. DOI:
 > [10.1038/s41588-026-02661-4](https://doi.org/10.1038/s41588-026-02661-4)
 
 ## Installation
@@ -44,7 +44,7 @@ pak::pak("CSOgroup/SelectSim")
 ```
 
 For more details on installation refer to
-[INSTALLATION](INSTALLATION.md).
+[INSTALLATION](https://github.com/CSOgroup/SelectSim/blob/main/INSTALLATION.md).
 
 ## Quick start
 
@@ -86,7 +86,7 @@ If you use SelectSim in your research, please cite:
 
 > Iyer A, Petrovic M, Sesia D, Nanni L, Mina M, Ciriello G (2026).
 > Evolving patterns of co-mutations from tumor initiation to metastatic
-> progression. *Nature Genetics*. doi:
+> progression. *Nature Genetics*. DOI:
 > [10.1038/s41588-026-02661-4](https://doi.org/10.1038/s41588-026-02661-4)
 
 You can also run `citation("SelectSim")` inside R for a formatted

@@ -30,7 +30,7 @@ selectX(
 
 \item{n.cores}{no of cores.}
 
-\item{min.freq}{number of samples for features to be atleast mutated in.}
+\item{min.freq}{number of samples for features to be at least mutated in.}
 
 \item{n.permut}{number of simulations.}
 

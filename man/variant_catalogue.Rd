@@ -5,12 +5,20 @@
 \alias{variant_catalogue}
 \title{OncoKB v3.9 cancer genes}
 \format{
-A dataframe
+A data frame
 }
 \usage{
 data(variant_catalogue)
 }
+\value{
+A data frame containing cancer-gene and variant annotations.
+}
 \description{
 A dataframe cancer genes with missense mutation annotations
+}
+\examples{
+data(variant_catalogue)
+dim(variant_catalogue)
+head(variant_catalogue)
 }
 \keyword{datasets}

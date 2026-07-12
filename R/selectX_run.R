@@ -6,7 +6,7 @@
 # Notes:
 # - Better Error message and running text
 # - Edge case: When sample size in less than 2 there is error in computation (need to fix a number to do this analysis)
-# - parallel::makeCluster(2, setup_strategy = "sequential") a possible fix to remove the erorr of not able to connect problem (https://github.com/rstudio/rstudio/issues/6692)
+# - parallel::makeCluster(2, setup_strategy = "sequential") a possible fix to remove the error of connection problem (https://github.com/rstudio/rstudio/issues/6692)
 # - Try to fix the parallel processing issuses
 ###
 
@@ -27,7 +27,7 @@
 #' @param sample.class sample covariates as named list.
 #' @param alteration.class alteration covariates as named list.
 #' @param n.cores no of cores.
-#' @param min.freq number of samples for features to be atleast mutated in.
+#' @param min.freq number of samples for features to be at least mutated in.
 #' @param n.permut number of simulations.
 #' @param lambda lambda parameter.
 #' @param tau tau (fold change) parameter.

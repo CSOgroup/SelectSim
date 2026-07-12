@@ -10,7 +10,15 @@ A list
 \usage{
 data(oncokb_truncating_genes)
 }
+\value{
+An object containing genes considered for truncating-mutation analyses.
+}
 \description{
 cancer genes list consider for truncating mutations
+}
+\examples{
+data(oncokb_truncating_genes)
+length(oncokb_truncating_genes)
+head(oncokb_truncating_genes)
 }
 \keyword{datasets}

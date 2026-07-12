@@ -1,6 +1,6 @@
 #' Lung adenocarcinoma from TCGA cohort as SelectSim run object
 #'
-#' Pre-processed TCGA LUAD data ready to pass directly to \code{selectX()}.
+#' Preprocessed TCGA LUAD data ready to pass directly to \code{selectX()}.
 #'
 #' @docType data
 #' @keywords datasets
@@ -22,6 +22,13 @@
 #'   \item{alteration.class}{Named character vector of alteration-type annotations
 #'     (length = number of genes). Names are gene symbols.}
 #' }
+#'
+#' @return A named list containing preprocessed LUAD input data for
+#'   \code{selectX()}.
+#' @examples
+#' data(luad_run_data)
+#' names(luad_run_data)
+#' str(luad_run_data, max.level = 1)
 NULL
 
 
@@ -34,7 +41,13 @@ NULL
 #' @keywords datasets
 #' @name luad_result
 #' @usage data(luad_result)
-#' @format A dataframe
+#' @format A data frame
+#'
+#' @return A data frame containing SelectSim results for the LUAD cohort.
+#' @examples
+#' data(luad_result)
+#' dim(luad_result)
+#' head(luad_result)
 NULL
 
 
@@ -48,7 +61,13 @@ NULL
 #' @keywords datasets
 #' @name luad_maf
 #' @usage data(luad_maf)
-#' @format A dataframe
+#' @format A data frame
+#'
+#' @return A data frame containing TCGA LUAD mutation data.
+#' @examples
+#' data(luad_maf)
+#' dim(luad_maf)
+#' head(luad_maf)
 NULL
 
 
@@ -62,6 +81,12 @@ NULL
 #' @name oncokb_genes
 #' @usage data(oncokb_genes)
 #' @format A list
+#'
+#' @return An object containing cancer-associated genes annotated by OncoKB.
+#' @examples
+#' data(oncokb_genes)
+#' length(oncokb_genes)
+#' head(oncokb_genes)
 NULL
 
 
@@ -75,6 +100,12 @@ NULL
 #' @name oncokb_truncating_genes
 #' @usage data(oncokb_truncating_genes)
 #' @format A list
+#'
+#' @return An object containing genes considered for truncating-mutation analyses.
+#' @examples
+#' data(oncokb_truncating_genes)
+#' length(oncokb_truncating_genes)
+#' head(oncokb_truncating_genes)
 NULL
 
 
@@ -87,5 +118,11 @@ NULL
 #' @keywords datasets
 #' @name variant_catalogue
 #' @usage data(variant_catalogue)
-#' @format A dataframe
+#' @format A data frame
+#'
+#' @return A data frame containing cancer-gene and variant annotations.
+#' @examples
+#' data(variant_catalogue)
+#' dim(variant_catalogue)
+#' head(variant_catalogue)
 NULL

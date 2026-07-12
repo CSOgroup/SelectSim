@@ -13,9 +13,9 @@ filter_maf_column(maf, values, column, inclusive = TRUE, fixed = TRUE, ...)
 
 \item{column}{column in maf file to filter}
 
-\item{inclusive}{a boolena to include or exclude the dataframe with values in list provided}
+\item{inclusive}{a boolean to include or exclude the data frame with values in list provided}
 
-\item{fixed}{a grep argument to specify if grep use the argumnet as string or not}
+\item{fixed}{a grep argument to specify if grep use the argument as string or not}
 
 \item{...}{Other options}
 }

@@ -607,7 +607,7 @@ interaction.table <- function(al,
       )
     }
   }
-  results <- results[order(abs(results$nES), decreasing = T), ]
+  results <- results[order(abs(results$nES), decreasing = TRUE), ]
   results$type <- rep("ME", nrow(results))
   results$type[results$nES > 0] <- "CO"
   results$FDR <- results$nFDR2 <= maxFDR

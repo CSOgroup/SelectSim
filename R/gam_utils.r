@@ -12,6 +12,9 @@
 #' Mutation list object
 #'
 #' @export
+#' @return A list containing the supported mutation-type classifications.
+#' @examples
+#' str(mutation_type)
 mutation_type <- list(
   "truncating" = c("Nonsense_Mutation", "Frame_Shift_Ins", "Frame_Shift_Del", "Splice_Site", "In_Frame_Ins", "In_Frame_Del"),
   "missense" = c("Missense_Mutation", "Splice_Site"),
@@ -22,6 +25,9 @@ mutation_type <- list(
 #' TCGA_maf_schema: schema for TCGA maf file to process the mutations
 #'
 #' @export
+#' @return A list defining the expected TCGA MAF column schema.
+#' @examples
+#' str(TCGA_maf_schema)
 TCGA_maf_schema <- list(
   "name" = "TCGA_maf",
   "column" = list(
@@ -43,6 +49,9 @@ TCGA_maf_schema <- list(
 #' GENIE_maf_schema: schema for GENIE maf file to process the mutations
 #'
 #' @export
+#' @return A list defining the expected GENIE MAF column schema.
+#' @examples
+#' str(GENIE_maf_schema)
 GENIE_maf_schema <- list(
   "column" = list(
     "gene" = "Hugo_Symbol",
@@ -69,8 +78,8 @@ GENIE_maf_schema <- list(
 #' @param maf a maf as dataframe
 #' @param values a list containing the elements to filter
 #' @param column column in maf file to filter
-#' @param inclusive a boolena to include or exclude the dataframe with values in list provided
-#' @param fixed a grep argument to specify if grep use the argumnet as string or not
+#' @param inclusive a boolean to include or exclude the data frame with values in list provided
+#' @param fixed a grep argument to specify if grep use the argument as string or not
 #' @param ... Other options
 #' @return filtered_maf  a filtered maf file
 #'
@@ -219,7 +228,7 @@ filter_maf_mutations <- function(maf, values, maf.col = c("Hugo_Symbol", "HGVSp_
 #' `filter_maf_schema()` takes a maf file and filters a MAF dataframe by retaining only the rows with a column value included in the values list
 #'
 #' @param maf a maf as dataframe
-#' @param schema a schema of datafrane check Select::TCGA_maf_schema for example
+#' @param schema a data-frame schema; see `TCGA_maf_schema` for an example
 #' @param column column in maf file to filter
 #' @param values a list containing the elements to file
 #' @param ... Other options
@@ -246,7 +255,7 @@ filter_maf_schema <- function(maf, schema = TCGA_maf_schema, column, values, ...
 #' `filter_maf_truncating()` takes a maf file and filters a MAF dataframe by retaining only the rows with a column value included in the values list
 #'
 #' @param maf a maf as dataframe
-#' @param schema a schema of datafrane check Select::TCGA_maf_schema for example
+#' @param schema a data-frame schema; see `TCGA_maf_schema` for an example
 #' @param ... Other options
 #' @return filtered_maf  a filtered maf file
 #'
@@ -269,7 +278,7 @@ filter_maf_truncating <- function(maf, schema = TCGA_maf_schema, ...) {
 #' `filter_maf_missense()` takes a maf file and filters a MAF dataframe by retaining only the rows with a column value included in the values list
 #'
 #' @param maf a maf as dataframe
-#' @param schema a schema of datafrane check Select::TCGA_maf_schema for example
+#' @param schema a data-frame schema; see `TCGA_maf_schema` for an example
 #' @param ... Other options
 #' @return filtered_maf  a filtered maf file
 #'
@@ -292,7 +301,7 @@ filter_maf_missense <- function(maf, schema = TCGA_maf_schema, ...) {
 #' `filter_maf_ignore()` takes a maf file and filters a MAF dataframe by retaining only the rows with a column value included in the values list
 #'
 #' @param maf a maf as dataframe
-#' @param schema a schema of datafrane check Select::TCGA_maf_schema for example
+#' @param schema a data-frame schema; see `TCGA_maf_schema` for an example
 #' @param ... Other options
 #' @return filtered_maf  a filtered maf file
 #'
@@ -317,7 +326,7 @@ filter_maf_ignore <- function(maf, schema = TCGA_maf_schema, ...) {
 #' `stat_maf_column()` takes a maf file and filters a MAF dataframe by retaining only the rows with a column value included in the values list
 #'
 #' @param maf a maf as dataframe
-#' @param column a schema of datafrane check Select::TCGA_maf_schema for example
+#' @param column a data-frame schema; see `TCGA_maf_schema` for an example
 #' @param ... Other options
 #' @return filtered_maf  a filtered maf file
 #'
@@ -386,7 +395,11 @@ stat_maf_gene <- function(maf, column = "Hugo_Symbol", ...) {
 #'
 #' @examples
 #' data(luad_maf, package = "SelectSim")
-#' gam <- maf2gam(luad_maf)
+#' small_maf <- luad_maf[
+#'   luad_maf$Tumor_Sample_Barcode %in%
+#'     unique(luad_maf$Tumor_Sample_Barcode)[1:5],
+#' ]
+#' gam <- maf2gam(small_maf)
 #' dim(gam)
 #'
 #' @export

@@ -10,7 +10,15 @@ A list
 \usage{
 data(oncokb_genes)
 }
+\value{
+An object containing cancer-associated genes annotated by OncoKB.
+}
 \description{
 cancer genes list
+}
+\examples{
+data(oncokb_genes)
+length(oncokb_genes)
+head(oncokb_genes)
 }
 \keyword{datasets}

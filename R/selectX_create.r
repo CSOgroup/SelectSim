@@ -273,7 +273,7 @@ generateW_mean_tmb <- function(tmb,
   if (!discrete) {
     w <- 1 / (1 + lambda * (tmb.FC - tau))
   }
-  W <- matrix(rep(w, ngenes), nrow = ngenes, byrow = T)
+  W <- matrix(rep(w, ngenes), nrow = ngenes, byrow = TRUE)
   return(W)
 }
 
