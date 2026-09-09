@@ -17,15 +17,19 @@ new.AL.general(
 alteration matrices, each genes x samples) and \code{tmb} (a named list of data
 frames, one per matrix in \code{M}, each with columns \code{sample} and
 \code{mutation}). The names of \code{M} and \code{tmb} must match. All matrices
-in \code{M} must have identical row and column names.}
+in \code{M} must have identical row and column names. Each \code{tmb} table may
+be partial (list only the samples with a nonzero \code{mutation} count for that
+type) — any sample present in \code{M} but absent from a \code{tmb} table is
+treated as having \code{mutation = 0} for that type.}
 
-\item{feat.covariates}{Named character vector of alteration-type annotations, one
-entry per feature (gene). Names must match rownames of the matrices in \code{M}.
-If \code{NULL}, all features are labelled \code{"MUT"}.}
+\item{feat.covariates}{Named character (or factor, auto-coerced) vector of
+alteration-type annotations, one entry per feature (gene). Names must match
+rownames of the matrices in \code{M}. If \code{NULL}, all features are labelled
+\code{"MUT"}.}
 
-\item{sample.covariates}{Named character vector of sample-type annotations, one
-entry per sample. Names must match colnames of the matrices in \code{M}. If
-\code{NULL}, all samples are labelled \code{"sample"}.}
+\item{sample.covariates}{Named character (or factor, auto-coerced) vector of
+sample-type annotations, one entry per sample. Names must match colnames of the
+matrices in \code{M}. If \code{NULL}, all samples are labelled \code{"sample"}.}
 
 \item{min.freq}{Minimum number of samples a gene must be mutated in (strictly
 greater than) to be retained. Features with \code{rowSums <= min.freq} are

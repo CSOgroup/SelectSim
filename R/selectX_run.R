@@ -2,7 +2,7 @@
 # Author  : Arvind Iyer, Miljan Petrovic
 # Project : SelectSim
 # Desc    : Main file which to run the SelecSim algoritm via calling selectX function to create alteration object with background model and funtion to generate the table.
-# Version : 0.1.6
+# Version : 0.1.7
 # Notes:
 # - Better Error message and running text
 # - Edge case: When sample size in less than 2 there is error in computation (need to fix a number to do this analysis)

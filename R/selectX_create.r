@@ -2,7 +2,7 @@
 # Author  : Arvind Iyer, Miljan Petrovic
 # Project : SelectSim
 # Desc    : Implementation of SelectSim algorithm
-# Version : 0.1.6
+# Version : 0.1.7
 ###
 
 #' Create an Alteration Landscape (AL) object
@@ -14,13 +14,17 @@
 #'   alteration matrices, each genes x samples) and \code{tmb} (a named list of data
 #'   frames, one per matrix in \code{M}, each with columns \code{sample} and
 #'   \code{mutation}). The names of \code{M} and \code{tmb} must match. All matrices
-#'   in \code{M} must have identical row and column names.
-#' @param feat.covariates Named character vector of alteration-type annotations, one
-#'   entry per feature (gene). Names must match rownames of the matrices in \code{M}.
-#'   If \code{NULL}, all features are labelled \code{"MUT"}.
-#' @param sample.covariates Named character vector of sample-type annotations, one
-#'   entry per sample. Names must match colnames of the matrices in \code{M}. If
-#'   \code{NULL}, all samples are labelled \code{"sample"}.
+#'   in \code{M} must have identical row and column names. Each \code{tmb} table may
+#'   be partial (list only the samples with a nonzero \code{mutation} count for that
+#'   type) — any sample present in \code{M} but absent from a \code{tmb} table is
+#'   treated as having \code{mutation = 0} for that type.
+#' @param feat.covariates Named character (or factor, auto-coerced) vector of
+#'   alteration-type annotations, one entry per feature (gene). Names must match
+#'   rownames of the matrices in \code{M}. If \code{NULL}, all features are labelled
+#'   \code{"MUT"}.
+#' @param sample.covariates Named character (or factor, auto-coerced) vector of
+#'   sample-type annotations, one entry per sample. Names must match colnames of the
+#'   matrices in \code{M}. If \code{NULL}, all samples are labelled \code{"sample"}.
 #' @param min.freq Minimum number of samples a gene must be mutated in (strictly
 #'   greater than) to be retained. Features with \code{rowSums <= min.freq} are
 #'   dropped.
@@ -96,24 +100,53 @@ new.AL.general <- function(am,
     al$alterations$alteration.class <- rep("MUT", nrow(al$am[[1]]))
     names(al$alterations$alteration.class) <- rownames(al$am[[1]])
   } else {
+    if (is.factor(feat.covariates)) {
+      if (verbose) message("feat.covariates was a factor; converting to character.")
+      feat.covariates <- setNames(as.character(feat.covariates), names(feat.covariates))
+    }
     al$alterations$alteration.class <- feat.covariates
   }
   if (is.null(sample.covariates)) {
     al$samples$sample.class <- rep("sample", ncol(al$am[[1]]))
     names(al$samples$sample.class) <- colnames(al$am[[1]])
   } else {
+    if (is.factor(sample.covariates)) {
+      if (verbose) message("sample.covariates was a factor; converting to character.")
+      sample.covariates <- setNames(as.character(sample.covariates), names(sample.covariates))
+    }
     al$samples$sample.class <- sample.covariates
   }
-  # set the tumor mutation burden vector
+  # set the tumor mutation burden vector, aligning every tmb table to col.order
+  # by sample identity (rather than assuming row order/length already match) and
+  # zero-filling any sample missing from a given tmb table.
   al$tmb <- list()
   for (i in names(am$M)) {
-    al$tmb[[i]] <- am$tmb[[i]]
+    tb <- am$tmb[[i]]
+    tb_sample <- as.character(tb$sample)
+    unknown <- setdiff(tb_sample, col.order)
+    if (length(unknown) > 0) {
+      stop(sprintf(
+        "am$tmb[['%s']] contains sample id(s) not present in am$M[['%s']]: %s",
+        i, i, paste(unknown[seq_len(min(5, length(unknown)))], collapse = ", ")
+      ))
+    }
+    if (anyDuplicated(tb_sample) > 0) {
+      stop(sprintf("am$tmb[['%s']] has duplicate 'sample' entries.", i))
+    }
+    missing <- setdiff(col.order, tb_sample)
+    if (verbose && length(missing) > 0) {
+      message(sprintf(
+        "am$tmb[['%s']]: %d of %d samples had no entry - filled with mutation = 0",
+        i, length(missing), length(col.order)
+      ))
+    }
+    mutation <- setNames(rep(0, length(col.order)), col.order)
+    mutation[tb_sample] <- tb$mutation
+    al$tmb[[i]] <- data.frame(sample = col.order, mutation = mutation,
+                              row.names = col.order, stringsAsFactors = FALSE)
   }
-  al$tmb[["total"]] <- c(rep(0, ncol(am$M[[1]])))
-  for (i in names(am$tmb)) {
-    al$tmb[["total"]] <- al$tmb[["total"]] + am$tmb[[i]][, c("mutation")]
-  }
-  names(al$tmb$total) <- am$tmb[[1]]$sample
+  al$tmb[["total"]] <- Reduce(`+`, lapply(al$tmb, function(t) t[col.order, "mutation"]))
+  names(al$tmb$total) <- col.order
 
   class(al) <- "AL"
   return(al)
@@ -144,8 +177,13 @@ get.blocks <- function(al) {
     al$samples$sample.class <- rep("sample", ncol(al$am[[1]]))
     names(al$samples$sample.class) <- colnames(al$am[[1]])
   }
-  alteration.class <- al$alterations$alteration.class[rownames(al$am$full)]
-  sample.class <- al$samples$sample.class[colnames(al$am$full)]
+  # Coerce defensively to character: which() silently drops names when comparing
+  # a named factor (but not a named character vector), which would otherwise
+  # produce unnamed sample/feature blocks downstream.
+  alteration.class <- as.character(al$alterations$alteration.class[rownames(al$am$full)])
+  names(alteration.class) <- rownames(al$am$full)
+  sample.class <- as.character(al$samples$sample.class[colnames(al$am$full)])
+  names(sample.class) <- colnames(al$am$full)
   feature.blocks <- lapply(unique(alteration.class), function(x) which(alteration.class == x))
   names(feature.blocks) <- unique(alteration.class)
   sample.blocks <- lapply(unique(sample.class), function(x) which(sample.class == x))

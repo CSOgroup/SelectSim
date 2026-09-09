@@ -2,7 +2,7 @@
 # Author  : Arvind Iyer, Miljan Petrovic
 # Project : SelectSim
 # Desc    : The file contains plot related functions
-# Version : 0.1.6
+# Version : 0.1.7
 ###
 
 # Suppress R CMD check notes for ggplot2/ggridges column name variables

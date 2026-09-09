@@ -2,7 +2,7 @@
 # Author  : Arvind Iyer
 # Project : SelectSim
 # Desc    : The file which contains the function to generate the stats and table
-# Version : 0.1.6
+# Version : 0.1.7
 ###
 
 #' Initialize an Alteration Landscape Stats (ALS) container

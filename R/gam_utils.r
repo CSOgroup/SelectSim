@@ -2,7 +2,7 @@
 # Author  : Marco Mina , Arvind Iyer
 # Project : SelectSim
 # Desc    : Functions to process the maf to gam
-# Version : 0.1.6
+# Version : 0.1.7
 ###
 
 
